@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --pythia-purple-2: #fdf8ff;
+  --pythia-purple-20: #d9caf2;
+  --pythia-purple-40: #a377ef;
+  --pythia-purple-50: #8f63db;
+  --pythia-purple-60: #5a24b7;
+  --pythia-purple-80: #4a228b;
+  --pythia-purple-100: #331367;
+
+  --pythia-orange-80: #987026;
+  --pythia-orange-60: #e7a731;
+  --pythia-orange-40: #e0ac4c;
+  --pythia-orange-2: #fff9e4;
+
+  --pythia-blue-2: #f3fbff;
+
+  --pythia-red-60: #e35b49;
+  --pythia-red-20: #ef8274;
+  --pythia-red-2: #faf4f3;
+
+  --pythia-grey-100: #4e4b52;
+  --pythia-grey-80: #676d66;
+  --pythia-grey-40: #a6aca5;
+  --pythia-grey-15: #d9dbd9;
+  --pythia-grey-10: #eeefed;
+  --pythia-grey-5: #f6f6f6;
+  --pythia-grey-2: #fafafa;
+  --pythia-black: #212023;
+
+  --pythia-blue-80: #457097;
+  --pythia-blue-40: #70a1ca;
+  --pythia-blue-2: #f3fbff;
+
+  --header-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1);
+  --hero-wave-shadow: 0px 1.967px 21.641px 0px rgba(0, 0, 0, 0.15);
+  --hero-feature-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.12);
+  --feature-card-shadow: 0px 4px 34px 0px rgba(0, 0, 0, 0.25);
+  --work-item-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.2);
+
+  --feature-card-background: linear-gradient(
+    31deg,
+    #fff 65.06%,
+    rgba(255, 255, 255, 0.1) 156.69%
+  );
+  --meet-pythia-store-background: radial-gradient(
+    57.48% 57.48% at 50% 55.41%,
+    #d9caf2 0%,
+    #f6f6f6 100%
+  );
+
+  --hero-height-desktop: calc(100vh - 75px);
+  /* --hero-height-mobile: calc(100vh - 146px); */
+  /* --hero-height-desktop: 100vh; */
+  --hero-height-mobile: 100vh;
+}
+
+/* TODO: Are all of them used? */
+@theme inline {
+  --color-background: var(--background);
+
+  --color-purple-2: var(--pythia-purple-2);
+  --color-purple-20: var(--pythia-purple-20);
+  --color-purple-40: var(--pythia-purple-40);
+  --color-purple-50: var(--pythia-purple-50);
+  --color-purple-60: var(--pythia-purple-60);
+  --color-purple-80: var(--pythia-purple-80);
+  --color-purple-100: var(--pythia-purple-100);
+
+  --color-orange-80: var(--pythia-orange-80);
+  --color-orange-60: var(--pythia-orange-60);
+  --color-orange-40: var(--pythia-orange-40);
+  --color-orange-2: var(--pythia-orange-2);
+
+  --color-pythia-black: var(--pythia-black);
+
+  --color-grey-100: var(--pythia-grey-100);
+  --color-grey-80: var(--pythia-grey-80);
+  --color-grey-40: var(--pythia-grey-40);
+  --color-grey-15: var(--pythia-grey-15);
+  --color-grey-10: var(--pythia-grey-10);
+  --color-grey-5: var(--pythia-grey-5);
+  --color-grey-2: var(--pythia-grey-2);
+
+  --color-red-60: var(--pythia-red-60);
+  --color-red-20: var(--pythia-red-20);
+  --color-red-2: var(--pythia-red-2);
+
+  --color-blue-80: var(--pythia-blue-80);
+  --color-blue-40: var(--pythia-blue-40);
+  --color-blue-2: var(--pythia-blue-2);
+
+  --shadow-header: var(--header-shadow);
+  --shadow-hero-wave: var(--hero-wave-shadow);
+  --shadow-hero-feature: var(--hero-feature-shadow);
+  --shadow-feature-card: var(--feature-card-shadow);
+  --shadow-work-item: var(--work-item-shadow);
+
+  --hero-height-desktop: var(--hero-height-desktop);
+  --hero-height-mobile: var(--hero-height-mobile);
+
+  --breakpoint-mobile: 320px;
+  --breakpoint-wide: 920px;
+  --breakpoint-desktop: 768px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Instrument Sans, sans-serif;
+}
+
+.PhoneInput input:focus{
+  outline: none;
+  border: none;
+}

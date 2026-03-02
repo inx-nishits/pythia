@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  pythia-landing:
+    build:
+      context: .
+      dockerfile: Dockerfile.pm2
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - KLAVIYO_PUBLIC_API_KEY=${KLAVIYO_PUBLIC_API_KEY}
+      - KLAVIYO_PUBLIC_PROFILES_URL=${KLAVIYO_PUBLIC_PROFILES_URL}
+      - PM2_INSTANCES=${PM2_INSTANCES:-max}
+    restart: unless-stopped
+    # Mount logs volume for PM2 logging
+    volumes:
+      - ./logs:/var/log
+
+networks:
+  default:
+    name: pythia-network 

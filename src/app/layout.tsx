@@ -1,0 +1,33 @@
+import type { Metadata } from "next";
+import { Instrument_Sans, Roboto } from "next/font/google";
+import "./globals.css";
+
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
+  subsets: ["latin"],
+});
+
+const robotoFont = Roboto({
+  variable: "--font-roboto-sans",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Hear and Fix In-Store Issues Instantly | Pythia Store",
+  description:
+    "Pythia listens to counter conversations, analyzes them with AI, and gives you real-time insights to improve service, staff performance, and sales.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}
