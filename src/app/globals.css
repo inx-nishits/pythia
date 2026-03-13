@@ -1,0 +1,164 @@
+/* Utility to hide scrollbars while allowing scroll */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+@import "tailwindcss";
+
+:root {
+  --background: #fafafa; /* Architectural light gray/white */
+  --foreground: #1c2331; /* Deep navy text */
+  
+  --brand-navy: #04245b; /* Logo blue, used for titles and accents */
+  --brand-navy-light: #0d3d72; /* Lighter variant for hovers */
+  
+  --brand-teal: #0ed7c1; /* Electric Teal for CTAs */
+  --brand-teal-hover: #0bbaaa;
+
+  --brand-coral: #ff94a4; /* Logo icon accent, coral/salmon */
+  
+  --brand-gray-light: #f1f5f9;
+  --brand-gray-border: #e2e8f0;
+
+  /* Design system: cards & sections */
+  --radius-card: 24px;
+  --radius-card-lg: 28px;
+  --radius-pill: 9999px;
+  --shadow-card: 0 18px 40px rgba(4, 36, 91, 0.06);
+  --shadow-card-hover: 0 24px 52px rgba(4, 36, 91, 0.1);
+  --section-padding-y: 120px;
+  --section-padding-y-lg: 160px;
+  --section-padding-x: 24px;
+  /* Industry-standard wide container (B2B SaaS / marketing); 1400px is common */
+  --content-max-width: 1400px;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-light: var(--brand-navy-light);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-hover: var(--brand-teal-hover);
+  --color-brand-coral: var(--brand-coral);
+  --font-sans: var(--font-roboto-sans), sans-serif;
+  --font-heading: var(--font-instrument-sans), sans-serif;
+  
+  --breakpoint-mobile: 320px;
+  --breakpoint-desktop: 768px;
+  --breakpoint-wide: 920px;
+  --max-width-content: 1400px;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Prevent flex/grid children from overflowing on small screens */
+main,
+section,
+article,
+[class*="max-w-"] {
+  min-width: 0;
+}
+
+/* Responsive typography: prevent long words from breaking layout */
+h1, h2, h3, h4, h5, h6, p, span {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Subtle noise texture for premium non-flat white look */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  opacity: 0.15;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  color: var(--brand-navy);
+}
+
+.PhoneInput input:focus{
+  outline: none;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+/* Light mode Glassmorphism utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--brand-gray-border);
+}
+
+/* Light mode Gradients */
+.text-gradient {
+  background: linear-gradient(to right, var(--brand-navy), #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.radiant-glow {
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+::selection {
+  background-color: var(--brand-teal);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-navy);
+  border-radius: 10px;
+  border: 4px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}

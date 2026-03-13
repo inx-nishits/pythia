@@ -1,0 +1,40 @@
+.policyPage {
+  font-family: var(--font-roboto-sans);
+  width: 100%;
+}
+
+.policyPage .page-content {
+  padding: 40px 24px 56px;
+}
+
+.policyPage .page-content p {
+  font-family: var(--font-roboto-sans), sans-serif;
+  font-size: 15px;
+  color: rgba(51, 65, 85, 0.98);
+  line-height: 1.9;
+  font-weight: 500;
+}
+
+.policyPage .page-content p strong {
+  color: #0f172a;
+}
+
+.policyPage .page-content p strong.main {
+  display: block;
+  font-size: 18px;
+  padding: 28px 0px 10px;
+  letter-spacing: -0.02em;
+}
+
+.policyPage .page-content ul {
+  padding: 12px 12px 12px 24px;
+}
+
+.policyPage .page-content a {
+  color: #0ed7c1;
+  font-weight: 700;
+}
+
+.policyPage .page-content a:hover {
+  text-decoration: underline;
+}

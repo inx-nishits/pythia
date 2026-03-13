@@ -1,0 +1,23 @@
+.home-contact-padding {
+  padding-left: clamp(20px, 6vw, 146px);
+  padding-right: clamp(20px, 6vw, 146px);
+  padding-top: clamp(60px, 6vw, 100px);
+  padding-bottom: clamp(60px, 8vw, 120px);
+}
+
+.home-contact-right-container {
+  width: clamp(285px, 26vw, 500px);
+  height: clamp(285px, 26vw, 500px);
+}
+
+.home-contact-left-image {
+  width: clamp(143px, 13vw, 252px);
+  height: clamp(143px, 13vw, 252px);
+  left: calc(0px - clamp(106px, 9vw, 186px));
+  top: clamp(48px, 4vw, 82px);
+}
+
+.home-contact-inner-image {
+  width: clamp(503px, 46vw, 880px);
+  height: clamp(323px, 46vw, 565px);
+}
