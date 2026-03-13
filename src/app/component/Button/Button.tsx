@@ -1,5 +1,5 @@
 const defaultStyles =
-  "flex justify-center items-center py-[12px] px-[16px] rounded-[6px] text-[15px] font-semibold transition-all duration-200";
+  "flex justify-center items-center py-[12px] px-[16px] rounded-[6px] text-[15px] font-semibold transition-all duration-200 cursor-pointer";
 
 const primaryStyles = 
   "bg-brand-navy text-white hover:bg-brand-navy-light shadow-md hover:shadow-lg";
