@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus, HelpCircle } from "lucide-react";
 import { useState } from "react";
 
 const faqs = [
@@ -34,52 +34,77 @@ function FAQSection({ standalone }: FAQSectionProps) {
 
   return (
     <section
-      className={
-        standalone
-          ? "py-8 sm:py-10 lg:py-16 px-4 sm:px-6 bg-white overflow-hidden min-w-0 w-full"
-          : "py-16 sm:py-20 lg:py-[120px] xl:py-[180px] px-4 sm:px-6 bg-white border-t border-slate-100 overflow-hidden min-w-0 w-full"
-      }
+      className={`py-16 lg:py-24 px-6 bg-white ${standalone ? "" : "border-t border-slate-100"}`}
     >
-      <div className="max-w-[800px] mx-auto w-full min-w-0">
-        <div className="text-center mb-16 space-y-4">
-          <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-[#0F172A] text-[40px] lg:text-[56px] font-extrabold tracking-tighter"
+      <div className="max-w-[1000px] mx-auto grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16">
+        <div className="space-y-4 lg:sticky lg:top-32 h-fit">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-200"
           >
-            Common questions
+            <HelpCircle className="w-3.5 h-3.5 text-slate-400" />
+            <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">Support</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-[1.05]"
+          >
+            Common <br />
+            <span className="text-emerald-500 italic">questions.</span>
           </motion.h2>
-          <p className="text-slate-500 text-lg lg:text-xl font-medium">Everything you need to know about Pythia Intelligence.</p>
+          <p className="text-sm text-slate-500 font-medium leading-relaxed max-w-[280px]">Everything you need to know about Pythia Intelligence.</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, index) => (
-            <motion.div 
+            <motion.div
               key={index}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`border rounded-3xl transition-all duration-300 ${openIndex === index ? 'border-brand-teal/30 bg-slate-50' : 'border-slate-200 bg-white hover:border-slate-300'}`}
+              className={`rounded-2xl overflow-hidden border transition-all duration-400 ${
+                openIndex === index
+                  ? "border-emerald-200 bg-emerald-50/20 shadow-sm"
+                  : "border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm"
+              }`}
             >
-              <button 
+              <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between text-left gap-4"
+                className="w-full px-5 py-4 flex items-center justify-between text-left gap-4 group"
               >
-                <span className="text-[15px] sm:text-lg font-bold text-[#0F172A] tracking-tight flex-1">{faq.q}</span>
-                <div
-                  className={`w-8 h-8 aspect-square rounded-full border border-slate-200 flex-none flex items-center justify-center transition-transform duration-300 ${
-                    openIndex === index ? 'rotate-180 bg-brand-teal border-brand-teal' : ''
-                  }`}
-                >
-                  {openIndex === index ? <Minus className="w-4 h-4 text-white" /> : <Plus className="w-4 h-4 text-slate-400" />}
+                <span className={`text-[15px] font-bold tracking-tight transition-colors leading-snug ${
+                  openIndex === index ? "text-[#04245b]" : "text-slate-700 group-hover:text-slate-900"
+                }`}>
+                  {faq.q}
+                </span>
+                <div className={`w-7 h-7 rounded-lg border flex-none flex items-center justify-center transition-all duration-300 shrink-0 ${
+                  openIndex === index
+                    ? "bg-[#04245b] border-[#04245b] text-white"
+                    : "bg-slate-50 border-slate-200 text-slate-400 group-hover:bg-[#04245b] group-hover:border-[#04245b] group-hover:text-white"
+                }`}>
+                  {openIndex === index ? <Minus size={14} /> : <Plus size={14} />}
                 </div>
               </button>
-              
-              <div className={`overflow-hidden transition-all duration-500 ${openIndex === index ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="px-8 pb-8 text-slate-500 leading-relaxed text-[16px]">
-                  {faq.a}
-                </div>
-              </div>
+
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                  >
+                    <div className="px-5 pb-5 pt-2 text-sm text-slate-600 leading-relaxed font-medium">
+                      {faq.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>

@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
+import { Search, Filter, BookOpen, ArrowRight } from "lucide-react";
 
 type ResourceCategory = "Blog" | "Article" | "Case Study";
 
@@ -23,7 +24,7 @@ const resources: ResourceItem[] = [
     category: "Article",
     industry: "Convenience Retail",
     excerpt:
-      "Standard dashboards surface shortage, shrink, and basket size, but they rarely capture what customers actually say when they walk away from a purchase.",
+      "Standard dashboards surface shortage, shrink, and basket size, but they rarely capture what customers actually say.",
     tags: ["Missed sales", "Store reports", "Friction"],
   },
   {
@@ -32,7 +33,7 @@ const resources: ResourceItem[] = [
     category: "Blog",
     industry: "Fuel & C‑Store",
     excerpt:
-      "Operations leaders need a simple way to hear what is happening at the counter without sitting in every store for hours each week.",
+      "Operations leaders need a simple way to hear what is happening at the counter without sitting in every store.",
     tags: ["Feedback loop", "Multi-store", "Operations"],
   },
   {
@@ -41,7 +42,7 @@ const resources: ResourceItem[] = [
     category: "Case Study",
     industry: "Retail Chains",
     excerpt:
-      "By listening to everyday interactions, this operator uncovered patterns that transformed how they coached frontline teams.",
+      "By listening to everyday interactions, this operator uncovered patterns that transformed how they coached teams.",
     tags: ["Coaching", "Audio intelligence", "Case study"],
   },
 ];
@@ -70,107 +71,100 @@ export default function ResourcesPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#f8fafc]">
-        <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px]">
-        <div className="max-w-[1400px] mx-auto space-y-12">
-          <header className="space-y-5">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]"
-            >
-              Resources
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tighter"
-            >
-              Insights for operators who care about what really happens at the counter.
-            </motion.h1>
-            <p className="text-slate-600 text-[15px] leading-relaxed">
-              Browse articles, blogs, and case studies that explore how audio intelligence changes
-              the way retail leaders run their stores and coach their teams.
-            </p>
-          </header>
-
-          <div className="flex flex-col md:flex-row gap-5 md:items-center md:justify-between p-4 rounded-2xl bg-white border border-slate-200 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
-            <div className="inline-flex flex-wrap gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-[12px] font-semibold transition-all duration-200 ${
-                    selectedCategory === cat
-                      ? "bg-[#0F172A] text-white shadow-sm"
-                      : "text-slate-600 hover:bg-slate-100 border border-slate-200"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            <div className="w-full md:w-[280px]">
-              <input
-                type="search"
-                placeholder="Search resources"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-[14px] text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-teal/40 focus:border-brand-teal transition-shadow duration-200"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 pt-4">
-            {filteredResources.map((item) => (
-              <motion.article
-                key={item.id}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="rounded-[24px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.05)] p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_24px_52px_rgba(15,23,42,0.08)] hover:border-slate-300/80"
+      <main className="min-h-screen bg-white">
+        <section className="px-6 pt-32 lg:pt-48 pb-24 lg:pb-40">
+          <div className="max-w-[1320px] mx-auto">
+            <div className="max-w-4xl mb-20 space-y-8">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-100"
               >
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                    <span>{item.category}</span>
-                    <span className="w-1 h-1 rounded-full bg-slate-300" />
-                    <span>{item.industry}</span>
-                  </div>
-                  <h2 className="text-[18px] font-extrabold text-[#0F172A] leading-snug tracking-tight">
-                    {item.title}
-                  </h2>
-                  <p className="text-[14px] text-slate-600 leading-relaxed">{item.excerpt}</p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-[12px] font-medium text-slate-600"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="mt-6 pt-4 border-t border-slate-100">
-                  <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-slate-500">
-                    Full summaries will be available soon.
-                  </span>
-                </div>
-              </motion.article>
-            ))}
-            {filteredResources.length === 0 && (
-              <p className="text-sm text-slate-500 col-span-full">
-                No resources found for your current filters. Try clearing the search or choosing a
-                different category.
+                <BookOpen className="w-4 h-4 text-emerald-500" />
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Resource Library</span>
+              </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[0.95]"
+              >
+                Insights for the <br />
+                <span className="text-slate-400 italic">modern operator.</span>
+              </motion.h1>
+              <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl">
+                Browse our library of articles, blogs, and case studies exploring the frontier of audio intelligence in retail.
               </p>
-            )}
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-between">
+              <div className="flex bg-slate-50 p-1.5 rounded-2xl border border-slate-100">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                      selectedCategory === cat
+                        ? "bg-white text-slate-900 shadow-xl border border-slate-100"
+                        : "text-slate-400 hover:text-slate-600"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              <div className="relative w-full md:w-[320px] group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
+                <input
+                  type="search"
+                  placeholder="Search insights..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-6 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <AnimatePresence mode="popLayout">
+                {filteredResources.map((item) => (
+                  <motion.article
+                    layout
+                    key={item.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="group relative flex flex-col p-10 rounded-[40px] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:border-slate-200 transition-all duration-500"
+                  >
+                    <div className="flex-1 space-y-6">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest">{item.category}</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-200" />
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.industry}</span>
+                      </div>
+                      <h2 className="text-2xl font-bold text-slate-900 leading-tight tracking-tight group-hover:text-emerald-500 transition-colors">
+                        {item.title}
+                      </h2>
+                      <p className="text-slate-500 font-medium leading-relaxed">
+                        {item.excerpt}
+                      </p>
+                    </div>
+                    
+                    <div className="mt-10 pt-8 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Read Article</span>
+                      <div className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center text-slate-300 group-hover:bg-emerald-500 group-hover:border-emerald-500 group-hover:text-white transition-all duration-500">
+                        <ArrowRight className="w-5 h-5" />
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
-        </div>
         </section>
       </main>
       <Footer />
     </>
   );
 }
-

@@ -2,93 +2,84 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight, Github, Twitter, Linkedin } from "lucide-react";
 
 const siteLinks = [
   {
-    title: "Pythia",
+    title: "Platform",
     links: [
-      {
-        name: 'Home',
-        href: '/',
-      },
-      {
-        name: 'Contact Us',
-        href: '/contact',
-      },
-      {
-        name: 'Solutions',
-        href: '/solutions/in-store-analytics',
-      },
-      {
-        name: 'Resources',
-        href: '/resources',
-      },
-      {
-        name: 'FAQ',
-        href: '/faq',
-      },
-      {
-        name: 'About',
-        href: '/about',
-      },
+      { name: 'Home', href: '/' },
+      { name: 'Solutions', href: '/solutions/in-store-analytics' },
+      { name: 'Device', href: '/#meet-pythia-store' },
+      { name: 'Process', href: '/#how-it-works' },
     ]
   },
   {
-    title: "Policies",
+    title: "Company",
     links: [
-      {
-        name: 'Privacy Policy',
-        href: '/privacy-policy',
-      },
-      {
-        name: 'Terms & Conditions',
-        href: '/terms-of-use',
-      },
+      { name: 'About', href: '/about' },
+      { name: 'Resources', href: '/resources' },
+      { name: 'FAQ', href: '/faq' },
+      { name: 'Contact', href: '/contact' },
+    ]
+  },
+  {
+    title: "Legal",
+    links: [
+      { name: 'Privacy Policy', href: '/privacy-policy' },
+      { name: 'Terms of Use', href: '/terms-of-use' },
     ]
   }
 ]
 
 function Footer() {
   return (
-    <footer className="py-12 sm:py-16 lg:py-[72px] xl:py-[88px] px-4 sm:px-6 bg-[#f9fafb] border-t border-slate-200 text-slate-600 overflow-hidden relative min-w-0 w-full">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-      <div className="absolute bottom-0 right-0 w-[380px] h-[380px] bg-brand-teal/[0.06] rounded-full blur-[110px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
-
-      <div className="max-w-[1400px] mx-auto relative z-10 w-full min-w-0">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 xl:gap-28 w-full justify-between items-start min-w-0">
-          <div className="flex flex-col gap-5 w-full lg:max-w-[360px] min-w-0">
-            <Link href={'/'} className="group">
-              <Image 
-                src={'/pythiaLogo.png'} 
-                alt="Pythia Intelligence" 
-                width={145} 
-                height={50} 
-                className="group-hover:opacity-80 transition-opacity" 
-              />
+    <footer className="py-24 px-6 bg-slate-950 border-t border-slate-800/50 overflow-hidden text-white">
+      <div className="max-w-[1320px] mx-auto">
+        <div className="grid lg:grid-cols-2 gap-20 mb-20">
+          <div className="space-y-10">
+            <Link href={'/'} className="inline-block">
+              <div className="bg-white px-4 py-2 rounded-xl inline-flex items-center justify-center">
+                <Image 
+                  src={'/pythiaLogo.png'} 
+                  alt="Pythia Intelligence" 
+                  width={130} 
+                  height={40} 
+                  className="w-auto h-8" 
+                />
+              </div>
             </Link>
-            <p className="text-sm font-medium leading-relaxed text-slate-500">
-              The in-store audio-intel device and dashboard for modern retail chains. Trusted by 100+ locations.
+            <p className="text-xl text-slate-400 font-medium leading-relaxed max-w-sm">
+              The in-store audio-intel device and dashboard for modern retail chains.
             </p>
             <div className="flex gap-4">
-               {/* Placeholders for social if needed, but keeping text-only for now to avoid content change */}
+              <div className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer">
+                <Twitter size={18} />
+              </div>
+              <div className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer">
+                <Linkedin size={18} />
+              </div>
+              <div className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer">
+                <Github size={18} />
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-x-10 sm:gap-x-14 lg:gap-x-[72px] xl:gap-x-[110px] gap-y-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
             {siteLinks.map((group, index) => (
-              <div key={index} className="flex flex-col min-w-[120px] sm:min-w-[140px]">
-                <p className="text-slate-900 text-[13px] font-semibold mb-4 uppercase tracking-[0.22em]">
+              <div key={index} className="space-y-6">
+                <p className="text-xs font-black text-white uppercase tracking-widest">
                   {group.title}
                 </p>
-                <ul className="flex flex-col gap-3 text-[14px] font-medium">
-                  {group.links.map((innerLink, i) => (
+                <ul className="space-y-4">
+                  {group.links.map((link, i) => (
                     <li key={i}>
                       <Link 
-                        href={innerLink?.href}
-                        className="hover:text-brand-teal transition-colors flex items-center gap-2 group"
+                        href={link.href}
+                        className="text-base text-slate-400 hover:text-emerald-400 font-medium transition-colors flex items-center gap-1 group"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-brand-teal transition-colors" />
-                        {innerLink?.name}
+                        {link.name}
+                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </Link>
                     </li>
                   ))}
@@ -98,17 +89,14 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-5">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-teal animate-pulse" />
-            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.24em]">
-              System Status: Operational
-            </p>
+        <div className="pt-12 border-t border-slate-800/50 flex flex-col md:flex-row justify-between gap-8 items-center">
+          <div className="flex items-center gap-3 bg-slate-900 px-4 py-2 rounded-full border border-slate-800">
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">System Status: Optimal</span>
           </div>
-          
-          <small className="text-slate-500 text-[12px] font-medium uppercase tracking-[0.24em] text-center md:text-right">
-            ©2025 Pythia Scorecard. All rights reserved.
-          </small>
+          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+            © 2026 Pythia Scorecard. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>

@@ -1,264 +1,513 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValue,
+  AnimatePresence,
+} from "framer-motion";
 import { Sections } from "@/app/sections";
 import Button from "@/app/component/Button";
 import Image from "next/image";
-import { Play, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  Play,
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  ShieldCheck,
+  TrendingUp,
+  Activity,
+  AlertTriangle,
+  BarChart3,
+  Users,
+} from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 
-const HERO_SLIDES = [
+/* ── SLIDES — each has its own content + image ── */
+const slides = [
   {
-    subline: "Every sigh, complaint, or missed sale is a clue. Pythia captures and analyzes checkout interactions to give you real-time recommendations on what to fix, before it costs you.",
-    pillars: ["Real-time insights", "Retain top talent", "Recover revenue"],
-    image: {
-      src: "https://www.pythiascorecard.com/desktop-meet-pythia-store.webp",
-      alt: "Pythia dashboard, real-time retail insights at checkout",
-    },
+    src: "https://www.pythiascorecard.com/desktop-meet-pythia-store.webp",
+    badge: "Live Dashboard",
+    badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-200",
+    dotColor: "bg-emerald-500",
+    headline: "Real-time checkout intelligence",
+    desc: "Every conversation at the counter, analysed instantly. Spot missed upsells and friction as they happen.",
+    stat: { icon: <BarChart3 className="w-3.5 h-3.5" />, value: "$4.2K", label: "recovered / store / mo" },
   },
   {
-    subline: "See what’s really happening at the counter, so you can coach, reward, and fix before it’s too late.",
-    pillars: ["Real-time insights", "Retain top talent", "Recover revenue"],
-    image: {
-      src: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
-      alt: "Retail checkout and store operations",
-    },
+    src: "https://www.pythiascorecard.com/desktop-meet-pythia-store.webp",
+    badge: "Staff Analytics",
+    badgeColor: "bg-indigo-500/10 text-indigo-600 border-indigo-200",
+    dotColor: "bg-indigo-500",
+    headline: "Detect burnout before it's too late",
+    desc: "AI surfaces staff frustration signals days before problems escalate — so you can act before they walk out.",
+    stat: { icon: <Users className="w-3.5 h-3.5" />, value: "42%", label: "avg industry turnover" },
   },
   {
-    subline: "Turn checkout conversations into a daily playbook. No more guessing, no more missed signals.",
-    pillars: ["Real-time insights", "Retain top talent", "Recover revenue"],
-    image: {
-      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-      alt: "Analytics and insights dashboard",
-    },
+    src: "https://www.pythiascorecard.com/desktop-meet-pythia-store.webp",
+    badge: "ROI Reports",
+    badgeColor: "bg-amber-500/10 text-amber-600 border-amber-200",
+    dotColor: "bg-amber-500",
+    headline: "Turn audio into measurable ROI",
+    desc: "Every missed upsell and complaint is tracked, scored, and turned into a daily improvement playbook.",
+    stat: { icon: <TrendingUp className="w-3.5 h-3.5" />, value: "92%", label: "upsell adoption rate" },
   },
 ];
 
-const SLIDE_DURATION_MS = 5500;
+/* ── Slide variants — whole card slides in/out ── */
+const slideVariants = {
+  enter: (dir: number) => ({
+    x: dir > 0 ? "100%" : "-100%",
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (dir: number) => ({
+    x: dir > 0 ? "-40%" : "40%",
+    opacity: 0,
+  }),
+};
 
-function HeroSection() {
-  const [activeSlide, setActiveSlide] = useState(0);
+export default function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const parallaxY = useTransform(scrollY, [0, 600], [0, -60]);
+
+  /* 3-D tilt */
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(mouseY, [-300, 300], [3, -3]), { stiffness: 100, damping: 28 });
+  const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-3, 3]), { stiffness: 100, damping: 28 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const r = containerRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - (r.left + r.width / 2));
+    mouseY.set(e.clientY - (r.top + r.height / 2));
+  };
+  const handleMouseLeave = () => { mouseX.set(0); mouseY.set(0); };
+
+  /* Slider */
+  const [current, setCurrent] = useState(0);
+  const [dir, setDir] = useState<1 | -1>(1);
+  const [paused, setPaused] = useState(false);
+
+  const go = (idx: number, d: 1 | -1) => { setDir(d); setCurrent(idx); };
+  const prev = () => go((current - 1 + slides.length) % slides.length, -1);
+  const next = () => go((current + 1) % slides.length, 1);
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, SLIDE_DURATION_MS);
-    return () => clearInterval(t);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
-  const slideVariants = {
-    enter: { opacity: 0, y: 12 },
-    center: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -12 },
-  };
+    if (paused) return;
+    const id = setInterval(() => { setDir(1); setCurrent(c => (c + 1) % slides.length); }, 4500);
+    return () => clearInterval(id);
+  }, [paused]);
 
   return (
     <section
+      ref={containerRef}
       id={Sections.HeroSection}
-      className="relative pt-[72px] sm:pt-[96px] lg:pt-[88px] pb-[56px] lg:pb-[72px] px-3 sm:px-4 lg:px-6 overflow-hidden min-w-0 w-full"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative min-h-screen flex items-center pt-20 pb-12 px-6 overflow-hidden"
+      style={{
+        backgroundColor: "#ffffff",
+        backgroundImage:
+          "linear-gradient(rgba(4,36,91,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(4,36,91,0.05) 1px, transparent 1px)",
+        backgroundSize: "56px 56px",
+      }}
     >
-      <div className="max-w-[1400px] mx-auto w-full min-w-0">
-        {/* Badge - full width */}
+      {/* ══ BACKGROUND overlays (glows + dots) ══ */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Intersection dots */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(4,36,91,0.08) 1.5px, transparent 1.5px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+        {/* Animated extra drift row */}
         <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-6 lg:mb-8 flex justify-center lg:justify-start"
-        >
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-slate-200 shadow-sm backdrop-blur-sm max-w-full">
-            <ShieldCheck className="w-3.5 h-3.5 text-brand-teal shrink-0" />
-            <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">BIPA & SOC 2 Enterprise Certified</span>
-            <div className="h-3 w-px bg-slate-200 mx-1 shrink-0 hidden sm:block" />
-            <span className="text-[10px] font-bold text-brand-teal animate-pulse shrink-0">LIVE INSIGHTS</span>
-          </div>
-        </motion.div>
+          animate={{ y: [0, 56] }}
+          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "linear-gradient(rgba(4,36,91,0.02) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+        {/* Emerald glow top-left */}
+        <motion.div
+          style={{ background: "rgba(16,185,129,0.18)", y: parallaxY }}
+          className="absolute -top-40 -left-20 w-[500px] h-[400px] rounded-full blur-[140px]"
+        />
+        {/* Indigo glow right */}
+        <div
+          className="absolute top-[5%] right-[-8%] w-[380px] h-[340px] rounded-full blur-[120px]"
+          style={{ background: "rgba(99,102,241,0.10)" }}
+        />
+        {/* Vignette: pure white in corners so grid softens at very edge */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 110% 110% at 50% 45%, transparent 60%, rgba(255,255,255,0.6) 100%)",
+          }}
+        />
+      </div>
 
-        {/* Desktop: side-by-side | Mobile: stacked with image high */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center lg:min-h-0 min-w-0">
-          {/* Left: copy + CTAs (on desktop) | On mobile: headline then image then copy */}
-          <div className="flex flex-col order-2 lg:order-1 text-center lg:text-left min-w-0">
-            <motion.h1
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-[28px] min-[400px]:text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.05] font-extrabold text-[#0F172A] tracking-tight text-balance mb-4 lg:mb-5 break-words"
+      {/* ══ LAYOUT: side by side ══ */}
+      <div className="max-w-[1320px] w-full mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+
+          {/* ── LEFT COLUMN ── */}
+          <div className="flex flex-col gap-7">
+            {/* Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              className="flex flex-wrap items-center gap-3"
             >
-              Get the insights{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-coral italic">your stores don’t report.</span>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950 text-white text-[10px] font-black uppercase tracking-[0.2em]">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live · 100+ Enterprise Chains
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-bold text-emerald-700">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                SOC 2 Compliant
+              </span>
+            </motion.div>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[clamp(2.8rem,5vw,4.8rem)] font-black tracking-[-0.04em] leading-[0.9] text-slate-950 uppercase"
+            >
+              Hear the
+              <br />
+              <span className="relative">
+                <span
+                  style={{
+                    background: "linear-gradient(90deg, #10b981, #14b8a6)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                  className="font-medium italic normal-case tracking-wide"
+                >
+                  Unreported
+                </span>
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ originX: 0 }}
+                  className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full bg-gradient-to-r from-emerald-400/50 to-transparent"
+                />
+              </span>
             </motion.h1>
 
-            {/* On mobile: show image slider here (above subline) so it's above fold */}
-            <div className="lg:hidden order-first mb-6 -mx-2">
-              <HeroImageSlider activeSlide={activeSlide} />
-            </div>
+            {/* Sub-copy */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.2 }}
+              className="text-base md:text-[1.05rem] text-slate-500 leading-relaxed font-medium max-w-md"
+            >
+              Pythia listens to every checkout conversation and surfaces missed
+              revenue, staff friction, and customer dissatisfaction —{" "}
+              <strong className="text-slate-800 font-semibold">
+                before it hits your P&amp;L.
+              </strong>
+            </motion.p>
 
-            {/* Slider: subline + pillars (fixed height so nav below never overlaps) */}
-            <div className="flex flex-col items-center lg:items-start w-full">
-              <div className="relative w-full min-h-[140px] sm:min-h-[128px] overflow-hidden">
-                <AnimatePresence mode="wait" initial={false}>
+            {/* Stat pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap gap-2.5"
+            >
+              {[
+                { icon: <Zap className="w-3.5 h-3.5" />, value: "$4.2K", label: "/ store / mo" },
+                { icon: <TrendingUp className="w-3.5 h-3.5" />, value: "92%", label: "upsell adoption" },
+                { icon: <Activity className="w-3.5 h-3.5" />, value: "98%", label: "accuracy" },
+              ].map((s, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-[12px] font-bold text-slate-700 shadow-sm"
+                >
+                  <span className="text-emerald-500">{s.icon}</span>
+                  <span className="font-black text-slate-900">{s.value}</span>
+                  <span className="text-slate-400 font-medium">{s.label}</span>
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-row items-start gap-3"
+            >
+              <a href="https://calendly.com/pythia/15-minute-demo" target="_blank" rel="noreferrer">
+                <Button
+                  id="hero-cta-trial"
+                  className="group h-12 px-7 text-[15px] font-bold bg-slate-950 text-white hover:bg-emerald-500 rounded-xl flex items-center gap-2.5 transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-slate-900/15 whitespace-nowrap"
+                >
+                  Start Free Trial
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </Button>
+              </a>
+              <a href={`#${Sections.DemoAssets}`}>
+                <Button
+                  id="hero-cta-demo"
+                  className="group h-12 px-6 text-[15px] font-bold bg-white text-slate-800 border border-slate-200 hover:border-emerald-400 rounded-xl flex items-center gap-2.5 transition-all shadow-sm whitespace-nowrap"
+                >
+                  <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
+                    <Play className="w-2.5 h-2.5 fill-slate-700 group-hover:fill-emerald-600 transition-colors translate-x-px" />
+                  </span>
+                  Watch Demo
+                </Button>
+              </a>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.52 }}
+              className="text-[12px] text-slate-400 font-medium"
+            >
+              No card required · Setup in under 5 minutes · Cancel anytime
+            </motion.p>
+          </div>
+
+          {/* ── RIGHT COLUMN: Product showcase ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            style={{ rotateX, rotateY, transformPerspective: 1400 }}
+            className="relative"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => { setPaused(false); mouseX.set(0); mouseY.set(0); }}
+          >
+            {/* Glow */}
+            <div className="absolute -inset-4 bg-emerald-400/8 blur-3xl rounded-3xl -z-10" />
+
+            {/* Browser chrome card */}
+            <div className="rounded-2xl border border-slate-200/90 bg-white shadow-[0_24px_64px_-12px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.04)] overflow-hidden">
+
+              {/* Browser top bar */}
+              <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 border-b border-slate-200/70">
+                <div className="flex gap-1.5 shrink-0">
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                </div>
+                <div className="flex-1">
+                  <div className="mx-auto max-w-[200px] bg-white border border-slate-200 rounded-md px-2.5 py-1 flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                    <span className="text-[10px] text-slate-400 font-mono truncate">
+                      app.pythiascorecard.com
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ══ SLIDING CONTENT + IMAGE ══
+                  The entire block (content header + image) slides as one unit */}
+              <div className="overflow-hidden relative">
+                <AnimatePresence initial={false} custom={dir} mode="popLayout">
                   <motion.div
-                    key={activeSlide}
+                    key={current}
+                    custom={dir}
                     variants={slideVariants}
                     initial="enter"
                     animate="center"
                     exit="exit"
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="absolute inset-0 flex flex-col items-center lg:items-start justify-center"
+                    transition={{
+                      x: { type: "spring", stiffness: 280, damping: 28 },
+                      opacity: { duration: 0.18 },
+                    }}
                   >
-                    <p className="text-[15px] sm:text-[17px] lg:text-[18px] leading-relaxed text-slate-600 max-w-[540px] lg:max-w-none tracking-tight font-medium mb-4">
-                      {HERO_SLIDES[activeSlide].subline}
-                    </p>
-                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-                      {HERO_SLIDES[activeSlide].pillars.map((label, i) => (
-                        <span
-                          key={i}
-                          className="inline-flex items-center px-3 py-1.5 rounded-full text-[12px] sm:text-[13px] font-semibold bg-slate-100 text-slate-700 border border-slate-200/80"
-                        >
-                          {label}
-                        </span>
-                      ))}
+                    {/* ── Content header strip (slides with image) ── */}
+                    <div className="px-5 py-4 border-b border-slate-100 bg-white">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="space-y-1">
+                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${slides[current].badgeColor}`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${slides[current].dotColor}`} />
+                            {slides[current].badge}
+                          </span>
+                          <h3 className="text-[15px] font-bold text-slate-900 leading-snug">
+                            {slides[current].headline}
+                          </h3>
+                          <p className="text-[12px] text-slate-500 leading-snug max-w-xs">
+                            {slides[current].desc}
+                          </p>
+                        </div>
+                        {/* Stat */}
+                        <div className="shrink-0 text-right">
+                          <div className="flex items-center justify-end gap-1 text-emerald-600 mb-0.5">
+                            {slides[current].stat.icon}
+                            <span className="text-lg font-black text-slate-900">
+                              {slides[current].stat.value}
+                            </span>
+                          </div>
+                          <span className="text-[10px] text-slate-400 font-medium">
+                            {slides[current].stat.label}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ── Screenshot image ── */}
+                    <div className="relative aspect-[16/9] bg-slate-100">
+                      <Image
+                        src={slides[current].src}
+                        alt={slides[current].headline}
+                        fill
+                        className="object-cover"
+                        priority={current === 0}
+                      />
                     </div>
                   </motion.div>
                 </AnimatePresence>
-              </div>
-              {/* Navigation: dots + arrows + counter (own row, never overlapped) */}
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 pt-4 border-t border-slate-200/60 w-full justify-center lg:justify-start min-w-0" aria-label="Hero slide navigation">
-                <div className="flex items-center gap-2 flex-wrap justify-center">
-                  <button
-                    type="button"
-                    aria-label="Previous slide"
-                    onClick={() => setActiveSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
-                    className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white text-slate-600 hover:border-brand-teal hover:text-brand-teal hover:bg-brand-teal/5 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <div className="flex items-center gap-2">
-                    {HERO_SLIDES.map((_, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        aria-label={`Go to slide ${i + 1}`}
-                        onClick={() => setActiveSlide(i)}
-                        className={`rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 ${
-                          i === activeSlide
-                            ? "w-8 h-3 bg-brand-teal"
-                            : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <button
-                    type="button"
-                    aria-label="Next slide"
-                    onClick={() => setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length)}
-                    className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white text-slate-600 hover:border-brand-teal hover:text-brand-teal hover:bg-brand-teal/5 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
+
+                {/* Progress bar — sits outside AnimatePresence so it doesn't slide */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-slate-200/50 z-10">
+                  <motion.div
+                    key={`prog-${current}`}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: paused ? 0 : 4.5, ease: "linear" }}
+                    style={{ originX: 0 }}
+                    className="h-full bg-emerald-500"
+                  />
                 </div>
-                <span className="text-sm font-bold text-slate-600 tabular-nums min-w-[3ch]">
-                  {activeSlide + 1} / {HERO_SLIDES.length}
-                </span>
               </div>
             </div>
 
-            {/* CTAs */}
+            {/* Floating insight card */}
             <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: [0, -8, 0], opacity: 1 }}
+              transition={{
+                opacity: { delay: 1.3, duration: 0.6 },
+                y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 },
+              }}
+              className="absolute -bottom-6 -left-6 z-30 hidden xl:block"
             >
-              <a href="https://calendly.com/pythia/15-minute-demo" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-                <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
-                  Book a 15-Minute Demo
-                </Button>
-              </a>
-              <a href={`#${Sections.DemoAssets}`} className="group w-full sm:w-auto">
-                <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold transition-all duration-200 flex items-center justify-center gap-3 rounded-2xl whitespace-nowrap bg-slate-100 text-slate-700 border border-slate-200/60 hover:bg-brand-teal/10 hover:border-brand-teal/30 hover:text-[#0F172A] cursor-pointer">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-brand-teal group-hover:border-brand-teal group-hover:shadow-md transition-colors">
-                    <Play className="w-3.5 h-3.5 text-brand-teal ml-0.5 fill-brand-teal group-hover:text-white group-hover:fill-white transition-colors" />
-                  </div>
-                  Watch a 60-Second Demo
-                </Button>
-              </a>
-              <a href={`#${Sections.Contact}`} className="w-full sm:w-auto">
-                <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-[#0F172A] text-white hover:bg-slate-900 rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
-                  See it in action
-                </Button>
-              </a>
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xl p-4 w-[220px]">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                    Real-time Insight
+                  </span>
+                </div>
+                <p className="text-[12px] font-semibold text-slate-800 leading-snug">
+                  "Missed upsell on premium add-on — 3rd time this shift."
+                </p>
+                <div className="mt-2.5 h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+                  <div className="h-full w-[72%] bg-emerald-400 rounded-full" />
+                </div>
+              </div>
             </motion.div>
+
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: [0, 7, 0], opacity: 1 }}
+              transition={{
+                opacity: { delay: 1.5, duration: 0.6 },
+                y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2.5 },
+              }}
+              className="absolute -top-6 -right-5 z-30 hidden xl:block"
+            >
+              <div className="bg-slate-950 rounded-2xl border border-slate-800 shadow-xl p-4 w-[196px]">
+                <div className="flex items-center gap-2 mb-2">
+                  <AlertTriangle className="w-3 h-3 text-rose-400 shrink-0" />
+                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">
+                    Urgent Alert
+                  </span>
+                </div>
+                <p className="text-[12px] font-semibold text-white leading-snug">
+                  High frustration detected · Pump #4
+                </p>
+                <p className="text-[10px] text-slate-500 mt-1.5">12:44 PM · Store #12</p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+        </div>
+
+        {/* ══ SLIDER NAV — centred row below the entire two-column grid ══ */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-10 flex flex-col items-center gap-4"
+        >
+          {/* Dot indicators */}
+          <div className="flex items-center gap-3">
+            {slides.map((s, i) => (
+              <button
+                key={i}
+                onClick={() => go(i, i > current ? 1 : -1)}
+                aria-label={`Go to slide ${i + 1}: ${s.badge}`}
+                className="flex items-center gap-2 group"
+              >
+                <span
+                  className={`block rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "w-6 h-2 bg-slate-900"
+                      : "w-2 h-2 bg-slate-300 group-hover:bg-slate-400"
+                  }`}
+                />
+                <span
+                  className={`hidden sm:block text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                    i === current ? "text-slate-700" : "text-slate-300 group-hover:text-slate-500"
+                  }`}
+                >
+                  {s.badge}
+                </span>
+              </button>
+            ))}
           </div>
 
-          {/* Right: main image slider (desktop only - above the fold beside copy) */}
-          <div className="hidden lg:block order-2 relative min-w-0">
-            <HeroImageSlider activeSlide={activeSlide} />
+          {/* Prev / Next */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={prev}
+              aria-label="Previous slide"
+              className="h-8 px-4 flex items-center gap-1.5 rounded-full border border-slate-200 bg-white text-slate-600 text-xs font-semibold hover:bg-slate-50 hover:border-slate-300 hover:text-slate-900 transition-all active:scale-95"
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+              Prev
+            </button>
+            <span className="text-[11px] text-slate-400 font-medium tabular-nums">
+              {current + 1} / {slides.length}
+            </span>
+            <button
+              onClick={next}
+              aria-label="Next slide"
+              className="h-8 px-4 flex items-center gap-1.5 rounded-full border border-slate-200 bg-white text-slate-600 text-xs font-semibold hover:bg-slate-50 hover:border-slate-300 hover:text-slate-900 transition-all active:scale-95"
+            >
+              Next
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
           </div>
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );
 }
-
-function HeroImageSlider({ activeSlide }: { activeSlide: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 24 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="relative group min-w-0 w-full"
-    >
-      <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-br from-brand-teal/5 to-blue-500/5 rounded-[24px] lg:rounded-[40px] blur-2xl opacity-60 group-hover:opacity-80 transition-opacity pointer-events-none" />
-      <div className="relative rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] overflow-hidden border border-slate-200/80 shadow-[0_32px_64px_rgba(15,23,42,0.12)] aspect-[16/10] lg:aspect-[4/3] bg-slate-200 w-full min-w-0">
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={activeSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="absolute inset-0 bg-slate-200"
-          >
-            <Image
-              src={HERO_SLIDES[activeSlide].image.src}
-              alt={HERO_SLIDES[activeSlide].image.alt}
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority={activeSlide === 0}
-            />
-          </motion.div>
-        </AnimatePresence>
-        {/* Progress bar at bottom of image */}
-        <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-900/30 overflow-hidden">
-          <motion.div
-            className="h-full bg-brand-teal"
-            initial={{ width: "0%" }}
-            animate={{ width: `${((activeSlide + 1) / HERO_SLIDES.length) * 100}%` }}
-            transition={{ duration: 0.35 }}
-          />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-export default HeroSection;

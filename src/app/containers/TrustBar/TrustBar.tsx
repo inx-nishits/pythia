@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, ChevronRight } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 type Partner = {
   name: string;
@@ -17,41 +17,35 @@ const partners: Partner[] = [
 
 function TrustBar() {
   return (
-    <section className="w-full min-w-0 bg-white border-b border-slate-100 py-10 sm:py-14 overflow-hidden relative">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10 w-full min-w-0">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16 min-w-0">
-          <div className="flex items-center gap-4 sm:gap-6 shrink-0 min-w-0 text-center lg:text-left">
-            <div className="flex flex-col">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">Infrastructure</span>
-              <p className="text-lg font-extrabold text-[#0F172A] leading-none">Built for Retail Chains</p>
-              <p className="text-sm font-medium text-slate-500 mt-1">100+ convenience locations</p>
-            </div>
-            <div className="h-10 w-px bg-slate-200 hidden lg:block" />
+    <section className="w-full bg-slate-50 border-y border-slate-100 py-12 lg:py-16 overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-6">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          {/* Label */}
+          <div className="shrink-0 text-center lg:text-left space-y-2 lg:border-r border-slate-200 lg:pr-10">
+            <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
+              Trusted Infrastructure
+            </h2>
+            <p className="text-xl font-black text-slate-900 leading-tight">
+              Integrates with every <br className="hidden lg:block" /> major POS
+            </p>
           </div>
 
-          <div className="flex-1 overflow-hidden relative min-w-0 flex justify-center">
+          {/* Marquee */}
+          <div className="flex-1 relative overflow-hidden py-2 w-full">
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10" />
+            
             <motion.div
-              initial={{ x: 0 }}
-              animate={{ x: "-10%" }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="flex items-center gap-12 lg:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-500"
+              animate={{ x: [0, -1000] }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              className="flex items-center gap-20 whitespace-nowrap"
             >
-              {partners.map((p, i) => (
-                <div key={i} className="flex items-center gap-3 shrink-0 min-h-[40px] min-w-[80px] justify-center">
-                  <div className="w-10 h-10 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-xs shrink-0">
+              {[...partners, ...partners, ...partners, ...partners, ...partners].map((p, i) => (
+                <div key={i} className="flex items-center gap-4 group opacity-50 hover:opacity-100 transition-opacity duration-500">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center font-black text-lg text-slate-400 group-hover:text-[#04245b] group-hover:border-[#04245b] transition-all duration-500">
                     {p.symbol}
                   </div>
-                  <span className="text-xl font-extrabold text-[#0F172A] tracking-tighter font-mono">
-                    {p.name}
-                  </span>
-                </div>
-              ))}
-              {partners.map((p, i) => (
-                <div key={`dup-${i}`} className="flex items-center gap-3 shrink-0 min-h-[40px] min-w-[80px] justify-center">
-                  <div className="w-10 h-10 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-xs shrink-0">
-                    {p.symbol}
-                  </div>
-                  <span className="text-xl font-extrabold text-[#0F172A] tracking-tighter font-mono">
+                  <span className="text-2xl font-black text-slate-400 group-hover:text-slate-800 transition-colors duration-500 tracking-tight">
                     {p.name}
                   </span>
                 </div>
@@ -59,13 +53,16 @@ function TrustBar() {
             </motion.div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 shrink-0">
-            <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl shadow-sm transition-all duration-200 hover:shadow-md hover:border-slate-300/80">
-              <ShieldCheck className="w-4 h-4 text-brand-teal shrink-0" />
-              <span className="text-[10px] sm:text-xs font-bold text-slate-700 tracking-tight">BIPA & SOC 2 COMPLIANT</span>
-            </div>
-            <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors duration-200 cursor-pointer group">
-              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-brand-teal transition-colors" />
+          {/* Compliance Badge */}
+          <div className="shrink-0 lg:border-l border-slate-200 lg:pl-10">
+            <div className="flex items-center gap-3 px-5 py-3 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+              <div className="p-2 bg-slate-50 border border-slate-100 rounded-xl group-hover:bg-[#04245b] transition-colors">
+                <ShieldCheck className="w-5 h-5 text-[#04245b]" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Security</span>
+                <span className="text-[11px] font-black text-slate-900 whitespace-nowrap tracking-wide">SOC 2 & BIPA READY</span>
+              </div>
             </div>
           </div>
         </div>

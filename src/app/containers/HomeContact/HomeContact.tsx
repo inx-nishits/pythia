@@ -2,93 +2,141 @@
 
 import { motion } from "framer-motion";
 import { Sections } from "@/app/sections";
-import { Calendar, ShieldCheck, Zap } from "lucide-react";
-import "./HomeContact.css";
+import { Calendar, ShieldCheck, Zap, BarChart3, Users } from "lucide-react";
 import PythiaForm from "../PythiaForm/PythiaForm";
+
+const trustPills = [
+  { icon: <Calendar className="w-3 h-3" />, label: "Under 5 min setup" },
+  { icon: <Zap className="w-3 h-3" />, label: "Zero friction API" },
+  { icon: <BarChart3 className="w-3 h-3" />, label: "$4K+ ROI / store" },
+  { icon: <Users className="w-3 h-3" />, label: "100+ chains" },
+];
 
 function HomeContact() {
   return (
-    <section 
+    <section
       id={Sections.Contact}
-      className="relative px-4 sm:px-6 py-16 sm:py-20 lg:py-[120px] xl:py-[160px] bg-[#0F172A] overflow-hidden min-w-0 w-full"
+      className="relative py-16 lg:py-24 px-6 bg-[#020817] overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-navy via-[#020617] to-[#020617] opacity-90 pointer-events-none" />
-      <div className="absolute top-[-120px] right-[-120px] w-[480px] h-[480px] bg-brand-teal/12 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[-160px] left-[-160px] w-[520px] h-[520px] bg-blue-500/10 rounded-full blur-[160px] pointer-events-none" />
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+        <div className="absolute top-0 right-0 w-[55%] h-full bg-[#04245b]/30 blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[40%] h-[60%] bg-emerald-500/10 blur-[120px]" />
+      </div>
 
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-24 relative z-10 min-w-0">
-        
-        <div className="flex-1 space-y-8 sm:space-y-10 min-w-0">
-          <div className="space-y-8">
-            <motion.div 
-               initial={{ opacity: 0, scale: 0.9 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-teal/15 border border-brand-teal/25 backdrop-blur-sm"
+      <div className="max-w-[1240px] mx-auto relative z-10">
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-center">
+
+          {/* Left Panel */}
+          <div className="space-y-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20"
             >
-               <ShieldCheck className="w-3.5 h-3.5 text-brand-teal" />
-               <span className="text-[11px] font-bold text-brand-teal uppercase tracking-widest">Enterprise Ready</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+              <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">Enterprise Ready</span>
             </motion.div>
-            
-            <motion.h2 
-              initial={{ opacity: 0, y: 15 }}
+
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="!text-white text-[28px] sm:text-[36px] lg:text-[44px] xl:text-[56px] font-extrabold leading-[1.05] tracking-tight max-w-xl break-words"
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight leading-[1.05]"
+              style={{ color: "#ffffff" }}
             >
               Ready to hear what your{" "}
-              <span className="text-brand-teal italic">stores aren&rsquo;t telling you?</span>
+              <br className="hidden lg:block" />
+              <span
+                style={{
+                  background: "linear-gradient(90deg, #34d399, #2dd4bf)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  color: "#34d399", // Fallback
+                  backgroundClip: "text",
+                  fontStyle: "italic",
+                }}
+              >
+                stores aren&rsquo;t telling you?
+              </span>
             </motion.h2>
-            <p className="text-slate-300 text-lg lg:text-[20px] font-medium leading-relaxed max-w-xl opacity-90">
-              Book a free demo and see how Pythia helps you catch what’s slipping before it turns into bad reviews, missed targets, or team turnover.
-            </p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-sm font-medium leading-relaxed max-w-sm"
+              style={{ color: "#cbd5e1" }}
+            >
+              Book a walkthrough and see how Pythia helps you catch what&apos;s slipping before it turns into bad reviews or lost revenue.
+            </motion.p>
+
+            {/* Trust Pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+              className="flex flex-wrap gap-2 pt-2"
+            >
+              {trustPills.map((p, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-[11px] font-bold"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    color: "#e2e8f0",
+                  }}
+                >
+                  <span className="text-emerald-400">{p.icon}</span>
+                  {p.label}
+                </div>
+              ))}
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-2">
-             <div className="flex items-center gap-5 group">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-teal group-hover:border-brand-teal shadow-lg transition-all duration-300">
-                  <Calendar className="w-6 h-6 text-brand-teal group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                   <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">Setup Time</p>
-                   <p className="text-[17px] font-bold text-white tracking-tight">Under 5 Minutes</p>
-                </div>
-             </div>
-             <div className="flex items-center gap-5 group">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-teal group-hover:border-brand-teal shadow-lg transition-all duration-300">
-                  <Zap className="w-6 h-6 text-brand-teal group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                   <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">Integration</p>
-                   <p className="text-[17px] font-bold text-white tracking-tight">Zero Friction API</p>
-                </div>
-             </div>
-          </div>
-        </div>
+          {/* Form Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            {/* Glow halo behind card */}
+            <div className="absolute -inset-4 bg-[#04245b]/20 blur-2xl rounded-3xl" />
+            <div className="relative bg-white rounded-3xl p-8 shadow-2xl overflow-hidden border border-slate-200/50">
+              {/* Top gradient bar */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#04245b] via-emerald-500 to-[#04245b]" />
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          className="w-full min-w-0 lg:w-[520px] lg:shrink-0 relative group"
-        >
-          <div className="absolute -inset-3 bg-brand-teal/18 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          
-          <div className="bg-white rounded-[24px] lg:rounded-[28px] p-6 sm:p-7 lg:p-9 shadow-[0_26px_70px_rgba(15,23,42,0.5)] border border-slate-100/60 overflow-hidden relative backdrop-blur-sm">
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-teal to-brand-coral" />
-            
-            <div className="mb-10 text-center lg:text-left">
-               <h3 className="text-[24px] lg:text-[28px] font-extrabold text-[#0F172A] mb-2 tracking-tight leading-tight">Schedule Your Demo</h3>
-               <p className="text-slate-500 text-[14px] lg:text-[15px] font-medium max-w-md">Join 100+ locations using Pythia Intelligence.</p>
+              <div className="relative z-10">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">Schedule Your Demo</h3>
+                  <p className="text-[13px] text-slate-500 font-medium mt-1">Join 100+ brands using Pythia Intelligence.</p>
+                </div>
+
+                <PythiaForm
+                  hiddenFields={{ message: false }}
+                  submitText="Get Started"
+                  submitClassName=""
+                  formClassName="flex flex-col gap-4 w-full"
+                  requestedDemo={true}
+                />
+              </div>
             </div>
-            
-            <PythiaForm
-              hiddenFields={{ message: false }}
-              submitText="Book My Demo"
-              submitClassName="w-full mt-4 py-5 rounded-2xl text-[18px] font-extrabold shadow-2xl transition-all hover:scale-[1.02] active:scale-[0.98]"
-              formClassName="flex flex-col gap-5 w-full"
-              requestedDemo={true}
-            />
-          </div>
-        </motion.div>
+          </motion.div>
 
+        </div>
       </div>
     </section>
   );

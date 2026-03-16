@@ -10,31 +10,32 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa; /* Architectural light gray/white */
-  --foreground: #1c2331; /* Deep navy text */
+  --background: #ffffff;
+  --foreground: #020617; /* Slate 950 */
   
-  --brand-navy: #04245b; /* Logo blue, used for titles and accents */
-  --brand-navy-light: #0d3d72; /* Lighter variant for hovers */
+  --brand-navy: #0f172a; /* Slate 900 */
+  --brand-navy-light: #1e293b; /* Slate 800 */
   
-  --brand-teal: #0ed7c1; /* Electric Teal for CTAs */
-  --brand-teal-hover: #0bbaaa;
+  --brand-teal: #10b981; /* Emerald 500 */
+  --brand-teal-hover: #059669; /* Emerald 600 */
 
-  --brand-coral: #ff94a4; /* Logo icon accent, coral/salmon */
+  --brand-accent: #6366f1; /* Indigo 500 */
+  --brand-coral: #f43f5e; /* Rose 500 */
   
-  --brand-gray-light: #f1f5f9;
+  --brand-gray-light: #f8fafc;
   --brand-gray-border: #e2e8f0;
 
   /* Design system: cards & sections */
   --radius-card: 24px;
-  --radius-card-lg: 28px;
+  --radius-card-lg: 32px;
   --radius-pill: 9999px;
-  --shadow-card: 0 18px 40px rgba(4, 36, 91, 0.06);
-  --shadow-card-hover: 0 24px 52px rgba(4, 36, 91, 0.1);
-  --section-padding-y: 120px;
+  --shadow-premium: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 50px rgba(0, 0, 0, 0.1);
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --section-padding-y: 100px;
   --section-padding-y-lg: 160px;
-  --section-padding-x: 24px;
+  
   /* Industry-standard wide container (B2B SaaS / marketing); 1400px is common */
-  --content-max-width: 1400px;
+  --content-max-width: 1320px;
 }
 
 @theme {
@@ -51,7 +52,7 @@
   --breakpoint-mobile: 320px;
   --breakpoint-desktop: 768px;
   --breakpoint-wide: 920px;
-  --max-width-content: 1400px;
+  --max-width-content: 1320px;
 }
 
 html {
@@ -71,73 +72,45 @@ body {
   width: 100%;
 }
 
-/* Prevent flex/grid children from overflowing on small screens */
-main,
-section,
-article,
-[class*="max-w-"] {
-  min-width: 0;
-}
-
-/* Responsive typography: prevent long words from breaking layout */
-h1, h2, h3, h4, h5, h6, p, span {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-/* Subtle noise texture for premium non-flat white look */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -10;
-  opacity: 0.15;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
+/* Base styles */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  font-weight: 700;
   color: var(--brand-navy);
 }
 
-.PhoneInput input:focus{
-  outline: none;
-  border: none;
-  background: transparent;
-  color: inherit;
-}
-
-/* Light mode Glassmorphism utilities */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-}
-
+/* Custom Utilities */
 .glass-header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--brand-gray-border);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Light mode Gradients */
-.text-gradient {
-  background: linear-gradient(to right, var(--brand-navy), #334155);
+.premium-card {
+  background: white;
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-premium);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
-.radiant-glow {
-  mask-image: radial-gradient(circle at center, black, transparent 80%);
+/* Focus states */
+:focus-visible {
+  outline: 2px solid var(--brand-teal);
+  outline-offset: 2px;
 }
 
 ::selection {
@@ -145,20 +118,27 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
 }
 
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-navy);
+  background: #cbd5e1;
   border-radius: 10px;
-  border: 4px solid #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94a3b8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  :root {
+    --section-padding-y: 60px;
+  }
 }

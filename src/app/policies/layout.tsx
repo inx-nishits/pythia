@@ -5,11 +5,10 @@ export default function PoliciesLayout({ children }: { children: React.ReactNode
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#f8fafc]">
+      <main className="min-h-screen bg-white">
         {children}
       </main>
       <Footer />
     </>
   );
 }
-

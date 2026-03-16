@@ -2,85 +2,121 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 
 const solutions = [
   {
     slug: "in-store-analytics",
     title: "In-Store Analytics",
     description:
-      "Understand what actually happens at the counter, across every store, in language your operations team can act on.",
+      "Understand what actually happens at the counter across every store.",
+    tags: ["Operations", "Insights"],
   },
   {
     slug: "fuel-pricing-software",
     title: "Fuel Pricing Software",
     description:
-      "Connect the conversations happening at the forecourt and counter with pricing decisions you make every single day.",
+      "Connect forecourt conversations with dynamic pricing decisions.",
+    tags: ["Pricing", "Real-time"],
   },
   {
     slug: "retail-ai",
     title: "Retail AI",
     description:
-      "Bring an always-on AI analyst into every store, turning unstructured audio into structured operational intelligence.",
+      "Bring an always-on AI analyst into every store via structured audio.",
+    tags: ["AI", "Automation"],
   },
   {
     slug: "convenience-store-analytics",
-    title: "Convenience Store Analytics",
+    title: "C-Store Analytics",
     description:
-      "See how service, upsell behavior, and friction vary by location so you can coach stores like a top-performing region.",
+      "See how service and behavior vary by region and location.",
+    tags: ["Regional", "Benchmarking"],
   },
 ];
 
 function SolutionsSection() {
   return (
-    <section className="py-16 sm:py-20 lg:py-[120px] xl:py-[160px] px-4 sm:px-6 bg-[#f8fafc] border-t border-slate-100 overflow-hidden min-w-0 w-full">
-      <div className="max-w-[1400px] mx-auto w-full min-w-0">
-        <div className="max-w-[720px] mb-12 space-y-4">
-          <motion.span
+    <section className="py-16 lg:py-24 px-6 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-50/30 rounded-full blur-[120px] -z-10" />
+
+      <div className="max-w-[1240px] mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+          <div className="space-y-3">
+            <motion.span
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]"
+            >
+              Enterprise Solutions
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight"
+            >
+              Built for fuel &amp; <br />
+              <span className="text-emerald-500 italic">convenience retail.</span>
+            </motion.h2>
+          </div>
+          <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]"
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-sm text-slate-500 leading-relaxed max-w-sm font-medium"
           >
-            Solutions
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tighter"
-          >
-            Built for the realities of modern fuel and convenience retail.
-          </motion.h2>
-          <p className="text-slate-600 text-[15px] sm:text-[16px] leading-relaxed">
-            Explore how the same audio-intelligence engine powers different parts of your operation, from pricing decisions to day-to-day store execution.
-          </p>
+            Explore how our audio-intel engine powers different parts of your operation, from pricing to execution.
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 gap-5">
           {solutions.map((solution, index) => (
             <motion.article
               key={solution.slug}
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="group rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.04)] p-7 lg:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_24px_56px_rgba(15,23,42,0.08)] hover:border-slate-300/80"
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="group p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-500 flex flex-col justify-between min-h-[220px]"
             >
-              <div className="space-y-4">
-                <h3 className="text-[20px] lg:text-[22px] font-extrabold text-[#0F172A] tracking-tight">
-                  {solution.title}
-                </h3>
-                <p className="text-[14px] text-slate-600 leading-relaxed">
+              <div>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      {solution.tags.map(tag => (
+                        <span key={tag} className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{tag}</span>
+                      ))}
+                    </div>
+                    <h3 className="text-xl font-black text-slate-950 group-hover:text-emerald-600 transition-colors">
+                      {solution.title}
+                    </h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-[#04245b] group-hover:border-[#04245b] group-hover:text-white transition-all duration-300">
+                    <ArrowUpRight className="w-5 h-5" />
+                  </div>
+                </div>
+                <p className="text-sm text-slate-500 leading-relaxed font-medium max-w-xs">
                   {solution.description}
                 </p>
               </div>
-              <div className="mt-6">
+              
+              <div className="mt-6 pt-6 border-t border-slate-50 flex items-center justify-between">
                 <Link
                   href={`/solutions/${solution.slug}`}
-                  className="inline-flex items-center gap-2 text-[13px] font-semibold text-brand-teal hover:text-brand-teal-hover transition-colors"
+                  className="text-[11px] font-black text-slate-900 uppercase tracking-[0.15em] flex items-center gap-2 group/link"
                 >
-                  <span>View solution</span>
-                  <span className="w-5 h-5 rounded-full border border-brand-teal/40 flex items-center justify-center text-[11px]">
-                    →
-                  </span>
+                  Explore Solution
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
+                <span className="text-[10px] font-black text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                  ACTIVE
+                </span>
               </div>
             </motion.article>
           ))}
@@ -91,4 +127,3 @@ function SolutionsSection() {
 }
 
 export default SolutionsSection;
-
