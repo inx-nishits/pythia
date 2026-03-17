@@ -103,7 +103,7 @@ Mixed audience across the convenience store / fuel retail hierarchy:
 
 ## 6. Strategic 10-Section Page Structure (Top 1% SaaS Best Practice)
 1. **Hero Section:** Headline: single punchy sentence that communicates the transformation (not the feature). Should convey both core themes: retain A Players + remove customer friction. Sub-headline: 1–2 sentences expanding the "how." Primary CTA: "Book a 15-Minute Demo" (Calendly embed or link). Secondary CTA: "Watch a 60-Second Demo" (video modal). Visual: product mockup or short looping animation of the dashboard / device.
-2. **Social Proof Bar:** Logo strip: "Trusted by" with customer or partner logos. If no logos yet, use: "Built for the brands running 100+ convenience locations" with industry certification badges (SOC 2, BIPA compliant, etc.).
+2. **Social Proof Bar:** Logo strip: "Trusted by" with customer or partner logos. If no logos yet, use: "Built for the brands running 1-100+ retail locations" with industry certification badges (SOC 2, BIPA compliant, etc.).
 3. **Problem Agitation:** 2–3 pain points your audience feels daily, framed as questions or stats. Example: "67% of missed upsells happen because managers never hear about them." Example: "Your best cashier just quit — and you didn't even know they were unhappy." Goal: make the visitor nod and think "that's exactly my problem."
 4. **Solution / Product Overview:** Show how Pythia solves each pain point from Section 3. Use the 3-pillar layout (similar to Tote): e.g., "Capture → Analyse → Act." Tie pillars back to the two core themes: (1) retain talent, (2) boost sales. Include short video or animated GIF of the dashboard.
 5. **Key Product Features:** Highlight the 5 specific features from the table in Section 5 with icons and descriptions.

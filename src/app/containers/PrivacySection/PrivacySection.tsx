@@ -1,24 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, Lock } from "lucide-react";
+import { Shield } from "lucide-react";
 
-const guards = [
-  {
-    title: "Privacy First Architecture",
-    desc: "All audio is processed locally on the device. No customer Voice or PII is ever transmitted to the cloud.",
-    icon: <Shield className="w-5 h-5 text-brand-teal" />
-  },
-  {
-    title: "Security & Compliance",
-    desc: "BIPA and SOC 2 Type II compliant. Enterprise-grade encryption at rest and in transit.",
-    icon: <Lock className="w-5 h-5 text-brand-teal" />
-  }
-];
+
 
 function PrivacySection() {
   return (
-    <section className="py-16 sm:py-20 lg:py-[120px] xl:py-[180px] px-4 sm:px-6 bg-[#fafafa] overflow-hidden min-w-0 w-full">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#fafafa] overflow-hidden min-w-0 w-full">
       <div className="max-w-[1400px] mx-auto text-center mb-12 lg:mb-16 space-y-4 w-full min-w-0">
         <motion.span 
           initial={{ opacity: 0 }}
@@ -35,14 +24,7 @@ function PrivacySection() {
           Security that scales.
         </motion.h2>
         <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            BIPA Compliant
-          </span>
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-            SOC 2 Type II
-          </span>
+
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-700">
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
             No Customer PII Stored
@@ -58,27 +40,23 @@ function PrivacySection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1100px] mx-auto">
-        {guards.map((guard, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="p-8 bg-white border border-slate-200 rounded-[28px] hover:border-brand-teal/20 hover:shadow-[0_24px_52px_rgba(15,23,42,0.08)] transition-all duration-300 overflow-hidden relative group"
-          >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-teal/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform" />
-            <div className="flex items-start gap-5 relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-brand-teal/5 flex items-center justify-center shrink-0">
-                {guard.icon}
-              </div>
-              <div className="space-y-2 text-left">
-                <h3 className="text-xl font-bold text-[#0F172A] tracking-tight">{guard.title}</h3>
-                <p className="text-slate-500 leading-relaxed text-[15px]">{guard.desc}</p>
-              </div>
+      <div className="max-w-[1200px] mx-auto flex justify-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="p-10 lg:p-14 bg-white border border-slate-200 rounded-[32px] hover:border-brand-teal/20 hover:shadow-[0_32px_64px_rgba(15,23,42,0.06)] transition-all duration-300 overflow-hidden relative group w-full max-w-4xl"
+        >
+          <div className="absolute top-0 right-0 w-48 h-48 bg-brand-teal/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform" />
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8 relative z-10 text-center sm:text-left">
+            <div className="w-16 h-16 rounded-[24px] bg-brand-teal/5 flex items-center justify-center shrink-0">
+              <Shield className="w-8 h-8 text-brand-teal" />
             </div>
-          </motion.div>
-        ))}
+            <div className="space-y-4">
+              <h3 className="text-2xl lg:text-3xl font-extrabold text-[#0F172A] tracking-tight">Privacy is our core foundation</h3>
+              <p className="text-slate-500 leading-relaxed text-lg lg:text-xl font-medium">Audio captured at the counter is transmitted securely to the cloud using enterprise-grade encryption in transit. Recordings are retained for up to 14 days to ensure accuracy and support issue resolution, then permanently deleted. Only the structured insights and operational summaries derived from those recordings are stored long-term in your dashboard.</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

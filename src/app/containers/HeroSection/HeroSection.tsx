@@ -5,20 +5,20 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Sections } from "@/app/sections";
 import Button from "@/app/component/Button";
 import Image from "next/image";
-import { Play, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
+import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 
 const HERO_SLIDES = [
   {
-    subline: "Every sigh, complaint, or missed sale is a clue. Pythia captures and analyzes checkout interactions to give you real-time recommendations on what to fix, before it costs you.",
-    pillars: ["Real-time insights", "Retain top talent", "Recover revenue"],
+    subline: "Every sigh, complaint, or missed sale is a clue. Pythia captures and analyzes checkout interactions to give you always-on recommendations on what to fix, before it costs you.",
+    pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "https://www.pythiascorecard.com/desktop-meet-pythia-store.webp",
-      alt: "Pythia dashboard, real-time retail insights at checkout",
+      alt: "Pythia dashboard, always-on retail insights at checkout",
     },
   },
   {
     subline: "See what’s really happening at the counter, so you can coach, reward, and fix before it’s too late.",
-    pillars: ["Real-time insights", "Retain top talent", "Recover revenue"],
+    pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
       alt: "Retail checkout and store operations",
@@ -26,7 +26,7 @@ const HERO_SLIDES = [
   },
   {
     subline: "Turn checkout conversations into a daily playbook. No more guessing, no more missed signals.",
-    pillars: ["Real-time insights", "Retain top talent", "Recover revenue"],
+    pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
       alt: "Analytics and insights dashboard",
@@ -78,20 +78,7 @@ function HeroSection() {
       className="relative pt-[72px] sm:pt-[96px] lg:pt-[88px] pb-[56px] lg:pb-[72px] px-3 sm:px-4 lg:px-6 overflow-hidden min-w-0 w-full"
     >
       <div className="max-w-[1400px] mx-auto w-full min-w-0">
-        {/* Badge - full width */}
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-6 lg:mb-8 flex justify-center lg:justify-start"
-        >
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-slate-200 shadow-sm backdrop-blur-sm max-w-full">
-            <ShieldCheck className="w-3.5 h-3.5 text-brand-teal shrink-0" />
-            <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">BIPA & SOC 2 Enterprise Certified</span>
-            <div className="h-3 w-px bg-slate-200 mx-1 shrink-0 hidden sm:block" />
-            <span className="text-[10px] font-bold text-brand-teal animate-pulse shrink-0">LIVE INSIGHTS</span>
-          </div>
-        </motion.div>
+
 
         {/* Desktop: side-by-side | Mobile: stacked with image high */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center lg:min-h-0 min-w-0">

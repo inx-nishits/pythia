@@ -6,13 +6,13 @@ import Input from "@/app/component/Input";
 import { ProfileData } from "@/app/types";
 import { useState } from "react";
 import { ProfileSchema } from "../../schema";
-import Textarea from "@/app/component/Textarea";
+
 import Button from "@/app/component/Button";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { inputStyles } from "@/app/component/Input/Input";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Mail, Building2, Hash, Globe, CheckCircle2, Loader2, Phone } from "lucide-react";
+import { User, Mail, CheckCircle2, Loader2, Phone } from "lucide-react";
 
 interface PythiaFormProps {
   hiddenFields: Partial<Record<keyof ProfileData, boolean>>;
@@ -39,7 +39,7 @@ function PythiaForm({
     type_of_industry: "",
     message: "",
     demo_requested: false,
-    emails_accepted: false,
+    emails_accepted: true,
   };
 
   const [formData, setFormData] = useState<ProfileData>(defaultProfileData);
@@ -220,7 +220,7 @@ function PythiaForm({
             </div>
             <PhoneInput
               className={`${inputStyles} pl-[46px] group-hover:border-slate-300 transition-all [&>input]:bg-transparent [&>input]:border-none [&>input]:outline-none [&>input]:w-full`}
-              placeholder="Enter phone number"
+              placeholder="Phone number (optional)"
               defaultCountry="US"
               value={formData.phone_number}
               onChange={(value) => setFormData((prev) => ({ ...prev, phone_number: value ?? '' }))} 
@@ -235,79 +235,7 @@ function PythiaForm({
         </AnimatePresence>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-        <div className="flex flex-col gap-1 w-full">
-          <Input
-            type="text"
-            placeholder="Store name"
-            icon={<Building2 className="w-4 h-4" />}
-            value={formData.store_name}
-            onChange={onFieldChange("store_name")}
-            error={!!errors.store_name}
-          />
-          <AnimatePresence>
-            {errors.store_name && (
-              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
-                <FormFieldError error={errors.store_name} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-        <div className="flex flex-col gap-1 w-full">
-          <Input
-            type="number"
-            placeholder="Number of stores"
-            icon={<Hash className="w-4 h-4" />}
-            value={formData.number_of_stores ?? ""}
-            onChange={onFieldChange("number_of_stores")}
-            error={!!errors.number_of_stores}
-          />
-          <AnimatePresence>
-            {errors.number_of_stores && (
-              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
-                <FormFieldError error={errors.number_of_stores} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
 
-      <div className="flex flex-col gap-1 w-full">
-        <Input
-          type="text"
-          placeholder="Industry Type (e.g. Convenience Retail)"
-          icon={<Globe className="w-4 h-4" />}
-          value={formData.type_of_industry}
-          onChange={onFieldChange("type_of_industry")}
-          error={!!errors.type_of_industry}
-        />
-        <AnimatePresence>
-          {errors.type_of_industry && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
-              <FormFieldError error={errors.type_of_industry} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {!hiddenFields.message && (
-        <div className="flex flex-col gap-1 w-full">
-          <Textarea
-            placeholder="Tell us about your operational challenges..."
-            rows={4}
-            onChange={onFieldChange("message")}
-            value={formData.message}
-            className={errors.message ? "border-red-400 bg-red-50/50" : ""}
-          />
-          <AnimatePresence>
-            {errors.message && (
-              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
-                <FormFieldError error={errors.message} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
 
       <div className="flex flex-col gap-1 w-full pt-2">
         <div className="px-0.5">

@@ -21,9 +21,9 @@ const robotoFont = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Hear and Fix In-Store Issues Instantly | Pythia Store",
+  title: "Hear and Fix In-Store Issues with Same Day Intelligence | Pythia Store",
   description:
-    "Pythia listens to counter conversations, analyzes them with AI, and gives you real-time insights to improve service, staff performance, and sales.",
+    "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and sales.",
 };
 
 export default function RootLayout({

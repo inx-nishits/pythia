@@ -48,7 +48,7 @@ function MeetPythiaStore() {
                 className="text-slate-500 text-[17px] lg:text-[19px] font-medium leading-relaxed max-w-[520px]"
               >
                 Pythia is a simple device that listens to what’s said at the counter, analyzes it with AI, and gives you
-                real-time insights and recommendations in a clear dashboard. All it needs is Wi-Fi.
+                always-on insights and recommendations in a clear dashboard. All it needs is Wi-Fi.
               </motion.p>
             </div>
           </motion.div>

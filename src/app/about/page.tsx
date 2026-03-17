@@ -36,7 +36,7 @@ export default function AboutPage() {
                 <p className="text-[14px] text-slate-600 leading-relaxed">
                   Retail operators have no shortage of dashboards and reports, but they still struggle
                   to see the full picture of what customers experience. Pythia was created to close that
-                  gap by listening at the counter and giving leaders a live, conversational view of their
+                  gap by listening at the counter and giving leaders an always-on, conversational view of their
                   stores.
                 </p>
               </div>
@@ -68,7 +68,7 @@ export default function AboutPage() {
                     Focus
                   </p>
                   <p className="text-[14px] font-semibold text-[#0F172A]">
-                    Real-time, audio-driven store intelligence
+                    Always-on, audio-driven store intelligence
                   </p>
                 </div>
               </div>

@@ -49,7 +49,7 @@ function ConversionSection() {
           </div>
 
           <p className="text-[12px] text-slate-300 leading-relaxed">
-            No obligation. No pressure. Just a clear look at how Pythia turns live counter audio into a daily playbook for your stores.
+            No obligation. No pressure. Just a clear look at how Pythia turns always-on counter audio into a daily playbook for your stores.
           </p>
         </div>
       </div>

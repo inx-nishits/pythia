@@ -15,27 +15,28 @@ import ConversionSection from "./containers/ConversionSection";
 import PersonaSection from "./containers/PersonaSection";
 import DemoAssetsSection from "./containers/DemoAssetsSection";
 import PrivacySection from "./containers/PrivacySection";
+import BlogSection from "./containers/BlogSection";
 import FAQSection from "./containers/FAQSection";
 
 
 export const metadata = {
-  title: "Pythia Scorecard | Real-Time Retail AI Insights at Checkout",
-  description: "Pythia is your in-store audio-intel device and dashboard. It captures in-store checkout conversations, analyses sentiment & behaviour with AI and gives retail chains real-time insights to prevent missed sales, staff burnout and poor customer experience.",
+  title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
+  description: "Pythia is your in-store audio-intel device and dashboard. It captures in-store checkout conversations, analyses sentiment & behaviour with AI and gives retail chains always-on insights to prevent missed sales, staff burnout and poor customer experience.",
   keywords: [
     "retail AI",
     "in-store analytics",
     "checkout insights",
     "customer sentiment",
     "Pythia Scorecard",
-    "real-time store insights",
+    "always-on store insights",
     "staff performance analytics",
     "audio intelligence retail",
     "missed sale prevention",
     "retail operations optimization"
   ],
   openGraph: {
-    title: "Pythia Scorecard | Real-Time Retail AI Insights at Checkout",
-    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses checkout interactions and delivers actionable insights in real time.",
+    title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
+    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses checkout interactions and delivers actionable insights in near real time.",
     url: `${process.env.NEXT_PUBLIC_SITE}/`,
     site_name: "Pythia Scorecard",
     images: [
@@ -70,6 +71,7 @@ export default function Home() {
         <DemoAssetsSection />
         <HowItWorks />
         <PrivacySection />
+        <BlogSection />
         <FAQSection />
         <HomeContact />
       </main>

@@ -7,15 +7,15 @@ import { useState } from "react";
 const faqs = [
   {
     q: "How does Pythia handle customer privacy?",
-    a: "Privacy is our core foundation. All audio is processed locally on the hardware device using Edge AI. No customer voice recordings or Personally Identifiable Information (PII) are ever stored or transmitted to the cloud. We are fully BIPA and SOC 2 Type II compliant."
+    a: "Privacy is our core foundation. Audio captured at the counter is transmitted securely to the cloud using enterprise-grade encryption in transit. Recordings are retained for up to 14 days to ensure accuracy and support issue resolution, then permanently deleted. Only the structured insights and operational summaries derived from those recordings are stored long-term in your dashboard."
   },
   {
     q: "Will this integrate with my existing POS system?",
-    a: "Yes. Pythia is design to be POS-agnostic. While it runs as a standalone intelligence layer, we offer integrations with major retail hubs like PDI, Verifone, and Gilbarco to correlate audio insights with transactional data."
+    a: "Yes, Pythia is designed to be POS agnostic. It runs as a standalone intelligence layer, we work with any POS company such as Gilbarco, Verifone, NCR, Toast, and many more."
   },
   {
     q: "How long does it take to see the first insights?",
-    a: "Immediately. Once the device is connected to Wi-Fi, it begins analyzing conversations in real-time. Store managers typically receive their first actionable 'Summary Digest' within the first 24 hours of operation."
+    a: "Immediately. Once the device is connected to Wi-Fi, it begins analyzing conversations in near real-time. Store managers typically receive their first actionable 'Summary Digest' within the first 24 hours of operation."
   },
   {
     q: "What is the typical ROI for a multi-store chain?",

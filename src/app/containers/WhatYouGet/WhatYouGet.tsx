@@ -6,7 +6,7 @@ import { Sections } from "@/app/sections";
 
 const features = [
   {
-    title: "Real-time analysis of in-store customer feedback",
+    title: "Always-on analysis of in-store customer feedback",
     description: "",
     icon: <Trophy className="w-6 h-6 text-amber-500" />,
     className: "md:col-span-2 md:row-span-1",

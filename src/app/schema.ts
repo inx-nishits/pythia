@@ -17,10 +17,12 @@ export const ProfileSchema = z.object({
     .min(1, "Last name is required")
     .refine(alphabeticOnly, { message: `Last name ${alphabeticMessage}.` }),
   email: z.string().email("Invalid email address"),
-  store_name: z.string().min(1, "Store name is required"),
+  store_name: z.string().optional(),
   phone_number: z
     .string()
+    .optional()
     .refine((val) => {
+      if (!val) return true;
       const phoneNumber = parsePhoneNumberFromString(val);
       return phoneNumber?.isValid() ?? false;
     }, {
@@ -29,8 +31,9 @@ export const ProfileSchema = z.object({
   number_of_stores: z
     .number()
     .min(1, "Number of stores must be at least 1")
+    .optional()
     .nullable(),
-  type_of_industry: z.string().min(1, "Type of industry is required"),
+  type_of_industry: z.string().optional(),
   message: z.string().optional(),
   demo_requested: z.boolean().optional(),
   emails_accepted: z.boolean(),

@@ -22,7 +22,7 @@ export default function FuelPricingSoftwarePage() {
         useCaseBody="A pricing team rolls out a new price band in a subset of stores. By listening to how often customers mention price or confusion at the counter, they quickly learn where communication or signage needs to be tightened before expanding the change network-wide."
         impactLabel="Impact snapshot"
         impactValue="Faster read on customer reaction"
-        impactDetail="Teams can pair transaction data with live feedback, reducing the risk of silent dissatisfaction when prices or promos change."
+        impactDetail="Teams can pair transaction data with always-on feedback, reducing the risk of silent dissatisfaction when prices or promos change."
         capabilities={[
           "Capture how often price, value, or promotions are mentioned at the counter.",
           "Detect early signs of confusion or frustration around specific offers or price changes.",

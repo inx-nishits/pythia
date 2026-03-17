@@ -3,7 +3,7 @@ import '../policies.css';
 
 export const metadata = {
   title: "Terms & Conditions | Pythia Scorecard",
-  description: "Review the terms of use for Pythia Scorecard’s retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence services.",
+  description: "Review the terms of use for Pythia Scorecard’s always-on retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence services.",
   keywords: [
     "Pythia Scorecard terms",
     "retail AI terms of use",
@@ -252,7 +252,7 @@ export default function TermsOfUse() {
           <li>
             <p>
               Use the Website in any manner that could disable, overburden, damage, or impair the site or interfere with
-              any other person&rsquo;s use of the Website, including their ability to engage in real-time activities
+              any other person&rsquo;s use of the Website, including their ability to engage in near real-time activities
               through the Website.
             </p>
           </li>

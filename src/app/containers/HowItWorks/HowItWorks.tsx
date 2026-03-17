@@ -15,7 +15,7 @@ const steps = [
   {
     number: "02",
     title: "Analyze",
-    desc: "Our AI reviews each interaction to detect tone, sentiment, feedback, and patterns in real time.",
+    desc: "Our AI reviews each interaction to detect tone, sentiment, feedback, and patterns in near real time.",
     icon: <Brain className="w-6 h-6 text-brand-teal" />,
     color: "bg-brand-teal/10"
   },
