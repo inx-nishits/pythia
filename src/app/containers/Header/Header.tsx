@@ -97,6 +97,7 @@ function Header() {
   useEffect(() => {
     if (!pathname) return;
     if (pathname.startsWith("/resources")) setActiveItem("resources");
+    else if (pathname.startsWith("/articles")) setActiveItem("articles");
     else if (pathname.startsWith("/about")) setActiveItem("about");
     else if (pathname.startsWith("/faq")) setActiveItem("faq");
     else if (pathname.startsWith("/contact")) setActiveItem("contact");
@@ -189,6 +190,13 @@ function Header() {
                 onClick={() => setActiveItem("resources")}
               >
                 Resources
+              </NavItem>
+              <NavItem
+                href="/articles"
+                isActive={activeItem === "articles" && pathname.startsWith("/articles")}
+                onClick={() => setActiveItem("articles")}
+              >
+                Articles
               </NavItem>
               <NavItem
                 href="/about"
@@ -345,6 +353,22 @@ function Header() {
                     }}
                   >
                     Resources
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/articles"
+                    className={`block text-[18px] font-semibold transition-colors ${
+                      activeItem === "articles" && pathname.startsWith("/articles")
+                        ? "text-brand-navy"
+                        : "text-slate-800"
+                    }`}
+                    onClick={() => {
+                      setActiveItem("articles");
+                      setMobileOpen(false);
+                    }}
+                  >
+                    Articles
                   </Link>
                 </li>
                 <li>
