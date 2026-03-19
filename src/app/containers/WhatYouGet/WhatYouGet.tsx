@@ -41,20 +41,21 @@ const features = [
     icon: <Target className="w-6 h-6 text-brand-teal" />,
     className: "md:col-span-1 md:row-span-1",
     visual: (
-      <div className="mt-4 h-20" />
+      <div className="mt-6 h-24" />
     ),
   },
   {
     title: "AI-powered recommendations to improve your operations",
     description: "",
     icon: <FileJson className="w-6 h-6 text-blue-500" />,
-    className: "md:col-span-1 md:row-span-1",
+    className: "md:col-span-2 md:row-span-1",
     visual: (
-      <div className="mt-4 flex flex-1 items-center justify-center">
+      <div className="mt-3 flex items-center justify-center">
         <img
           src="https://res.cloudinary.com/dsgulltma/image/upload/v1773919322/Gemini_Generated_Image_rmkejirmkejirmke_nqb0hu.png"
           alt="AI powered recommendations"
-          style={{ width: "370px", height: "auto", maxHeight: "125px" }}
+          style={{ width: "100%", maxWidth: "850px", height: "410px", maxHeight: "580px" }}
+          className="rounded-2xl shadow-sm"
         />
       </div>
     ),
@@ -63,20 +64,22 @@ const features = [
     title: "Quick and easy plug-and-play setup – just connect to Wi-Fi",
     description: "",
     icon: <History className="w-6 h-6 text-purple-500" />,
-    className: "md:col-span-2 md:row-span-1",
+    className: "md:col-span-1 md:row-span-1",
     visual: (
-      <div className="mt-4 space-y-2">
+      <div className="mt-6 space-y-4">
         <div className="flex gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-brand-teal mt-1"></div>
-          <p className="text-[11px] text-slate-600 font-medium">Plug in at checkout</p>
+          <div className="w-2.5 h-2.5 rounded-full bg-brand-teal mt-1"></div>
+          <p className="text-[20px] text-slate-600 font-medium">Plug in at checkout</p>
         </div>
         <div className="flex gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1"></div>
-          <p className="text-[11px] text-slate-600 font-medium">Connect to Wi‑Fi</p>
+          <div className="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1"></div>
+          <p className="text-[20px] text-slate-600 font-medium">Connect to Wi‑Fi</p>
         </div>
         <div className="flex gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-1"></div>
-          <p className="text-[11px] text-slate-600 font-medium">Start getting insights</p>
+          <div className="w-2.5 h-2.5 rounded-full bg-purple-500 mt-1"></div>
+          <p className="text-[20px] text-slate-600 font-medium">Start getting insights</p>
+        </div>
+        <div>
         </div>
       </div>
     ),
