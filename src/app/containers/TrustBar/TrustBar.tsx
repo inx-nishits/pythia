@@ -11,10 +11,9 @@ type Partner = {
 const partners: Partner[] = [
   { name: "NACS", symbol: "N" },
   { name: "Conexxus", symbol: "CX" },
-  { name: "PDI", symbol: "◆" },
   { name: "Verifone", symbol: "V" },
   { name: "Gilbarco", symbol: "G" },
-  { name: "NCR Voyix", symbol: "NV" }
+  { name: "NCR", symbol: "N" }
 ];
 
 function TrustBar() {

@@ -6,24 +6,20 @@ import { useState } from "react";
 
 const faqs = [
   {
-    q: "How does Pythia handle customer privacy?",
-    a: "Privacy is our core foundation. Audio captured at the counter is transmitted securely to the cloud using enterprise-grade encryption in transit. Recordings are retained for up to 14 days to ensure accuracy and support issue resolution, then permanently deleted. Only the structured insights and operational summaries derived from those recordings are stored long-term in your dashboard."
+    q: "How many locations do I need to get started?",
+    a: "Just one. Pythia is built to scale from a single flagship store up to a portfolio of 100+ locations. Many operators start with one or two sites to prove the value, then roll out across the chain."
   },
   {
-    q: "Will this integrate with my existing POS system?",
-    a: "Yes, Pythia is designed to be POS agnostic. It runs as a standalone intelligence layer, we work with any POS company such as Gilbarco, Verifone, NCR, Toast, and many more."
+    q: "What hardware do I actually receive?",
+    a: "You receive a compact, plug-and-play audio intelligence device that sits discreetly at the checkout counter. There's no bulky equipment to install and no technician required — just plug it in, connect to Wi-Fi, and you're live."
   },
   {
-    q: "How long does it take to see the first insights?",
-    a: "Immediately. Once the device is connected to Wi-Fi, it begins analyzing conversations in near real-time. Store managers typically receive their first actionable 'Summary Digest' within the first 24 hours of operation."
+    q: "Who can see the insights — just corporate, or store managers too?",
+    a: "Both. Pythia offers two perspectives in one platform. Corporate and operations leaders get a network-wide view to compare locations and spot trends. Store owners and frontline managers see a store-level dashboard with daily digests they can use directly in team huddles."
   },
   {
-    q: "What is the typical ROI for a multi-store chain?",
-    a: "Retailers typically see a full ROI within 3-4 months. This is driven by a 15-20% reduction in staff turnover and the recovery of approximately $4,000 per store per month in previously missed upsell opportunities."
-  },
-  {
-    q: "Is any special training required for my staff?",
-    a: "Zero. Pythia is a background intelligence tool. Staff continue their normal checkout procedures. The insights are delivered directly to managers and owners via a simple mobile-responsive dashboard and automated daily summaries."
+    q: "How does Pythia handle noisy or high-traffic store environments?",
+    a: "Pythia is designed for the realities of busy convenience and fuel retail environments. The AI is trained to filter ambient noise and focus on checkout counter interactions, so high foot traffic and background sound don't degrade the quality of insights."
   }
 ];
 

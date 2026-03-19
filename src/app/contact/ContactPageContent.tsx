@@ -7,14 +7,14 @@ import PythiaForm from "../containers/PythiaForm";
 const contactInfo = [
   {
     label: "Email",
-    value: "contact@pythiastore.com",
-    href: "mailto:contact@pythiastore.com",
+    value: "info@pythiascorecard.com",
+    href: "mailto:info@pythiascorecard.com",
     icon: Mail,
   },
   {
     label: "Office",
-    value: "123 Redbud Lane, Tulsa, OK 74104",
-    href: "https://maps.google.com/?q=123+Redbud+Lane+Tulsa+OK+74104",
+    value: "411 Overland Ave. Burley, ID 83318",
+    href: "https://maps.google.com/?q=411+Overland+Ave+Burley+ID+83318",
     icon: MapPin,
   },
 ];
