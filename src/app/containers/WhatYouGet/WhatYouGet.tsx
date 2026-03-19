@@ -17,7 +17,7 @@ const features = [
             <div
               className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${
                 i === 1 ? "bg-amber-100 text-amber-600" : "bg-slate-100 text-slate-400"
-              }`}
+                }`}
             >
               0{i}
             </div>
@@ -50,16 +50,12 @@ const features = [
     icon: <FileJson className="w-6 h-6 text-blue-500" />,
     className: "md:col-span-1 md:row-span-1",
     visual: (
-      <div className="mt-4 font-mono text-[9px] text-slate-400 bg-slate-900 rounded-lg p-3 overflow-hidden border border-slate-700">
-        <p className="text-blue-400">{"{"}</p>
-        <p className="pl-2">
-          &quot;status&quot;: <span className="text-brand-teal">&quot;resolved&quot;</span>,
-        </p>
-        <p className="pl-2">&quot;issue&quot;: &quot;Cooler leak&quot;,</p>
-        <p className="pl-2">
-          &quot;auto_filled&quot;: <span className="text-brand-teal">true</span>
-        </p>
-        <p className="text-blue-400">{"}"}</p>
+      <div className="mt-4 flex flex-1 items-center justify-center">
+        <img
+          src="https://res.cloudinary.com/dsgulltma/image/upload/v1773919322/Gemini_Generated_Image_rmkejirmkejirmke_nqb0hu.png"
+          alt="AI powered recommendations"
+          style={{ width: "370px", height: "auto", maxHeight: "125px" }}
+        />
       </div>
     ),
   },
@@ -94,14 +90,14 @@ function WhatYouGet() {
       className="flex flex-col items-center justify-center w-full min-w-0 py-16 sm:py-20 lg:py-[120px] xl:py-[180px] bg-white border-t border-slate-100 overflow-hidden"
     >
       <div className="text-center px-4 sm:px-6 mb-12 lg:mb-24 space-y-4 max-w-3xl w-full min-w-0">
-        <motion.span 
+        <motion.span
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="text-xs font-bold text-brand-teal uppercase tracking-[0.2em]"
         >
           Product Intelligence
         </motion.span>
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -110,7 +106,7 @@ function WhatYouGet() {
           Get the answers you’ve been <span className="text-slate-400">missing.</span>
         </motion.h2>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 sm:px-6 w-full max-w-[1400px] mx-auto min-w-0">
         {features.map((feature, index) => (
           <motion.div

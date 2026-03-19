@@ -11,10 +11,10 @@ const solutions = [
       "Understand what actually happens at the counter, across every store, in language your operations team can act on.",
   },
   {
-    slug: "fuel-pricing-software",
-    title: "Fuel Pricing Software",
+    slug: "work-order-tickets",
+    title: "Work Order Tickets",
     description:
-      "Connect the conversations happening at the forecourt and counter with pricing decisions you make every single day.",
+      "Introducing Tickets — From Friction Detected to Fix in Motion. When Pythia flags a friction point in the shopping experience, our AI Ticket Agent automatically converts it into a work order and routes it to the right manager or maintenance team — no forms to fill out, no manual steps required. Detect, assign, resolve.",
   },
   {
     slug: "retail-ai",
@@ -67,7 +67,7 @@ function SolutionsSection() {
                 <h3 className="text-[20px] lg:text-[22px] font-extrabold text-[#0F172A] tracking-tight">
                   {solution.title}
                 </h3>
-                <p className="text-[14px] text-slate-600 leading-relaxed">
+                <p className="text-[14px] text-slate-600 leading-relaxed line-clamp-4">
                   {solution.description}
                 </p>
               </div>

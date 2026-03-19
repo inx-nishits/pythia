@@ -20,7 +20,7 @@ const HERO_SLIDES = [
     subline: "See what’s really happening at the counter, so you can coach, reward, and fix before it’s too late.",
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
-      src: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
+      src: "https://res.cloudinary.com/dsgulltma/image/upload/v1773915528/Screenshot_from_2026-03-19_15-47-36_gsyqj1.png",
       alt: "Retail checkout and store operations",
     },
   },
@@ -28,7 +28,7 @@ const HERO_SLIDES = [
     subline: "Turn checkout conversations into a daily playbook. No more guessing, no more missed signals.",
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
-      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      src: "https://res.cloudinary.com/dsgulltma/image/upload/v1773914087/Screenshot_from_2026-03-19_15-22-01_zlx6ml.png",
       alt: "Analytics and insights dashboard",
     },
   },
@@ -150,7 +150,7 @@ function HeroSection() {
                           i === activeSlide
                             ? "w-8 h-3 bg-brand-teal"
                             : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
-                        }`}
+                          }`}
                       />
                     ))}
                   </div>

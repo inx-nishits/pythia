@@ -13,28 +13,12 @@ type Testimonial = {
 
 const testimonials: Testimonial[] = [
   {
-    name: "VP of Operations",
-    role: "Multi-store convenience chain",
-    company: "US-based retail group",
+    name: "Drew Bryant",
+    role: "President",
+    company: "Jr. Food Mart",
     quote:
-      "Within weeks, Pythia surfaced patterns we had never seen in our traditional reports. It changed how we coach frontline teams and how fast we act on issues at the counter.",
-    logoInitials: "RG",
-  },
-  {
-    name: "Regional Director",
-    role: "Fuel & c-store locations",
-    company: "50+ site portfolio",
-    quote:
-      "Seeing every missed upsell and every friction point in one place has been a breakthrough. The team finally has a single source of truth for what really happens at checkout.",
-    logoInitials: "FP",
-  },
-  {
-    name: "Store Owner",
-    role: "Independent operator",
-    company: "High-volume flagship site",
-    quote:
-      "Setup was under five minutes. The first 24-hour digest highlighted three issues we fixed the same day. It felt like adding another manager without more headcount.",
-    logoInitials: "FS",
+      "As a multi-unit convenience store operator, we need to keep a close eye on store-level details, both issues and opportunities. More often than not, these surface during checkout conversations between customers and cashiers.\n\nPythia Scorecard uses AI to capture, flag, and categorize these interactions, allowing our supervisors to easily understand the situation and act quickly. Success in our business is built on getting the details right, and Pythia is a vital tool that lets us oversee our stores 100% of the time, even when management isn't on the floor.\n\nAs a company leader, since implementing Pythia, my overall confidence in our operations has improved. It gives me the flexibility to oversee the business at a high level, while still allowing me to easily drill down into the details whenever necessary.\n\nPythia is quickly becoming an invaluable tool for ensuring our standards are met every single day.",
+    logoInitials: "DB",
   },
 ];
 
@@ -59,7 +43,7 @@ function TestimonialsSection() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+        <div className="max-w-4xl mx-auto">
           {testimonials.map((t, index) => (
             <motion.figure
               key={index}
@@ -86,7 +70,7 @@ function TestimonialsSection() {
                   </div>
                   <Quote className="w-7 h-7 text-brand-coral opacity-90 shrink-0" />
                 </div>
-                <p className="text-slate-700 text-[15px] leading-relaxed font-medium">
+                <p className="text-slate-700 text-[15px] leading-relaxed font-medium whitespace-pre-wrap">
                   {t.quote}
                 </p>
               </div>

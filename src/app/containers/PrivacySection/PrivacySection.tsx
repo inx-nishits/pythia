@@ -23,21 +23,6 @@ function PrivacySection() {
         >
           Security that scales.
         </motion.h2>
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
-
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-            No Customer PII Stored
-          </span>
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-            GDPR
-          </span>
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-            CCPA
-          </span>
-        </div>
       </div>
 
       <div className="max-w-[1200px] mx-auto flex justify-center px-4">
