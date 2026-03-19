@@ -62,8 +62,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {/* Breadcrumb */}
           <AnimatedReveal index={0}>
             <nav className="mb-6 text-sm font-medium">
-              <Link href="/articles" className="text-brand-teal hover:underline transition-colors">
-                &larr; Back to Articles
+              <Link href="/resources" className="text-brand-teal hover:underline transition-colors">
+                &larr; Back to Resources
               </Link>
             </nav>
           </AnimatedReveal>
@@ -76,7 +76,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 <span className="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
                 <span>{article.readTime}</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-6 leading-tight">
+              <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tighter mb-6 leading-tight">
                 {article.title}
               </h1>
             </header>

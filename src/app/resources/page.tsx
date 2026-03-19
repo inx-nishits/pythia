@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
+import Link from "next/link";
+import { articles } from "../articles/data";
 
 type ResourceCategory = "Blog" | "Article" | "Case Study";
 
@@ -14,6 +16,7 @@ interface ResourceItem {
   industry: string;
   excerpt: string;
   tags: string[];
+  slug?: string;
 }
 
 const resources: ResourceItem[] = [
@@ -46,6 +49,19 @@ const resources: ResourceItem[] = [
   },
 ];
 
+const allResources: ResourceItem[] = [
+  ...resources,
+  ...articles.map((article, index) => ({
+    id: 10 + index,
+    title: article.title,
+    category: "Article" as ResourceCategory,
+    industry: "Convenience Retail",
+    excerpt: article.excerpt,
+    tags: ["Insights", "Operations"],
+    slug: article.slug,
+  }))
+];
+
 const categories: (ResourceCategory | "All")[] = ["All", "Blog", "Article", "Case Study"];
 
 export default function ResourcesPage() {
@@ -53,7 +69,7 @@ export default function ResourcesPage() {
   const [search, setSearch] = useState("");
 
   const filteredResources = useMemo(() => {
-    return resources.filter((item) => {
+    return allResources.filter((item) => {
       const matchesCategory =
         selectedCategory === "All" ? true : item.category === selectedCategory;
       const query = search.trim().toLowerCase();
@@ -153,9 +169,18 @@ export default function ResourcesPage() {
                   </div>
                 </div>
                 <div className="mt-6 pt-4 border-t border-slate-100">
-                  <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-slate-500">
-                    Full summaries will be available soon.
-                  </span>
+                  {item.slug ? (
+                    <Link href={`/articles/${item.slug}`} className="inline-flex items-center gap-2 text-[13px] font-bold text-brand-teal hover:opacity-80 transition-opacity group">
+                      Read Article
+                      <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-slate-500">
+                      Full summaries will be available soon.
+                    </span>
+                  )}
                 </div>
               </motion.article>
             ))}

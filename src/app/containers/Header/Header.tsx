@@ -192,13 +192,6 @@ function Header() {
                 Resources
               </NavItem>
               <NavItem
-                href="/articles"
-                isActive={activeItem === "articles" && pathname.startsWith("/articles")}
-                onClick={() => setActiveItem("articles")}
-              >
-                Articles
-              </NavItem>
-              <NavItem
                 href="/about"
                 isActive={activeItem === "about" && pathname.startsWith("/about")}
                 onClick={() => setActiveItem("about")}
@@ -353,22 +346,6 @@ function Header() {
                     }}
                   >
                     Resources
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/articles"
-                    className={`block text-[18px] font-semibold transition-colors ${
-                      activeItem === "articles" && pathname.startsWith("/articles")
-                        ? "text-brand-navy"
-                        : "text-slate-800"
-                    }`}
-                    onClick={() => {
-                      setActiveItem("articles");
-                      setMobileOpen(false);
-                    }}
-                  >
-                    Articles
                   </Link>
                 </li>
                 <li>

@@ -24,10 +24,6 @@ const siteLinks = [
         href: '/resources',
       },
       {
-        name: 'Articles',
-        href: '/articles',
-      },
-      {
         name: 'FAQ',
         href: '/faq',
       },
