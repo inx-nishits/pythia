@@ -13,7 +13,8 @@ const partners: Partner[] = [
   { name: "Conexxus", symbol: "CX" },
   { name: "Verifone", symbol: "V" },
   { name: "Gilbarco", symbol: "G" },
-  { name: "NCR", symbol: "N" }
+  { name: "NCR", symbol: "N" },
+  { name: "Study Group", symbol: "SG" }
 ];
 
 function TrustBar() {

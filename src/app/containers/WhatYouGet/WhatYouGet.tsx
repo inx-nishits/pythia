@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Trophy, Target, FileJson, History } from "lucide-react";
 import { Sections } from "@/app/sections";
+import Image from "next/image";
 
 const features = [
   {
@@ -51,10 +52,12 @@ const features = [
     className: "md:col-span-2 md:row-span-1",
     visual: (
       <div className="mt-3 flex items-center justify-center">
-        <img
+        <Image
           src="https://res.cloudinary.com/dsgulltma/image/upload/v1773919322/Gemini_Generated_Image_rmkejirmkejirmke_nqb0hu.png"
           alt="AI powered recommendations"
-          style={{ width: "100%", maxWidth: "850px", height: "410px", maxHeight: "580px" }}
+          width={850}
+          height={410}
+          style={{ width: "100%", maxWidth: "850px", height: "auto" }}
           className="rounded-2xl shadow-sm"
         />
       </div>
@@ -117,7 +120,7 @@ function WhatYouGet() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={`group p-8 rounded-[32px] border border-slate-200/60 bg-white hover:border-brand-teal/20 hover:shadow-[0_8px_40px_rgba(15,23,42,0.08)] transition-all duration-500 flex flex-col justify-between ${feature.className}`}
+            className={`group p-8 rounded-[32px] border border-slate-200/60 bg-white hover:border-brand-teal/20 hover:shadow-[0_8px_40px_rgba(15,23,42,0.08)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between ${feature.className}`}
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 group-hover:bg-brand-teal/5 transition-colors">

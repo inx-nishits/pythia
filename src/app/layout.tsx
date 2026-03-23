@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and sales.",
 };
 
+import DemoPopup from "./containers/DemoPopup/DemoPopup";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,6 +54,7 @@ export default function RootLayout({
       </head>
       <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`} suppressHydrationWarning>
         {children}
+        <DemoPopup />
       </body>
     </html>
   );
