@@ -38,7 +38,7 @@ function HomeContact() {
               <span className="text-brand-teal italic">stores aren&rsquo;t telling you?</span>
             </motion.h2>
             <p className="text-slate-300 text-lg lg:text-[20px] font-medium leading-relaxed max-w-xl opacity-90">
-              Book a free demo and see how Pythia helps you catch what’s slipping before it turns into bad reviews, missed targets, or team turnover.
+              Cut turnover by up to 18%. Add up to $4,200 in monthly sales. Both in 6 months. You can’t be in every store at once. For as low as $129/month, Pythia can.
             </p>
           </div>
 

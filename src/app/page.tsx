@@ -17,7 +17,7 @@ import DemoAssetsSection from "./containers/DemoAssetsSection";
 import PrivacySection from "./containers/PrivacySection";
 import BlogSection from "./containers/BlogSection";
 import FAQSection from "./containers/FAQSection";
-
+import IndustriesSection from "./containers/IndustriesSection";
 
 export const metadata = {
   title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
@@ -70,6 +70,7 @@ export default function Home() {
         <PersonaSection />
         <DemoAssetsSection />
         <HowItWorks />
+        <IndustriesSection />
         <PrivacySection />
         <BlogSection />
         <FAQSection />

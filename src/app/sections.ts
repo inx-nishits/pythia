@@ -5,5 +5,6 @@ export enum Sections {
   WhatYouGet = "what-you-get",
   DemoAssets = "demo-assets",
   HowItWorks = "how-it-works",
+  Industries = "industries",
   Contact = "contact",
 }

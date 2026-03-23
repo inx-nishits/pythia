@@ -117,7 +117,7 @@ function WhatYouGet() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={`group p-8 rounded-[32px] border border-slate-200/60 bg-white hover:border-brand-teal/20 hover:shadow-[0_8px_40px_rgba(15,23,42,0.08)] transition-all duration-500 flex flex-col justify-between ${feature.className}`}
+            className={`group p-8 rounded-[32px] border border-slate-200/60 bg-white hover:border-brand-teal/20 hover:shadow-[0_8px_40px_rgba(15,23,42,0.08)] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between ${feature.className}`}
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 group-hover:bg-brand-teal/5 transition-colors">

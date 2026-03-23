@@ -185,6 +185,13 @@ function Header() {
                 Intelligence
               </NavItem>
               <NavItem
+                href={`/#${Sections.Industries}`}
+                isActive={activeItem === "industries" && pathname === "/"}
+                onClick={() => setActiveItem("industries")}
+              >
+                Industries
+              </NavItem>
+              <NavItem
                 href="/resources"
                 isActive={activeItem === "resources" && pathname.startsWith("/resources")}
                 onClick={() => setActiveItem("resources")}
@@ -330,6 +337,22 @@ function Header() {
                     }}
                   >
                     Intelligence
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/#${Sections.Industries}`}
+                    className={`block text-[18px] font-semibold transition-colors ${
+                      activeItem === "industries" && pathname === "/"
+                        ? "text-brand-navy"
+                        : "text-slate-800"
+                    }`}
+                    onClick={() => {
+                      setActiveItem("industries");
+                      setMobileOpen(false);
+                    }}
+                  >
+                    Industries
                   </a>
                 </li>
                 <li>

@@ -61,7 +61,7 @@ function SolutionsSection() {
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="group rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.04)] p-7 lg:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_24px_56px_rgba(15,23,42,0.08)] hover:border-slate-300/80"
+              className="group rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.04)] p-7 lg:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_24px_56px_rgba(15,23,42,0.08)] hover:border-slate-300/80 hover:-translate-y-2"
             >
               <div className="space-y-4">
                 <h3 className="text-[20px] lg:text-[22px] font-extrabold text-[#0F172A] tracking-tight">
