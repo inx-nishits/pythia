@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Store, Coffee, ShoppingBasket, Shirt, Utensils } from "lucide-react";
-import { Sections } from "@/app/sections";
+
 
 const industries = [
   {

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Trophy, Target, FileJson, History } from "lucide-react";
 import { Sections } from "@/app/sections";
+import Image from "next/image";
 
 const features = [
   {
@@ -51,10 +52,12 @@ const features = [
     className: "md:col-span-2 md:row-span-1",
     visual: (
       <div className="mt-3 flex items-center justify-center">
-        <img
+        <Image
           src="https://res.cloudinary.com/dsgulltma/image/upload/v1773919322/Gemini_Generated_Image_rmkejirmkejirmke_nqb0hu.png"
           alt="AI powered recommendations"
-          style={{ width: "100%", maxWidth: "850px", height: "410px", maxHeight: "580px" }}
+          width={850}
+          height={410}
+          style={{ width: "100%", maxWidth: "850px", height: "auto" }}
           className="rounded-2xl shadow-sm"
         />
       </div>
