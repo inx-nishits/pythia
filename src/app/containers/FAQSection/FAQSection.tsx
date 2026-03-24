@@ -11,15 +11,35 @@ const faqs = [
   },
   {
     q: "What hardware do I actually receive?",
-    a: "You receive a compact, plug-and-play audio intelligence device that sits discreetly at the checkout counter. There's no bulky equipment to install and no technician required — just plug it in, connect to Wi-Fi, and you're live."
+    a: "You receive a compact, plug-and-play audio intelligence device that sits discreetly at the checkout counter. There's no bulky equipment to install and no technician required. Just plug it in, connect to Wi-Fi, and you're live."
   },
   {
-    q: "Who can see the insights — just corporate, or store managers too?",
+    q: "Who can see the insights, just corporate, or store managers too?",
     a: "Both. Pythia offers two perspectives in one platform. Corporate and operations leaders get a network-wide view to compare locations and spot trends. Store owners and frontline managers see a store-level dashboard with daily digests they can use directly in team huddles."
   },
   {
     q: "How does Pythia handle noisy or high-traffic store environments?",
     a: "Pythia is designed for the realities of busy convenience and fuel retail environments. The AI is trained to filter ambient noise and focus on checkout counter interactions, so high foot traffic and background sound don't degrade the quality of insights."
+  },
+  {
+    q: "How is Pythia different from a mystery shop program?",
+    a: "Mystery shoppers observe one interaction per week at best. That's a tiny snapshot of what's actually happening on the floor. Pythia scores every conversation at the register, every shift, every day. Instead of a handful of staged visits per month, you get continuous data on how your team interacts with real customers in real time."
+  },
+  {
+    q: "How does the AI scoring work?",
+    a: "Pythia listens to employee-customer conversations at the register and scores them automatically. Each interaction is evaluated for key behaviors that drive customer experience and inside sales. Scores and insights are delivered to your dashboard so managers can coach with real data instead of guesswork."
+  },
+  {
+    q: "How does Pythia handle work orders and maintenance tickets?",
+    a: "Pythia picks up equipment failures, customer complaints, and operational issues straight from conversations at the register. A customer mentions a broken pump or a dirty restroom, and our AI agent creates the ticket, fills out the details, and routes it to the right person automatically. No forms. No delays. No waiting for someone to report it days later."
+  },
+  {
+    q: "How does Pythia handle customer privacy?",
+    a: "Privacy is our core foundation. All audio is processed locally on the hardware device using Edge AI. No customer voice recordings or Personally Identifiable Information (PII) are ever stored or transmitted to the cloud. We are fully BIPA and SOC 2 Type II compliant."
+  },
+  {
+    q: "Will this integrate with my existing POS system?",
+    a: "Yes. Pythia is design to be POS-agnostic. While it runs as a standalone intelligence layer, we offer integrations with major retail hubs like PDI, Verifone, and Gilbarco to correlate audio insights with transactional data."
   }
 ];
 

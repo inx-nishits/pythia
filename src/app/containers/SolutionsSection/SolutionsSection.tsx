@@ -14,7 +14,7 @@ const solutions = [
     slug: "work-order-tickets",
     title: "Work Order Tickets",
     description:
-      "Introducing Tickets — From Friction Detected to Fix in Motion. When Pythia flags a friction point in the shopping experience, our AI Ticket Agent automatically converts it into a work order and routes it to the right manager or maintenance team — no forms to fill out, no manual steps required. Detect, assign, resolve.",
+      "Introducing Tickets. From Friction Detected to Fix in Motion. When Pythia flags a friction point in the shopping experience, our AI Ticket Agent automatically converts it into a work order and routes it to the right manager or maintenance team, no forms to fill out, no manual steps required. Detect, assign, resolve.",
   },
   {
     slug: "retail-ai",

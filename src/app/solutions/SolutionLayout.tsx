@@ -109,7 +109,7 @@ export default function SolutionLayout({
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link
-                    href="https://calendly.com/pythia/15-minute-demo"
+                    href="https://calendly.com/nick-pythiascorecard/new-meeting"
                     target="_blank"
                     rel="noreferrer"
                   >

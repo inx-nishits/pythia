@@ -132,7 +132,7 @@ export const articles: ArticleData[] = [
       <h2>Five Common Reasons This Happens</h2>
       <ol>
         <li><strong>The employee believes the price objection and has no response:</strong> The customer says it's cheaper somewhere else, and the employee accepts the claim without a fight.</li>
-        <li><strong>The employee doesn't know the current offer:</strong> Loyalty deals, bundles, multi-buy promotions—if the employee doesn't know those offers, the store loses its chance to defend the sale.</li>
+        <li><strong>The employee doesn't know the current offer:</strong> Loyalty deals, bundles, multi-buy promotions. If the employee doesn't know those offers, the store loses its chance to defend the sale.</li>
         <li><strong>The item is out of stock:</strong> When that happens, some employees take the fastest path and send the shopper elsewhere.</li>
         <li><strong>The employee has never been trained to offer a substitute:</strong> "We're out of that one, but this is the closest match." Strong operators teach this third option.</li>
         <li><strong>The culture has slipped:</strong> People stop thinking like merchants. They start thinking like traffic directors.</li>

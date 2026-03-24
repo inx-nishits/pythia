@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Button from "@/app/component/Button";
-import { Sections } from "@/app/sections";
 
 function ConversionSection() {
   return (
@@ -25,25 +24,20 @@ function ConversionSection() {
             Turn today&apos;s checkout conversations into tomorrow&apos;s wins.
           </motion.h2>
           <p className="text-slate-200 text-[15px] sm:text-[16px] leading-relaxed max-w-xl">
-            Choose the path that fits your schedule best: jump straight into a live walkthrough with the team, or watch a short product demo before you book.
+            Choose the path that fits your schedule best: jump straight into a live walkthrough with the team to see how Pythia works for you.
           </p>
         </div>
 
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href="https://calendly.com/pythia/15-minute-demo"
+              href="https://calendly.com/nick-pythiascorecard/new-meeting"
               target="_blank"
               rel="noreferrer"
               className="flex-1"
             >
               <Button className="w-full py-3.5 rounded-full bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-[14px] font-semibold shadow-lg hover:shadow-xl transition-transform duration-200 hover:-translate-y-0.5">
                 Book a 15-Minute Demo
-              </Button>
-            </a>
-            <a href={`#${Sections.DemoAssets}`} className="flex-1">
-              <Button className="w-full py-3.5 rounded-full bg-transparent border border-white/25 text-white hover:bg-white/5 text-[14px] font-semibold">
-                Watch a 60-Second Demo
               </Button>
             </a>
           </div>
