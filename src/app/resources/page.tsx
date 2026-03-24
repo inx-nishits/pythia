@@ -50,7 +50,6 @@ const resources: ResourceItem[] = [
 ];
 
 const allResources: ResourceItem[] = [
-  ...resources,
   ...articles.map((article, index) => ({
     id: 10 + index,
     title: article.title,
@@ -59,7 +58,8 @@ const allResources: ResourceItem[] = [
     excerpt: article.excerpt,
     tags: ["Insights", "Operations"],
     slug: article.slug,
-  }))
+  })),
+  ...resources,
 ];
 
 const categories: (ResourceCategory | "All")[] = ["All", "Blog", "Article", "Case Study"];

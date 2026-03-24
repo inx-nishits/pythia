@@ -5,7 +5,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Sections } from "@/app/sections";
 import Button from "@/app/component/Button";
 import Image from "next/image";
-import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HERO_SLIDES = [
   {
@@ -174,19 +174,12 @@ function HeroSection() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
             >
-              <a href="https://calendly.com/pythia/15-minute-demo" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+              <a href="https://calendly.com/nick-pythiascorecard/new-meeting" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
                 <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
                   Book a 15-Minute Demo
                 </Button>
               </a>
-              <a href={`#${Sections.DemoAssets}`} className="group w-full sm:w-auto">
-                <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold transition-all duration-200 flex items-center justify-center gap-3 rounded-2xl whitespace-nowrap bg-slate-100 text-slate-700 border border-slate-200/60 hover:bg-brand-teal/10 hover:border-brand-teal/30 hover:text-[#0F172A] cursor-pointer">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-brand-teal group-hover:border-brand-teal group-hover:shadow-md transition-colors">
-                    <Play className="w-3.5 h-3.5 text-brand-teal ml-0.5 fill-brand-teal group-hover:text-white group-hover:fill-white transition-colors" />
-                  </div>
-                  Watch a 60-Second Demo
-                </Button>
-              </a>
+
               <a href={`#${Sections.Contact}`} className="w-full sm:w-auto">
                 <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-[#0F172A] text-white hover:bg-slate-900 rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
                   See it in action

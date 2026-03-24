@@ -3,7 +3,7 @@ export enum Sections {
   WhyItMatters = "why-it-matters",
   MeetPythiaStore = "meet-pythia-store",
   WhatYouGet = "what-you-get",
-  DemoAssets = "demo-assets",
+  VoiceToTicket = "demo-assets",
   HowItWorks = "how-it-works",
   Industries = "industries",
   Contact = "contact",

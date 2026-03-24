@@ -13,7 +13,7 @@ export default function WorkOrderTicketsPage() {
       <SolutionLayout
         eyebrow="Solution"
         title="Work Order Tickets"
-        intro="Introducing Tickets — From Friction Detected to Fix in Motion. When Pythia flags a friction point in the shopping experience, our AI Ticket Agent automatically converts it into a work order and routes it to the right manager or maintenance team — no forms to fill out, no manual steps required. Detect, assign, resolve."
+        intro="Introducing Tickets. From Friction Detected to Fix in Motion. When Pythia flags a friction point in the shopping experience, our AI Ticket Agent automatically converts it into a work order and routes it to the right manager or maintenance team, no forms to fill out, no manual steps required. Detect, assign, resolve."
         problemHeadline="Manual ticketing slows down resolution."
         problemBody="Traditional work order forms require manual entries, leading to delays and miscommunications between the store team and maintenance."
         solutionHeadline="Automated ticketing directly from customer interactions."
