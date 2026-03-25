@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 };
 
 import DemoPopup from "./containers/DemoPopup/DemoPopup";
+import ChatBot from "./component/ChatBot";
 
 export default function RootLayout({
   children,
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`} suppressHydrationWarning>
         {children}
         <DemoPopup />
+        <ChatBot />
       </body>
     </html>
   );
