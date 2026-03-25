@@ -131,6 +131,20 @@ export default function ChatBot() {
       return;
     }
 
+    if (userMessageCount >= 10) {
+      setTimeout(() => {
+        const limitReply: Message = {
+          id: 'limit-hook',
+          type: "bot",
+          text: "You've asked some great questions! To keep our support focused, we limit the automated chat to 10 questions. Would you like to schedule a 15-minute live demo to get deeper technical answers?",
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, limitReply]);
+        setIsLoading(false);
+      }, 1000);
+      return;
+    }
+
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -307,7 +321,7 @@ export default function ChatBot() {
                             <div style={{ whiteSpace: "pre-line" }}>
                               {msg.text}
                             </div>
-                            {(msg.id === 'demo-hook' || msg.id === 'demo-hook-static') && (
+                            {(msg.id === 'demo-hook' || msg.id === 'demo-hook-static' || msg.id === 'limit-hook') && (
                               <button
                                 onClick={() => window.open('https://calendly.com/nick-pythiascorecard/new-meeting', '_blank')}
                                 className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2"

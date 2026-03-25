@@ -14,22 +14,44 @@ export async function POST(req: Request) {
   try {
     const { message, messages = [] } = await req.json();
 
-    // --- LAYER 1: INPUT FILTERING (The Sieve) ---
-    // Fast check to prevent obvious general-purpose abuse
-    const lowMessage = message.toLowerCase();
-    const forbiddenTopics = ['recipe', 'coding', 'script', 'poem', 'story', 'history', 'sports', 'weather', 'joke'];
-    const intentKeywords = ['schedule', 'meeting', 'demo', 'book', 'call', 'contact', 'sales', 'pricing', 'plan', 'subscribe'];
-    const isIntentQuery = intentKeywords.some(word => lowMessage.includes(word));
-    const isRetailRelevant = ['pythia', 'store', 'retail', 'pos', 'audio', 'customer', 'staff', 'sales', 'pricing', 'hardware', 'device', 'ticket'].some(word => lowMessage.includes(word));
+    const lowMessage = message.toLowerCase().trim();
 
-    if (forbiddenTopics.some(topic => lowMessage.includes(topic)) && !isRetailRelevant && !isIntentQuery) {
+    // --- LAYER 1: INPUT FILTERING ---
+    const forbiddenTopics = ['recipe', 'coding', 'script', 'poem', 'story', 'history', 'sports', 'weather', 'joke'];
+
+    const isRetailRelevant = [
+      'pythia', 'store', 'retail', 'pos', 'audio', 'customer',
+      'staff', 'sales', 'pricing', 'hardware', 'device', 'ticket'
+    ].some(word => lowMessage.includes(word));
+
+    if (forbiddenTopics.some(topic => lowMessage.includes(topic)) && !isRetailRelevant) {
       return NextResponse.json({
         text: "I am specialized only in Pythia Store Intelligence. I cannot assist with general topics, but I'd be happy to discuss our store solutions!"
       });
     }
 
-    // --- ACTION HANDLER ---
-    if (isIntentQuery) {
+    // --- LAYER 2: INTENT + PRODUCT CLASSIFICATION ---
+
+    // ✅ STRICT INTENT DETECTION (no loose matching)
+    const isIntentQuery =
+      /^(book|schedule|request|arrange)\b/.test(lowMessage) ||
+      (
+        /\b(demo|meeting|call)\b/.test(lowMessage) &&
+        (lowMessage.includes("schedule") || lowMessage.includes("book") || lowMessage.includes("want") || lowMessage.includes("need"))
+      );
+
+    // ✅ PRODUCT / PYTHIA PRIORITY DETECTION
+    const isProductQuery = [
+      'pythia', 'system', 'device', 'audio', 'record', 'listen',
+      'privacy', 'data', 'store', 'customer', 'ticket', 'feature',
+      'roi', 'benefit', 'value', 'insight'
+    ].some(word => lowMessage.includes(word));
+
+    // --- PRIORITY LOGIC (VERY IMPORTANT) ---
+    // 1. Product queries → ALWAYS go to AI
+    // 2. Intent queries → Only if NOT product-related
+
+    if (isIntentQuery && !isProductQuery) {
       return NextResponse.json({
         text: "I can help you with that.\n\n- Please use the demo or scheduling option available on the website\n- Or let me know your preferred time and I can guide you further"
       });
@@ -40,37 +62,34 @@ export async function POST(req: Request) {
       return NextResponse.json({ text: responseCache.get(lowMessage) });
     }
 
-    // --- LAYER 2: SYSTEM PROMPT & CONTEXT (The Identity) ---
+    // --- LAYER 3: AI RESPONSE ---
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini", // Cost-effective and fast
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: PYTHIA_PERSONA },
         {
           role: "system",
           content: `Knowledge Base Context: ${JSON.stringify(PYTHIA_KNOWLEDGE)}`
         },
-        ...messages.slice(-5), // Include previous 5 messages for context
+        ...messages.slice(-5),
         { role: "user", content: message }
       ],
-      temperature: 0.3, // Low temperature for factual consistency
-      max_tokens: 350,  // Keep responses concise
+      temperature: 0.3,
+      max_tokens: 350,
     });
 
     const aiResponse = response.choices[0].message.content || "";
 
-    // --- LAYER 3: OUTPUT VALIDATION (The Gatekeeper) ---
-    // Ensure the AI hasn't tried to be "too helpful" with off-topic things
-    // ✅ CLEAN THE RESPONSE HERE
+    // --- LAYER 4: OUTPUT CLEANING ---
     const cleanResponse = aiResponse
       .replace(/[*_#`]/g, '')        // remove markdown symbols
       .replace(/[ \t]+/g, ' ')       // remove extra spaces
-      .replace(/\n\s*\n/g, '\n\n')   // fix spacing
+      .replace(/\n\s*\n/g, '\n\n')   // clean spacing
       .trim();
 
-    // ✅ STORE IN CACHE
+    // --- CACHE STORE ---
     responseCache.set(lowMessage, cleanResponse);
 
-    // ✅ RETURN CLEAN RESPONSE
     return NextResponse.json({ text: cleanResponse });
 
   } catch (error) {
