@@ -28,7 +28,7 @@ const HERO_SLIDES = [
     subline: "Turn checkout conversations into a daily playbook. No more guessing, no more missed signals.",
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
-      src: "https://res.cloudinary.com/dsgulltma/image/upload/v1773914087/Screenshot_from_2026-03-19_15-22-01_zlx6ml.png",
+      src: "https://res.cloudinary.com/dsgulltma/image/upload/v1774499718/Screenshot_from_2026-03-26_10-05-02_q4y6f4.png",
       alt: "Analytics and insights dashboard",
     },
   },
