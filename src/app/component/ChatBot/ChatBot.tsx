@@ -55,6 +55,47 @@ export default function ChatBot() {
   const [userMessageCount, setUserMessageCount] = useState(0);
   const [usedQuickActions, setUsedQuickActions] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // --- CLICK OUTSIDE TO CLOSE ---
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && chatContainerRef.current && !chatContainerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // --- PERSISTENCE: LOAD ---
+  useEffect(() => {
+    const savedMessages = localStorage.getItem("pythia_chat_messages");
+    const savedCount = localStorage.getItem("pythia_chat_count");
+    const savedActions = localStorage.getItem("pythia_chat_actions");
+
+    if (savedMessages) {
+      const parsed = JSON.parse(savedMessages).map((m: Message) => ({
+        ...m,
+        timestamp: new Date(m.timestamp)
+      }));
+      setMessages(parsed);
+    }
+    if (savedCount) setUserMessageCount(parseInt(savedCount));
+    if (savedActions) setUsedQuickActions(JSON.parse(savedActions));
+  }, []);
+
+  // --- PERSISTENCE: SAVE ---
+  useEffect(() => {
+    if (messages.length > 1 || userMessageCount > 0) {
+      localStorage.setItem("pythia_chat_messages", JSON.stringify(messages));
+      localStorage.setItem("pythia_chat_count", userMessageCount.toString());
+      localStorage.setItem("pythia_chat_actions", JSON.stringify(usedQuickActions));
+    }
+  }, [messages, userMessageCount, usedQuickActions]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -102,9 +143,15 @@ export default function ChatBot() {
       "Schedule a Meeting": "Great! You can pick a time for a meeting directly on our calendar using the link below.",
       "Pricing Info": "Pythia starts as low as $129/month per location. For detailed enterprise quotes covering 100+ stores, we recommend a quick discovery call.",
       "Talk to Sales": "I'd love to connect you with our sales team! The best way is to pick a time on our calendar so we're ready for you.",
-      "How Pythia Works": "Pythia uses discreet audio intelligence devices at your checkout counter to analyze customer interactions. It then provides real-time insights to help managers catch issues where they start—at the register.",
+      "How Pythia Works": "Pythia uses discreet audio intelligence devices at your checkout counter to analyze customer interactions. It then provides real-time insights to help managers catch issues where they start - at the register.",
       "Features": "Our core features include:\n- Voice to Ticket automation\n- 100% Interaction Scoring\n- Same-Day Manager Dashboards\n- Direct POS Integration (PDI, Verifone, Gilbarco)",
-      "Privacy & Security": "Privacy is our foundation:\n- 100% Local processing (Edge AI)\n- No voice stored or sent to cloud\n- Ensures complete control over in-store data"
+      "Privacy & Security": "Privacy is our foundation:\n- 100% Local processing (Edge AI)\n- No voice stored or sent to cloud\n- Ensures complete control over in-store data",
+      "POS Integrations": "Pythia integrates seamlessly with leading Point-of-Sale systems including Verifone, Gilbarco, and PDI. This allows us to link transaction data directly with interaction insights.",
+      "Audio Analytics Details": "Our Edge AI devices analyze checkout conversations in real-time. It detects tone, script compliance (like upselling), and friction points without recording or storing actual voices, ensuring total privacy.",
+      "Hardware Requirements": "We provide proprietary Edge AI sensors that stick directly to the checkout counter. No servers or complex networking required, just a simple power connection.",
+      "Voice-to-Ticket Automation": "If a customer mentions an operational issue (e.g., 'Pump 4 is broken'), Pythia instantly analyzes the voice intent and automatically creates a service ticket for your team. Zero manual entry needed.",
+      "Performance Tracking": "Every shift generates a 'Daily Scorecard' for managers. It highlights top performers, missed upsell opportunities, and specific coaching moments to help you train your best talent.",
+      "Deployment Timeline": "Our plug-and-play hardware allows for extremely fast deployment. Most stores are up and running within 48 hours of receiving the devices, with zero disruption to your daily operations."
     };
 
     if (localResponses[text]) {
@@ -185,6 +232,9 @@ export default function ChatBot() {
   };
 
   const handleNewConversation = () => {
+    localStorage.removeItem("pythia_chat_messages");
+    localStorage.removeItem("pythia_chat_count");
+    localStorage.removeItem("pythia_chat_actions");
     setMessages([
       {
         id: "1",
@@ -206,10 +256,16 @@ export default function ChatBot() {
     "How Pythia Works",
     "Features",
     "Privacy & Security",
+    "POS Integrations",
+    "Audio Analytics Details",
+    "Hardware Requirements",
+    "Voice-to-Ticket Automation",
+    "Performance Tracking",
+    "Deployment Timeline",
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
+    <div ref={chatContainerRef} className="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
@@ -283,15 +339,34 @@ export default function ChatBot() {
                     </div>
 
                     <div className="mt-8">
-                      <h5 className="text-[12px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-4">Recent</h5>
-                      <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm cursor-pointer hover:bg-slate-50 transition-colors group"
-                        onClick={() => setView("messages")}
-                      >
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-xs font-bold text-brand-navy">Team Pythia</span>
-                          <span className="text-[10px] font-medium text-slate-400">10:42</span>
-                        </div>
-                        <p className="text-sm text-slate-600 line-clamp-1 group-hover:text-slate-900 transition-colors">Great! We&apos;d love to show you Pythia in action...</p>
+                      <div className="flex flex-wrap justify-center gap-2 animate-in fade-in duration-500 w-full">
+                        {(() => {
+                          const availableActions = quickActions.filter(action => !usedQuickActions.includes(action));
+                          
+                          if (availableActions.length > 0) {
+                            return availableActions.slice(0, 7).map((action) => (
+                              <button
+                                key={action}
+                                onClick={() => {
+                                  setView("messages");
+                                  handleSend(action);
+                                }}
+                                className="px-4 py-2 bg-white border border-slate-200 rounded-full text-[12px] font-bold text-brand-navy hover:border-brand-teal/40 hover:bg-slate-50 transition-all shadow-sm whitespace-nowrap"
+                              >
+                                {action}
+                              </button>
+                            ));
+                          }
+                          
+                          return (
+                            <div className="bg-brand-teal/10 rounded-2xl p-5 text-center border border-brand-teal/20 w-full mt-2">
+                              <p className="text-[13px] font-medium text-brand-navy leading-relaxed">
+                                I hope we cleared up most of your questions about Pythia! 🌟<br/><br/>
+                                If you still have any doubts or need specific details, please feel free to use the messages section. Our AI bot is always here to help you. 💙
+                              </p>
+                            </div>
+                          );
+                        })()}
                       </div>
                     </div>
                   </motion.div>
@@ -333,23 +408,6 @@ export default function ChatBot() {
                         </div>
                       ))}
 
-
-                      {/* Quick Actions (Persistent & Filtered) */}
-                      {!isLoading && quickActions.filter(action => !usedQuickActions.includes(action)).length > 0 && (
-                        <div className="flex flex-wrap gap-2 pt-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
-                          {quickActions
-                            .filter(action => !usedQuickActions.includes(action))
-                            .map((action) => (
-                              <button
-                                key={action}
-                                onClick={() => handleSend(action)}
-                                className="px-4 py-2 bg-white border border-slate-200 rounded-full text-[12px] font-bold text-brand-navy hover:border-brand-teal/40 hover:bg-slate-50 transition-all shadow-sm whitespace-nowrap"
-                              >
-                                {action}
-                              </button>
-                            ))}
-                        </div>
-                      )}
 
                       {/* Loading Indicator */}
                       {isLoading && (
