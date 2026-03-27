@@ -30,7 +30,6 @@ export const PYTHIA_KNOWLEDGE = {
   privacy: {
     foundation: "Privacy is the core foundation. All audio is processed locally on the hardware device using Edge AI.",
     data_storage: "No customer voice recordings or Personally Identifiable Information (PII) are ever stored or transmitted to the cloud.",
-    compliance: "Fully BIPA and SOC 2 Type II compliant.",
   },
   integrations: {
     pos: "POS-agnostic but offers direct integrations with PDI, Verifone, and Gilbarco to correlate audio insights with transactional data.",
@@ -47,6 +46,62 @@ export const PYTHIA_KNOWLEDGE = {
     {
       q: "How does it handle noise?",
       a: "AI filters ambient noise (traffic, background sound) and focuses specifically on counter interactions."
+    },
+    {
+      q: "How difficult is installation?",
+      a: "Installation requires no technical skills. You only need power and an internet or Wi-Fi connection. The system installs in under 10 minutes."
+    },
+    {
+      q: "What systems does it work with?",
+      a: "Pythia works with any point-of-sale system. It operates alongside your existing setup and does not require integration, so it fits any checkout environment."
+    },
+    {
+      q: "What about data privacy and security?",
+      a: "Pythia handles data similar to CCTV systems. Access is role-based, so only authorized users can view it. Audio recordings are automatically deleted after 14 days."
+    },
+    {
+      q: "Can I customize what insights I receive?",
+      a: "Yes. Within the platform, you can create custom insights tailored to your specific business needs. This allows you to focus on the data that matters most to you."
+    },
+    {
+      q: "How do I get started?",
+      a: "The process begins with a 15-minute discovery call to review your needs and determine fit. Next is a 30-minute demo where you see the platform in action. After the demo, you can move forward with signup if it aligns with your goals."
+    },
+    {
+      q: "How real-time is the data?",
+      a: "Pythia processes data every two hours. You will start seeing insights shortly after installation once the device is powered and connected to the internet."
+    },
+    {
+      q: "Can you send real-time alerts?",
+      a: "Yes. Pythia sends near real-time alerts for emergency situations."
+    },
+    {
+      q: "Where do you capture audio inside the store?",
+      a: "Pythia captures audio only at the cash register with an approximate 8 to 10 foot radius. It does not monitor the entire store. The focus is limited to the point of sale or checkout area."
+    },
+    {
+      q: "Does Pythia Scorecard run 24/7?",
+      a: "Yes. Pythia records 24/7, and both the audio and transcription are available for you to access and use."
+    },
+    {
+      q: "How do employees react to Pythia Scorecard recording them 24/7?",
+      a: "Employees often see this as an opportunity to stand out. Since most employees have limited interaction with leadership, Pythia creates visibility into their performance. This helps identify high performers so they can be recognized and promoted."
+    },
+    {
+      q: "What is the legality of a system like this?",
+      a: "Laws vary by state, so you should consult your legal team to determine consent requirements. There are 35 single-party consent states and 15 all-party consent states. Pythia Scorecard operates in both types of states."
+    },
+    {
+      q: "What is the cost of Pythia Scorecard?",
+      a: "Pythia runs 24/7 and provides insights to owners, district managers, and store managers to help improve employee turnover and reduce customer friction. Pricing varies based on the length of the contract."
+    },
+    {
+      q: "Do I need more than one device per store?",
+      a: "Pythia typically covers a 10-foot radius, which can include multiple point-of-sale systems. If your checkout area is spread out or has a wide layout, you will need more than one device."
+    },
+    {
+      q: "How accurate is the data?",
+      a: "Pythia uses AI to analyze audio and transcription. There is some margin for error, and false positives can occur when reporting insights. We continue to improve the system and AI models to increase accuracy over time."
     }
   ]
 };

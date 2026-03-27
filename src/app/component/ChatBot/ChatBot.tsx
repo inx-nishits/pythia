@@ -53,6 +53,7 @@ export default function ChatBot() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [userMessageCount, setUserMessageCount] = useState(0);
+  const [globalApiCount, setGlobalApiCount] = useState(0);
   const [usedQuickActions, setUsedQuickActions] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -76,6 +77,7 @@ export default function ChatBot() {
     const savedMessages = localStorage.getItem("pythia_chat_messages");
     const savedCount = localStorage.getItem("pythia_chat_count");
     const savedActions = localStorage.getItem("pythia_chat_actions");
+    const savedGlobalCount = localStorage.getItem("pythia_api_call_count");
 
     if (savedMessages) {
       const parsed = JSON.parse(savedMessages).map((m: Message) => ({
@@ -86,6 +88,7 @@ export default function ChatBot() {
     }
     if (savedCount) setUserMessageCount(parseInt(savedCount));
     if (savedActions) setUsedQuickActions(JSON.parse(savedActions));
+    if (savedGlobalCount) setGlobalApiCount(parseInt(savedGlobalCount));
   }, []);
 
   // --- PERSISTENCE: SAVE ---
@@ -96,6 +99,11 @@ export default function ChatBot() {
       localStorage.setItem("pythia_chat_actions", JSON.stringify(usedQuickActions));
     }
   }, [messages, userMessageCount, usedQuickActions]);
+
+  // --- PERSISTENCE: SAVE GLOBAL COUNT ---
+  useEffect(() => {
+    localStorage.setItem("pythia_api_call_count", globalApiCount.toString());
+  }, [globalApiCount]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -178,12 +186,12 @@ export default function ChatBot() {
       return;
     }
 
-    if (userMessageCount >= 10) {
+    if (globalApiCount >= 10) {
       setTimeout(() => {
         const limitReply: Message = {
           id: 'limit-hook',
           type: "bot",
-          text: "You've asked some great questions! To keep our support focused, we limit the automated chat to 10 questions. Would you like to schedule a 15-minute live demo to get deeper technical answers?",
+          text: "You've asked some great questions! To keep our support focused, we limit the automated chat to 10 automated answers. Would you like to schedule a 15-minute live demo to get deeper technical answers?",
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, limitReply]);
@@ -191,6 +199,8 @@ export default function ChatBot() {
       }, 1000);
       return;
     }
+
+    setGlobalApiCount(prev => prev + 1);
 
     try {
       const response = await fetch("/api/chat", {
@@ -273,12 +283,19 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.95, transformOrigin: "bottom right" }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-4 w-[350px] sm:w-[400px] h-[600px] bg-white rounded-[32px] shadow-[0_32px_80px_rgba(0,0,0,0.2)] border border-slate-100 flex flex-col overflow-hidden"
+            className="fixed inset-0 sm:relative sm:inset-auto sm:mb-4 w-full h-[100dvh] sm:w-[400px] sm:h-[600px] bg-white rounded-none sm:rounded-[32px] shadow-none sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)] border-0 sm:border sm:border-slate-100 flex flex-col overflow-hidden z-[120]"
           >
             {/* Dynamic Header */}
             <div className={`transition-all duration-300 bg-brand-navy flex-shrink-0 relative z-10 ${view === 'home' ? 'h-[180px] p-8 pt-10' : 'h-[72px] px-5 flex items-center'}`}>
               {view === "home" ? (
                 <div className="space-y-4">
+                  <button 
+                    onClick={() => setIsOpen(false)} 
+                    className="absolute top-4 right-4 p-2 text-white/80 hover:text-white sm:hidden z-20"
+                    aria-label="Close Chat"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
                   <div className="flex -space-x-3">
                     {[1, 2].map((i) => (
                       <div key={i} className="w-10 h-10 rounded-full border-2 border-brand-navy overflow-hidden bg-brand-teal shadow-md">

@@ -49,18 +49,19 @@ export default function DemoPopup() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-[900px] bg-white rounded-[32px] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.3)] flex flex-col md:flex-row min-h-[500px]"
+            className="relative w-full max-w-[900px] bg-white rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.3)] flex flex-col md:flex-row min-h-[400px] max-h-[90dvh] sm:max-h-[90vh]"
           >
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 md:bg-slate-100 md:hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-[50] w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 backdrop-blur-sm shadow-[0_2px_8px_rgba(0,0,0,0.12)] hover:bg-white hover:scale-105 flex items-center justify-center text-slate-700 transition-all cursor-pointer"
+              aria-label="Close popup"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
             </button>
 
             {/* Left Side: Visual */}
-            <div className="relative w-full md:w-[48%] h-[300px] md:h-auto overflow-hidden bg-slate-50">
+            <div className="hidden md:block relative w-full md:w-[48%] h-[120px] sm:h-[240px] md:h-auto overflow-hidden bg-slate-50 flex-shrink-0">
               <Image
                 src="/popup-visual.png"
                 alt="Retail checkout intelligence"
@@ -72,8 +73,8 @@ export default function DemoPopup() {
             </div>
 
             {/* Right Side: Content & Form */}
-            <div className="flex-1 p-8 sm:p-10 flex flex-col justify-center">
-              <div className="mb-8">
+            <div className="flex-1 p-5 sm:p-8 md:p-10 flex flex-col justify-center overflow-y-auto pb-6">
+              <div className="mb-6">
                 <h3 className="text-[28px] sm:text-[32px] font-extrabold text-[#0F172A] mb-2 tracking-tight leading-tight">
                   Schedule Your Demo
                 </h3>
