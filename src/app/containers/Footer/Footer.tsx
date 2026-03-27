@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Linkedin } from "lucide-react";
 
 const siteLinks = [
   {
@@ -62,19 +63,27 @@ function Footer() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 xl:gap-28 w-full justify-between items-start min-w-0">
           <div className="flex flex-col gap-5 w-full lg:max-w-[360px] min-w-0">
             <Link href={'/'} className="group">
-              <Image 
-                src={'/pythiaLogo.png'} 
-                alt="Pythia Intelligence" 
-                width={145} 
-                height={50} 
-                className="group-hover:opacity-80 transition-opacity" 
+              <Image
+                src={'/pythiaLogo.png'}
+                alt="Pythia Intelligence"
+                width={145}
+                height={50}
+                className="group-hover:opacity-80 transition-opacity"
               />
             </Link>
             <p className="text-sm font-medium leading-relaxed text-slate-500">
               The in-store audio-intel device and dashboard for modern retail chains. Trusted by 100+ locations.
             </p>
-            <div className="flex gap-4">
-               {/* Placeholders for social if needed, but keeping text-only for now to avoid content change */}
+            <div className="flex gap-4 pt-1">
+              <a 
+                href="https://www.linkedin.com/company/pythia-scorecard" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-brand-teal/10 text-brand-teal hover:bg-brand-teal hover:text-white transition-all duration-300"
+                aria-label="Follow us on LinkedIn"
+              >
+                <Linkedin className="w-5 h-5 fill-current" />
+              </a>
             </div>
           </div>
 
@@ -87,7 +96,7 @@ function Footer() {
                 <ul className="flex flex-col gap-3 text-[14px] font-medium">
                   {group.links.map((innerLink, i) => (
                     <li key={i}>
-                      <Link 
+                      <Link
                         href={innerLink?.href}
                         className="hover:text-brand-teal transition-colors flex items-center gap-2 group"
                       >
@@ -109,9 +118,9 @@ function Footer() {
               System Status: Operational
             </p>
           </div>
-          
+
           <small className="text-slate-500 text-[12px] font-medium uppercase tracking-[0.24em] text-center md:text-right">
-            ©2025 Pythia Scorecard. All rights reserved.
+            ©2026 Pythia Scorecard. All rights reserved.
           </small>
         </div>
       </div>
