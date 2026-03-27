@@ -19,35 +19,6 @@ interface ResourceItem {
   slug?: string;
 }
 
-const resources: ResourceItem[] = [
-  {
-    id: 1,
-    title: "What your store reports aren’t telling you about missed sales.",
-    category: "Article",
-    industry: "Convenience Retail",
-    excerpt:
-      "Standard dashboards surface shortage, shrink, and basket size, but they rarely capture what customers actually say when they walk away from a purchase.",
-    tags: ["Missed sales", "Store reports", "Friction"],
-  },
-  {
-    id: 2,
-    title: "Designing a feedback loop for multi-store operations.",
-    category: "Blog",
-    industry: "Fuel & C‑Store",
-    excerpt:
-      "Operations leaders need a simple way to hear what is happening at the counter without sitting in every store for hours each week.",
-    tags: ["Feedback loop", "Multi-store", "Operations"],
-  },
-  {
-    id: 3,
-    title: "How one operator turned audio into a coaching playbook.",
-    category: "Case Study",
-    industry: "Retail Chains",
-    excerpt:
-      "By listening to everyday interactions, this operator uncovered patterns that transformed how they coached frontline teams.",
-    tags: ["Coaching", "Audio intelligence", "Case study"],
-  },
-];
 
 const allResources: ResourceItem[] = [
   ...articles.map((article, index) => ({
@@ -59,7 +30,6 @@ const allResources: ResourceItem[] = [
     tags: ["Insights", "Operations"],
     slug: article.slug,
   })),
-  ...resources,
 ];
 
 const categories: (ResourceCategory | "All")[] = ["All", "Blog", "Article", "Case Study"];
