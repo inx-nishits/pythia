@@ -5,6 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Cookie, X, Settings2 } from "lucide-react";
 import Button from "./Button";
 
+declare global {
+  interface Window {
+    gtag?: (command: 'consent', action: 'update', parameters: { analytics_storage: 'granted' | 'denied' }) => void;
+  }
+}
+
 export default function CookieConsent() {
   const [consentState, setConsentState] = useState<"granted" | "denied" | null>(null);
   const [showBanner, setShowBanner] = useState(false);
@@ -17,8 +23,8 @@ export default function CookieConsent() {
       setConsentState(stored as "granted" | "denied");
       
       // If they previously granted it, we must update the default 'denied' state
-      if (stored === "granted" && typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag('consent', 'update', {
+      if (stored === "granted" && typeof window !== "undefined" && window.gtag) {
+        window.gtag('consent', 'update', {
           'analytics_storage': 'granted'
         });
       }
@@ -34,8 +40,8 @@ export default function CookieConsent() {
     setShowBanner(false);
 
     // Update GA consent mode instantly
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag('consent', 'update', {
         'analytics_storage': 'granted'
       });
     }
@@ -47,8 +53,8 @@ export default function CookieConsent() {
     setShowBanner(false);
 
     // Strictly deny
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag('consent', 'update', {
         'analytics_storage': 'denied'
       });
     }
