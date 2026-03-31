@@ -103,7 +103,11 @@ function PythiaForm({
         setSuccessSubmission(true);
       } else {
         setSuccessSubmission(false);
-        setFormError("Failed to submit. Please try again later.");
+        if (res.status === 409) {
+          setFormError("Sorry, a request with this email address has already been submitted.");
+        } else {
+          setFormError("Failed to submit. Please try again later.");
+        }
       }
     } catch {
       setFormError("Failed to submit. Please try again later.");

@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 
 import DemoPopup from "./containers/DemoPopup/DemoPopup";
 import ChatBot from "./component/ChatBot";
+import CookieConsent from "./component/CookieConsent";
 
 export default function RootLayout({
   children,
@@ -39,6 +40,18 @@ export default function RootLayout({
       <head>
         <meta name="geo.region" content="US" />
         <meta name="geo.country" content="US" />
+        
+        {/* Google Consent Mode v2 Default */}
+        <Script id="google-consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied'
+            });
+          `}
+        </Script>
+
         {/* Google tag (gtag.js) / GA4 */}
         <Script
           async
@@ -57,6 +70,7 @@ export default function RootLayout({
         {children}
         <DemoPopup />
         <ChatBot />
+        <CookieConsent />
       </body>
     </html>
   );
