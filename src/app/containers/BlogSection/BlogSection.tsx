@@ -104,9 +104,6 @@ function BlogSection() {
               </div>
               <div className="mt-8 pt-6 border-t border-slate-100">
                 <div className="flex items-center justify-between">
-                  <span className="text-[13px] font-semibold text-slate-500">
-                    Coming Soon
-                  </span>
                   <Link 
                     href="/resources" 
                     className="text-sm font-bold text-brand-teal flex items-center gap-2 group/btn"

@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
 
   const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
   const KLAVIYO_URL = process.env.KLAVIYO_PUBLIC_PROFILES_URL;
-  const LIST_ID = process.env.KLAYIYO_LIST_ID;
+  const LIST_ID = process.env.KLAVIYO_LIST_ID;
 
   if (!KLAVIYO_API_KEY || !KLAVIYO_URL) {
     return NextResponse.json(
