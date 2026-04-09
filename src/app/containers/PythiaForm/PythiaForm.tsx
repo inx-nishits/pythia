@@ -13,6 +13,7 @@ import PhoneInput from "react-phone-number-input";
 import { inputStyles } from "@/app/component/Input/Input";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, CheckCircle2, Loader2, Phone } from "lucide-react";
+import { trackEvent } from "../../utils/gtm";
 
 interface PythiaFormProps {
   hiddenFields: Partial<Record<keyof ProfileData, boolean>>;
@@ -101,6 +102,10 @@ function PythiaForm({
         setErrors({});
         setFormError(null);
         setSuccessSubmission(true);
+        trackEvent("demo_request_complete", {
+          demo_requested: requestedDemo,
+          email: result.data.email, // Standard practice for lead attribution
+        });
       } else {
         setSuccessSubmission(false);
         if (res.status === 409) {
