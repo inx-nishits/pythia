@@ -14,6 +14,7 @@ import PhoneInput from "react-phone-number-input";
 import { inputStyles } from "@/app/component/Input/Input";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, CheckCircle2, Loader2, Phone } from "lucide-react";
+import { trackEvent } from "../../utils/gtm";
 
 interface PythiaFormProps {
   hiddenFields: Partial<Record<keyof ProfileData, boolean>>;
@@ -58,7 +59,68 @@ function PythiaForm({
   const [phoneValue, setPhoneValue] = useState("");
   const [forceReset, setForceReset] = useState(false);
 
-  if (state.status === "success" && !forceReset) {
+    const result = ProfileSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      for (const [key, val] of Object.entries(
+        result.error.flatten().fieldErrors
+      )) {
+        if (val && val.length > 0) fieldErrors[key] = val[0];
+      }
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/create-profile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...result.data,
+          requestedDemo,
+          message: !!hiddenFields.message ? "" : result.data.message,
+        }),
+      });
+
+      if (res.ok) {
+        setFormData(defaultProfileData);
+        setErrors({});
+        setFormError(null);
+        setSuccessSubmission(true);
+        trackEvent("demo_request_complete", {
+          demo_requested: requestedDemo,
+          email: result.data.email, // Standard practice for lead attribution
+        });
+      } else {
+        setSuccessSubmission(false);
+        if (res.status === 409) {
+          setFormError("Sorry, a request with this email address has already been submitted.");
+        } else {
+          setFormError("Failed to submit. Please try again later.");
+        }
+      }
+    } catch {
+      setFormError("Failed to submit. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isSubmitting) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-6 mt-8 min-h-[400px]">
+        <div className="relative">
+          <div className="w-16 h-16 rounded-full border-4 border-slate-100 border-t-brand-teal animate-spin" />
+          <Loader2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-brand-teal animate-pulse" />
+        </div>
+        <p className="text-slate-500 font-bold tracking-tight animate-pulse text-lg">Processing your request...</p>
+      </div>
+    );
+  }
+
+  if (successSubmission) {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}

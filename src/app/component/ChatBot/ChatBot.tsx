@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Home, MessageSquare, ChevronLeft, SendHorizontal } from "lucide-react";
 import { chatAction } from "@/app/actions/chat";
+import { trackEvent } from "../../utils/gtm";
 
 interface Message {
   id: string;
@@ -139,6 +140,12 @@ export default function ChatBot() {
     setMessages((prev) => [...prev, newUserMessage]);
     setInputValue("");
     setIsLoading(true);
+
+    // --- TRACKING: CONVERSATION START ---
+    if (userMessageCount === 0) {
+      trackEvent("ai_sdr_conversation_start");
+    }
+
     setUserMessageCount(prev => prev + 1);
 
     // Track used quick actions
@@ -224,6 +231,9 @@ export default function ChatBot() {
 
     // --- CONVERSION TRIGGER ---
     if (userMessageCount === 4) { // This was the 5th user message
+      // --- TRACKING: QUALIFIED ---
+      trackEvent("ai_sdr_qualified", { reason: "engaged_user_5_messages" });
+      
       setTimeout(() => {
         const demoMessage: Message = {
           id: 'demo-hook',

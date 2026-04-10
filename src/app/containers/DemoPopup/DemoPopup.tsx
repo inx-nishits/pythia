@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import PythiaForm from "../PythiaForm/PythiaForm";
 import Image from "next/image";
+import { trackEvent } from "../../utils/gtm";
 
 export default function DemoPopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,6 +19,7 @@ export default function DemoPopup() {
     const timer = setTimeout(() => {
       setIsVisible(true);
       setHasShown(true);
+      trackEvent("demo_request_start");
     }, 10000); // 10 seconds
 
     return () => clearTimeout(timer);
