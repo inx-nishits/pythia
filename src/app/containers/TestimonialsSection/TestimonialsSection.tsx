@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionSpan, MotionH2, MotionFigure } from "@/app/component/MotionWrapper";
 import { Quote } from "lucide-react";
 
 type Testimonial = {
@@ -27,25 +25,25 @@ function TestimonialsSection() {
     <section className="py-16 sm:py-20 lg:py-[120px] xl:py-[160px] px-4 sm:px-6 bg-white border-t border-slate-100 overflow-hidden min-w-0 w-full">
       <div className="max-w-[1400px] mx-auto w-full min-w-0">
         <div className="text-center mb-16 space-y-4">
-          <motion.span
+          <MotionSpan
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]"
           >
             Customer Voices
-          </motion.span>
-          <motion.h2
+          </MotionSpan>
+          <MotionH2
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[52px] font-extrabold tracking-tighter"
           >
             What operators say after hearing everything.
-          </motion.h2>
+          </MotionH2>
         </div>
 
         <div className="max-w-4xl mx-auto">
           {testimonials.map((t, index) => (
-            <motion.figure
+            <MotionFigure
               key={index}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +80,7 @@ function TestimonialsSection() {
                   {t.role} · {t.company}
                 </span>
               </figcaption>
-            </motion.figure>
+            </MotionFigure>
           ))}
         </div>
       </div>

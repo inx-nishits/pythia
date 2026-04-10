@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionSpan, MotionH2 } from "@/app/component/MotionWrapper";
 import Button from "@/app/component/Button";
 
 function ConversionSection() {
@@ -8,21 +6,21 @@ function ConversionSection() {
     <section className="py-16 sm:py-20 lg:py-[96px] xl:py-[140px] px-4 sm:px-6 bg-[#0F172A] text-white overflow-hidden min-w-0 w-full">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_minmax(0,1fr)] gap-8 lg:gap-16 items-center min-w-0">
         <div className="space-y-5 min-w-0">
-          <motion.span
+          <MotionSpan
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-[0.24em] uppercase text-slate-200"
           >
             Conversion Focus
-          </motion.span>
-          <motion.h2
+          </MotionSpan>
+          <MotionH2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-[24px] sm:text-[30px] lg:text-[36px] xl:text-[44px] font-extrabold tracking-tight leading-[1.1] break-words"
             style={{ color: "var(--color-brand-teal)" }}
           >
             Turn today&apos;s checkout conversations into tomorrow&apos;s wins.
-          </motion.h2>
+          </MotionH2>
           <p className="text-slate-200 text-[15px] sm:text-[16px] leading-relaxed max-w-xl">
             Choose the path that fits your schedule best: jump straight into a live walkthrough with the team to see how Pythia works for you.
           </p>

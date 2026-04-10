@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionSpan, MotionH2, MotionDiv } from "@/app/component/MotionWrapper";
 import { Store, Coffee, ShoppingBasket, Shirt, Utensils } from "lucide-react";
 
 
@@ -40,14 +38,14 @@ export default function IndustriesSection() {
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
         <div className="text-center mb-16 lg:mb-24 space-y-4">
-          <motion.span
+          <MotionSpan
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-xs font-bold text-brand-teal uppercase tracking-[0.2em]"
           >
             Industries
-          </motion.span>
-          <motion.h2
+          </MotionSpan>
+          <MotionH2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -55,12 +53,12 @@ export default function IndustriesSection() {
           >
             Intelligence built for <br className="hidden sm:block" />
             <span className="text-slate-400 italic">your specific business.</span>
-          </motion.h2>
+          </MotionH2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {industries.map((industry, index) => (
-            <motion.div
+            <MotionDiv
               key={industry.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +74,7 @@ export default function IndustriesSection() {
               <p className="text-slate-500 text-sm leading-relaxed">
                 {industry.description}
               </p>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

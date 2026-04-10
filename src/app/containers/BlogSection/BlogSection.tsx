@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionSpan, MotionH2, MotionArticle } from "@/app/component/MotionWrapper";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -46,20 +44,20 @@ function BlogSection() {
       <div className="max-w-[1400px] mx-auto w-full min-w-0">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="space-y-4">
-            <motion.span 
+            <MotionSpan 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]"
             >
               Latest Insights
-            </motion.span>
-            <motion.h2 
+            </MotionSpan>
+            <MotionH2 
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tighter"
             >
               Resources for retail leaders.
-            </motion.h2>
+            </MotionH2>
           </div>
           <Link 
             href="/resources"
@@ -72,7 +70,7 @@ function BlogSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
           {articles.map((item, index) => (
-            <motion.article
+            <MotionArticle
               key={item.id}
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +111,7 @@ function BlogSection() {
                   </Link>
                 </div>
               </div>
-            </motion.article>
+            </MotionArticle>
           ))}
         </div>
       </div>

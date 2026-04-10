@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionH2, MotionDiv } from "@/app/component/MotionWrapper";
 import { Sections } from "@/app/sections";
 import { Zap, Brain, Rocket } from "lucide-react";
 
@@ -36,20 +34,20 @@ function HowItWorks() {
     >
       <div className="max-w-[1400px] mx-auto relative z-10 w-full min-w-0">
         <div className="text-center mb-20 space-y-4">
-          <motion.h2 
+          <MotionH2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-[#0F172A] text-[40px] lg:text-[60px] font-extrabold tracking-tighter"
           >
             How it works
-          </motion.h2>
+          </MotionH2>
           <p className="text-slate-500 text-lg lg:text-xl font-medium">Low friction. Immediate value.</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-8 relative">
           {/* Connecting Line (Desktop, behind cards) */}
           <div className="hidden lg:block absolute top-[96px] left-[15%] right-[15%] h-[2px] bg-slate-100 -z-10 overflow-hidden">
-             <motion.div 
+             <MotionDiv 
                initial={{ x: "-100%" }}
                whileInView={{ x: "0%" }}
                transition={{ duration: 1.5, ease: "easeInOut" }}
@@ -58,7 +56,7 @@ function HowItWorks() {
           </div>
 
           {steps.map((step, index) => (
-            <motion.div
+            <MotionDiv
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +73,7 @@ function HowItWorks() {
               </div>
               <h3 className="text-2xl font-bold text-[#0F172A] tracking-tight mb-4">{step.title}</h3>
               <p className="text-slate-500 leading-relaxed max-w-[300px] text-[15px]">{step.desc}</p>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

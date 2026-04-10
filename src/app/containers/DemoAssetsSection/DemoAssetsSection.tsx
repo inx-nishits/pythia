@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionSpan, MotionH2 } from "@/app/component/MotionWrapper";
 import Image from "next/image";
 import { Sections } from "@/app/sections";
 
@@ -12,20 +10,20 @@ function DemoAssetsSection() {
     >
       <div className="max-w-[1400px] mx-auto space-y-6 w-full min-w-0">
         <div className="space-y-3 max-w-[800px]">
-          <motion.span
+          <MotionSpan
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]"
           >
             Operational Intelligence
-          </motion.span>
-          <motion.h2
+          </MotionSpan>
+          <MotionH2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-[#0F172A] text-[28px] sm:text-[32px] lg:text-[40px] font-extrabold tracking-tighter leading-[1.1]"
           >
             Voice to Ticket Work Order Automation
-          </motion.h2>
+          </MotionH2>
           <p className="text-slate-600 text-[15px] sm:text-[16px] leading-relaxed max-w-[700px]">
             Eliminate the gap between detecting a problem and fixing it. Pythia turns register conversations into instant action across your entire store network.
           </p>

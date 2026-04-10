@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionSpan, MotionH2, MotionArticle } from "@/app/component/MotionWrapper";
 import Link from "next/link";
 
 const solutions = [
@@ -35,20 +33,20 @@ function SolutionsSection() {
     <section className="py-16 sm:py-20 lg:py-[120px] xl:py-[160px] px-4 sm:px-6 bg-[#f8fafc] border-t border-slate-100 overflow-hidden min-w-0 w-full">
       <div className="max-w-[1400px] mx-auto w-full min-w-0">
         <div className="max-w-[720px] mb-12 space-y-4">
-          <motion.span
+          <MotionSpan
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]"
           >
             Solutions
-          </motion.span>
-          <motion.h2
+          </MotionSpan>
+          <MotionH2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tighter"
           >
             Built for the realities of modern fuel and convenience retail.
-          </motion.h2>
+          </MotionH2>
           <p className="text-slate-600 text-[15px] sm:text-[16px] leading-relaxed">
             Explore how the same audio-intelligence engine powers different parts of your operation, from pricing decisions to day-to-day store execution.
           </p>
@@ -56,7 +54,7 @@ function SolutionsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {solutions.map((solution, index) => (
-            <motion.article
+            <MotionArticle
               key={solution.slug}
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +80,7 @@ function SolutionsSection() {
                   </span>
                 </Link>
               </div>
-            </motion.article>
+            </MotionArticle>
           ))}
         </div>
       </div>

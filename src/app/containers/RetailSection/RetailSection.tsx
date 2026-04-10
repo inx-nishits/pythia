@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionDiv, MotionH2, MotionP } from "@/app/component/MotionWrapper";
 import { Sections } from "@/app/sections";
 import { AlertCircle, UserMinus, TrendingDown, EyeOff } from "lucide-react";
 
@@ -40,16 +38,16 @@ function RetailSection() {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 xl:gap-24 items-start min-w-0">
           
           <div className="flex-1 space-y-6 sm:space-y-8 min-w-0">
-            <motion.div 
+            <MotionDiv 
                initial={{ opacity: 0, y: 10 }}
                whileInView={{ opacity: 1, y: 0 }}
                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/25"
             >
                <AlertCircle className="w-3 h-3 text-brand-teal" />
                <span className="text-[10px] font-bold text-brand-teal uppercase tracking-widest leading-relaxed">Efficiency Gap Detected</span>
-            </motion.div>
+            </MotionDiv>
             
-            <motion.h2 
+            <MotionH2 
                initial={{ opacity: 0, y: 20 }}
                whileInView={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.1 }}
@@ -57,9 +55,9 @@ function RetailSection() {
             >
               <span className="text-brand-teal">Your stores are leaking money.</span>{" "}
               <span className="text-slate-300 italic font-medium">You just can’t hear it happening.</span>
-            </motion.h2>
+            </MotionH2>
 
-            <motion.p 
+            <MotionP 
                initial={{ opacity: 0, y: 20 }}
                whileInView={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.2 }}
@@ -68,12 +66,12 @@ function RetailSection() {
               It’s not always obvious. A line gets too long. A customer walks out
               frustrated. Your best cashier is burning out. The moments that hurt
               your business most are the ones no one talks about until it’s too late.
-            </motion.p>
+            </MotionP>
           </div>
 
           <div className="flex-1 grid grid-cols-1 gap-6 w-full min-w-0 lg:max-w-md">
             {painPoints.map((point, index) => (
-              <motion.div
+              <MotionDiv
                 key={index}
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -92,7 +90,7 @@ function RetailSection() {
                     <p className="text-slate-100 text-sm leading-relaxed">{point.desc}</p>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
 

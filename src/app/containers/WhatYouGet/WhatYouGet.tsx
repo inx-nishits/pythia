@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionDiv, MotionSpan, MotionH2 } from "@/app/component/MotionWrapper";
 import { Trophy, Target, FileJson, History } from "lucide-react";
 import { Sections } from "@/app/sections";
 import Image from "next/image";
@@ -23,7 +21,7 @@ const features = [
               0{i}
             </div>
             <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
-              <motion.div
+              <MotionDiv
                 initial={{ width: 0 }}
                 whileInView={{ width: `${100 - i * 15}%` }}
                 transition={{ duration: 1, delay: i * 0.2 }}
@@ -96,26 +94,26 @@ function WhatYouGet() {
       className="flex flex-col items-center justify-center w-full min-w-0 py-16 sm:py-20 lg:py-[120px] xl:py-[180px] bg-white border-t border-slate-100 overflow-hidden"
     >
       <div className="text-center px-4 sm:px-6 mb-12 lg:mb-24 space-y-4 max-w-3xl w-full min-w-0">
-        <motion.span
+        <MotionSpan
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="text-xs font-bold text-brand-teal uppercase tracking-[0.2em]"
         >
           Product Intelligence
-        </motion.span>
-        <motion.h2
+        </MotionSpan>
+        <MotionH2
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="text-[#0F172A] text-[40px] lg:text-[60px] font-extrabold tracking-tighter leading-[1] text-balance"
         >
           Get the answers you’ve been <span className="text-slate-400">missing.</span>
-        </motion.h2>
+        </MotionH2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 sm:px-6 w-full max-w-[1400px] mx-auto min-w-0">
         {features.map((feature, index) => (
-          <motion.div
+          <MotionDiv
             key={feature.title}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -134,7 +132,7 @@ function WhatYouGet() {
               ) : null}
             </div>
             {feature.visual}
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
     </section>
