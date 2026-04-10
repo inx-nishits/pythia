@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Home, MessageSquare, ChevronLeft, SendHorizontal } from "lucide-react";
+import { chatAction } from "@/app/actions/chat";
 
 interface Message {
   id: string;
@@ -203,21 +204,15 @@ export default function ChatBot() {
     setGlobalApiCount(prev => prev + 1);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          messages: messages.map(m => ({ role: m.type === 'bot' ? 'assistant' : 'user', content: m.text }))
-        }),
-      });
-
-      const data = await response.json();
+      const result = await chatAction(
+        text,
+        messages.map(m => ({ role: m.type === 'bot' ? 'assistant' as const : 'user' as const, content: m.text }))
+      );
 
       const botReply: Message = {
         id: Date.now().toString(),
         type: "bot",
-        text: data.text || "I'm sorry, I'm having trouble connecting right now. Please try again later.",
+        text: 'text' in result ? result.text : "I'm sorry, I'm having trouble connecting right now. Please try again later.",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botReply]);

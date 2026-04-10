@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionDiv, MotionH2, MotionP } from "@/app/component/MotionWrapper";
 import { Headphones, Brain, Activity } from "lucide-react";
 import { Sections } from "@/app/sections";
 import Image from "next/image";
@@ -13,7 +11,7 @@ function MeetPythiaStore() {
     >
       <div className="w-full max-w-[1400px] mx-auto min-w-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-w-0">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="flex flex-col gap-6 lg:gap-8"
@@ -28,7 +26,7 @@ function MeetPythiaStore() {
             </div>
 
             <div className="space-y-4 min-w-0">
-              <motion.h2
+              <MotionH2
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 }}
@@ -39,9 +37,9 @@ function MeetPythiaStore() {
                   Pythia
                 </span>{" "}
                 , your ears at the counter.
-              </motion.h2>
+              </MotionH2>
 
-              <motion.p
+              <MotionP
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -49,11 +47,11 @@ function MeetPythiaStore() {
               >
                 Pythia is a simple device that listens to what’s said at the counter, analyzes it with AI, and gives you
                 always-on insights and recommendations in a clear dashboard. All it needs is Wi-Fi.
-              </motion.p>
+              </MotionP>
             </div>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15 }}
@@ -76,7 +74,7 @@ function MeetPythiaStore() {
                 </span>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

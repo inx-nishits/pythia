@@ -1,7 +1,8 @@
 import { type NextConfig } from "next";
 
+const allowedOrigin = process.env.ALLOWED_ORIGIN ?? "https://www.pythiascorecard.com";
+
 const nextConfig: NextConfig = {
-  // Enable standalone output for Docker deployment
   output: 'standalone',
   trailingSlash: true,
   async rewrites() {
@@ -14,6 +15,19 @@ const nextConfig: NextConfig = {
     return [
       { source: "/policies/privacy-policy", destination: "/privacy-policy", permanent: true },
       { source: "/policies/terms-of-use", destination: "/terms-of-use", permanent: true },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: allowedOrigin },
+          { key: "Access-Control-Allow-Methods", value: "POST, OPTIONS" },
+          { key: "Access-Control-Allow-Headers", value: "Content-Type" },
+          { key: "Access-Control-Max-Age", value: "86400" },
+        ],
+      },
     ];
   },
   images: {
@@ -30,7 +44,7 @@ const nextConfig: NextConfig = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
-      include: /app[\\/]assets/,
+      include: /app[\\\/]assets/,
       use: ["@svgr/webpack"],
     });
     return config;

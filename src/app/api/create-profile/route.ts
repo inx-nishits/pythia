@@ -1,7 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ProfileSchema } from "@/app/schema";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  let body: unknown;
+
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid JSON body." },
+      { status: 400 }
+    );
+  }
+
+  const validation = ProfileSchema.safeParse(body);
+  if (!validation.success) {
+    return NextResponse.json(
+      { error: "Invalid request data." },
+      { status: 400 }
+    );
+  }
 
   const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
   const KLAVIYO_URL = process.env.KLAVIYO_PUBLIC_PROFILES_URL;
@@ -14,23 +32,21 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // const url = `${KLAVIYO_URL}?company_id=${KLAVIYO_API_KEY}`;
-
   const profilePayload = {
     data: {
       type: "profile",
       attributes: {
-        email: body.email,
-        first_name: body.first_name,
-        last_name: body.last_name,
-        phone_number: body.phone_number || undefined,
+        email: validation.data.email,
+        first_name: validation.data.first_name,
+        last_name: validation.data.last_name,
+        phone_number: validation.data.phone_number || undefined,
         properties: {
-          store_name: body.store_name,
-          number_of_stores: body.number_of_stores,
-          type_of_industry: body.type_of_industry,
-          emails_accepted: body.emails_accepted,
-          message: body.message || "",
-          requestedDemo: body.requestedDemo || false,
+          store_name: validation.data.store_name,
+          number_of_stores: validation.data.number_of_stores,
+          type_of_industry: validation.data.type_of_industry,
+          emails_accepted: validation.data.emails_accepted,
+          message: validation.data.message || "",
+          requestedDemo: (body as Record<string, unknown>).requestedDemo ?? false,
           submitted_at: new Date().toISOString(),
         },
       }
@@ -54,7 +70,11 @@ export async function POST(req: NextRequest) {
 
     if (!profileRes.ok) {
       const err = await profileRes.json();
-      return NextResponse.json(err, { status: profileRes.status });
+      console.error("Klaviyo Profile Error:", err);
+      return NextResponse.json(
+        { error: "Failed to create profile." },
+        { status: 500 }
+      );
     }
 
     const profileData = await profileRes.json();
@@ -63,19 +83,13 @@ export async function POST(req: NextRequest) {
     // Step 2: Add to List
     if (profileId && LIST_ID) {
       const listPayload = {
-        data: [
-          {
-            type: "profile",
-            id: profileId,
-          },
-        ],
+        data: [{ type: "profile", id: profileId }],
       };
 
-      const listRes = await fetch(`https://a.klaviyo.com/api/lists/${LIST_ID}/relationships/profiles/`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(listPayload),
-      });
+      const listRes = await fetch(
+        `https://a.klaviyo.com/api/lists/${LIST_ID}/relationships/profiles/`,
+        { method: "POST", headers, body: JSON.stringify(listPayload) }
+      );
 
       if (!listRes.ok) {
         console.error(`Failed to add profile ${profileId} to list ${LIST_ID}`);

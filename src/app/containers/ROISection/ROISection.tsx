@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionH2, MotionDiv } from "@/app/component/MotionWrapper";
 import { TrendingUp, Users, DollarSign, Wallet } from "lucide-react";
 
 const stats = [
@@ -48,14 +46,14 @@ function ROISection() {
       <div className="max-w-[1400px] mx-auto relative z-10 w-full min-w-0">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 items-center lg:items-start">
           <div className="flex-1 space-y-6">
-            <motion.h2 
+            <MotionH2 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               className="!text-white text-[40px] lg:text-[60px] font-extrabold tracking-tighter leading-[1]"
             >
               The impact is <br/> 
               <span className="text-brand-teal italic">quantifiable.</span>
-            </motion.h2>
+            </MotionH2>
             <p className="text-slate-200 text-lg lg:text-xl font-medium leading-relaxed max-w-lg">
               Every checkout interaction carries a monetary value. These example metrics show how Pythia can turn those moments into a data-driven ROI engine for your retail operations.
             </p>
@@ -63,7 +61,7 @@ function ROISection() {
           
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {stats.map((stat, index) => (
-              <motion.div
+              <MotionDiv
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -83,7 +81,7 @@ function ROISection() {
                   <p className="text-sm font-bold text-slate-100">{stat.label}</p>
                   <p className="text-[11px] text-slate-300 font-medium uppercase tracking-widest leading-loose">{stat.detail}</p>
                 </div>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
