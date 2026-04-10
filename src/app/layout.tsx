@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 import DemoPopup from "./containers/DemoPopup/DemoPopup";
 import ChatBot from "./component/ChatBot";
 import CookieConsent from "./component/CookieConsent";
+import TrackingManager from "./component/TrackingManager";
 
 export default function RootLayout({
   children,
@@ -52,21 +53,28 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Google tag (gtag.js) / GA4 */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-LY8FBGTQ4T"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
+        {/* Google Tag Manager - Global Base */}
+        <Script id="gtm-init" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-LY8FBGTQ4T');
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5DFNJSZN');
           `}
         </Script>
       </head>
       <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`} suppressHydrationWarning>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5DFNJSZN"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+        <TrackingManager />
         {children}
         <DemoPopup />
         <ChatBot />
