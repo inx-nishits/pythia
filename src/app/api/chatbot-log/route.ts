@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
     if (error) throw error;
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
-    console.error('Error saving insight:', error.message);
+  } catch (error) {
+    console.error('Error saving insight:', error instanceof Error ? error.message : error);
     return NextResponse.json({ error: 'Internal Error' }, { status: 500 });
   }
 }
