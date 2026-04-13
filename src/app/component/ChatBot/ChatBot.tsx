@@ -143,7 +143,10 @@ export default function ChatBot() {
 
     // --- TRACKING: CONVERSATION START ---
     if (userMessageCount === 0) {
-      trackEvent("ai_sdr_conversation_start");
+      trackEvent("ai_sdr_conversation_start", {
+        chatbot_id: "pythia_sdr",
+        initial_message: text
+      });
     }
 
     setUserMessageCount(prev => prev + 1);
@@ -232,7 +235,10 @@ export default function ChatBot() {
     // --- CONVERSION TRIGGER ---
     if (userMessageCount === 4) { // This was the 5th user message
       // --- TRACKING: QUALIFIED ---
-      trackEvent("ai_sdr_qualified", { reason: "engaged_user_5_messages" });
+      trackEvent("ai_sdr_qualified", { 
+        reason: "engaged_user_5_messages",
+        interaction_count: 5
+      });
       
       setTimeout(() => {
         const demoMessage: Message = {
