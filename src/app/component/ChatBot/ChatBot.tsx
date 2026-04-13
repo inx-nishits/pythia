@@ -57,6 +57,7 @@ export default function ChatBot() {
   const [userMessageCount, setUserMessageCount] = useState(0);
   const [globalApiCount, setGlobalApiCount] = useState(0);
   const [usedQuickActions, setUsedQuickActions] = useState<string[]>([]);
+  const [sessionId, setSessionId] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -91,6 +92,14 @@ export default function ChatBot() {
     if (savedCount) setUserMessageCount(parseInt(savedCount));
     if (savedActions) setUsedQuickActions(JSON.parse(savedActions));
     if (savedGlobalCount) setGlobalApiCount(parseInt(savedGlobalCount));
+
+    // Initialize or load Session ID
+    let sId = localStorage.getItem("pythia_chat_session_id");
+    if (!sId) {
+      sId = crypto.randomUUID();
+      localStorage.setItem("pythia_chat_session_id", sId);
+    }
+    setSessionId(sId);
   }, []);
 
   // --- PERSISTENCE: SAVE ---
@@ -139,6 +148,22 @@ export default function ChatBot() {
 
     setMessages((prev) => [...prev, newUserMessage]);
     setInputValue("");
+
+    // --- LOG TO ANALYTICS API ---
+    try {
+      await fetch('/api/chatbot-log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: sessionId,
+          role: 'user',
+          content: text,
+        }),
+      });
+    } catch (err) {
+      console.error("Failed to log insight:", err);
+    }
+
     setIsLoading(true);
 
     // --- TRACKING: CONVERSATION START ---
