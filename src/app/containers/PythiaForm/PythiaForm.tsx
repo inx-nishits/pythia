@@ -57,6 +57,17 @@ function PythiaForm({
   });
   const [phoneValue, setPhoneValue] = useState("");
   const [forceReset, setForceReset] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  const handleFormStart = () => {
+    if (!hasStarted) {
+      setHasStarted(true);
+      trackEvent("form_start", {
+        form_id: "demo_request_form",
+        requested_demo: requestedDemo,
+      });
+    }
+  };
 
   // Fire analytics when form submission succeeds
   useEffect(() => {
@@ -95,7 +106,12 @@ function PythiaForm({
   }
 
   return (
-    <form className={formClassName} action={formAction}>
+    <form 
+      className={formClassName} 
+      action={formAction}
+      onFocus={handleFormStart}
+      onSubmit={() => trackEvent("form_submit", { form_id: "demo_request_form" })}
+    >
       <input type="hidden" name="requestedDemo" value={String(requestedDemo)} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div className="flex flex-col gap-1 w-full relative">
