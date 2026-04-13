@@ -18,6 +18,14 @@ const testimonials: Testimonial[] = [
       "As a multi-unit convenience store operator, we need to keep a close eye on store-level details, both issues and opportunities. More often than not, these surface during checkout conversations between customers and cashiers.\n\nPythia Scorecard uses AI to capture, flag, and categorize these interactions, allowing our supervisors to easily understand the situation and act quickly. Success in our business is built on getting the details right, and Pythia is a vital tool that lets us oversee our stores 100% of the time, even when management isn't on the floor.\n\nAs a company leader, since implementing Pythia, my overall confidence in our operations has improved. It gives me the flexibility to oversee the business at a high level, while still allowing me to easily drill down into the details whenever necessary.\n\nPythia is quickly becoming an invaluable tool for ensuring our standards are met every single day.",
     logoInitials: "DB",
   },
+  {
+    name: "Alex Kugar",
+    role: "VP of Finance",
+    company: "Gas N Wash",
+    quote:
+      "As a multi-site fuel retail and convenience operator with nearly 40 locations across the Chicago suburbs, knowing what's happening at each site without being physically present is one of our biggest operational challenges. \n\nPythia Scorecard gives us visibility into what's happening at the store level. Customer interactions and team behavior are at the forefront of the feedback loop. \n\nFor us, the biggest win has been catching early warning signs before they become bigger issues. When a store's culture starts to drift or a team dynamic starts to shift, Pythia flags it early enough for us to step in and course correct before it impacts the customer experience or our numbers.\n\nIn a business where we can't be everywhere at once, Pythia gives us the confidence that our standards are being upheld. Not just when a manager is watching",
+    logoInitials: "AK",
+  },
 ];
 
 function TestimonialsSection() {
@@ -41,7 +49,7 @@ function TestimonialsSection() {
           </MotionH2>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           {testimonials.map((t, index) => (
             <MotionFigure
               key={index}

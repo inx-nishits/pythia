@@ -4,10 +4,9 @@ import Checkbox from "@/app/component/Checkbox";
 import FormFieldError from "@/app/component/FormFieldError";
 import Input from "@/app/component/Input";
 import { ProfileData } from "@/app/types";
-import { useState, useActionState } from "react";
+import { useState, useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { submitProfile } from "@/app/actions/submitProfile";
-
 import Button from "@/app/component/Button";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -59,68 +58,16 @@ function PythiaForm({
   const [phoneValue, setPhoneValue] = useState("");
   const [forceReset, setForceReset] = useState(false);
 
-    const result = ProfileSchema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: Record<string, string> = {};
-      for (const [key, val] of Object.entries(
-        result.error.flatten().fieldErrors
-      )) {
-        if (val && val.length > 0) fieldErrors[key] = val[0];
-      }
-      setErrors(fieldErrors);
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const res = await fetch("/api/create-profile", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...result.data,
-          requestedDemo,
-          message: !!hiddenFields.message ? "" : result.data.message,
-        }),
+  // Fire analytics when form submission succeeds
+  useEffect(() => {
+    if (state.status === "success") {
+      trackEvent("demo_request_complete", {
+        demo_requested: requestedDemo,
       });
-
-      if (res.ok) {
-        setFormData(defaultProfileData);
-        setErrors({});
-        setFormError(null);
-        setSuccessSubmission(true);
-        trackEvent("demo_request_complete", {
-          demo_requested: requestedDemo,
-          email: result.data.email, // Standard practice for lead attribution
-        });
-      } else {
-        setSuccessSubmission(false);
-        if (res.status === 409) {
-          setFormError("Sorry, a request with this email address has already been submitted.");
-        } else {
-          setFormError("Failed to submit. Please try again later.");
-        }
-      }
-    } catch {
-      setFormError("Failed to submit. Please try again later.");
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+  }, [state.status, requestedDemo]);
 
-  if (isSubmitting) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-6 mt-8 min-h-[400px]">
-        <div className="relative">
-          <div className="w-16 h-16 rounded-full border-4 border-slate-100 border-t-brand-teal animate-spin" />
-          <Loader2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-brand-teal animate-pulse" />
-        </div>
-        <p className="text-slate-500 font-bold tracking-tight animate-pulse text-lg">Processing your request...</p>
-      </div>
-    );
-  }
-
-  if (successSubmission) {
+  if (state.status === "success" && !forceReset) {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -240,8 +187,6 @@ function PythiaForm({
           )}
         </AnimatePresence>
       </div>
-
-
 
       <div className="flex flex-col gap-1 w-full pt-2">
         <div className="px-0.5">
