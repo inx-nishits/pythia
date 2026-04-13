@@ -7,7 +7,7 @@ import Button from "./Button";
 
 declare global {
   interface Window {
-    dataLayer: any[];
+    dataLayer: unknown[];
   }
 }
 
