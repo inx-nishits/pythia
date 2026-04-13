@@ -10,6 +10,10 @@ import { sendGTMEvent } from "@next/third-parties/google";
  * @param data - Optional key-value pairs of additional tracking data
  */
 export const trackEvent = (event: string, data?: Record<string, unknown>) => {
+  if (process.env.NODE_ENV === "development") {
+    console.log(`[GTM Event]: ${event}`, data);
+  }
+
   sendGTMEvent({
     event,
     ...data,

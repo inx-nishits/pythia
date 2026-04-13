@@ -62,8 +62,9 @@ function PythiaForm({
   const handleFormStart = () => {
     if (!hasStarted) {
       setHasStarted(true);
-      trackEvent("form_start", {
+      trackEvent("demo_request_start", {
         form_id: "demo_request_form",
+        form_name: "Demo Request Form",
         requested_demo: requestedDemo,
       });
     }
@@ -72,6 +73,15 @@ function PythiaForm({
   // Fire analytics when form submission succeeds
   useEffect(() => {
     if (state.status === "success") {
+      // Firing standard GA4 form_submit event ONLY after successful submission
+      trackEvent("form_submit", {
+        form_id: "demo_request_form",
+        form_name: "Demo Request Form",
+        form_destination: "Klaviyo",
+        requested_demo: requestedDemo,
+      });
+
+      // Firing custom success event
       trackEvent("demo_request_complete", {
         demo_requested: requestedDemo,
       });
@@ -110,7 +120,6 @@ function PythiaForm({
       className={formClassName} 
       action={formAction}
       onFocus={handleFormStart}
-      onSubmit={() => trackEvent("form_submit", { form_id: "demo_request_form" })}
     >
       <input type="hidden" name="requestedDemo" value={String(requestedDemo)} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
