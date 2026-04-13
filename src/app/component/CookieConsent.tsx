@@ -7,7 +7,7 @@ import Button from "./Button";
 
 declare global {
   interface Window {
-    gtag?: (command: 'consent', action: 'update', parameters: { analytics_storage: 'granted' | 'denied' }) => void;
+    dataLayer: unknown[];
   }
 }
 
@@ -23,9 +23,14 @@ export default function CookieConsent() {
       setConsentState(stored as "granted" | "denied");
       
       // If they previously granted it, we must update the default 'denied' state
-      if (stored === "granted" && typeof window !== "undefined" && window.gtag) {
-        window.gtag('consent', 'update', {
-          'analytics_storage': 'granted'
+      if (stored === "granted" && typeof window !== "undefined") {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "consent_update",
+          analytics_storage: "granted",
+          ad_storage: "granted",
+          ad_user_data: "granted",
+          ad_personalization: "granted"
         });
       }
     } else {
@@ -40,9 +45,14 @@ export default function CookieConsent() {
     setShowBanner(false);
 
     // Update GA consent mode instantly
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag('consent', 'update', {
-        'analytics_storage': 'granted'
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "consent_update",
+        analytics_storage: "granted",
+        ad_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted"
       });
     }
   };
@@ -53,9 +63,14 @@ export default function CookieConsent() {
     setShowBanner(false);
 
     // Strictly deny
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag('consent', 'update', {
-        'analytics_storage': 'denied'
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "consent_update",
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
       });
     }
   };
