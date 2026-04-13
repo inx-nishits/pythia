@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Roboto } from "next/font/google";
-import Script from "next/script";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -42,38 +42,27 @@ export default function RootLayout({
         <meta name="geo.region" content="US" />
         <meta name="geo.country" content="US" />
         
-        {/* Google Consent Mode v2 Default */}
-        <Script id="google-consent-default" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-              'analytics_storage': 'denied'
-            });
-          `}
-        </Script>
-
-        {/* Google Tag Manager - Global Base */}
-        <Script id="gtm-init" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-5DFNJSZN');
-          `}
-        </Script>
+        {/* Important: Initialize dataLayer and Consent Mode before GTM loads */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'wait_for_update': 500
+              });
+            `,
+          }}
+        />
       </head>
       <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`} suppressHydrationWarning>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5DFNJSZN"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
+        {/* Google Tag Manager (Optimized) */}
+        <GoogleTagManager gtmId="GTM-5DFNJSZN" />
+        
         <TrackingManager />
         {children}
         <DemoPopup />
