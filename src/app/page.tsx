@@ -21,7 +21,7 @@ import IndustriesSection from "./containers/IndustriesSection";
 
 export const metadata = {
   title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-  description: "Pythia is your in-store audio-intel device and dashboard. It captures in-store checkout conversations, analyses sentiment & behaviour with AI and gives retail chains always-on insights to prevent missed sales, staff burnout and poor customer experience.",
+  description: "Pythia captures in-store checkout conversations and analyzes them with AI to provide retail chains always-on insights, preventing missed sales and staff burnout.",
   keywords: [
     "retail AI",
     "in-store analytics",
@@ -37,17 +37,23 @@ export const metadata = {
   openGraph: {
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
     description: "Capture what your stores don’t report. Pythia listens at the counter, analyses checkout interactions and delivers actionable insights in near real time.",
-    url: `${process.env.NEXT_PUBLIC_SITE}/`,
+    url: "/",
     site_name: "Pythia Scorecard",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE}/og-image.jpg`,
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Pythia Store device analysing retail checkout conversations"
       }
     ],
     type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
+    description: "Capture what your stores don’t report. Pythia listens at the counter and delivers actionable insights.",
+    images: ["/og-image.jpg"],
   }
 };
 

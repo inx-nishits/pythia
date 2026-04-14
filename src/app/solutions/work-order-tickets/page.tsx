@@ -4,6 +4,17 @@ import Footer from "../../containers/Footer";
 
 export const metadata = {
   title: "Work Order Tickets | Pythia Scorecard",
+  description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI.",
+  openGraph: {
+    title: "Work Order Tickets | Pythia Store",
+    description: "From friction detected to fix in motion automatically.",
+    url: "/solutions/work-order-tickets/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Work Order Tickets | Pythia Store",
+    description: "Automate retail work orders with AI audio analytics.",
+  }
 };
 
 export default function WorkOrderTicketsPage() {

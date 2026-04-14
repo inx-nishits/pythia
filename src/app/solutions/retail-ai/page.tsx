@@ -4,6 +4,17 @@ import Footer from "../../containers/Footer";
 
 export const metadata = {
   title: "Retail AI | Pythia Scorecard",
+  description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights and optimized operations.",
+  openGraph: {
+    title: "Retail AI | Pythia Store",
+    description: "Transform checkout conversations into clear, prioritized actions with AI.",
+    url: "/solutions/retail-ai/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Retail AI | Pythia Store",
+    description: "Transform checkout conversations into actionable insights.",
+  }
 };
 
 export default function RetailAiPage() {

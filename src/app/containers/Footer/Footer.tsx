@@ -12,15 +12,15 @@ const siteLinks = [
       },
       {
         name: 'Contact Us',
-        href: '/contact',
+        href: '/contact/',
       },
       {
         name: 'Solutions',
-        href: '/solutions/in-store-analytics',
+        href: '/solutions/in-store-analytics/',
       },
       {
         name: 'Resources',
-        href: '/resources',
+        href: '/resources/',
       },
       {
         name: 'Industries',
@@ -28,11 +28,11 @@ const siteLinks = [
       },
       {
         name: 'FAQ',
-        href: '/faq',
+        href: '/faq/',
       },
       {
         name: 'About',
-        href: '/about',
+        href: '/about/',
       },
     ]
   },
@@ -41,11 +41,11 @@ const siteLinks = [
     links: [
       {
         name: 'Privacy Policy',
-        href: '/privacy-policy',
+        href: '/privacy-policy/',
       },
       {
         name: 'Terms & Conditions',
-        href: '/terms-of-use',
+        href: '/terms-of-use/',
       },
     ]
   }

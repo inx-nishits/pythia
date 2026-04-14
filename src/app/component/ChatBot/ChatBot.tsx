@@ -260,11 +260,11 @@ export default function ChatBot() {
     // --- CONVERSION TRIGGER ---
     if (userMessageCount === 4) { // This was the 5th user message
       // --- TRACKING: QUALIFIED ---
-      trackEvent("ai_sdr_qualified", { 
+      trackEvent("ai_sdr_qualified", {
         reason: "engaged_user_5_messages",
         interaction_count: 5
       });
-      
+
       setTimeout(() => {
         const demoMessage: Message = {
           id: 'demo-hook',
@@ -325,8 +325,8 @@ export default function ChatBot() {
             <div className={`transition-all duration-300 bg-brand-navy flex-shrink-0 relative z-10 ${view === 'home' ? 'h-[180px] p-8 pt-10' : 'h-[72px] px-5 flex items-center'}`}>
               {view === "home" ? (
                 <div className="space-y-4">
-                  <button 
-                    onClick={() => setIsOpen(false)} 
+                  <button
+                    onClick={() => setIsOpen(false)}
                     className="absolute top-4 right-4 p-2 text-white/80 hover:text-white sm:hidden z-20"
                     aria-label="Close Chat"
                   >
@@ -395,7 +395,7 @@ export default function ChatBot() {
                       <div className="flex flex-wrap justify-center gap-2 animate-in fade-in duration-500 w-full">
                         {(() => {
                           const availableActions = quickActions.filter(action => !usedQuickActions.includes(action));
-                          
+
                           if (availableActions.length > 0) {
                             return availableActions.slice(0, 7).map((action) => (
                               <button
@@ -410,11 +410,11 @@ export default function ChatBot() {
                               </button>
                             ));
                           }
-                          
+
                           return (
                             <div className="bg-brand-teal/10 rounded-2xl p-5 text-center border border-brand-teal/20 w-full mt-2">
                               <p className="text-[13px] font-medium text-brand-navy leading-relaxed">
-                                I hope we cleared up most of your questions about Pythia! 🌟<br/><br/>
+                                I hope we cleared up most of your questions about Pythia! 🌟<br /><br />
                                 If you still have any doubts or need specific details, please feel free to use the messages section. Our AI bot is always here to help you. 💙
                               </p>
                             </div>

@@ -192,28 +192,28 @@ function Header() {
                 Industries
               </NavItem>
               <NavItem
-                href="/resources"
+                href="/resources/"
                 isActive={activeItem === "resources" && pathname.startsWith("/resources")}
                 onClick={() => setActiveItem("resources")}
               >
                 Resources
               </NavItem>
               <NavItem
-                href="/about"
+                href="/about/"
                 isActive={activeItem === "about" && pathname.startsWith("/about")}
                 onClick={() => setActiveItem("about")}
               >
                 About Us
               </NavItem>
               <NavItem
-                href="/faq"
+                href="/faq/"
                 isActive={activeItem === "faq" && pathname.startsWith("/faq")}
                 onClick={() => setActiveItem("faq")}
               >
                 FAQ
               </NavItem>
               <NavItem
-                href="/contact"
+                href="/contact/"
                 isActive={activeItem === "contact" && pathname.startsWith("/contact")}
                 onClick={() => setActiveItem("contact")}
               >
@@ -357,7 +357,7 @@ function Header() {
                 </li>
                 <li>
                   <Link
-                    href="/resources"
+                    href="/resources/"
                     className={`block text-[18px] font-semibold transition-colors ${
                       activeItem === "resources" && pathname.startsWith("/resources")
                         ? "text-brand-navy"
@@ -373,7 +373,7 @@ function Header() {
                 </li>
                 <li>
                   <Link
-                    href="/about"
+                    href="/about/"
                     className={`block text-[18px] font-semibold transition-colors ${
                       activeItem === "about" && pathname.startsWith("/about")
                         ? "text-brand-navy"
@@ -389,7 +389,7 @@ function Header() {
                 </li>
                 <li>
                   <Link
-                    href="/faq"
+                    href="/faq/"
                     className={`block text-[18px] font-semibold transition-colors ${
                       activeItem === "faq" && pathname.startsWith("/faq")
                         ? "text-brand-navy"
@@ -405,7 +405,7 @@ function Header() {
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="/contact/"
                     className={`block text-[18px] font-semibold transition-colors ${
                       activeItem === "contact" && pathname.startsWith("/contact")
                         ? "text-brand-navy"

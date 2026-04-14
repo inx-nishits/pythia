@@ -19,13 +19,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!article) return {};
 
   return {
-    title: `${article.title} | Pythia Scorecard Articles`,
+    title: `${article.title} | Pythia Store Articles`,
     description: article.excerpt,
     openGraph: {
       title: article.title,
       description: article.excerpt,
       type: "article",
+      url: `/articles/${slug}/`,
+      images: ["/og-image.jpg"],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: ["/og-image.jpg"],
+    }
   };
 }
 

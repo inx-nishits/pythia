@@ -4,6 +4,17 @@ import Footer from "../../containers/Footer";
 
 export const metadata = {
   title: "Convenience Store Analytics | Pythia Scorecard",
+  description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service and higher revenue.",
+  openGraph: {
+    title: "Convenience Store Analytics | Pythia Store",
+    description: "Give every store a feedback loop they've never had before.",
+    url: "/solutions/convenience-store-analytics/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Convenience Store Analytics | Pythia Store",
+    description: "Optimize store performance with AI interaction analytics.",
+  }
 };
 
 export default function ConvenienceStoreAnalyticsPage() {
