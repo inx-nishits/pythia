@@ -15,17 +15,23 @@ export const metadata = {
   openGraph: {
     title: "Terms & Conditions | Pythia Scorecard",
     description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics, ensuring clarity on our in-store audio intelligence services.",
-    url: `${process.env.NEXT_PUBLIC_SITE}/terms-of-use`,
+    url: "/terms-of-use/",
     siteName: "Pythia Scorecard",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE}/og-image.jpg`,
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Pythia Scorecard Terms of Use"
       }
     ],
     type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms & Conditions | Pythia Scorecard",
+    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics.",
+    images: ["/og-image.jpg"],
   }
 };
 
@@ -50,7 +56,7 @@ export default function TermsOfUse() {
           <strong>Pythia Scorecard,</strong>&rdquo; &ldquo;<strong>we,</strong>&rdquo; &ldquo;<strong>our,</strong>
           &rdquo; or &ldquo;<strong>us</strong>&rdquo;). The following terms and conditions, together with any documents
           they expressly incorporate by reference (collectively, &ldquo;<strong>Terms of Use</strong>&rdquo;), govern
-          your access to and use of&nbsp;<strong>http://app.pythiastore.ai</strong>, including any content,
+          your access to and use of&nbsp;<strong>https://app.pythiastore.ai</strong>, including any content,
           functionality, and services offered on or through app.com (the &ldquo;<strong>Website</strong>&rdquo;).&nbsp;
         </p>
         <p>
@@ -61,7 +67,8 @@ export default function TermsOfUse() {
             FOUND AT
           </strong>
           <strong>&nbsp;</strong>
-          <strong>HTTP://APP.PYTHIASTORE.AI</strong>
+          <strong>HTTPS://APP.PYTHIASTORE.AI</strong>
+
           <strong>, INCORPORATED HEREIN BY REFERENCE.</strong>&nbsp;If you do not want to agree to these Terms of Use or
           the Privacy Policy, then you must not access or use the Website. These terms become effective as between you
           and us on the date and time at our location when you agree to them, as set forth herein.

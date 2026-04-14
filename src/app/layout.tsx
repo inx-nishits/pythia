@@ -21,9 +21,31 @@ const robotoFont = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Hear and Fix In-Store Issues with Same Day Intelligence | Pythia Store",
+  title: "Fix In-Store Issues with Same Day AI | Pythia Store",
   description:
     "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and sales.",
+  metadataBase: new URL("https://www.pythiascorecard.com"),
+  openGraph: {
+    title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
+    description: "Capture what your stores don’t report. Pythia listens at the counter and analyses checkout interactions in near real-time.",
+    url: "/",
+    siteName: "Pythia Scorecard",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Pythia Store device analysing retail checkout conversations"
+      }
+    ],
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
+    description: "Capture what your stores don’t report. Pythia listens at the counter and delivers actionable insights.",
+    images: ["/og-image.jpg"],
+  }
 };
 
 import DemoPopup from "./containers/DemoPopup/DemoPopup";

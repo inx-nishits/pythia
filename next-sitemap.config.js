@@ -3,4 +3,7 @@
 module.exports = {
   siteUrl: 'https://www.pythiascorecard.com',
   generateRobotsTxt: true,
+  generateIndexSitemap: false,
+  trailingSlash: true,
 };
+

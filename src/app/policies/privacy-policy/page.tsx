@@ -15,19 +15,26 @@ export const metadata = {
   openGraph: {
     title: "Privacy Policy | Pythia Scorecard",
     description: "Understand how Pythia Scorecard ensures the privacy and security of your data through our comprehensive privacy policy for retail AI analytics.",
-    url: `${process.env.NEXT_PUBLIC_SITE}/privacy-policy`,
+    url: "/privacy-policy/",
     siteName: "Pythia Scorecard",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE}/og-image.jpg`,
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Pythia Scorecard Privacy Policy"
       }
     ],
     type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Pythia Scorecard",
+    description: "Understand how Pythia Scorecard ensures the privacy and security of your data.",
+    images: ["/og-image.jpg"],
   }
 };
+
 
 export default function PrivacyPolicy() {
   return (
@@ -54,9 +61,9 @@ export default function PrivacyPolicy() {
           <strong>our</strong>,&rdquo; or &ldquo;<strong>us</strong>&rdquo;) respect your privacy and are committed to
           protecting it through our compliance with this policy. This policy describes the types of information we may
           collect from you or that you may provide when you visit the website&nbsp;
-          <Link href="http://www.pythiascorecard.com/">http://www.pythiascorecard.com/</Link>
+          <Link href="https://www.pythiascorecard.com/">https://www.pythiascorecard.com/</Link>
           &nbsp;
-          <Link href=" http://app.pythiastore.ai "> http://app.pythiastore.ai</Link>
+          <Link href=" https://app.pythiastore.ai "> https://app.pythiastore.ai</Link>
           &nbsp;(our &ldquo;<strong>Websites</strong>&rdquo;) and our practices for collecting, using, maintaining,
           protecting, and disclosing that information. This policy applies to information we collect:
         </p>
@@ -334,7 +341,7 @@ export default function PrivacyPolicy() {
           advertising. However these third parties may provide you with ways to choose not to have your information
           collected or used in this way. You can opt out of receiving targeted ads from members of the Network
           Advertising Initiative (&ldquo;<strong>NAI</strong>&rdquo;) on the NAI&rsquo;s&nbsp;
-          <Link href="http://www.networkadvertising.org/managing/opt_out.asp">
+          <Link href="https://www.networkadvertising.org/managing/opt_out.asp">
             <u>website</u>
           </Link>
           .
