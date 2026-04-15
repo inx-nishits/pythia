@@ -60,7 +60,7 @@ function BlogSection() {
             </MotionH2>
           </div>
           <Link 
-            href="/resources"
+            href="/resources/"
             className="inline-flex items-center gap-2 text-brand-teal font-bold hover:gap-3 transition-all duration-300 group"
           >
             Go to Resources
@@ -103,7 +103,7 @@ function BlogSection() {
               <div className="mt-8 pt-6 border-t border-slate-100">
                 <div className="flex items-center justify-between">
                   <Link 
-                    href="/resources" 
+                    href="/resources/" 
                     className="text-sm font-bold text-brand-teal flex items-center gap-2 group/btn"
                   >
                     Details

@@ -10,6 +10,9 @@ export const metadata = {
     description: "Give every store a feedback loop they've never had before.",
     url: "/solutions/convenience-store-analytics/",
   },
+  alternates: {
+    canonical: "/solutions/convenience-store-analytics/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Convenience Store Analytics | Pythia Store",

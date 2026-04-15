@@ -117,7 +117,7 @@ export default function SolutionLayout({
                       Book a 15-minute demo
                     </Button>
                   </Link>
-                  <Link href="/contact">
+                  <Link href="/contact/">
                     <Button className="w-full py-3 rounded-full bg-transparent border border-white/25 text-white hover:bg-white/5 text-[13px] font-semibold">
                       Talk to the team
                     </Button>

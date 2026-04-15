@@ -13,6 +13,9 @@ export const metadata = {
     "retail operations AI inquiry",
     "retail technology contact"
   ],
+  alternates: {
+    canonical: "/contact/",
+  },
   openGraph: {
     title: "Contact Pythia Scorecard | Request a Demo or Get Support",
     description: "Talk to us about how Pythia can transform your in-store experience with audio-based AI insights.",

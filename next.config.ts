@@ -20,6 +20,15 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+        ],
+      },
+      {
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Origin", value: allowedOrigin },
@@ -31,7 +40,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    unoptimized: true
+    unoptimized: false
   },
   turbopack: {
     rules: {

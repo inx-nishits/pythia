@@ -10,6 +10,9 @@ export const metadata = {
     description: "Transform checkout conversations into clear, prioritized actions with AI.",
     url: "/solutions/retail-ai/",
   },
+  alternates: {
+    canonical: "/solutions/retail-ai/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Retail AI | Pythia Store",

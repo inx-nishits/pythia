@@ -10,6 +10,9 @@ export const metadata = {
     description: "See what your existing reports miss with continuous operational insight.",
     url: "/solutions/in-store-analytics/",
   },
+  alternates: {
+    canonical: "/solutions/in-store-analytics/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "In-Store Analytics | Pythia Store",

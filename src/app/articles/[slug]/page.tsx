@@ -19,8 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!article) return {};
 
   return {
-    title: `${article.title} | Pythia Store Articles`,
+    title: `${article.title} | Pythia`,
     description: article.excerpt,
+    alternates: {
+      canonical: `/articles/${slug}/`,
+    },
     openGraph: {
       title: article.title,
       description: article.excerpt,
@@ -51,10 +54,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     "@type": "Article",
     "headline": article.title,
     "description": article.excerpt,
+    "image": "https://www.pythiascorecard.com/og-image.jpg",
     "datePublished": "2026-03-01",
     "author": {
       "@type": "Organization",
-      "name": "Pythia Scorecard"
+      "name": "Pythia Scorecard",
+      "url": "https://www.pythiascorecard.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Pythia Scorecard",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.pythiascorecard.com/pythiaLogo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.pythiascorecard.com/articles/${slug}/`
     }
   };
 
@@ -70,7 +87,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {/* Breadcrumb */}
           <AnimatedReveal index={0}>
             <nav className="mb-6 text-sm font-medium">
-              <Link href="/resources" className="text-brand-teal hover:underline transition-colors">
+              <Link href="/resources/" className="text-brand-teal hover:underline transition-colors">
                 &larr; Back to Resources
               </Link>
             </nav>
