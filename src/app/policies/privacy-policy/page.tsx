@@ -27,6 +27,9 @@ export const metadata = {
     ],
     type: "website"
   },
+  alternates: {
+    canonical: "/privacy-policy/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Privacy Policy | Pythia Scorecard",

@@ -27,6 +27,9 @@ export const metadata = {
     ],
     type: "website"
   },
+  alternates: {
+    canonical: "/terms-of-use/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Terms & Conditions | Pythia Scorecard",

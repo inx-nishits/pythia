@@ -10,6 +10,9 @@ export const metadata = {
     description: "Got questions about Pythia? Find answers here.",
     url: "/faq/",
   },
+  alternates: {
+    canonical: "/faq/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "FAQ | Pythia Store",

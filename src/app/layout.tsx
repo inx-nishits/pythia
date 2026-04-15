@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   description:
     "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and sales.",
   metadataBase: new URL("https://www.pythiascorecard.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
     description: "Capture what your stores don’t report. Pythia listens at the counter and analyses checkout interactions in near real-time.",
@@ -48,8 +51,8 @@ export const metadata: Metadata = {
   }
 };
 
-import DemoPopup from "./containers/DemoPopup/DemoPopup";
-import ChatBot from "./component/ChatBot";
+
+import ClientSideComponents from "./component/ClientSideComponents";
 import CookieConsent from "./component/CookieConsent";
 import TrackingManager from "./component/TrackingManager";
 
@@ -65,7 +68,7 @@ export default function RootLayout({
         <meta name="geo.country" content="US" />
         
         {/* 1. Initialize Consent Mode (denied by default) */}
-        <Script id="gtm-consent" strategy="beforeInteractive">
+        <Script id="gtm-consent" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
@@ -80,7 +83,7 @@ export default function RootLayout({
         </Script>
 
         {/* 2. Load GTM Container (Standard Snippet) */}
-        <Script id="gtm-script" strategy="beforeInteractive">
+        <Script id="gtm-script" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -103,8 +106,7 @@ export default function RootLayout({
         
         <TrackingManager />
         {children}
-        <DemoPopup />
-        <ChatBot />
+        <ClientSideComponents />
         <CookieConsent />
       </body>
     </html>

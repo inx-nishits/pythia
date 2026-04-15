@@ -34,6 +34,9 @@ export const metadata = {
     "missed sale prevention",
     "retail operations optimization"
   ],
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
     description: "Capture what your stores don’t report. Pythia listens at the counter, analyses checkout interactions and delivers actionable insights in near real time.",

@@ -10,6 +10,9 @@ export const metadata = {
     description: "From friction detected to fix in motion automatically.",
     url: "/solutions/work-order-tickets/",
   },
+  alternates: {
+    canonical: "/solutions/work-order-tickets/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Work Order Tickets | Pythia Store",

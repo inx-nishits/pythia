@@ -10,6 +10,9 @@ export const metadata = {
     description: "Retail operations insights built for leaders who care about every interaction.",
     url: "/about/",
   },
+  alternates: {
+    canonical: "/about/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "About Pythia Scorecard",
