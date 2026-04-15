@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface NavItemProps {
@@ -43,6 +43,10 @@ function Header() {
   const lastScrollY = useRef(0);
   const pathname = usePathname();
   const [activeItem, setActiveItem] = useState<string>("");
+  const [isCompanyHovered, setIsCompanyHovered] = useState(false);
+  const [isCompanyMobileOpen, setIsCompanyMobileOpen] = useState(false);
+  const [isInsightsHovered, setIsInsightsHovered] = useState(false);
+  const [isInsightsMobileOpen, setIsInsightsMobileOpen] = useState(false);
 
   useEffect(() => {
     let scrollEndTimer: ReturnType<typeof setTimeout>;
@@ -96,11 +100,10 @@ function Header() {
   // Set active nav based on current route for top-level pages
   useEffect(() => {
     if (!pathname) return;
-    if (pathname.startsWith("/resources")) setActiveItem("resources");
+    if (pathname.startsWith("/resources")) setActiveItem("insights");
     else if (pathname.startsWith("/articles")) setActiveItem("articles");
-    else if (pathname.startsWith("/about")) setActiveItem("about");
-    else if (pathname.startsWith("/faq")) setActiveItem("faq");
-    else if (pathname.startsWith("/contact")) setActiveItem("contact");
+    else if (pathname.startsWith("/pricing")) setActiveItem("pricing");
+    else if (pathname.startsWith("/about") || pathname.startsWith("/faq") || pathname.startsWith("/contact")) setActiveItem("company");
     else {
       // On home and other root-level routes, default to first section
       setActiveItem("why");
@@ -178,47 +181,112 @@ function Header() {
                 How it works
               </NavItem>
               <NavItem
-                href={`/#${Sections.WhatYouGet}`}
-                isActive={activeItem === "intelligence" && pathname === "/"}
-                onClick={() => setActiveItem("intelligence")}
+                href="/pricing/"
+                isActive={activeItem === "pricing" && pathname.startsWith("/pricing")}
+                onClick={() => setActiveItem("pricing")}
               >
-                Intelligence
+                Pricing
               </NavItem>
-              <NavItem
-                href={`/#${Sections.Industries}`}
-                isActive={activeItem === "industries" && pathname === "/"}
-                onClick={() => setActiveItem("industries")}
+              <li
+                className="relative px-2 xl:px-4 shrink-0 flex items-center h-full cursor-pointer"
+                onMouseEnter={() => setIsInsightsHovered(true)}
+                onMouseLeave={() => setIsInsightsHovered(false)}
               >
-                Industries
-              </NavItem>
-              <NavItem
-                href="/resources/"
-                isActive={activeItem === "resources" && pathname.startsWith("/resources")}
-                onClick={() => setActiveItem("resources")}
+                <div
+                  className={`flex items-center gap-1 text-[13px] xl:text-[14px] font-bold tracking-tight whitespace-nowrap transition-colors ${
+                    activeItem === "insights"
+                      ? "text-brand-navy"
+                      : "text-slate-500 hover:text-brand-teal"
+                  }`}
+                >
+                  <span className={`border-b-2 transition-colors ${activeItem === "insights" ? "border-brand-teal" : "border-transparent hover:border-brand-teal/60"} py-1`}>Insights</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isInsightsHovered ? "rotate-180" : ""}`} />
+                </div>
+
+                <AnimatePresence>
+                  {isInsightsHovered && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 min-w-[180px] mt-2 py-2 bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col z-50 overflow-hidden"
+                    >
+                      <a
+                        href={`/#${Sections.WhatYouGet}`}
+                        className="px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 text-slate-600 hover:text-brand-navy"
+                        onClick={() => { setIsInsightsHovered(false); setActiveItem("insights"); }}
+                      >
+                        Intelligence
+                      </a>
+                      <a
+                        href={`/#${Sections.Industries}`}
+                        className="px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 text-slate-600 hover:text-brand-navy"
+                        onClick={() => { setIsInsightsHovered(false); setActiveItem("insights"); }}
+                      >
+                        Industries
+                      </a>
+                      <Link
+                        href="/resources/"
+                        className={`px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 ${pathname.startsWith("/resources") ? "text-brand-navy bg-slate-50/50" : "text-slate-600 hover:text-brand-navy"}`}
+                        onClick={() => { setIsInsightsHovered(false); setActiveItem("insights"); }}
+                      >
+                        Resources
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
+              <li
+                className="relative px-2 xl:px-4 shrink-0 flex items-center h-full cursor-pointer"
+                onMouseEnter={() => setIsCompanyHovered(true)}
+                onMouseLeave={() => setIsCompanyHovered(false)}
               >
-                Resources
-              </NavItem>
-              <NavItem
-                href="/about/"
-                isActive={activeItem === "about" && pathname.startsWith("/about")}
-                onClick={() => setActiveItem("about")}
-              >
-                About Us
-              </NavItem>
-              <NavItem
-                href="/faq/"
-                isActive={activeItem === "faq" && pathname.startsWith("/faq")}
-                onClick={() => setActiveItem("faq")}
-              >
-                FAQ
-              </NavItem>
-              <NavItem
-                href="/contact/"
-                isActive={activeItem === "contact" && pathname.startsWith("/contact")}
-                onClick={() => setActiveItem("contact")}
-              >
-                Contact Us
-              </NavItem>
+                <div
+                  className={`flex items-center gap-1 text-[13px] xl:text-[14px] font-bold tracking-tight whitespace-nowrap transition-colors ${
+                    activeItem === "company"
+                      ? "text-brand-navy"
+                      : "text-slate-500 hover:text-brand-teal"
+                  }`}
+                >
+                  <span className={`border-b-2 transition-colors ${activeItem === "company" ? "border-brand-teal" : "border-transparent hover:border-brand-teal/60"} py-1`}>Company</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isCompanyHovered ? "rotate-180" : ""}`} />
+                </div>
+
+                <AnimatePresence>
+                  {isCompanyHovered && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 min-w-[180px] mt-2 py-2 bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col z-50 overflow-hidden"
+                    >
+                      <Link
+                        href="/about/"
+                        className={`px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 ${pathname === "/about/" ? "text-brand-navy bg-slate-50/50" : "text-slate-600 hover:text-brand-navy"}`}
+                        onClick={() => setIsCompanyHovered(false)}
+                      >
+                        About Us
+                      </Link>
+                      <Link
+                        href="/faq/"
+                        className={`px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 ${pathname === "/faq/" ? "text-brand-navy bg-slate-50/50" : "text-slate-600 hover:text-brand-navy"}`}
+                        onClick={() => setIsCompanyHovered(false)}
+                      >
+                        FAQ
+                      </Link>
+                      <Link
+                        href="/contact/"
+                        className={`px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 ${pathname === "/contact/" ? "text-brand-navy bg-slate-50/50" : "text-slate-600 hover:text-brand-navy"}`}
+                        onClick={() => setIsCompanyHovered(false)}
+                      >
+                        Contact Us
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
             </ul>
           </nav>
 
@@ -324,100 +392,126 @@ function Header() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href={`/#${Sections.WhatYouGet}`}
-                    className={`block text-[18px] font-semibold transition-colors ${
-                      activeItem === "intelligence" && pathname === "/"
-                        ? "text-brand-navy"
-                        : "text-slate-800"
-                    }`}
-                    onClick={() => {
-                      setActiveItem("intelligence");
-                      setMobileOpen(false);
-                    }}
-                  >
-                    Intelligence
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={`/#${Sections.Industries}`}
-                    className={`block text-[18px] font-semibold transition-colors ${
-                      activeItem === "industries" && pathname === "/"
-                        ? "text-brand-navy"
-                        : "text-slate-800"
-                    }`}
-                    onClick={() => {
-                      setActiveItem("industries");
-                      setMobileOpen(false);
-                    }}
-                  >
-                    Industries
-                  </a>
-                </li>
-                <li>
                   <Link
-                    href="/resources/"
+                    href="/pricing/"
                     className={`block text-[18px] font-semibold transition-colors ${
-                      activeItem === "resources" && pathname.startsWith("/resources")
+                      activeItem === "pricing" && pathname.startsWith("/pricing")
                         ? "text-brand-navy"
                         : "text-slate-800"
                     }`}
                     onClick={() => {
-                      setActiveItem("resources");
+                      setActiveItem("pricing");
                       setMobileOpen(false);
                     }}
                   >
-                    Resources
+                    Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/about/"
-                    className={`block text-[18px] font-semibold transition-colors ${
-                      activeItem === "about" && pathname.startsWith("/about")
-                        ? "text-brand-navy"
-                        : "text-slate-800"
+                  <button
+                    type="button"
+                    onClick={() => setIsInsightsMobileOpen(!isInsightsMobileOpen)}
+                    className={`w-full flex items-center justify-between text-[18px] font-semibold transition-colors ${
+                      activeItem === "insights" ? "text-brand-navy" : "text-slate-800"
                     }`}
-                    onClick={() => {
-                      setActiveItem("about");
-                      setMobileOpen(false);
-                    }}
                   >
-                    About Us
-                  </Link>
+                    <span>Insights</span>
+                    <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isInsightsMobileOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {isInsightsMobileOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <ul className="flex flex-col gap-4 pl-4 mt-4 border-l-2 border-slate-100">
+                          <li>
+                            <a
+                              href={`/#${Sections.WhatYouGet}`}
+                              className="block text-[16px] font-medium transition-colors text-slate-600"
+                              onClick={() => { setActiveItem("insights"); setMobileOpen(false); }}
+                            >
+                              Intelligence
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href={`/#${Sections.Industries}`}
+                              className="block text-[16px] font-medium transition-colors text-slate-600"
+                              onClick={() => { setActiveItem("insights"); setMobileOpen(false); }}
+                            >
+                              Industries
+                            </a>
+                          </li>
+                          <li>
+                            <Link
+                              href="/resources/"
+                              className={`block text-[16px] font-medium transition-colors ${pathname.startsWith("/resources") ? "text-brand-navy" : "text-slate-600"}`}
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              Resources
+                            </Link>
+                          </li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </li>
                 <li>
-                  <Link
-                    href="/faq/"
-                    className={`block text-[18px] font-semibold transition-colors ${
-                      activeItem === "faq" && pathname.startsWith("/faq")
-                        ? "text-brand-navy"
-                        : "text-slate-800"
+                  <button
+                    type="button"
+                    onClick={() => setIsCompanyMobileOpen(!isCompanyMobileOpen)}
+                    className={`w-full flex items-center justify-between text-[18px] font-semibold transition-colors ${
+                      activeItem === "company" ? "text-brand-navy" : "text-slate-800"
                     }`}
-                    onClick={() => {
-                      setActiveItem("faq");
-                      setMobileOpen(false);
-                    }}
                   >
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact/"
-                    className={`block text-[18px] font-semibold transition-colors ${
-                      activeItem === "contact" && pathname.startsWith("/contact")
-                        ? "text-brand-navy"
-                        : "text-slate-800"
-                    }`}
-                    onClick={() => {
-                      setActiveItem("contact");
-                      setMobileOpen(false);
-                    }}
-                  >
-                    Contact Us
-                  </Link>
+                    <span>Company</span>
+                    <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isCompanyMobileOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {isCompanyMobileOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <ul className="flex flex-col gap-4 pl-4 mt-4 border-l-2 border-slate-100">
+                          <li>
+                            <Link
+                              href="/about/"
+                              className={`block text-[16px] font-medium transition-colors ${pathname === "/about/" ? "text-brand-navy" : "text-slate-600"}`}
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              About Us
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              href="/faq/"
+                              className={`block text-[16px] font-medium transition-colors ${pathname === "/faq/" ? "text-brand-navy" : "text-slate-600"}`}
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              FAQ
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              href="/contact/"
+                              className={`block text-[16px] font-medium transition-colors ${pathname === "/contact/" ? "text-brand-navy" : "text-slate-600"}`}
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              Contact Us
+                            </Link>
+                          </li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </li>
                 </ul>
               </nav>
