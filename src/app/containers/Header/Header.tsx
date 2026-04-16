@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { trackEvent } from "../../utils/gtm";
 
 interface NavItemProps {
   href: string;
@@ -183,7 +184,10 @@ function Header() {
               <NavItem
                 href="/pricing/"
                 isActive={activeItem === "pricing" && pathname.startsWith("/pricing")}
-                onClick={() => setActiveItem("pricing")}
+                onClick={() => {
+                  setActiveItem("pricing");
+                  trackEvent("pricing_nav_click", { location: "navbar" });
+                }}
               >
                 Pricing
               </NavItem>
@@ -402,6 +406,7 @@ function Header() {
                     onClick={() => {
                       setActiveItem("pricing");
                       setMobileOpen(false);
+                      trackEvent("pricing_nav_click", { location: "navbar" });
                     }}
                   >
                     Pricing
