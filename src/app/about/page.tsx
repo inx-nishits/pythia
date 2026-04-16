@@ -4,7 +4,7 @@ import Footer from "../containers/Footer";
 
 export const metadata = {
   title: "About Pythia Scorecard",
-  description: "Learn about the mission behind Pythia Scorecard—giving retail leaders a clear, objective view of every customer interaction through AI-driven audio intelligence.",
+  description: "Learn about the mission behind Pythia Scorecard - giving retail leaders a clear, objective view of every customer interaction through AI-driven audio intelligence.",
   openGraph: {
     title: "About Pythia Scorecard",
     description: "Retail operations insights built for leaders who care about every interaction.",
