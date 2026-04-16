@@ -11,7 +11,7 @@ import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
   "Always-on audio capture with privacy-first edge processing",
-  "Plug-and-play setup — no IT team or technician required",
+  "Plug-and-play setup - no IT team or technician required",
   "Automatically syncs every session to your Pythia dashboard",
   "Regular over-the-air firmware updates included at no extra cost",
   "Built for convenience and retail environments",
@@ -137,7 +137,7 @@ export default function PricingPage() {
                 transition={{ duration: 0.45, delay: 0.2 }}
               >
                 <p className="text-slate-500 text-[15px] sm:text-[16px] max-w-xl mx-auto leading-relaxed">
-                  Everything you need to capture, analyse, and act on your store interactions — with no hidden fees.
+                  Everything you need to capture, analyse, and act on your store interactions - with no hidden fees.
                 </p>
               </MotionDiv>
             </header>
@@ -186,7 +186,7 @@ export default function PricingPage() {
                     </span>
                     <h2 className="text-[26px] sm:text-[30px] font-extrabold text-[#0F172A] tracking-tight mt-0.5">
                       Professional Plan
-                      <span className="text-brand-teal"> — ${TOTAL_PRICE}/month</span>
+                      <span className="text-brand-teal"> - ${TOTAL_PRICE}/month</span>
                     </h2>
                   </div>
                   <div className="flex flex-wrap items-center justify-end gap-2">
@@ -255,7 +255,7 @@ export default function PricingPage() {
                     href="/#contact"
                     className="block w-full text-center rounded-full font-bold text-[16px] py-4 bg-brand-teal text-brand-navy hover:bg-brand-teal-hover shadow-md hover:shadow-lg transition-colors duration-200"
                   >
-                    Buy Now — ${TOTAL_PRICE}/month
+                    Buy Now - ${TOTAL_PRICE}/month
                   </Link>
                 </motion.div>
 
