@@ -14,11 +14,11 @@ const deviceDetails = [
   "Plug-and-play setup — no IT team or technician required",
   "Automatically syncs every session to your Pythia dashboard",
   "Regular over-the-air firmware updates included at no extra cost",
-  "Built for convenience and fuel retail environments",
+  "Built for convenience and retail environments",
 ];
 
 const dashboardDetails = [
-  "Real-time store performance dashboard with intuitive visualisations",
+  "Store performance dashboard with intuitive visualisations",
   "AI-generated coaching insights surfaced per shift and per associate",
   "Multi-location roll-up views for area managers and executives",
   "Custom alerts and scheduled weekly digest emails",
@@ -26,9 +26,7 @@ const dashboardDetails = [
   "Unlimited historical data access and CSV exports",
 ];
 
-const DEVICE_PRICE = 129;
-const DASHBOARD_PRICE = 49;
-const TOTAL_PRICE = DEVICE_PRICE + DASHBOARD_PRICE;
+const TOTAL_PRICE = 129;
 
 function DetailAccordion({
   icon: Icon,
@@ -191,9 +189,14 @@ export default function PricingPage() {
                       <span className="text-brand-teal"> — ${TOTAL_PRICE}/month</span>
                     </h2>
                   </div>
-                  <span className="bg-brand-teal text-brand-navy text-[11px] font-extrabold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full shadow-sm">
-                    All-in-one
-                  </span>
+                  <div className="flex flex-wrap items-center justify-end gap-2">
+                    <span className="bg-brand-teal text-brand-navy text-[11px] font-extrabold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full shadow-sm">
+                      Unlimited Seats
+                    </span>
+                    <span className="bg-brand-teal text-brand-navy text-[11px] font-extrabold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full shadow-sm">
+                      All-in-one
+                    </span>
+                  </div>
                 </motion.div>
 
                 {/* What you get breakdown */}
@@ -208,30 +211,16 @@ export default function PricingPage() {
                     What you get
                   </p>
 
-                  {/* Device row */}
-                  <div className="flex items-center justify-between py-3 border-b border-slate-200/70">
+                  {/* Device & Dashboard row */}
+                  <div className="flex items-center justify-between py-3">
                     <span className="flex items-center gap-2.5 text-[14px] font-semibold text-slate-700">
                       <span className="flex items-center justify-center w-7 h-7 rounded-xl bg-brand-teal/10">
                         <Zap className="w-3.5 h-3.5 text-brand-teal" strokeWidth={2.5} />
                       </span>
-                      Pythia Device
+                      Device & Dashboard
                     </span>
                     <span className="text-[15px] font-bold text-[#0F172A]">
-                      ${DEVICE_PRICE}
-                      <span className="text-slate-400 font-medium text-[12px]">/mo</span>
-                    </span>
-                  </div>
-
-                  {/* Dashboard row */}
-                  <div className="flex items-center justify-between py-3">
-                    <span className="flex items-center gap-2.5 text-[14px] font-semibold text-slate-700">
-                      <span className="flex items-center justify-center w-7 h-7 rounded-xl bg-brand-teal/10">
-                        <LayoutDashboard className="w-3.5 h-3.5 text-brand-teal" strokeWidth={2.5} />
-                      </span>
-                      Dashboard Subscription
-                    </span>
-                    <span className="text-[15px] font-bold text-[#0F172A]">
-                      ${DASHBOARD_PRICE}
+                      ${TOTAL_PRICE}
                       <span className="text-slate-400 font-medium text-[12px]">/mo</span>
                     </span>
                   </div>
