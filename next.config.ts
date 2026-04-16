@@ -40,7 +40,17 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    unoptimized: false
+    unoptimized: false,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.pythiascorecard.com",
+      },
+    ],
   },
   turbopack: {
     rules: {

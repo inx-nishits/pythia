@@ -11,7 +11,19 @@ interface Message {
   type: "bot" | "user";
   text: string;
   timestamp: Date;
+  category?: "demo-hook" | "limit-hook";
 }
+
+const generateId = () => {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+};
 
 type View = "home" | "messages";
 
@@ -83,10 +95,31 @@ export default function ChatBot() {
     const savedGlobalCount = localStorage.getItem("pythia_api_call_count");
 
     if (savedMessages) {
-      const parsed = JSON.parse(savedMessages).map((m: Message) => ({
-        ...m,
-        timestamp: new Date(m.timestamp)
-      }));
+      const seenIds = new Set<string>();
+      const parsed = JSON.parse(savedMessages).map((m: Message) => {
+        let uniqueId = m.id;
+        
+        // Fix legacy hardcoded IDs and check for duplicates to prevent React key collisions
+        const isLegacyId = ['limit-hook', 'demo-hook', 'demo-hook-static'].includes(uniqueId);
+        if (isLegacyId || seenIds.has(uniqueId)) {
+          uniqueId = generateId();
+        }
+        seenIds.add(uniqueId);
+
+        // Migrate legacy ID logic to the new robust category system
+        let category = m.category;
+        if (!category) {
+          if (m.id === 'limit-hook') category = 'limit-hook';
+          if (m.id === 'demo-hook' || m.id === 'demo-hook-static') category = 'demo-hook';
+        }
+
+        return {
+          ...m,
+          id: uniqueId,
+          category,
+          timestamp: new Date(m.timestamp)
+        };
+      });
       setMessages(parsed);
     }
     if (savedCount) setUserMessageCount(parseInt(savedCount));
@@ -96,7 +129,16 @@ export default function ChatBot() {
     // Initialize or load Session ID
     let sId = localStorage.getItem("pythia_chat_session_id");
     if (!sId) {
-      sId = crypto.randomUUID();
+      // Fallback for non-secure contexts (like accessing via IP address)
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        sId = crypto.randomUUID();
+      } else {
+        sId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0;
+          const v = c === 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
       localStorage.setItem("pythia_chat_session_id", sId);
     }
     setSessionId(sId);
@@ -140,7 +182,7 @@ export default function ChatBot() {
     if (!text.trim() || isLoading) return;
 
     const newUserMessage: Message = {
-      id: Date.now().toString(),
+      id: generateId(),
       type: "user",
       text,
       timestamp: new Date(),
@@ -201,7 +243,7 @@ export default function ChatBot() {
     if (localResponses[text]) {
       setTimeout(() => {
         const botReply: Message = {
-          id: Date.now().toString(),
+          id: generateId(),
           type: "bot",
           text: localResponses[text],
           timestamp: new Date(),
@@ -212,10 +254,11 @@ export default function ChatBot() {
         // Custom Hook for Bookings
         if (["Book a Demo", "Schedule a Meeting", "Talk to Sales"].includes(text)) {
           setMessages(prev => [...prev, {
-            id: 'demo-hook-static',
+            id: generateId(),
             type: "bot",
             text: "You can book directly here:",
             timestamp: new Date(),
+            category: "demo-hook",
           }]);
         }
       }, 600);
@@ -225,10 +268,11 @@ export default function ChatBot() {
     if (globalApiCount >= 10) {
       setTimeout(() => {
         const limitReply: Message = {
-          id: 'limit-hook',
+          id: generateId(),
           type: "bot",
           text: "You've asked some great questions! To keep our support focused, we limit the automated chat to 10 automated answers. Would you like to schedule a 15-minute live demo to get deeper technical answers?",
           timestamp: new Date(),
+          category: "limit-hook",
         };
         setMessages((prev) => [...prev, limitReply]);
         setIsLoading(false);
@@ -245,7 +289,7 @@ export default function ChatBot() {
       );
 
       const botReply: Message = {
-        id: Date.now().toString(),
+        id: generateId(),
         type: "bot",
         text: 'text' in result ? result.text : "I'm sorry, I'm having trouble connecting right now. Please try again later.",
         timestamp: new Date(),
@@ -267,10 +311,11 @@ export default function ChatBot() {
 
       setTimeout(() => {
         const demoMessage: Message = {
-          id: 'demo-hook',
+          id: generateId(),
           type: "bot",
           text: "It looks like you have some great questions! Would you like to book a quick 15-minute live demo to see these features in action?",
           timestamp: new Date(),
+          category: "demo-hook",
         };
         setMessages(prev => [...prev, demoMessage]);
       }, 1500);
@@ -449,7 +494,7 @@ export default function ChatBot() {
                             <div style={{ whiteSpace: "pre-line" }}>
                               {msg.text}
                             </div>
-                            {(msg.id === 'demo-hook' || msg.id === 'demo-hook-static' || msg.id === 'limit-hook') && (
+                            {msg.category && (msg.category === 'demo-hook' || msg.category === 'limit-hook') && (
                               <button
                                 onClick={() => window.open('https://calendly.com/nick-pythiascorecard/new-meeting', '_blank')}
                                 className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2"

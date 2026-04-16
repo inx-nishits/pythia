@@ -59,7 +59,7 @@ function MeetPythiaStore() {
           >
             <div className="relative w-full">
               <Image
-                src="https://www.pythiascorecard.com/desktop-meet-pythia-store.webp"
+                src="/desktop-meet-pythia-store.webp"
                 alt="Pythia Intelligence Dashboard"
                 width={1100}
                 height={600}

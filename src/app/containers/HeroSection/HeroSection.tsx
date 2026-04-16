@@ -12,7 +12,7 @@ const HERO_SLIDES = [
     subline: "Every sigh, complaint, or missed sale is a clue. Pythia captures and analyzes checkout interactions to give you always-on recommendations on what to fix, before it costs you.",
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
-      src: "https://www.pythiascorecard.com/desktop-meet-pythia-store.webp",
+      src: "/desktop-meet-pythia-store.webp",
       alt: "Pythia dashboard, always-on retail insights at checkout",
     },
   },
