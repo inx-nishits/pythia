@@ -72,6 +72,8 @@ export default function ChatBot() {
   const [sessionId, setSessionId] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const hasFiredOpenEvent = useRef(false);
+  const hasFiredFirstMessageEvent = useRef(false);
 
   // --- CLICK OUTSIDE TO CLOSE ---
   useEffect(() => {
@@ -178,6 +180,17 @@ export default function ChatBot() {
     return () => window.removeEventListener("open-pythia-chat", handleOpenChat);
   }, []);
 
+  // --- TRACKING: FIRE ON OPEN ---
+  useEffect(() => {
+    if (isOpen && !hasFiredOpenEvent.current) {
+      console.log("GTM Fired: ai_sdr_chat_open");
+      trackEvent("ai_sdr_chat_open", {
+        chatbot_id: "pythia_sdr",
+      });
+      hasFiredOpenEvent.current = true;
+    }
+  }, [isOpen]);
+
   const handleSend = async (text: string) => {
     if (!text.trim() || isLoading) return;
 
@@ -208,12 +221,14 @@ export default function ChatBot() {
 
     setIsLoading(true);
 
-    // --- TRACKING: CONVERSATION START ---
-    if (userMessageCount === 0) {
-      trackEvent("ai_sdr_conversation_start", {
+    // --- TRACKING: FIRST MESSAGE ---
+    if (userMessageCount === 0 && !hasFiredFirstMessageEvent.current) {
+      console.log("GTM Fired: ai_sdr_first_message");
+      trackEvent("ai_sdr_first_message", {
         chatbot_id: "pythia_sdr",
-        initial_message: text
+        initial_message: text,
       });
+      hasFiredFirstMessageEvent.current = true;
     }
 
     setUserMessageCount(prev => prev + 1);
@@ -336,6 +351,8 @@ export default function ChatBot() {
     ]);
     setUserMessageCount(0);
     setUsedQuickActions([]);
+    hasFiredOpenEvent.current = false;
+    hasFiredFirstMessageEvent.current = false;
     setView("messages");
   };
 
