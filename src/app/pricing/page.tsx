@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ChevronDown, Check, Zap, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
+import { trackEvent } from "../utils/gtm";
 
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
@@ -88,7 +89,10 @@ function DetailAccordion({
                   className="flex items-start gap-2.5 text-[13px] text-slate-600 leading-relaxed"
                 >
                   <span className="mt-0.5 flex-shrink-0 flex items-center justify-center w-4 h-4 rounded-full bg-brand-teal/15">
-                    <Check className="w-2.5 h-2.5 text-brand-teal" strokeWidth={3} />
+                    <Check
+                      className="w-2.5 h-2.5 text-brand-teal"
+                      strokeWidth={3}
+                    />
                   </span>
                   {point}
                 </motion.li>
@@ -108,7 +112,6 @@ export default function PricingPage() {
       <main className="min-h-screen bg-[#f8fafc]">
         <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[100px] pb-[100px]">
           <div className="max-w-[720px] mx-auto">
-
             {/* Page header */}
             <header className="text-center space-y-4 mb-10">
               <MotionSpan
@@ -124,7 +127,11 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               >
                 <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[52px] font-extrabold tracking-tighter leading-[1.05]">
                   Simple, transparent pricing
@@ -137,7 +144,8 @@ export default function PricingPage() {
                 transition={{ duration: 0.45, delay: 0.2 }}
               >
                 <p className="text-slate-500 text-[15px] sm:text-[16px] max-w-xl mx-auto leading-relaxed">
-                  Everything you need to capture, analyse, and act on your store interactions - with no hidden fees.
+                  Everything you need to capture, analyse, and act on your store
+                  interactions - with no hidden fees.
                 </p>
               </MotionDiv>
             </header>
@@ -147,11 +155,18 @@ export default function PricingPage() {
               initial={{ opacity: 0, scale: 0.96, y: 12 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.5,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="flex items-center justify-center gap-3 bg-brand-teal/10 border border-brand-teal/30 rounded-2xl px-6 py-3.5 mb-10 max-w-xl mx-auto"
             >
               <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-brand-teal/20">
-                <Check className="w-3.5 h-3.5 text-brand-teal" strokeWidth={3} />
+                <Check
+                  className="w-3.5 h-3.5 text-brand-teal"
+                  strokeWidth={3}
+                />
               </span>
               <p className="text-[14px] font-semibold text-[#0F172A]">
                 Device setup and Dashboard setup are both&nbsp;
@@ -164,14 +179,17 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.6,
+                delay: 0.15,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="relative rounded-[28px] border border-brand-teal bg-white shadow-[0_18px_45px_rgba(15,23,42,0.09)] overflow-hidden"
             >
               {/* Top accent bar */}
               <div className="h-1 w-full bg-gradient-to-r from-brand-teal via-cyan-400 to-brand-teal" />
 
               <div className="p-8 sm:p-10">
-
                 {/* Plan name + badge */}
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
@@ -186,7 +204,10 @@ export default function PricingPage() {
                     </span>
                     <h2 className="text-[26px] sm:text-[30px] font-extrabold text-[#0F172A] tracking-tight mt-0.5">
                       Professional Plan
-                      <span className="text-brand-teal"> - ${TOTAL_PRICE}/month</span>
+                      <span className="text-brand-teal">
+                        {" "}
+                        - ${TOTAL_PRICE}/month
+                      </span>
                     </h2>
                   </div>
                   <div className="flex flex-wrap items-center justify-end gap-2">
@@ -215,13 +236,18 @@ export default function PricingPage() {
                   <div className="flex items-center justify-between py-3">
                     <span className="flex items-center gap-2.5 text-[14px] font-semibold text-slate-700">
                       <span className="flex items-center justify-center w-7 h-7 rounded-xl bg-brand-teal/10">
-                        <Zap className="w-3.5 h-3.5 text-brand-teal" strokeWidth={2.5} />
+                        <Zap
+                          className="w-3.5 h-3.5 text-brand-teal"
+                          strokeWidth={2.5}
+                        />
                       </span>
                       Device & Dashboard
                     </span>
                     <span className="text-[15px] font-bold text-[#0F172A]">
                       ${TOTAL_PRICE}
-                      <span className="text-slate-400 font-medium text-[12px]">/mo</span>
+                      <span className="text-slate-400 font-medium text-[12px]">
+                        /mo
+                      </span>
                     </span>
                   </div>
                 </motion.div>
@@ -252,13 +278,18 @@ export default function PricingPage() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Link
-                    href="/#contact"
+                    href="#"
+                    onClick={() =>
+                      trackEvent("pricing_cta_click", {
+                        plan: "professional",
+                        price: String(TOTAL_PRICE),
+                      })
+                    }
                     className="block w-full text-center rounded-full font-bold text-[16px] py-4 bg-brand-teal text-brand-navy hover:bg-brand-teal-hover shadow-md hover:shadow-lg transition-colors duration-200"
                   >
                     Buy Now - ${TOTAL_PRICE}/month
                   </Link>
                 </motion.div>
-
               </div>
             </MotionDiv>
 
@@ -271,14 +302,17 @@ export default function PricingPage() {
               className="text-center mt-8"
             >
               <p className="text-[13px] text-slate-400">
-                Price is per location per month. Volume discounts available for chains with 5+ locations.{" "}
-                <a href="/contact/" className="text-brand-teal font-semibold hover:underline">
+                Price is per location per month. Volume discounts available for
+                chains with 5+ locations.{" "}
+                <a
+                  href="/contact/"
+                  className="text-brand-teal font-semibold hover:underline"
+                >
                   Contact us
                 </a>{" "}
                 to learn more.
               </p>
             </MotionDiv>
-
           </div>
         </section>
       </main>
