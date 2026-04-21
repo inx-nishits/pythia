@@ -6,6 +6,7 @@ import { Sections } from "@/app/sections";
 import Button from "@/app/component/Button";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { PopupModal } from "react-calendly";
 
 const HERO_SLIDES = [
   {
@@ -38,6 +39,14 @@ const SLIDE_DURATION_MS = 5500;
 
 function HeroSection() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setRootElement(document.body);
+    }
+  }, []);
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -174,11 +183,27 @@ function HeroSection() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
             >
-              <a href="https://calendly.com/nick-pythiascorecard/new-meeting" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-                <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
+              <div className="w-full sm:w-auto">
+                <Button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer"
+                >
                   Book a 15-Minute Demo
                 </Button>
-              </a>
+              </div>
+
+              {rootElement && (
+                <PopupModal
+                  url="https://calendly.com/nick-pythiascorecard/new-meeting"
+                  onModalClose={() => setIsModalOpen(false)}
+                  open={isModalOpen}
+                  rootElement={rootElement}
+                  pageSettings={{
+                    hideEventTypeDetails: true,
+                    hideLandingPageDetails: true,
+                  }}
+                />
+              )}
 
               <a href={`#${Sections.Contact}`} className="w-full sm:w-auto">
                 <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-[#0F172A] text-white hover:bg-slate-900 rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
