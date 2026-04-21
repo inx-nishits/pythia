@@ -1,9 +1,5 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Button from "@/app/component/Button";
-import { PopupModal } from "react-calendly";
 
 interface SolutionLayoutProps {
   title: string;
@@ -36,15 +32,6 @@ export default function SolutionLayout({
   impactDetail,
   capabilities,
 }: SolutionLayoutProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setRootElement(document.body);
-    }
-  }, []);
-
   return (
     <main className="min-h-screen bg-[#0b1120] text-white">
       <section className="px-6 pt-[120px] pb-[96px]">
@@ -121,25 +108,15 @@ export default function SolutionLayout({
                   Ready to see how this solution fits into your network of stores?
                 </p>
                 <div className="flex flex-col gap-2">
-                  <Button 
-                    onClick={() => setIsModalOpen(true)}
-                    className="w-full py-3 rounded-full bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-[14px] font-semibold shadow-md hover:shadow-lg transition-transform duration-200 hover:-translate-y-0.5"
+                  <Link
+                    href="https://calendly.com/nick-pythiascorecard/new-meeting"
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    Book a 15-minute demo
-                  </Button>
-
-                  {rootElement && (
-                    <PopupModal
-                      url="https://calendly.com/nick-pythiascorecard/new-meeting"
-                      onModalClose={() => setIsModalOpen(false)}
-                      open={isModalOpen}
-                      rootElement={rootElement}
-                      pageSettings={{
-                        hideEventTypeDetails: true,
-                        hideLandingPageDetails: true,
-                      }}
-                    />
-                  )}
+                    <Button className="w-full py-3 rounded-full bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-[14px] font-semibold shadow-md hover:shadow-lg">
+                      Book a 15-minute demo
+                    </Button>
+                  </Link>
                   <Link href="/contact/">
                     <Button className="w-full py-3 rounded-full bg-transparent border border-white/25 text-white hover:bg-white/5 text-[13px] font-semibold">
                       Talk to the team

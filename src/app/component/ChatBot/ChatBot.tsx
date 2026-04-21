@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Home, MessageSquare, ChevronLeft, SendHorizontal } from "lucide-react";
 import { chatAction } from "@/app/actions/chat";
 import { trackEvent } from "../../utils/gtm";
-import { PopupModal } from "react-calendly";
 
 interface Message {
   id: string;
@@ -75,14 +74,6 @@ export default function ChatBot() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const hasFiredOpenEvent = useRef(false);
   const hasFiredFirstMessageEvent = useRef(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setRootElement(document.body);
-    }
-  }, []);
 
   // --- CLICK OUTSIDE TO CLOSE ---
   useEffect(() => {
@@ -522,8 +513,8 @@ export default function ChatBot() {
                             </div>
                             {msg.category && (msg.category === 'demo-hook' || msg.category === 'limit-hook') && (
                               <button
-                                onClick={() => setIsModalOpen(true)}
-                                className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                onClick={() => window.open('https://calendly.com/nick-pythiascorecard/new-meeting', '_blank')}
+                                className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2"
                               >
                                 Book a Live Demo 🚀
                               </button>
@@ -597,19 +588,6 @@ export default function ChatBot() {
                 <span className="text-[10px] font-bold uppercase tracking-wider">Messages</span>
               </button>
             </div>
-            {/* Calendly Modal */}
-            {rootElement && (
-              <PopupModal
-                url="https://calendly.com/nick-pythiascorecard/new-meeting"
-                onModalClose={() => setIsModalOpen(false)}
-                open={isModalOpen}
-                rootElement={rootElement}
-                pageSettings={{
-                  hideEventTypeDetails: true,
-                  hideLandingPageDetails: true,
-                }}
-              />
-            )}
           </motion.div>
         )}
       </AnimatePresence>
