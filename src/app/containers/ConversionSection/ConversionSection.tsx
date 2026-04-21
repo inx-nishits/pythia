@@ -1,20 +1,7 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import { MotionSpan, MotionH2 } from "@/app/component/MotionWrapper";
 import Button from "@/app/component/Button";
-import { PopupModal } from "react-calendly";
 
 function ConversionSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setRootElement(document.body);
-    }
-  }, []);
-
   return (
     <section className="py-16 sm:py-20 lg:py-[96px] xl:py-[140px] px-4 sm:px-6 bg-[#0F172A] text-white overflow-hidden min-w-0 w-full">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_minmax(0,1fr)] gap-8 lg:gap-16 items-center min-w-0">
@@ -41,26 +28,16 @@ function ConversionSection() {
 
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex-1">
-              <Button 
-                onClick={() => setIsModalOpen(true)}
-                className="w-full py-3.5 rounded-full bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-[14px] font-semibold shadow-lg hover:shadow-xl transition-transform duration-200 hover:-translate-y-0.5"
-              >
+            <a
+              href="https://calendly.com/nick-pythiascorecard/new-meeting"
+              target="_blank"
+              rel="noreferrer"
+              className="flex-1"
+            >
+              <Button className="w-full py-3.5 rounded-full bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-[14px] font-semibold shadow-lg hover:shadow-xl transition-transform duration-200 hover:-translate-y-0.5">
                 Book a 15-Minute Demo
               </Button>
-            </div>
-            {rootElement && (
-              <PopupModal
-                url="https://calendly.com/nick-pythiascorecard/new-meeting"
-                onModalClose={() => setIsModalOpen(false)}
-                open={isModalOpen}
-                rootElement={rootElement}
-                pageSettings={{
-                  hideEventTypeDetails: true,
-                  hideLandingPageDetails: true,
-                }}
-              />
-            )}
+            </a>
           </div>
 
           <p className="text-[12px] text-slate-300 leading-relaxed">
