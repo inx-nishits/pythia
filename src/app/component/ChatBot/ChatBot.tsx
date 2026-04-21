@@ -221,15 +221,9 @@ export default function ChatBot() {
 
     setIsLoading(true);
 
-    // --- TRACKING: FIRST MESSAGE ---
-    if (userMessageCount === 0 && !hasFiredFirstMessageEvent.current) {
-      console.log("GTM Fired: ai_sdr_first_message");
-      trackEvent("ai_sdr_first_message", {
-        chatbot_id: "pythia_sdr",
-        initial_message: text,
-      });
-      hasFiredFirstMessageEvent.current = true;
-    }
+    // --- TRACKING: FIRST INTERACTION ---
+    // Moved to interaction handlers (click/submit) for better reliability
+
 
     setUserMessageCount(prev => prev + 1);
 
@@ -463,6 +457,17 @@ export default function ChatBot() {
                               <button
                                 key={action}
                                 onClick={() => {
+                                  if (!hasFiredFirstMessageEvent.current) {
+                                    (window as any).dataLayer = (window as any).dataLayer || [];
+                                    (window as any).dataLayer.push({
+                                      event: "ai_sdr_first_message",
+                                      interaction_type: "quick_action",
+                                      button_name: action,
+                                      trigger: "first_interaction"
+                                    });
+                                    hasFiredFirstMessageEvent.current = true;
+                                  }
+
                                   setView("messages");
                                   handleSend(action);
                                 }}
@@ -546,6 +551,15 @@ export default function ChatBot() {
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
+                          if (!hasFiredFirstMessageEvent.current) {
+                            (window as any).dataLayer = (window as any).dataLayer || [];
+                            (window as any).dataLayer.push({
+                              event: "ai_sdr_first_message",
+                              interaction_type: "input",
+                              trigger: "first_interaction"
+                            });
+                            hasFiredFirstMessageEvent.current = true;
+                          }
                           handleSend(inputValue);
                         }}
                         className="relative"
