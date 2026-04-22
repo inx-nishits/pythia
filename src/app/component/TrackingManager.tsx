@@ -20,10 +20,18 @@ export default function TrackingManager() {
     if (!pathname) return;
 
     // 1. Track Pricing Page View
-    if (pathname === "/pricing") {
+    if (pathname === "/pricing" || pathname === "/pricing/") {
       trackEvent("pricing_page_view", {
         path: pathname,
         page_name: "Pricing",
+      });
+    }
+
+    // Track Thank You Page View (Custom Event)
+    if (pathname === "/thank-you" || pathname === "/thank-you/") {
+      trackEvent("thank_you_page_view", {
+        path: pathname,
+        page_name: "Thank You",
       });
     }
 
