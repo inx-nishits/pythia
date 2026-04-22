@@ -6,6 +6,7 @@ import { Sections } from "@/app/sections";
 import Button from "@/app/component/Button";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { PopupModal } from "react-calendly";
 
 const HERO_SLIDES = [
   {
@@ -38,6 +39,7 @@ const SLIDE_DURATION_MS = 5500;
 
 function HeroSection() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -73,128 +75,130 @@ function HeroSection() {
   };
 
   return (
-    <section
-      id={Sections.HeroSection}
-      className="relative pt-[72px] sm:pt-[96px] lg:pt-[88px] pb-[56px] lg:pb-[72px] px-3 sm:px-4 lg:px-6 overflow-hidden min-w-0 w-full"
-    >
-      <div className="max-w-[1400px] mx-auto w-full min-w-0">
+    <>
+      <section
+        id={Sections.HeroSection}
+        className="relative pt-[72px] sm:pt-[96px] lg:pt-[88px] pb-[56px] lg:pb-[72px] px-3 sm:px-4 lg:px-6 overflow-hidden min-w-0 w-full"
+      >
+        <div className="max-w-[1400px] mx-auto w-full min-w-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center lg:min-h-0 min-w-0">
+            <div className="flex flex-col order-2 lg:order-1 text-center lg:text-left min-w-0">
+              <motion.h1
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="text-[28px] min-[400px]:text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.05] font-extrabold text-[#0F172A] tracking-tight text-balance mb-4 lg:mb-5 break-words"
+              >
+                Get the insights{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-coral italic">your stores don’t report.</span>
+              </motion.h1>
 
+              <div className="lg:hidden order-first mb-6 -mx-2">
+                <HeroImageSlider activeSlide={activeSlide} />
+              </div>
 
-        {/* Desktop: side-by-side | Mobile: stacked with image high */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center lg:min-h-0 min-w-0">
-          {/* Left: copy + CTAs (on desktop) | On mobile: headline then image then copy */}
-          <div className="flex flex-col order-2 lg:order-1 text-center lg:text-left min-w-0">
-            <motion.h1
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-[28px] min-[400px]:text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.05] font-extrabold text-[#0F172A] tracking-tight text-balance mb-4 lg:mb-5 break-words"
-            >
-              Get the insights{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-coral italic">your stores don’t report.</span>
-            </motion.h1>
-
-            {/* On mobile: show image slider here (above subline) so it's above fold */}
-            <div className="lg:hidden order-first mb-6 -mx-2">
-              <HeroImageSlider activeSlide={activeSlide} />
-            </div>
-
-            {/* Slider: subline + pillars (fixed height so nav below never overlaps) */}
-            <div className="flex flex-col items-center lg:items-start w-full">
-              <div className="relative w-full min-h-[140px] sm:min-h-[128px] overflow-hidden">
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={activeSlide}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="absolute inset-0 flex flex-col items-center lg:items-start justify-center"
-                  >
-                    <p className="text-[15px] sm:text-[17px] lg:text-[18px] leading-relaxed text-slate-600 max-w-[540px] lg:max-w-none tracking-tight font-medium mb-4">
-                      {HERO_SLIDES[activeSlide].subline}
-                    </p>
-                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-                      {HERO_SLIDES[activeSlide].pillars.map((label, i) => (
-                        <span
+              <div className="flex flex-col items-center lg:items-start w-full">
+                <div className="relative w-full min-h-[140px] sm:min-h-[128px] overflow-hidden">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={activeSlide}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      className="absolute inset-0 flex flex-col items-center lg:items-start justify-center"
+                    >
+                      <p className="text-[15px] sm:text-[17px] lg:text-[18px] leading-relaxed text-slate-600 max-w-[540px] lg:max-w-none tracking-tight font-medium mb-4">
+                        {HERO_SLIDES[activeSlide].subline}
+                      </p>
+                      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+                        {HERO_SLIDES[activeSlide].pillars.map((label, i) => (
+                          <span
+                            key={i}
+                            className="inline-flex items-center px-3 py-1.5 rounded-full text-[12px] sm:text-[13px] font-semibold bg-slate-100 text-slate-700 border border-slate-200/80"
+                          >
+                            {label}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 pt-4 border-t border-slate-200/60 w-full justify-center lg:justify-start min-w-0" aria-label="Hero slide navigation">
+                  <div className="flex items-center gap-2 flex-wrap justify-center">
+                    <button
+                      type="button"
+                      aria-label="Previous slide"
+                      onClick={() => setActiveSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
+                      className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white text-slate-600 hover:border-brand-teal hover:text-brand-teal hover:bg-brand-teal/5 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <div className="flex items-center gap-2">
+                      {HERO_SLIDES.map((_, i) => (
+                        <button
                           key={i}
-                          className="inline-flex items-center px-3 py-1.5 rounded-full text-[12px] sm:text-[13px] font-semibold bg-slate-100 text-slate-700 border border-slate-200/80"
-                        >
-                          {label}
-                        </span>
+                          type="button"
+                          aria-label={`Go to slide ${i + 1}`}
+                          onClick={() => setActiveSlide(i)}
+                          className={`rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 ${
+                            i === activeSlide
+                              ? "w-8 h-3 bg-brand-teal"
+                              : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
+                            }`}
+                        />
                       ))}
                     </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-              {/* Navigation: dots + arrows + counter (own row, never overlapped) */}
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 pt-4 border-t border-slate-200/60 w-full justify-center lg:justify-start min-w-0" aria-label="Hero slide navigation">
-                <div className="flex items-center gap-2 flex-wrap justify-center">
-                  <button
-                    type="button"
-                    aria-label="Previous slide"
-                    onClick={() => setActiveSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
-                    className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white text-slate-600 hover:border-brand-teal hover:text-brand-teal hover:bg-brand-teal/5 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <div className="flex items-center gap-2">
-                    {HERO_SLIDES.map((_, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        aria-label={`Go to slide ${i + 1}`}
-                        onClick={() => setActiveSlide(i)}
-                        className={`rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 ${
-                          i === activeSlide
-                            ? "w-8 h-3 bg-brand-teal"
-                            : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
-                          }`}
-                      />
-                    ))}
+                    <button
+                      type="button"
+                      aria-label="Next slide"
+                      onClick={() => setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length)}
+                      className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white text-slate-600 hover:border-brand-teal hover:text-brand-teal hover:bg-brand-teal/5 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    aria-label="Next slide"
-                    onClick={() => setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length)}
-                    className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white text-slate-600 hover:border-brand-teal hover:text-brand-teal hover:bg-brand-teal/5 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
+                  <span className="text-sm font-bold text-slate-600 tabular-nums min-w-[3ch]">
+                    {activeSlide + 1} / {HERO_SLIDES.length}
+                  </span>
                 </div>
-                <span className="text-sm font-bold text-slate-600 tabular-nums min-w-[3ch]">
-                  {activeSlide + 1} / {HERO_SLIDES.length}
-                </span>
               </div>
-            </div>
 
-            {/* CTAs */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
-            >
-              <a href="https://calendly.com/nick-pythiascorecard/new-meeting" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-                <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
+              >
+                <Button 
+                  onClick={() => setIsCalendlyOpen(true)}
+                  className="w-full sm:w-auto h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer"
+                >
                   Book a 15-Minute Demo
                 </Button>
-              </a>
 
-              <a href={`#${Sections.Contact}`} className="w-full sm:w-auto">
-                <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-[#0F172A] text-white hover:bg-slate-900 rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
-                  See it in action
-                </Button>
-              </a>
-            </motion.div>
-          </div>
 
-          {/* Right: main image slider (desktop only - above the fold beside copy) */}
-          <div className="hidden lg:block order-2 relative min-w-0">
-            <HeroImageSlider activeSlide={activeSlide} />
+                <a href={`#${Sections.Contact}`} className="w-full sm:w-auto">
+                  <Button className="w-full h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-[#0F172A] text-white hover:bg-slate-900 rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer">
+                    See it in action
+                  </Button>
+                </a>
+              </motion.div>
+            </div>
+
+            <div className="hidden lg:block order-2 relative min-w-0">
+              <HeroImageSlider activeSlide={activeSlide} />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <PopupModal
+        url="https://calendly.com/nick-pythiascorecard/new-meeting"
+        onModalClose={() => setIsCalendlyOpen(false)}
+        open={isCalendlyOpen}
+        rootElement={typeof window !== 'undefined' ? document.body : (undefined as unknown as HTMLElement)}
+      />
+    </>
   );
 }
 
@@ -227,7 +231,6 @@ function HeroImageSlider({ activeSlide }: { activeSlide: number }) {
             />
           </motion.div>
         </AnimatePresence>
-        {/* Progress bar at bottom of image */}
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-900/30 overflow-hidden">
           <motion.div
             className="h-full bg-brand-teal"
