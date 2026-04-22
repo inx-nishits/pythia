@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Utility to hide scrollbars while allowing scroll */
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
@@ -7,48 +9,24 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-@import "tailwindcss";
 
 :root {
+  /* Brand visual identity base - mapped in @theme below */
   --background: #fafafa; /* Architectural light gray/white */
   --foreground: #1c2331; /* Deep navy text */
   
-  /* System colors - automatically detected by Tailwind v4 */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
   --brand-navy: #04245b; /* Logo blue, used for titles and accents */
-  --color-brand-navy: var(--brand-navy);
-
   --brand-navy-light: #0d3d72; /* Lighter variant for hovers */
-  --color-brand-navy-light: var(--brand-navy-light);
   
   --brand-teal: #0ed7c1; /* Electric Teal for CTAs */
-  --color-brand-teal: var(--brand-teal);
-
   --brand-teal-hover: #0bbaaa;
-  --color-brand-teal-hover: var(--brand-teal-hover);
 
   --brand-coral: #ff94a4; /* Logo icon accent, coral/salmon */
-  --color-brand-coral: var(--brand-coral);
   
   --brand-gray-light: #f1f5f9;
-  --color-brand-gray-light: var(--brand-gray-light);
-
   --brand-gray-border: #e2e8f0;
-  --color-brand-gray-border: var(--brand-gray-border);
 
-  /* Fonts */
-  --font-sans: var(--font-roboto-sans), sans-serif;
-  --font-heading: var(--font-instrument-sans), sans-serif;
-
-  /* Breakpoints */
-  --breakpoint-mobile: 320px;
-  --breakpoint-desktop: 768px;
-  --breakpoint-wide: 920px;
-  --max-width-content: 1400px;
-
-  /* Design system: cards & sections */
+  /* Layout tokens */
   --radius-card: 24px;
   --radius-card-lg: 28px;
   --radius-pill: 9999px;
@@ -57,8 +35,30 @@
   --section-padding-y: 120px;
   --section-padding-y-lg: 160px;
   --section-padding-x: 24px;
-  /* Industry-standard wide container (B2B SaaS / marketing); 1400px is common */
   --content-max-width: 1400px;
+}
+
+@theme {
+  /* Color mappings for Tailwind v4 engine */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-light: var(--brand-navy-light);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-hover: var(--brand-teal-hover);
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-gray-light: var(--brand-gray-light);
+  --color-brand-gray-border: var(--brand-gray-border);
+
+  /* Typography tokens */
+  --font-sans: var(--font-roboto-sans), sans-serif;
+  --font-heading: var(--font-instrument-sans), sans-serif;
+
+  /* Grid & Breakpoints config */
+  --breakpoint-mobile: 320px;
+  --breakpoint-desktop: 768px;
+  --breakpoint-wide: 920px;
+  --max-width-content: var(--content-max-width);
 }
 
 html {

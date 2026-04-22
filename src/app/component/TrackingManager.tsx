@@ -55,6 +55,11 @@ export default function TrackingManager() {
       // Show success toast
       setShowToast(true);
 
+      // Auto-hide the toast after 5 seconds
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000);
+
       // Redirect after a short delay to allow the user to see the success state
       setTimeout(() => {
         router.push("/thank-you/");
