@@ -6,8 +6,27 @@ import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import Button from "../component/Button";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function ThankYouContent() {
+  const router = useRouter();
+  const [countdown, setCountdown] = useState(5);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (countdown === 0) {
+      router.push("/");
+    }
+  }, [countdown, router]);
+
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden min-h-screen bg-brand-navy">
       <Header />
@@ -43,12 +62,15 @@ export default function ThankYouContent() {
               </p>
             </div>
             
-            <div className="pt-6 flex justify-center">
+            <div className="pt-6 flex flex-col items-center space-y-4">
               <Link href="/">
                 <Button className="px-10 py-4 bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-full font-bold text-lg shadow-[0_0_20px_rgba(20,184,166,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] cursor-pointer">
                   Return to Home
                 </Button>
               </Link>
+              <p className="text-slate-400 text-sm animate-pulse">
+                Redirecting to home in {countdown}s...
+              </p>
             </div>
             
             <p className="text-slate-500 text-sm">
