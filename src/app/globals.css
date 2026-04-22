@@ -27,6 +27,7 @@
   --brand-gray-border: #e2e8f0;
 
   /* Layout tokens */
+  
   --radius-card: 24px;
   --radius-card-lg: 28px;
   --radius-pill: 9999px;
@@ -59,6 +60,7 @@
   --breakpoint-desktop: 768px;
   --breakpoint-wide: 920px;
   --max-width-content: var(--content-max-width);
+  
 }
 
 html {
@@ -168,16 +170,4 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
-}
-
-/* Fix Calendly modal height on mobile */
-.calendly-popup-content {
-  height: 85vh !important;
-  max-height: 750px !important;
-}
-
-@media (max-width: 600px) {
-  .calendly-popup-content {
-    height: 95vh !important;
-  }
 }

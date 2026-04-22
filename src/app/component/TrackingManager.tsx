@@ -1,11 +1,8 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { trackEvent } from "../utils/gtm";
-import { useCalendlyEventListener } from "react-calendly";
-import { CheckCircle2, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * TrackingManager handles route-based events and other global tracking logic.
@@ -13,8 +10,6 @@ import { motion, AnimatePresence } from "framer-motion";
  */
 export default function TrackingManager() {
   const pathname = usePathname();
-  const router = useRouter();
-  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (!pathname) return;
