@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Home, MessageSquare, ChevronLeft, SendHorizontal } from "lucide-react";
 import { chatAction } from "@/app/actions/chat";
 import { trackEvent } from "../../utils/gtm";
+import { PopupModal } from "react-calendly";
 
 interface Message {
   id: string;
@@ -56,6 +57,7 @@ export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [view, setView] = useState<View>("home");
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -518,8 +520,8 @@ export default function ChatBot() {
                             </div>
                             {msg.category && (msg.category === 'demo-hook' || msg.category === 'limit-hook') && (
                               <button
-                                onClick={() => window.open('https://calendly.com/nick-pythiascorecard/new-meeting', '_blank')}
-                                className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2"
+                                onClick={() => setIsCalendlyOpen(true)}
+                                className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2 cursor-pointer"
                               >
                                 Book a Live Demo 🚀
                               </button>
@@ -670,6 +672,13 @@ export default function ChatBot() {
           </AnimatePresence>
         </motion.button>
       </div>
+
+      <PopupModal
+        url="https://calendly.com/nick-pythiascorecard/new-meeting"
+        onModalClose={() => setIsCalendlyOpen(false)}
+        open={isCalendlyOpen}
+        rootElement={typeof window !== 'undefined' ? document.body : (undefined as unknown as HTMLElement)}
+      />
     </div>
   );
 }
