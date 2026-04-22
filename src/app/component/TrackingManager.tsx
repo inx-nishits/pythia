@@ -52,6 +52,12 @@ export default function TrackingManager() {
         event_type: "calendly_viewed",
       });
     },
+    onDateAndTimeSelected: () => {
+      // Track when a specific slot is selected
+      trackEvent("demo_slot_selected", {
+        event_type: "calendly_slot_selected",
+      });
+    },
     onEventScheduled: (e) => {
       // Track successful booking
       trackEvent("demo_booking_success", {
