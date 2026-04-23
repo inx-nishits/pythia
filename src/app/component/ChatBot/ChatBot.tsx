@@ -460,9 +460,7 @@ export default function ChatBot() {
                                 key={action}
                                 onClick={() => {
                                   if (!hasFiredFirstMessageEvent.current) {
-                                    (window as any).dataLayer = (window as any).dataLayer || [];
-                                    (window as any).dataLayer.push({
-                                      event: "ai_sdr_first_message",
+                                    trackEvent("ai_sdr_first_message", {
                                       interaction_type: "quick_action",
                                       button_name: action,
                                       trigger: "first_interaction"
@@ -554,9 +552,7 @@ export default function ChatBot() {
                         onSubmit={(e) => {
                           e.preventDefault();
                           if (!hasFiredFirstMessageEvent.current) {
-                            (window as any).dataLayer = (window as any).dataLayer || [];
-                            (window as any).dataLayer.push({
-                              event: "ai_sdr_first_message",
+                            trackEvent("ai_sdr_first_message", {
                               interaction_type: "input",
                               trigger: "first_interaction"
                             });

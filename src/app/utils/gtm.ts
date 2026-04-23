@@ -1,3 +1,11 @@
+type DataLayerEvent = Record<string, unknown>;
+
+declare global {
+  interface Window {
+    dataLayer: DataLayerEvent[];
+  }
+}
+
 export const trackEvent = (event: string, data?: Record<string, unknown>) => {
   if (typeof window !== "undefined") {
     // Ensuring dataLayer safety
