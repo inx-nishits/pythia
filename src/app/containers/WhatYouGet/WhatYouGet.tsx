@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import { MotionDiv, MotionSpan, MotionH2 } from "@/app/component/MotionWrapper";
-import { Trophy, Target, FileJson, History } from "lucide-react";
+import { Trophy, Target, FileJson, History, Calendar } from "lucide-react";
 import { Sections } from "@/app/sections";
 import Image from "next/image";
+import Button from "@/app/component/Button";
+import { PopupModal } from "react-calendly";
 
 const features = [
   {
@@ -40,8 +45,18 @@ const features = [
     icon: <Target className="w-6 h-6 text-brand-teal" />,
     className: "md:col-span-1 md:row-span-1",
     visual: (
-      <div className="mt-6 h-24" />
+      <div className="mt-6 h-24 flex items-end">
+        <div className="w-full h-1 bg-slate-50 rounded-full overflow-hidden">
+          <MotionDiv 
+            initial={{ width: 0 }}
+            whileInView={{ width: "100%" }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="h-full bg-brand-teal/20"
+          />
+        </div>
+      </div>
     ),
+    hasCalendly: true,
   },
   {
     title: "AI-powered recommendations to improve your operations",
@@ -88,6 +103,8 @@ const features = [
 ];
 
 function WhatYouGet() {
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+
   return (
     <section
       id={Sections.WhatYouGet}
@@ -130,11 +147,27 @@ function WhatYouGet() {
                   {feature.description}
                 </p>
               ) : null}
+              {feature.hasCalendly && (
+                <Button 
+                  onClick={() => setIsCalendlyOpen(true)}
+                  className="mt-2 bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-xl px-5 py-2.5 text-sm font-bold flex items-center gap-2 group/btn transition-all duration-300 w-fit"
+                >
+                  <Calendar className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
+                  Book a 15-min demo
+                </Button>
+              )}
             </div>
             {feature.visual}
           </MotionDiv>
         ))}
       </div>
+
+      <PopupModal
+        url="https://calendly.com/nick-pythiascorecard/new-meeting"
+        onModalClose={() => setIsCalendlyOpen(false)}
+        open={isCalendlyOpen}
+        rootElement={typeof window !== 'undefined' ? document.body : (undefined as unknown as HTMLElement)}
+      />
     </section>
   );
 }
