@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { trackEvent } from "../utils/gtm";
 import { useCalendlyEventListener } from "react-calendly";
 import { CheckCircle2, X } from "lucide-react";
@@ -44,9 +44,16 @@ export default function TrackingManager() {
     }
   }, [pathname]);
 
+  const lastPopupFired = useRef<number>(0);
+
   // 3. Calendly Event Listeners
   useCalendlyEventListener({
     onEventTypeViewed: () => {
+      // Prevent Calendly from naturally double-firing this event on load
+      const now = Date.now();
+      if (now - lastPopupFired.current < 2000) return;
+      lastPopupFired.current = now;
+
       const source = typeof window !== 'undefined' ? sessionStorage.getItem("demo_source") : null;
       // Track when the popup is opened
       trackEvent("calendly_popup_opened", {
