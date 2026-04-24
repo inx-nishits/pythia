@@ -7,6 +7,7 @@ import { Sections } from "@/app/sections";
 import Image from "next/image";
 import Button from "@/app/component/Button";
 import { PopupModal } from "react-calendly";
+import { trackEvent } from "@/app/utils/gtm";
 
 const features = [
   {
@@ -149,7 +150,12 @@ function WhatYouGet() {
               ) : null}
               {feature.hasCalendly && (
                 <Button 
-                  onClick={() => setIsCalendlyOpen(true)}
+                  onClick={() => {
+                    trackEvent("intelligence_demo_click", {
+                      section: "product_intelligence"
+                    });
+                    setIsCalendlyOpen(true);
+                  }}
                   className="mt-2 bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-xl px-5 py-2.5 text-sm font-bold flex items-center gap-2 group/btn transition-all duration-300 w-fit"
                 >
                   <Calendar className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
