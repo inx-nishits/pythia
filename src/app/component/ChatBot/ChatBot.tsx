@@ -2,7 +2,14 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Home, MessageSquare, ChevronLeft, SendHorizontal } from "lucide-react";
+import {
+  X,
+  Send,
+  Home,
+  MessageSquare,
+  ChevronLeft,
+  SendHorizontal,
+} from "lucide-react";
 import { chatAction } from "@/app/actions/chat";
 import { trackEvent } from "../../utils/gtm";
 import { PopupModal } from "react-calendly";
@@ -16,12 +23,12 @@ interface Message {
 }
 
 const generateId = () => {
-  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
     return crypto.randomUUID();
   }
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    const r = Math.random() * 16 | 0;
-    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 };
@@ -80,7 +87,11 @@ export default function ChatBot() {
   // --- CLICK OUTSIDE TO CLOSE ---
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen && chatContainerRef.current && !chatContainerRef.current.contains(event.target as Node)) {
+      if (
+        isOpen &&
+        chatContainerRef.current &&
+        !chatContainerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -102,9 +113,13 @@ export default function ChatBot() {
       const seenIds = new Set<string>();
       const parsed = JSON.parse(savedMessages).map((m: Message) => {
         let uniqueId = m.id;
-        
+
         // Fix legacy hardcoded IDs and check for duplicates to prevent React key collisions
-        const isLegacyId = ['limit-hook', 'demo-hook', 'demo-hook-static'].includes(uniqueId);
+        const isLegacyId = [
+          "limit-hook",
+          "demo-hook",
+          "demo-hook-static",
+        ].includes(uniqueId);
         if (isLegacyId || seenIds.has(uniqueId)) {
           uniqueId = generateId();
         }
@@ -113,15 +128,16 @@ export default function ChatBot() {
         // Migrate legacy ID logic to the new robust category system
         let category = m.category;
         if (!category) {
-          if (m.id === 'limit-hook') category = 'limit-hook';
-          if (m.id === 'demo-hook' || m.id === 'demo-hook-static') category = 'demo-hook';
+          if (m.id === "limit-hook") category = "limit-hook";
+          if (m.id === "demo-hook" || m.id === "demo-hook-static")
+            category = "demo-hook";
         }
 
         return {
           ...m,
           id: uniqueId,
           category,
-          timestamp: new Date(m.timestamp)
+          timestamp: new Date(m.timestamp),
         };
       });
       setMessages(parsed);
@@ -134,14 +150,17 @@ export default function ChatBot() {
     let sId = localStorage.getItem("pythia_chat_session_id");
     if (!sId) {
       // Fallback for non-secure contexts (like accessing via IP address)
-      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      if (typeof crypto !== "undefined" && crypto.randomUUID) {
         sId = crypto.randomUUID();
       } else {
-        sId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          const r = Math.random() * 16 | 0;
-          const v = c === 'x' ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
-        });
+        sId = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+          /[xy]/g,
+          function (c) {
+            const r = (Math.random() * 16) | 0;
+            const v = c === "x" ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+          },
+        );
       }
       localStorage.setItem("pythia_chat_session_id", sId);
     }
@@ -153,7 +172,10 @@ export default function ChatBot() {
     if (messages.length > 1 || userMessageCount > 0) {
       localStorage.setItem("pythia_chat_messages", JSON.stringify(messages));
       localStorage.setItem("pythia_chat_count", userMessageCount.toString());
-      localStorage.setItem("pythia_chat_actions", JSON.stringify(usedQuickActions));
+      localStorage.setItem(
+        "pythia_chat_actions",
+        JSON.stringify(usedQuickActions),
+      );
     }
   }, [messages, userMessageCount, usedQuickActions]);
 
@@ -208,12 +230,12 @@ export default function ChatBot() {
 
     // --- LOG TO ANALYTICS API ---
     try {
-      await fetch('/api/chatbot-log', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("/api/chatbot-log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           session_id: sessionId,
-          role: 'user',
+          role: "user",
           content: text,
         }),
       });
@@ -226,29 +248,41 @@ export default function ChatBot() {
     // --- TRACKING: FIRST INTERACTION ---
     // Moved to interaction handlers (click/submit) for better reliability
 
-
-    setUserMessageCount(prev => prev + 1);
+    setUserMessageCount((prev) => prev + 1);
 
     // Track used quick actions
     if (quickActions.includes(text)) {
-      setUsedQuickActions(prev => [...prev, text]);
+      setUsedQuickActions((prev) => [...prev, text]);
     }
 
     // --- ZERO-TOKEN LOCAL HANDLER (Saves API Costs Completely) ---
     const localResponses: Record<string, string> = {
-      "Book a Demo": "I can help you with that! You can see Pythia in action by scheduling a 15-minute live demo. Please use the link below to find a time that works for you.",
-      "Schedule a Meeting": "Great! You can pick a time for a meeting directly on our calendar using the link below.",
-      "Pricing Info": "Pythia starts as low as $129/month per location. For detailed enterprise quotes covering 100+ stores, we recommend a quick discovery call.",
-      "Talk to Sales": "I'd love to connect you with our sales team! The best way is to pick a time on our calendar so we're ready for you.",
-      "How Pythia Works": "Pythia uses discreet audio intelligence devices at your checkout counter to analyze customer interactions. It then provides real-time insights to help managers catch issues where they start - at the register.",
-      "Features": "Our core features include:\n- Voice to Ticket automation\n- 100% Interaction Scoring\n- Same-Day Manager Dashboards\n- Direct POS Integration (PDI, Verifone, Gilbarco)",
-      "Privacy & Security": "Privacy is our foundation:\n- 100% Local processing (Edge AI)\n- No voice stored or sent to cloud\n- Ensures complete control over in-store data",
-      "POS Integrations": "Pythia integrates seamlessly with leading Point-of-Sale systems including Verifone, Gilbarco, and PDI. This allows us to link transaction data directly with interaction insights.",
-      "Audio Analytics Details": "Our Edge AI devices analyze checkout conversations in real-time. It detects tone, script compliance (like upselling), and friction points without recording or storing actual voices, ensuring total privacy.",
-      "Hardware Requirements": "We provide proprietary Edge AI sensors that stick directly to the checkout counter. No servers or complex networking required, just a simple power connection.",
-      "Voice-to-Ticket Automation": "If a customer mentions an operational issue (e.g., 'Pump 4 is broken'), Pythia instantly analyzes the voice intent and automatically creates a service ticket for your team. Zero manual entry needed.",
-      "Performance Tracking": "Every shift generates a 'Daily Scorecard' for managers. It highlights top performers, missed upsell opportunities, and specific coaching moments to help you train your best talent.",
-      "Deployment Timeline": "Our plug-and-play hardware allows for extremely fast deployment. Most stores are up and running within 48 hours of receiving the devices, with zero disruption to your daily operations."
+      "Book a Demo":
+        "I can help you with that! You can see Pythia in action by scheduling a 15-minute live demo. Please use the link below to find a time that works for you.",
+      "Schedule a Meeting":
+        "Great! You can pick a time for a meeting directly on our calendar using the link below.",
+      "Pricing Info":
+        "Pythia starts as low as $129/month per location. For detailed enterprise quotes covering 100+ stores, we recommend a quick discovery call.",
+      "Talk to Sales":
+        "I'd love to connect you with our sales team! The best way is to pick a time on our calendar so we're ready for you.",
+      "How Pythia Works":
+        "Pythia uses discreet audio intelligence devices at your checkout counter to analyze customer interactions. It then provides real-time insights to help managers catch issues where they start - at the register.",
+      Features:
+        "Our core features include:\n- Voice to Ticket automation\n- 100% Interaction Scoring\n- Same-Day Manager Dashboards\n- Direct POS Integration (PDI, Verifone, Gilbarco)",
+      "Privacy & Security":
+        "Privacy is our foundation:\n- 100% Local processing (Edge AI)\n- No voice stored or sent to cloud\n- Ensures complete control over in-store data",
+      "POS Integrations":
+        "Pythia integrates seamlessly with leading Point-of-Sale systems including Verifone, Gilbarco, and PDI. This allows us to link transaction data directly with interaction insights.",
+      "Audio Analytics Details":
+        "Our Edge AI devices analyze checkout conversations in real-time. It detects tone, script compliance (like upselling), and friction points without recording or storing actual voices, ensuring total privacy.",
+      "Hardware Requirements":
+        "We provide proprietary Edge AI sensors that stick directly to the checkout counter. No servers or complex networking required, just a simple power connection.",
+      "Voice-to-Ticket Automation":
+        "If a customer mentions an operational issue (e.g., 'Pump 4 is broken'), Pythia instantly analyzes the voice intent and automatically creates a service ticket for your team. Zero manual entry needed.",
+      "Performance Tracking":
+        "Every shift generates a 'Daily Scorecard' for managers. It highlights top performers, missed upsell opportunities, and specific coaching moments to help you train your best talent.",
+      "Deployment Timeline":
+        "Our plug-and-play hardware allows for extremely fast deployment. Most stores are up and running within 48 hours of receiving the devices, with zero disruption to your daily operations.",
     };
 
     if (localResponses[text]) {
@@ -263,14 +297,19 @@ export default function ChatBot() {
         setIsLoading(false);
 
         // Custom Hook for Bookings
-        if (["Book a Demo", "Schedule a Meeting", "Talk to Sales"].includes(text)) {
-          setMessages(prev => [...prev, {
-            id: generateId(),
-            type: "bot",
-            text: "You can book directly here:",
-            timestamp: new Date(),
-            category: "demo-hook",
-          }]);
+        if (
+          ["Book a Demo", "Schedule a Meeting", "Talk to Sales"].includes(text)
+        ) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: generateId(),
+              type: "bot",
+              text: "You can book directly here:",
+              timestamp: new Date(),
+              category: "demo-hook",
+            },
+          ]);
         }
       }, 600);
       return;
@@ -291,18 +330,24 @@ export default function ChatBot() {
       return;
     }
 
-    setGlobalApiCount(prev => prev + 1);
+    setGlobalApiCount((prev) => prev + 1);
 
     try {
       const result = await chatAction(
         text,
-        messages.map(m => ({ role: m.type === 'bot' ? 'assistant' as const : 'user' as const, content: m.text }))
+        messages.map((m) => ({
+          role: m.type === "bot" ? ("assistant" as const) : ("user" as const),
+          content: m.text,
+        })),
       );
 
       const botReply: Message = {
         id: generateId(),
         type: "bot",
-        text: 'text' in result ? result.text : "I'm sorry, I'm having trouble connecting right now. Please try again later.",
+        text:
+          "text" in result
+            ? result.text
+            : "I'm sorry, I'm having trouble connecting right now. Please try again later.",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botReply]);
@@ -313,11 +358,12 @@ export default function ChatBot() {
     }
 
     // --- CONVERSION TRIGGER ---
-    if (userMessageCount === 4) { // This was the 5th user message
+    if (userMessageCount === 4) {
+      // This was the 5th user message
       // --- TRACKING: QUALIFIED ---
       trackEvent("ai_sdr_qualified", {
         reason: "engaged_user_5_messages",
-        interaction_count: 5
+        interaction_count: 5,
       });
 
       setTimeout(() => {
@@ -328,7 +374,7 @@ export default function ChatBot() {
           timestamp: new Date(),
           category: "demo-hook",
         };
-        setMessages(prev => [...prev, demoMessage]);
+        setMessages((prev) => [...prev, demoMessage]);
       }, 1500);
     }
   };
@@ -369,18 +415,28 @@ export default function ChatBot() {
   ];
 
   return (
-    <div ref={chatContainerRef} className="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
+    <div
+      ref={chatContainerRef}
+      className="fixed bottom-6 right-6 z-[100] flex flex-col items-end"
+    >
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95, transformOrigin: "bottom right" }}
+            initial={{
+              opacity: 0,
+              y: 20,
+              scale: 0.95,
+              transformOrigin: "bottom right",
+            }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             className="fixed inset-0 sm:relative sm:inset-auto sm:mb-4 w-full h-[100dvh] sm:w-[400px] sm:h-[600px] bg-white rounded-none sm:rounded-[32px] shadow-none sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)] border-0 sm:border sm:border-slate-100 flex flex-col overflow-hidden z-[120]"
           >
             {/* Dynamic Header */}
-            <div className={`transition-all duration-300 bg-brand-navy flex-shrink-0 relative z-10 ${view === 'home' ? 'h-[180px] p-8 pt-10' : 'h-[72px] px-5 flex items-center'}`}>
+            <div
+              className={`transition-all duration-300 bg-brand-navy flex-shrink-0 relative z-10 ${view === "home" ? "h-[180px] p-8 pt-10" : "h-[72px] px-5 flex items-center"}`}
+            >
               {view === "home" ? (
                 <div className="space-y-4">
                   <button
@@ -392,7 +448,10 @@ export default function ChatBot() {
                   </button>
                   <div className="flex -space-x-3">
                     {[1, 2].map((i) => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-brand-navy overflow-hidden bg-brand-teal shadow-md">
+                      <div
+                        key={i}
+                        className="w-10 h-10 rounded-full border-2 border-brand-navy overflow-hidden bg-brand-teal shadow-md"
+                      >
                         <div className="w-full h-full flex items-center justify-center scale-75">
                           <PythiaIcon isOpen={false} />
                         </div>
@@ -401,9 +460,14 @@ export default function ChatBot() {
                   </div>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <span className="text-[32px] inline-block animate-bounce flex-shrink-0 mt-1">👋</span>
+                      <span className="text-[32px] inline-block animate-bounce flex-shrink-0 mt-1">
+                        👋
+                      </span>
                       <div className="space-y-0.5">
-                        <p className="text-[16px] sm:text-[17px] font-semibold text-white/90 leading-snug">We&apos;re online and ready to help you catch what&apos;s slipping.</p>
+                        <p className="text-[16px] sm:text-[17px] font-semibold text-white/90 leading-snug">
+                          We&apos;re online and ready to help you catch
+                          what&apos;s slipping.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -439,50 +503,65 @@ export default function ChatBot() {
                     className="flex-1 overflow-y-auto p-5 no-scrollbar relative z-20"
                   >
                     {/* Stacked Card (No Overlap) */}
-                    <div className="relative z-30 bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-slate-100 group cursor-pointer active:scale-[0.98] transition-all hover:border-brand-teal/20"
+                    <div
+                      className="relative z-30 bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-slate-100 group cursor-pointer active:scale-[0.98] transition-all hover:border-brand-teal/20"
                       onClick={handleNewConversation}
                     >
                       <div className="flex justify-between items-start mb-1">
-                        <h4 className="font-extrabold text-slate-900 text-lg">New Conversation</h4>
+                        <h4 className="font-extrabold text-slate-900 text-lg">
+                          New Conversation
+                        </h4>
                         <SendHorizontal className="w-5 h-5 text-brand-teal rotate-0 group-hover:translate-x-1 transition-all" />
                       </div>
-                      <p className="text-slate-500 text-sm font-medium">We typically reply in a few minutes</p>
+                      <p className="text-slate-500 text-sm font-medium">
+                        We typically reply in a few minutes
+                      </p>
                     </div>
 
                     <div className="mt-8">
                       <div className="flex flex-wrap justify-center gap-2 animate-in fade-in duration-500 w-full">
                         {(() => {
-                          const availableActions = quickActions.filter(action => !usedQuickActions.includes(action));
+                          const availableActions = quickActions.filter(
+                            (action) => !usedQuickActions.includes(action),
+                          );
 
                           if (availableActions.length > 0) {
-                            return availableActions.slice(0, 7).map((action) => (
-                              <button
-                                key={action}
-                                onClick={() => {
-                                  if (!hasFiredFirstMessageEvent.current) {
-                                    trackEvent("ai_sdr_first_message", {
-                                      interaction_type: "quick_action",
-                                      button_name: action,
-                                      trigger: "first_interaction"
-                                    });
-                                    hasFiredFirstMessageEvent.current = true;
-                                  }
+                            return availableActions
+                              .slice(0, 7)
+                              .map((action) => (
+                                <button
+                                  key={action}
+                                  onClick={() => {
+                                    if (!hasFiredFirstMessageEvent.current) {
+                                      trackEvent("ai_sdr_first_message", {
+                                        interaction_type: "quick_action",
+                                        button_name: action,
+                                        trigger: "first_interaction",
+                                      });
+                                      hasFiredFirstMessageEvent.current = true;
+                                    }
 
-                                  setView("messages");
-                                  handleSend(action);
-                                }}
-                                className="px-4 py-2 bg-white border border-slate-200 rounded-full text-[12px] font-bold text-brand-navy hover:border-brand-teal/40 hover:bg-slate-50 transition-all shadow-sm whitespace-nowrap"
-                              >
-                                {action}
-                              </button>
-                            ));
+                                    setView("messages");
+                                    handleSend(action);
+                                  }}
+                                  className="px-4 py-2 bg-white border border-slate-200 rounded-full text-[12px] font-bold text-brand-navy hover:border-brand-teal/40 hover:bg-slate-50 transition-all shadow-sm whitespace-nowrap"
+                                >
+                                  {action}
+                                </button>
+                              ));
                           }
 
                           return (
                             <div className="bg-brand-teal/10 rounded-2xl p-5 text-center border border-brand-teal/20 w-full mt-2">
                               <p className="text-[13px] font-medium text-brand-navy leading-relaxed">
-                                I hope we cleared up most of your questions about Pythia! 🌟<br /><br />
-                                If you still have any doubts or need specific details, please feel free to use the messages section. Our AI bot is always here to help you. 💙
+                                I hope we cleared up most of your questions
+                                about Pythia! 🌟
+                                <br />
+                                <br />
+                                If you still have any doubts or need specific
+                                details, please feel free to use the messages
+                                section. Our AI bot is always here to help you.
+                                💙
                               </p>
                             </div>
                           );
@@ -500,7 +579,9 @@ export default function ChatBot() {
                   >
                     <div className="flex-1 overflow-y-auto p-5 space-y-4 no-scrollbar">
                       <div className="text-center py-6">
-                        <h4 className="text-[15px] font-bold text-slate-800">Start a new chat</h4>
+                        <h4 className="text-[15px] font-bold text-slate-800">
+                          Start a new chat
+                        </h4>
                       </div>
                       {messages.map((msg) => (
                         <div
@@ -508,26 +589,37 @@ export default function ChatBot() {
                           className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}
                         >
                           <div
-                            className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${msg.type === "user"
-                              ? "bg-brand-navy text-white rounded-tr-none"
-                              : "bg-white border border-slate-100 text-slate-700 shadow-sm rounded-tl-none"
-                              }`}
+                            className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${
+                              msg.type === "user"
+                                ? "bg-brand-navy text-white rounded-tr-none"
+                                : "bg-white border border-slate-100 text-slate-700 shadow-sm rounded-tl-none"
+                            }`}
                           >
                             <div style={{ whiteSpace: "pre-line" }}>
                               {msg.text}
                             </div>
-                            {msg.category && (msg.category === 'demo-hook' || msg.category === 'limit-hook') && (
-                              <button
-                                onClick={() => setIsCalendlyOpen(true)}
-                                className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2 cursor-pointer"
-                              >
-                                Book a Live Demo 🚀
-                              </button>
-                            )}
+                            {msg.category &&
+                              (msg.category === "demo-hook" ||
+                                msg.category === "limit-hook") && (
+                                <button
+                                  onClick={() => {
+                                    sessionStorage.setItem(
+                                      "demo_source",
+                                      "chatbot",
+                                    );
+                                    trackEvent("chatbot_demo_click", {
+                                      event_type: "chatbot_interaction",
+                                    });
+                                    setIsCalendlyOpen(true);
+                                  }}
+                                  className="mt-3 w-full py-2 bg-brand-teal text-brand-navy font-bold rounded-lg text-xs hover:bg-brand-teal/90 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                >
+                                  Book a Live Demo 🚀
+                                </button>
+                              )}
                           </div>
                         </div>
                       ))}
-
 
                       {/* Loading Indicator */}
                       {isLoading && (
@@ -537,7 +629,11 @@ export default function ChatBot() {
                               <motion.div
                                 key={i}
                                 animate={{ opacity: [0.3, 1, 0.3] }}
-                                transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                                transition={{
+                                  duration: 1,
+                                  repeat: Infinity,
+                                  delay: i * 0.2,
+                                }}
                                 className="w-1.5 h-1.5 bg-slate-300 rounded-full"
                               />
                             ))}
@@ -548,35 +644,29 @@ export default function ChatBot() {
                     </div>
 
                     <div className="p-4 bg-white border-t border-slate-100">
-                      <form
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          if (!hasFiredFirstMessageEvent.current) {
-                            trackEvent("ai_sdr_first_message", {
-                              interaction_type: "input",
-                              trigger: "first_interaction"
-                            });
-                            hasFiredFirstMessageEvent.current = true;
-                          }
-                          handleSend(inputValue);
-                        }}
-                        className="relative"
-                      >
+                      <div className="relative">
                         <input
                           type="text"
                           placeholder="Type a message..."
                           value={inputValue}
                           onChange={(e) => setInputValue(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && inputValue.trim()) {
+                              handleSend(inputValue);
+                            }
+                          }}
                           className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3 pl-4 pr-12 text-sm focus:outline-none focus:border-brand-teal/40 transition-colors text-slate-700"
                         />
+
                         <button
-                          type="submit"
+                          type="button"
+                          onClick={() => handleSend(inputValue)}
                           disabled={!inputValue.trim()}
                           className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-xl bg-brand-navy text-white flex items-center justify-center disabled:opacity-30 transition-all hover:bg-slate-800"
                         >
                           <Send className="w-4 h-4" />
                         </button>
-                      </form>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -587,17 +677,21 @@ export default function ChatBot() {
             <div className="bg-white border-t border-slate-100 px-8 py-4 flex justify-around items-center">
               <button
                 onClick={() => setView("home")}
-                className={`flex flex-col items-center gap-1 transition-all ${view === 'home' ? 'text-brand-teal scale-110' : 'text-slate-400 hover:text-slate-600'}`}
+                className={`flex flex-col items-center gap-1 transition-all ${view === "home" ? "text-brand-teal scale-110" : "text-slate-400 hover:text-slate-600"}`}
               >
                 <Home className="w-6 h-6" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Home</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider">
+                  Home
+                </span>
               </button>
               <button
                 onClick={() => setView("messages")}
-                className={`flex flex-col items-center gap-1 transition-all ${view === 'messages' ? 'text-brand-teal scale-110' : 'text-slate-400 hover:text-slate-600'}`}
+                className={`flex flex-col items-center gap-1 transition-all ${view === "messages" ? "text-brand-teal scale-110" : "text-slate-400 hover:text-slate-600"}`}
               >
                 <MessageSquare className="w-6 h-6" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Messages</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider">
+                  Messages
+                </span>
               </button>
             </div>
           </motion.div>
@@ -639,8 +733,9 @@ export default function ChatBot() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(!isOpen)}
-          className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 relative z-10 ${isOpen ? "bg-white text-brand-navy" : "bg-brand-navy text-white"
-            }`}
+          className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 relative z-10 ${
+            isOpen ? "bg-white text-brand-navy" : "bg-brand-navy text-white"
+          }`}
           aria-label="Open chat"
         >
           <AnimatePresence mode="wait">
@@ -673,7 +768,11 @@ export default function ChatBot() {
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
-        rootElement={typeof window !== 'undefined' ? document.body : (undefined as unknown as HTMLElement)}
+        rootElement={
+          typeof window !== "undefined"
+            ? document.body
+            : (undefined as unknown as HTMLElement)
+        }
       />
     </div>
   );

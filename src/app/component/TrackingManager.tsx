@@ -47,24 +47,35 @@ export default function TrackingManager() {
   // 3. Calendly Event Listeners
   useCalendlyEventListener({
     onEventTypeViewed: () => {
+      const source = typeof window !== 'undefined' ? sessionStorage.getItem("demo_source") : null;
       // Track when the popup is opened
       trackEvent("calendly_popup_opened", {
         event_type: "calendly_viewed",
+        source: source || "landing_page",
       });
     },
     onDateAndTimeSelected: () => {
+      const source = typeof window !== 'undefined' ? sessionStorage.getItem("demo_source") : null;
       // Track when a specific slot is selected
       trackEvent("demo_slot_selected", {
         event_type: "calendly_slot_selected",
+        source: source || "landing_page",
       });
     },
     onEventScheduled: (e) => {
+      const source = typeof window !== 'undefined' ? sessionStorage.getItem("demo_source") : null;
       // Track successful booking
       trackEvent("demo_booking_success", {
         event_type: "calendly_scheduled",
         calendly_event_uri: e.data.payload.event.uri,
         calendly_invitee_uri: e.data.payload.invitee.uri,
+        source: source || "landing_page",
       });
+
+      // Clear source after successful booking
+      if (typeof window !== 'undefined') {
+        sessionStorage.removeItem("demo_source");
+      }
 
       // Show success toast
       setShowToast(true);
