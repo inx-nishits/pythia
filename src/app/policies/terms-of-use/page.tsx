@@ -2,8 +2,8 @@ import Link from 'next/link';
 import '../policies.css';
 
 export const metadata = {
-  title: "Terms of Use – Pythia Scorecard",
-  description: "Review the terms of use for Pythia Scorecard’s retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence services.",
+  title: "Terms & Conditions | Pythia Scorecard",
+  description: "Review the terms of use for Pythia Scorecard’s always-on retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence services.",
   keywords: [
     "Pythia Scorecard terms",
     "retail AI terms of use",
@@ -13,36 +13,53 @@ export const metadata = {
     "Pythia service agreement"
   ],
   openGraph: {
-    title: "Terms of Use – Pythia Scorecard",
+    title: "Terms & Conditions | Pythia Scorecard",
     description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics, ensuring clarity on our in-store audio intelligence services.",
-    url: `${process.env.NEXT_PUBLIC_SITE}/terms-of-use`,
+    url: "/terms-of-use/",
     siteName: "Pythia Scorecard",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE}/og-image.jpg`,
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Pythia Scorecard Terms of Use"
       }
     ],
     type: "website"
+  },
+  alternates: {
+    canonical: "/terms-of-use/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms & Conditions | Pythia Scorecard",
+    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics.",
+    images: ["/og-image.jpg"],
   }
 };
 
 export default function TermsOfUse() {
   return (
-    <div className="policyPage">
-      <div className="pageHeader">
-        <h1>TERMS OF USE</h1>
-      </div>
-      <div className="page-content">
+    <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px] bg-[#f8fafc]">
+      <div className="max-w-[1100px] mx-auto w-full min-w-0">
+        <div className="mb-10 space-y-3 max-w-3xl">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]">
+            Policies
+          </span>
+          <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tight leading-[1.05]">
+            Terms of Use
+          </h1>
+        </div>
+
+        <div className="policyPage rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
+          <div className="page-content">
         <p>
           <strong className="main">1. Acceptance of the Terms of Use</strong>These terms of use are entered into by and
           between you and Pythia Store LLC (&ldquo;<strong>Pythia Store</strong>,&rdquo; &ldquo;
           <strong>Pythia Scorecard,</strong>&rdquo; &ldquo;<strong>we,</strong>&rdquo; &ldquo;<strong>our,</strong>
           &rdquo; or &ldquo;<strong>us</strong>&rdquo;). The following terms and conditions, together with any documents
           they expressly incorporate by reference (collectively, &ldquo;<strong>Terms of Use</strong>&rdquo;), govern
-          your access to and use of&nbsp;<strong>http://app.pythiastore.ai</strong>, including any content,
+          your access to and use of&nbsp;<strong>https://app.pythiastore.ai</strong>, including any content,
           functionality, and services offered on or through app.com (the &ldquo;<strong>Website</strong>&rdquo;).&nbsp;
         </p>
         <p>
@@ -53,7 +70,8 @@ export default function TermsOfUse() {
             FOUND AT
           </strong>
           <strong>&nbsp;</strong>
-          <strong>HTTP://APP.PYTHIASTORE.AI</strong>
+          <strong>HTTPS://APP.PYTHIASTORE.AI</strong>
+
           <strong>, INCORPORATED HEREIN BY REFERENCE.</strong>&nbsp;If you do not want to agree to these Terms of Use or
           the Privacy Policy, then you must not access or use the Website. These terms become effective as between you
           and us on the date and time at our location when you agree to them, as set forth herein.
@@ -244,7 +262,7 @@ export default function TermsOfUse() {
           <li>
             <p>
               Use the Website in any manner that could disable, overburden, damage, or impair the site or interfere with
-              any other person&rsquo;s use of the Website, including their ability to engage in real-time activities
+              any other person&rsquo;s use of the Website, including their ability to engage in near real-time activities
               through the Website.
             </p>
           </li>
@@ -696,6 +714,8 @@ export default function TermsOfUse() {
           <strong>&nbsp;</strong>
         </p>
       </div>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 }

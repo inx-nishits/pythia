@@ -2,7 +2,7 @@ import Link from 'next/link';
 import '../policies.css';
 
 export const metadata = {
-  title: "Privacy Policy – Pythia Scorecard",
+  title: "Privacy Policy | Pythia Scorecard",
   description: "Learn how Pythia Scorecard collects, uses, and protects your personal information in compliance with our commitment to privacy and data security in retail AI analytics.",
   keywords: [
     "Pythia Scorecard privacy",
@@ -13,30 +13,50 @@ export const metadata = {
     "audio intelligence privacy"
   ],
   openGraph: {
-    title: "Privacy Policy – Pythia Scorecard",
+    title: "Privacy Policy | Pythia Scorecard",
     description: "Understand how Pythia Scorecard ensures the privacy and security of your data through our comprehensive privacy policy for retail AI analytics.",
-    url: `${process.env.NEXT_PUBLIC_SITE}/privacy-policy`,
+    url: "/privacy-policy/",
     siteName: "Pythia Scorecard",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE}/og-image.jpg`,
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Pythia Scorecard Privacy Policy"
       }
     ],
     type: "website"
+  },
+  alternates: {
+    canonical: "/privacy-policy/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Pythia Scorecard",
+    description: "Understand how Pythia Scorecard ensures the privacy and security of your data.",
+    images: ["/og-image.jpg"],
   }
 };
 
+
 export default function PrivacyPolicy() {
   return (
-    <div className="policyPage">
-      <div className="pageHeader">
-        <h1>Privacy Policy</h1>
-        <p>Last modified: July 2, 2025</p>
-      </div>
-      <div className="page-content">
+    <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px] bg-[#f8fafc]">
+      <div className="max-w-[1100px] mx-auto w-full min-w-0">
+        <div className="mb-10 space-y-3 max-w-3xl">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]">
+            Policies
+          </span>
+          <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tight leading-[1.05]">
+            Privacy Policy
+          </h1>
+          <p className="text-slate-500 text-[13px] sm:text-[14px] font-medium">
+            Last modified: July 2, 2025
+          </p>
+        </div>
+
+        <div className="policyPage rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
+          <div className="page-content">
         <p>
           <strong className="main">1. Introduction</strong>
           <strong>&nbsp;</strong>Pythia Store LLC (&ldquo;
@@ -44,9 +64,9 @@ export default function PrivacyPolicy() {
           <strong>our</strong>,&rdquo; or &ldquo;<strong>us</strong>&rdquo;) respect your privacy and are committed to
           protecting it through our compliance with this policy. This policy describes the types of information we may
           collect from you or that you may provide when you visit the website&nbsp;
-          <Link href="http://www.pythiascorecard.com/">http://www.pythiascorecard.com/</Link>
+          <Link href="https://www.pythiascorecard.com/">https://www.pythiascorecard.com/</Link>
           &nbsp;
-          <Link href=" http://app.pythiastore.ai "> http://app.pythiastore.ai</Link>
+          <Link href=" https://app.pythiastore.ai "> https://app.pythiastore.ai</Link>
           &nbsp;(our &ldquo;<strong>Websites</strong>&rdquo;) and our practices for collecting, using, maintaining,
           protecting, and disclosing that information. This policy applies to information we collect:
         </p>
@@ -324,7 +344,7 @@ export default function PrivacyPolicy() {
           advertising. However these third parties may provide you with ways to choose not to have your information
           collected or used in this way. You can opt out of receiving targeted ads from members of the Network
           Advertising Initiative (&ldquo;<strong>NAI</strong>&rdquo;) on the NAI&rsquo;s&nbsp;
-          <Link href="http://www.networkadvertising.org/managing/opt_out.asp">
+          <Link href="https://www.networkadvertising.org/managing/opt_out.asp">
             <u>website</u>
           </Link>
           .
@@ -373,6 +393,8 @@ export default function PrivacyPolicy() {
           <Link href={'mailto:info@pythiascorecard.com'}>info@pythiascorecard.com</Link>
         </p>
       </div>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 }

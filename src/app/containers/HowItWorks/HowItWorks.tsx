@@ -1,67 +1,81 @@
-import HowItWorksItem from "@/app/component/HowItWorksItem";
-import LeftDesktopBracketIcon from "@/app/assets/left-desktop-bracket.svg";
-import RightDesktopBracketIcon from "@/app/assets/right-desktop-bracket.svg";
-import SendMailIcon from "@/app/assets/send-mail.svg";
-import AiIcon from "@/app/assets/ai.svg";
-import UserSettingsIcon from "@/app/assets/user-settings.svg";
+import { MotionH2, MotionDiv } from "@/app/component/MotionWrapper";
 import { Sections } from "@/app/sections";
+import { Zap, Brain, Rocket } from "lucide-react";
 
-const howItWorksItems: {
-  icon: React.ReactNode;
-  iconColor: string;
-  iconBackground: string;
-  title: string;
-  description: string;
-}[] = [
+const steps = [
   {
-    icon: <SendMailIcon />,
-    iconColor: "text-blue-40",
-    iconBackground: "bg-blue-2",
+    number: "01",
     title: "Capture",
-    description:
-      "Pythia records all customer and staff conversations at the checkout counter, automatically and securely.",
+    desc: "Pythia records all customer and staff conversations at the checkout counter, automatically and securely.",
+    icon: <Zap className="w-6 h-6 text-brand-coral" />,
+    color: "bg-brand-coral/10"
   },
   {
-    icon: <AiIcon />,
-    iconColor: "text-grey-40",
-    iconBackground: "bg-grey-2",
+    number: "02",
     title: "Analyze",
-    description:
-      "Our AI reviews each interaction to detect tone, sentiment, feedback, and patterns — in real time.",
+    desc: "Our AI reviews each interaction to detect tone, sentiment, feedback, and patterns in near real time.",
+    icon: <Brain className="w-6 h-6 text-brand-teal" />,
+    color: "bg-brand-teal/10"
   },
   {
-    icon: <UserSettingsIcon />,
-    iconColor: "text-orange-40",
-    iconBackground: "bg-orange-2",
+    number: "03",
     title: "Act",
-    description:
-      "You get insights and recommendations to improve service, support your team, and fix problems fast.",
-  },
+    desc: "You get insights and recommendations to improve service, support your team, and fix problems fast.",
+    icon: <Rocket className="w-6 h-6 text-amber-500" />,
+    color: "bg-amber-500/10"
+  }
 ];
 
 function HowItWorks() {
   return (
-    <section
-      id={Sections.HowItWorks}
-      className="overflow-hidden flex flex-col items-center justify-center w-full gap-[77px] desktop:pt-[100px] desktop:pb-[120px] desktop:px-[20px] mobile:pt-[60px] mobile:pb-[60px] mobile:px-[20px]"
+    <section 
+      id={Sections.HowItWorks} 
+      className="py-16 sm:py-20 lg:py-[120px] xl:py-[180px] px-4 sm:px-6 bg-white overflow-hidden relative min-w-0 w-full"
     >
-      <h2 className="text-purple-60 text-[48px] font-bold">How it works</h2>
+      <div className="max-w-[1400px] mx-auto relative z-10 w-full min-w-0">
+        <div className="text-center mb-20 space-y-4">
+          <MotionH2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-[#0F172A] text-[40px] lg:text-[60px] font-extrabold tracking-tighter"
+          >
+            How it works
+          </MotionH2>
+          <p className="text-slate-500 text-lg lg:text-xl font-medium">Low friction. Immediate value.</p>
+        </div>
 
-      <div className="flex justify-center items-center w-full gap-[10px]">
-        <LeftDesktopBracketIcon className="mobile:hidden desktop:block shrink-0" />
-        <div className="flex flex-col desktop:gap-[20px] mobile:gap-[24px]">
-          {howItWorksItems.map((item, index) => (
-            <HowItWorksItem
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-8 relative">
+          {/* Connecting Line (Desktop, behind cards) */}
+          <div className="hidden lg:block absolute top-[96px] left-[15%] right-[15%] h-[2px] bg-slate-100 -z-10 overflow-hidden">
+             <MotionDiv 
+               initial={{ x: "-100%" }}
+               whileInView={{ x: "0%" }}
+               transition={{ duration: 1.5, ease: "easeInOut" }}
+               className="h-full w-full bg-gradient-to-r from-brand-coral via-brand-teal to-amber-500 opacity-50"
+             />
+          </div>
+
+          {steps.map((step, index) => (
+            <MotionDiv
               key={index}
-              icon={item.icon}
-              title={item.title}
-              description={item.description}
-              iconColor={item.iconColor}
-              iconBackground={item.iconBackground}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              className="flex-1 flex flex-col items-center text-center group"
+            >
+              <div className={`w-32 h-32 rounded-[40px] ${step.color} border-2 border-white shadow-xl flex items-center justify-center relative mb-8 group-hover:-translate-y-2 transition-transform duration-500 ring-8 ring-slate-50 group-hover:ring-brand-teal/5`}>
+                 <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-sm font-bold text-slate-400">
+                    {step.number}
+                 </div>
+                 <div className="group-hover:scale-110 transition-transform duration-500">
+                    {step.icon}
+                 </div>
+              </div>
+              <h3 className="text-2xl font-bold text-[#0F172A] tracking-tight mb-4">{step.title}</h3>
+              <p className="text-slate-500 leading-relaxed max-w-[300px] text-[15px]">{step.desc}</p>
+            </MotionDiv>
           ))}
         </div>
-        <RightDesktopBracketIcon className="mobile:hidden desktop:block shrink-0" />
       </div>
     </section>
   );

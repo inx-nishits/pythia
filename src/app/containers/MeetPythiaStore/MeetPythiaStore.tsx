@@ -1,3 +1,5 @@
+import { MotionDiv, MotionH2, MotionP } from "@/app/component/MotionWrapper";
+import { Headphones, Brain, Activity } from "lucide-react";
 import { Sections } from "@/app/sections";
 import Image from "next/image";
 
@@ -5,32 +7,76 @@ function MeetPythiaStore() {
   return (
     <section
       id={Sections.MeetPythiaStore}
-      className="desktop:scroll-mt-[67px] mobile:scroll-mt-[-50px] flex flex-col items-center justify-center desktop:gap-[77px] mobile:gap-[90px] desktop:pt-[70px] desktop:pb-[70px] px-[20px] mobile:pt-[232px] mobile:pb-[252px] bg-(image:--meet-pythia-store-background)"
+      className="flex flex-col items-center justify-center w-full min-w-0 bg-[#fafafa] pt-16 sm:pt-20 lg:pt-[120px] xl:pt-[200px] pb-16 sm:pb-20 lg:pb-[100px] xl:pb-[160px] overflow-hidden px-4 sm:px-6"
     >
-      <div className="flex flex-col gap-[20px] justify-center items-center desktop:w-[486px] mobile:w-full">
-        <h2 className="text-purple-60 desktop:text-[48px] mobile:text-[36px] font-bold desktop:leading-[64px] mobile:leading-[42px] text-center">
-          Meet Pythia – your ears at the counter.
-        </h2>
-        <p className="text-pythia-black text-[20px] leading-[32px] text-center">
-          Pythia is a simple device that listens to what’s said at the counter,
-          analyzes it with AI, and gives you real-time insights and
-          recommendations — all in a clear dashboard. All it needs is Wi-Fi.
-        </p>
+      <div className="w-full max-w-[1400px] mx-auto min-w-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-w-0">
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="flex flex-col gap-6 lg:gap-8"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center border border-brand-teal/20 text-brand-teal">
+                <Headphones className="w-7 h-7 animate-pulse" />
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-brand-navy/5 flex items-center justify-center border border-brand-navy/10 text-brand-navy">
+                <Brain className="w-7 h-7" />
+              </div>
+            </div>
+
+            <div className="space-y-4 min-w-0">
+              <MotionH2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 }}
+                className="text-[#0F172A] text-[28px] sm:text-[36px] lg:text-[44px] xl:text-[52px] font-extrabold leading-[1.02] tracking-tight break-words"
+              >
+                Meet{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-blue-500 italic">
+                  Pythia
+                </span>{" "}
+                , your ears at the counter.
+              </MotionH2>
+
+              <MotionP
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-slate-500 text-[17px] lg:text-[19px] font-medium leading-relaxed max-w-[520px]"
+              >
+                Pythia is a simple device that listens to what’s said at the counter, analyzes it with AI, and gives you
+                always-on insights and recommendations in a clear dashboard. All it needs is Wi-Fi.
+              </MotionP>
+            </div>
+          </MotionDiv>
+
+          <MotionDiv
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15 }}
+            className="w-full flex flex-col gap-4"
+          >
+            <div className="relative w-full">
+              <Image
+                src="/desktop-meet-pythia-store.webp"
+                alt="Pythia Intelligence Dashboard"
+                width={1100}
+                height={600}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 text-slate-100 border border-slate-200/40 shadow-md">
+                <Activity className="w-4 h-4 text-emerald-300" />
+                <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
+                  800ms Latency
+                </span>
+              </div>
+            </div>
+          </MotionDiv>
+        </div>
       </div>
-      <Image
-        src="/desktop-meet-pythia-store.webp"
-        alt="Meet Pythia Store"
-        width={912}
-        height={586}
-        className="object-cover mobile:hidden desktop:block"
-      />
-      <Image
-        src="/mobile-meet-pythia-store.png"
-        alt="Meet Pythia Store"
-        width={390}
-        height={586}
-        className="object-cover desktop:hidden mobile:block"
-      />
     </section>
   );
 }

@@ -4,6 +4,7 @@ interface HowItWorksItemProps {
   iconBackground: string;
   title: string;
   description: string;
+  stepNumber: number;
 }
 
 function HowItWorksItem({
@@ -12,20 +13,22 @@ function HowItWorksItem({
   description,
   iconColor,
   iconBackground,
+  stepNumber,
 }: HowItWorksItemProps) {
   return (
-    <div className="flex desktop:flex-row mobile:flex-col desktop:gap-[6px] mobile:gap-[4px]">
-      <div className="flex shadow-work-item desktop:flex-row items-center desktop:gap-[10px] desktop:justify-center desktop:w-[230px] desktop:h-[72px] desktop:rounded-tl-[12px] desktop:rounded-tr-[0px] desktop:rounded-br-[0px] desktop:rounded-bl-[12px] mobile:gap-[4px] mobile:justify-center mobile:w-[324px] mobile:h-[82px] mobile:flex-col mobile:rounded-tl-[12px] mobile:rounded-tr-[12px] mobile:rounded-br-[0px] mobile:rounded-bl-[0px]">
-        <div
-          className={`desktop:py-[2px] desktop:px-[4px] desktop:rounded-[6px] mobile:px-[5px] mobile:py-[3px] mobile:rounded-[8px] ${iconBackground} ${iconColor} flex items-center justify-center`}
-        >
-          {icon}
+    <div className="flex flex-col lg:flex-row w-full max-w-[800px] bg-white border border-brand-gray-border rounded-[24px] overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.03)] transition-transform hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
+      <div className="flex flex-row lg:flex-col items-center justify-between lg:justify-center p-6 lg:p-8 lg:w-[240px] bg-brand-gray-light border-b lg:border-b-0 lg:border-r border-brand-gray-border relative">
+        <div className="absolute top-4 left-4 text-gray-300 font-bold text-4xl leading-none font-sans hidden lg:block">0{stepNumber}</div>
+        <div className="flex items-center gap-4 lg:flex-col lg:gap-6 z-10 w-full lg:w-auto mt-0 lg:mt-6">
+          <div className={`p-4 rounded-xl ${iconBackground} ${iconColor} flex items-center justify-center shadow-sm border border-brand-gray-border`}>
+            {icon}
+          </div>
+          <h3 className="text-brand-navy text-[24px] lg:text-[28px] font-bold tracking-tight">{title}</h3>
         </div>
-        <h3 className="text-purple-60 text-[24px] font-bold">{title}</h3>
       </div>
 
-      <div className="py-[12px] px-[20px] rounded-br-[12px] desktop:rounded-tl-[0px] desktop:rounded-bl-[0px] desktop:rounded-tr-[12px] shadow-work-item desktop:w-[490px] mobile:w-[324px] mobile:rounded-tl-[0px] mobile:rounded-bl-[12px] mobile:rounded-tr-[0px]">
-        <p className="desktop:text-[18px] text-purple-60 leading-[24px] desktop:text-left mobile:text-[18px] mobile:text-center">
+      <div className="flex-1 p-6 lg:p-10 flex items-center">
+        <p className="text-[16px] lg:text-[18px] text-gray-600 leading-relaxed font-medium">
           {description}
         </p>
       </div>

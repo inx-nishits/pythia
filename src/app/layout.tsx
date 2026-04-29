@@ -1,7 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Roboto } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
@@ -11,13 +17,44 @@ const instrumentSans = Instrument_Sans({
 const robotoFont = Roboto({
   variable: "--font-roboto-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Hear and Fix In-Store Issues Instantly | Pythia Store",
+  title: "Fix In-Store Issues with Same Day AI | Pythia Store",
   description:
-    "Pythia listens to counter conversations, analyzes them with AI, and gives you real-time insights to improve service, staff performance, and sales.",
+    "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and sales.",
+  metadataBase: new URL("https://www.pythiascorecard.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
+    description: "Capture what your stores don’t report. Pythia listens at the counter and analyses checkout interactions in near real-time.",
+    url: "/",
+    siteName: "Pythia Scorecard",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Pythia Store device analysing retail checkout conversations"
+      }
+    ],
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
+    description: "Capture what your stores don’t report. Pythia listens at the counter and delivers actionable insights.",
+    images: ["/og-image.jpg"],
+  }
 };
+
+
+import ClientSideComponents from "./component/ClientSideComponents";
+import CookieConsent from "./component/CookieConsent";
+import TrackingManager from "./component/TrackingManager";
 
 export default function RootLayout({
   children,
@@ -25,24 +62,52 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Google tag (gtag.js) / GA4 */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-LY8FBGTQ4T"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <meta name="geo.region" content="US" />
+        <meta name="geo.country" content="US" />
+        
+        {/* 1. Initialize Consent Mode (denied by default) */}
+        <Script id="gtm-consent" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-LY8FBGTQ4T');
+            window.dataLayer.push({
+              event: "default_consent",
+              analytics_storage: "denied",
+              ad_storage: "denied",
+              ad_user_data: "denied",
+              ad_personalization: "denied",
+              wait_for_update: 500
+            });
+          `}
+        </Script>
+
+        {/* 2. Load GTM Container (Standard Snippet) */}
+        <Script id="gtm-script" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5DFNJSZN');
           `}
         </Script>
       </head>
-      <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`}>
+      <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`} suppressHydrationWarning>
+        {/* GTM Noscript (Fallback) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5DFNJSZN"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+        
+        <TrackingManager />
         {children}
+        <ClientSideComponents />
+        <CookieConsent />
       </body>
     </html>
   );
