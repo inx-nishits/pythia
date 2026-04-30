@@ -1,11 +1,17 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { trackEvent } from "../utils/gtm";
 import { useCalendlyEventListener } from "react-calendly";
 import { CheckCircle2, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  buildThankYouUrl,
+  clearDemoSource,
+  getDemoSource,
+  markDemoBookingComplete,
+} from "../utils/demoSource";
 
 /**
  * TrackingManager handles route-based events and other global tracking logic.
@@ -13,6 +19,7 @@ import { motion, AnimatePresence } from "framer-motion";
  */
 export default function TrackingManager() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
 
@@ -29,9 +36,11 @@ export default function TrackingManager() {
 
     // Track Thank You Page View (Custom Event)
     if (pathname === "/thank-you" || pathname === "/thank-you/") {
+      const source = searchParams.get("src");
       trackEvent("thank_you_page_view", {
         path: pathname,
         page_name: "Thank You",
+        src: source || "unknown",
       });
     }
 
@@ -42,7 +51,7 @@ export default function TrackingManager() {
         path: pathname,
       });
     }
-  }, [pathname]);
+  }, [pathname, searchParams]);
 
   const lastPopupFired = useRef<number>(0);
 
@@ -54,7 +63,7 @@ export default function TrackingManager() {
       if (now - lastPopupFired.current < 2000) return;
       lastPopupFired.current = now;
 
-      const source = typeof window !== 'undefined' ? sessionStorage.getItem("demo_source") : null;
+      const source = getDemoSource();
       // Track when the popup is opened
       trackEvent("calendly_popup_opened", {
         event_type: "calendly_viewed",
@@ -62,7 +71,7 @@ export default function TrackingManager() {
       });
     },
     onDateAndTimeSelected: () => {
-      const source = typeof window !== 'undefined' ? sessionStorage.getItem("demo_source") : null;
+      const source = getDemoSource();
       // Track when a specific slot is selected
       trackEvent("demo_slot_selected", {
         event_type: "calendly_slot_selected",
@@ -70,7 +79,7 @@ export default function TrackingManager() {
       });
     },
     onEventScheduled: (e) => {
-      const source = typeof window !== 'undefined' ? sessionStorage.getItem("demo_source") : null;
+      const source = getDemoSource();
       // Track successful booking
       trackEvent("demo_booking_success", {
         event_type: "calendly_scheduled",
@@ -78,11 +87,6 @@ export default function TrackingManager() {
         calendly_invitee_uri: e.data.payload.invitee.uri,
         source: source || "landing_page",
       });
-
-      // Clear source after successful booking
-      if (typeof window !== 'undefined') {
-        sessionStorage.removeItem("demo_source");
-      }
 
       // Show success toast
       setShowToast(true);
@@ -94,7 +98,9 @@ export default function TrackingManager() {
 
       // Redirect after a short delay to allow the user to see the success state
       setTimeout(() => {
-        router.push("/thank-you/");
+        markDemoBookingComplete(source);
+        router.push(buildThankYouUrl(source));
+        clearDemoSource();
       }, 2500);
     },
   });

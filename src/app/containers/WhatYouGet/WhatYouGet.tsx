@@ -8,6 +8,7 @@ import Image from "next/image";
 import Button from "@/app/component/Button";
 import { PopupModal } from "react-calendly";
 import { trackEvent } from "@/app/utils/gtm";
+import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
 
 const features = [
   {
@@ -151,6 +152,7 @@ function WhatYouGet() {
               {feature.hasCalendly && (
                 <Button 
                   onClick={() => {
+                    setDemoSource(DEMO_SOURCES.product);
                     trackEvent("intelligence_demo_click", {
                       section: "product_intelligence"
                     });

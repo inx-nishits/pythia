@@ -13,6 +13,10 @@ import {
 import { chatAction } from "@/app/actions/chat";
 import { trackEvent } from "../../utils/gtm";
 import { PopupModal } from "react-calendly";
+import {
+  DEMO_SOURCES,
+  setDemoSource,
+} from "../../utils/demoSource";
 
 interface Message {
   id: string;
@@ -603,10 +607,7 @@ export default function ChatBot() {
                                 msg.category === "limit-hook") && (
                                 <button
                                   onClick={() => {
-                                    sessionStorage.setItem(
-                                      "demo_source",
-                                      "chatbot",
-                                    );
+                                    setDemoSource(DEMO_SOURCES.chatbot);
                                     trackEvent("chatbot_demo_click", {
                                       event_type: "chatbot_interaction",
                                     });

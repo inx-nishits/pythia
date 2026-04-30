@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Button from "@/app/component/Button";
 import { PopupModal } from "react-calendly";
+import { clearDemoSource } from "@/app/utils/demoSource";
 
 interface SolutionLayoutProps {
   title: string;
@@ -116,7 +117,10 @@ export default function SolutionLayout({
                   </p>
                   <div className="flex flex-col gap-2">
                     <Button 
-                      onClick={() => setIsCalendlyOpen(true)}
+                      onClick={() => {
+                        clearDemoSource();
+                        setIsCalendlyOpen(true);
+                      }}
                       className="w-full py-3 rounded-full bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-[14px] font-semibold shadow-md hover:shadow-lg cursor-pointer"
                     >
                       Book a 15-minute demo
@@ -143,4 +147,3 @@ export default function SolutionLayout({
     </>
   );
 }
-
