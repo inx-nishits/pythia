@@ -46,3 +46,4 @@ public/sitemap*.xml
 
 # local editor settings
 .vscode/
+.codex/

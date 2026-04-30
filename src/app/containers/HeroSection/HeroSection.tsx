@@ -7,6 +7,7 @@ import Button from "@/app/component/Button";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PopupModal } from "react-calendly";
+import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
 
 const HERO_SLIDES = [
   {
@@ -170,7 +171,10 @@ function HeroSection() {
                 className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
               >
                 <Button 
-                  onClick={() => setIsCalendlyOpen(true)}
+                  onClick={() => {
+                    setDemoSource(DEMO_SOURCES.homepage);
+                    setIsCalendlyOpen(true);
+                  }}
                   className="w-full sm:w-auto h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer"
                 >
                   Book a 15-Minute Demo
