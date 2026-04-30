@@ -246,7 +246,17 @@ export default function ChatBot() {
     setIsLoading(true);
 
     // --- TRACKING: FIRST INTERACTION ---
-    // Moved to interaction handlers (click/submit) for better reliability
+    if (!hasFiredFirstMessageEvent.current) {
+      trackEvent("ai_sdr_conversation_start", {
+        session_id: sessionId,
+      });
+      trackEvent("ai_sdr_first_message", {
+        interaction_type: quickActions.includes(text) ? "quick_action" : "manual_input",
+        button_name: quickActions.includes(text) ? text : "manual",
+        trigger: "first_interaction",
+      });
+      hasFiredFirstMessageEvent.current = true;
+    }
 
     setUserMessageCount((prev) => prev + 1);
 
@@ -532,15 +542,6 @@ export default function ChatBot() {
                                 <button
                                   key={action}
                                   onClick={() => {
-                                    if (!hasFiredFirstMessageEvent.current) {
-                                      trackEvent("ai_sdr_first_message", {
-                                        interaction_type: "quick_action",
-                                        button_name: action,
-                                        trigger: "first_interaction",
-                                      });
-                                      hasFiredFirstMessageEvent.current = true;
-                                    }
-
                                     setView("messages");
                                     handleSend(action);
                                   }}
