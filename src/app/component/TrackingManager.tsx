@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { trackEvent } from "../utils/gtm";
 import { useCalendlyEventListener } from "react-calendly";
@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   buildThankYouUrl,
   clearDemoSource,
+  getDemoSourceFromThankYouPath,
   getDemoSource,
   markDemoBookingComplete,
 } from "../utils/demoSource";
@@ -19,7 +20,6 @@ import {
  */
 export default function TrackingManager() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
 
@@ -35,8 +35,8 @@ export default function TrackingManager() {
     }
 
     // Track Thank You Page View (Custom Event)
-    if (pathname === "/thank-you" || pathname === "/thank-you/") {
-      const source = searchParams.get("src");
+    if (pathname === "/thank-you" || pathname === "/thank-you/" || pathname.startsWith("/thank-you/src=")) {
+      const source = getDemoSourceFromThankYouPath(pathname);
       trackEvent("thank_you_page_view", {
         path: pathname,
         page_name: "Thank You",
@@ -51,7 +51,7 @@ export default function TrackingManager() {
         path: pathname,
       });
     }
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   const lastPopupFired = useRef<number>(0);
 

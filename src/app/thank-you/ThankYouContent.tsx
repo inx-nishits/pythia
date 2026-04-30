@@ -6,9 +6,9 @@ import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import Button from "../component/Button";
 import { motion } from "framer-motion";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import { buildThankYouUrl } from "../utils/demoSource";
+import { buildThankYouUrl, getDemoSourceFromThankYouPath } from "../utils/demoSource";
 
 const SOURCE_LABELS: Record<string, string> = {
   homepage: "Homepage",
@@ -17,13 +17,13 @@ const SOURCE_LABELS: Record<string, string> = {
 };
 
 export default function ThankYouContent() {
+  const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [countdown, setCountdown] = useState(5);
   const [isAllowed, setIsAllowed] = useState<boolean>(false);
 
   const hasChecked = useRef(false);
-  const source = searchParams.get("src");
+  const source = getDemoSourceFromThankYouPath(pathname);
   const sourceLabel = source ? SOURCE_LABELS[source] ?? source : null;
 
   useEffect(() => {

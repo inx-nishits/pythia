@@ -10,6 +10,24 @@ export const DEMO_SOURCES = {
 export type DemoSource =
   (typeof DEMO_SOURCES)[keyof typeof DEMO_SOURCES];
 
+export function normalizeDemoSource(source?: string | null) {
+  if (!source) return null;
+
+  const trimmed = source.trim();
+  const withoutQuotes = trimmed.replace(/^['"]+|['"]+$/g, "");
+
+  return withoutQuotes || null;
+}
+
+export function getDemoSourceFromThankYouPath(pathname?: string | null) {
+  if (!pathname) return null;
+
+  const match = pathname.match(/^\/thank-you\/src=([^/]+)\/?$/);
+  if (!match) return null;
+
+  return normalizeDemoSource(decodeURIComponent(match[1]));
+}
+
 export function setDemoSource(source: DemoSource) {
   if (typeof window === "undefined") return;
   sessionStorage.setItem(DEMO_SOURCE_KEY, source);
@@ -40,12 +58,13 @@ export function getCompletedDemoSource() {
 }
 
 export function buildThankYouUrl(source: string | null) {
-  const resolvedSource =
+  const resolvedSource = normalizeDemoSource(
     source ||
     (typeof window !== "undefined"
       ? getCompletedDemoSource() || getDemoSource()
-      : null);
+      : null),
+  );
 
   if (!resolvedSource) return "/thank-you/";
-  return `/thank-you/?src=${encodeURIComponent(resolvedSource)}`;
+  return `/thank-you/src=${encodeURIComponent(resolvedSource)}/`;
 }
