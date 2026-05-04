@@ -2,6 +2,7 @@ import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
+import RelatedLinks from "../../components/RelatedLinks";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
@@ -53,6 +54,19 @@ export default function InStoreAnalyticsPage() {
           "Spot which locations are quietly leaking revenue because key scripts are not being used.",
           "Correlate sentiment trends with performance so you can see when service is slipping before scores drop.",
           "Give field leaders concrete insight for coaching conversations instead of guesswork.",
+        ]}
+      />
+      <RelatedLinks
+        title="Related Reading"
+        links={[
+          {
+            title: "Close the Turnover Tap: Spotting and Fixing Training Gaps in Convenience Stores",
+            href: "/articles/close-the-turnover-tap/",
+          },
+          {
+            title: "When Your Team Sends the Customer to the Competition",
+            href: "/articles/when-your-team-sends-customer-to-competition/",
+          },
         ]}
       />
       <Footer />

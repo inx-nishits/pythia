@@ -2,6 +2,7 @@ import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
+import RelatedLinks from "../../components/RelatedLinks";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
@@ -56,8 +57,21 @@ export default function ConvenienceStoreAnalyticsPage() {
         capabilities={[
           "Rank stores based on behaviors that drive revenue and retention, not just sales volume.",
           "Identify locations where friction causes walk-offs, complaints, or missed loyalty capture.",
-          "Give store and district managers a shared view of what &quot;good&quot; looks like in conversations.",
+          "Give store and district managers a shared view of what \"good\" looks like in conversations.",
           "Track how coaching and new programs change in-store behavior over time.",
+        ]}
+      />
+      <RelatedLinks
+        title="Related Reading"
+        links={[
+          {
+            title: "Close the Turnover Tap: Spotting and Fixing Training Gaps in Convenience Stores",
+            href: "/articles/close-the-turnover-tap/",
+          },
+          {
+            title: "When Your Team Sends the Customer to the Competition",
+            href: "/articles/when-your-team-sends-customer-to-competition/",
+          },
         ]}
       />
       <Footer />

@@ -64,7 +64,7 @@ export const articles: ArticleData[] = [
   },
   {
     slug: "is-your-point-of-sale-leaking-profits",
-    title: "Is Your Point of Sale Leaking Profits? Catching Equipment Failures Before They Drain the Till",
+    title: "Is Your POS Leaking Profits? C-Store Equipment Downtime | Pythia",
     excerpt: "Broken pumps and jammed card readers choke sales in real time. Discover how to surface hidden downtime and turn lost minutes into recovered profit.",
     readTime: "5 min read",
     date: "March 2026",
