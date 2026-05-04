@@ -1,11 +1,13 @@
 import { articles } from "../data";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import Header from "@/app/containers/Header";
 import Footer from "@/app/containers/Footer";
 import Link from "next/link";
 import HomeContact from "@/app/containers/HomeContact";
 import { Zap } from "lucide-react";
 import AnimatedReveal from "@/app/component/AnimatedReveal";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export async function generateStaticParams() {
   return articles.map((article) => ({
@@ -75,8 +77,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     }
   };
 
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Resources", path: "/resources/" },
+    { name: article.title, path: `/articles/${slug}/` },
+  ]);
+
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden pt-20">
+      <Script id="article-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

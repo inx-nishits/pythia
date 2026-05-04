@@ -1,6 +1,8 @@
+import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Convenience Store Analytics | Pythia Scorecard",
@@ -21,8 +23,22 @@ export const metadata = {
 };
 
 export default function ConvenienceStoreAnalyticsPage() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Solutions", path: "/#solutions" },
+    {
+      name: "Convenience Store Analytics",
+      path: "/solutions/convenience-store-analytics/",
+    },
+  ]);
+
   return (
     <>
+      <Script
+        id="convenience-store-analytics-breadcrumb-schema"
+        type="application/ld+json"
+      >
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <SolutionLayout
         eyebrow="Solution"
@@ -48,4 +64,3 @@ export default function ConvenienceStoreAnalyticsPage() {
     </>
   );
 }
-

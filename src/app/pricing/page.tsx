@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import { ChevronDown, Check, Zap, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 import { trackEvent } from "../utils/gtm";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
@@ -106,8 +108,15 @@ function DetailAccordion({
 }
 
 export default function PricingPage() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Pricing", path: "/pricing/" },
+  ]);
+
   return (
     <>
+      <Script id="pricing-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[100px] pb-[100px]">

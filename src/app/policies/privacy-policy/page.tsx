@@ -1,4 +1,6 @@
+import Script from "next/script";
 import Link from 'next/link';
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 import '../policies.css';
 
 export const metadata = {
@@ -40,23 +42,31 @@ export const metadata = {
 
 
 export default function PrivacyPolicy() {
-  return (
-    <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px] bg-[#f8fafc]">
-      <div className="max-w-[1100px] mx-auto w-full min-w-0">
-        <div className="mb-10 space-y-3 max-w-3xl">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]">
-            Policies
-          </span>
-          <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tight leading-[1.05]">
-            Privacy Policy
-          </h1>
-          <p className="text-slate-500 text-[13px] sm:text-[14px] font-medium">
-            Last modified: July 2, 2025
-          </p>
-        </div>
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Privacy Policy", path: "/privacy-policy/" },
+  ]);
 
-        <div className="policyPage rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
-          <div className="page-content">
+  return (
+    <>
+      <Script id="privacy-policy-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
+      <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px] bg-[#f8fafc]">
+        <div className="max-w-[1100px] mx-auto w-full min-w-0">
+          <div className="mb-10 space-y-3 max-w-3xl">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]">
+              Policies
+            </span>
+            <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tight leading-[1.05]">
+              Privacy Policy
+            </h1>
+            <p className="text-slate-500 text-[13px] sm:text-[14px] font-medium">
+              Last modified: July 2, 2025
+            </p>
+          </div>
+
+          <div className="policyPage rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
+            <div className="page-content">
         <p>
           <strong className="main">1. Introduction</strong>
           <strong>&nbsp;</strong>Pythia Store LLC (&ldquo;
@@ -392,9 +402,10 @@ export default function PrivacyPolicy() {
           To ask questions or comment about this privacy policy and our privacy practices, contact us at:
           <Link href={'mailto:info@pythiascorecard.com'}>info@pythiascorecard.com</Link>
         </p>
-      </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
