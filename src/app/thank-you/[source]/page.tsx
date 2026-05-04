@@ -3,7 +3,7 @@ import ThankYouContent from "../ThankYouContent";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
-  title: "Thank You | Pythia Scorecard",
+  title: "Thank You: We'll Be In Touch About Your Pythia Scorecard Demo",
   robots: {
     index: false,
     follow: false,

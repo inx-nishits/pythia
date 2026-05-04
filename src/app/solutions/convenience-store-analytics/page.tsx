@@ -6,10 +6,10 @@ import RelatedLinks from "../../components/RelatedLinks";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
-  title: "Convenience Store Analytics | Pythia Scorecard",
+  title: "Convenience Store Analytics: Optimizing Retail Operations",
   description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service and higher revenue.",
   openGraph: {
-    title: "Convenience Store Analytics | Pythia Store",
+    title: "Convenience Store Analytics: Optimizing Retail Operations",
     description: "Give every store a feedback loop they've never had before.",
     url: "/solutions/convenience-store-analytics/",
   },
@@ -18,7 +18,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convenience Store Analytics | Pythia Store",
+    title: "Convenience Store Analytics: Optimizing Retail Operations",
     description: "Optimize store performance with AI interaction analytics.",
   }
 };

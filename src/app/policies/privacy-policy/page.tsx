@@ -4,7 +4,7 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 import '../policies.css';
 
 export const metadata = {
-  title: "Privacy Policy | Pythia Scorecard",
+  title: "Privacy Policy & Data Security | Pythia Scorecard Platform",
   description: "Learn how Pythia Scorecard collects, uses, and protects your personal information in compliance with our commitment to privacy and data security in retail AI analytics.",
   keywords: [
     "Pythia Scorecard privacy",
@@ -15,7 +15,7 @@ export const metadata = {
     "audio intelligence privacy"
   ],
   openGraph: {
-    title: "Privacy Policy | Pythia Scorecard",
+    title: "Privacy Policy & Data Security | Pythia Scorecard Platform",
     description: "Understand how Pythia Scorecard ensures the privacy and security of your data through our comprehensive privacy policy for retail AI analytics.",
     url: "/privacy-policy/",
     siteName: "Pythia Scorecard",
@@ -34,7 +34,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy | Pythia Scorecard",
+    title: "Privacy Policy & Data Security | Pythia Scorecard Platform",
     description: "Understand how Pythia Scorecard ensures the privacy and security of your data.",
     images: ["/og-image.jpg"],
   }

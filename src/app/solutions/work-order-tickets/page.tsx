@@ -6,10 +6,10 @@ import RelatedLinks from "../../components/RelatedLinks";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
-  title: "Work Order Tickets | Pythia Scorecard",
+  title: "Automated Work Order Tickets for Retail Operations & ROI",
   description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI.",
   openGraph: {
-    title: "Work Order Tickets | Pythia Store",
+    title: "Automated Work Order Tickets for Retail Operations & ROI",
     description: "From friction detected to fix in motion automatically.",
     url: "/solutions/work-order-tickets/",
   },
@@ -18,7 +18,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Work Order Tickets | Pythia Store",
+    title: "Automated Work Order Tickets for Retail Operations & ROI",
     description: "Automate retail work orders with AI audio analytics.",
   }
 };

@@ -5,10 +5,10 @@ import Footer from "../containers/Footer";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
-  title: "About Pythia Scorecard",
+  title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
   description: "Learn about the mission behind Pythia Scorecard - giving retail leaders a clear, objective view of every customer interaction through AI-driven audio intelligence.",
   openGraph: {
-    title: "About Pythia Scorecard",
+    title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
     description: "Retail operations insights built for leaders who care about every interaction.",
     url: "/about/",
   },
@@ -17,7 +17,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Pythia Scorecard",
+    title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
     description: "Retail operations insights built for leaders who care about every interaction.",
   }
 };
