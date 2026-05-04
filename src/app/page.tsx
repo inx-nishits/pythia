@@ -1,3 +1,4 @@
+import Script from "next/script";
 import ScrollToHash from "./component/ScrollToHash/ScrollToHash";
 import Footer from "./containers/Footer";
 import Header from "./containers/Header";
@@ -18,6 +19,7 @@ import PrivacySection from "./containers/PrivacySection";
 import BlogSection from "./containers/BlogSection";
 import FAQSection from "./containers/FAQSection";
 import IndustriesSection from "./containers/IndustriesSection";
+import { faqs } from "./faq/faqs";
 
 export const metadata = {
   title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
@@ -62,8 +64,24 @@ export const metadata = {
 
 
 export default function Home() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden">
+      <Script id="home-faq-schema" type="application/ld+json">
+        {JSON.stringify(faqSchema)}
+      </Script>
       <ScrollToHash />
       <Header />
       <main className="overflow-x-hidden min-w-0 w-full">

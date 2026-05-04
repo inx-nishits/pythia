@@ -28,7 +28,7 @@ const siteLinks = [
       },
       {
         name: 'FAQ',
-        href: '/faq/',
+        href: '/#faq',
       },
       {
         name: 'About',

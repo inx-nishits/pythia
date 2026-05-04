@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/faq", destination: "/#faq", permanent: true },
+      { source: "/faq/", destination: "/#faq", permanent: true },
       { source: "/policies/privacy-policy", destination: "/privacy-policy", permanent: true },
       { source: "/policies/terms-of-use", destination: "/terms-of-use", permanent: true },
     ];
