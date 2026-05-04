@@ -3,10 +3,10 @@ import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
 
 export const metadata = {
-  title: "In-Store Analytics | Pythia Scorecard",
+  title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
   description: "Gain deeper insights into store performance by analyzing checkout conversations. Identify missed upsells and service friction with AI-driven audio analytics.",
   openGraph: {
-    title: "In-Store Analytics | Pythia Store",
+    title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
     description: "See what your existing reports miss with continuous operational insight.",
     url: "/solutions/in-store-analytics/",
   },
@@ -15,7 +15,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "In-Store Analytics | Pythia Store",
+    title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
     description: "Analyze checkout conversations to boost performance.",
   }
 };

@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing | Pythia Scorecard",
+  title: "Pythia Scorecard Pricing: ROI-Driven Retail AI Insights",
   description: "Simple, transparent pricing for Pythia Store. Get always-on retail AI insights at checkout with no hidden fees.",
   alternates: {
     canonical: "/pricing/",
   },
   openGraph: {
-    title: "Pricing | Pythia Store",
+    title: "Pythia Scorecard Pricing: ROI-Driven Retail AI Insights",
     description: "Simple, transparent pricing for retail AI insights.",
     url: "/pricing/",
   },

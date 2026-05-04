@@ -3,10 +3,10 @@ import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
 
 export const metadata = {
-  title: "Retail AI | Pythia Scorecard",
+  title: "Retail AI & Edge Intelligence for Checkout Optimization",
   description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights and optimized operations.",
   openGraph: {
-    title: "Retail AI | Pythia Store",
+    title: "Retail AI & Edge Intelligence for Checkout Optimization",
     description: "Transform checkout conversations into clear, prioritized actions with AI.",
     url: "/solutions/retail-ai/",
   },
@@ -15,7 +15,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Retail AI | Pythia Store",
+    title: "Retail AI & Edge Intelligence for Checkout Optimization",
     description: "Transform checkout conversations into actionable insights.",
   }
 };

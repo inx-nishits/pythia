@@ -2,7 +2,7 @@ import Link from 'next/link';
 import '../policies.css';
 
 export const metadata = {
-  title: "Terms & Conditions | Pythia Scorecard",
+  title: "Terms & Conditions: User Agreement for Pythia Scorecard",
   description: "Review the terms of use for Pythia Scorecard’s always-on retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence services.",
   keywords: [
     "Pythia Scorecard terms",
@@ -13,7 +13,7 @@ export const metadata = {
     "Pythia service agreement"
   ],
   openGraph: {
-    title: "Terms & Conditions | Pythia Scorecard",
+    title: "Terms & Conditions: User Agreement for Pythia Scorecard",
     description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics, ensuring clarity on our in-store audio intelligence services.",
     url: "/terms-of-use/",
     siteName: "Pythia Scorecard",
@@ -32,7 +32,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms & Conditions | Pythia Scorecard",
+    title: "Terms & Conditions: User Agreement for Pythia Scorecard",
     description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics.",
     images: ["/og-image.jpg"],
   }
