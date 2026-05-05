@@ -1,6 +1,8 @@
+import Script from "next/script";
 import Footer from "../containers/Footer";
 import Header from "../containers/Header";
 import ContactPageContent from "./ContactPageContent";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Contact Pythia Scorecard | Request a Demo or Get Support",
@@ -41,8 +43,15 @@ export const metadata = {
 
 
 export default function Contact() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Contact", path: "/contact/" },
+  ]);
+
   return (
     <>
+      <Script id="contact-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <ContactPageContent />
       <Footer />

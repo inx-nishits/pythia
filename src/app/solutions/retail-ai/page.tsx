@@ -1,6 +1,9 @@
+import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
+import RelatedLinks from "../../components/RelatedLinks";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Retail AI & Edge Intelligence for Checkout Optimization",
@@ -21,8 +24,16 @@ export const metadata = {
 };
 
 export default function RetailAiPage() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Solutions", path: "/#solutions" },
+    { name: "Retail AI", path: "/solutions/retail-ai/" },
+  ]);
+
   return (
     <>
+      <Script id="retail-ai-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <SolutionLayout
         eyebrow="Solution"
@@ -44,8 +55,20 @@ export default function RetailAiPage() {
           "Support coaching, training, and performance programs with objective interaction data.",
         ]}
       />
+      <RelatedLinks
+        title="Related Reading"
+        links={[
+          {
+            title: "When Your Team Sends the Customer to the Competition",
+            href: "/articles/when-your-team-sends-customer-to-competition/",
+          },
+          {
+            title: "Closing the Action Gap: Voice Tickets for Equipment Fixes and Frontline Coaching",
+            href: "/articles/closing-the-action-gap-voice-tickets/",
+          },
+        ]}
+      />
       <Footer />
     </>
   );
 }
-

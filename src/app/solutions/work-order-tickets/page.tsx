@@ -1,6 +1,9 @@
+import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
+import RelatedLinks from "../../components/RelatedLinks";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Automated Work Order Tickets for Retail Operations & ROI",
@@ -21,8 +24,16 @@ export const metadata = {
 };
 
 export default function WorkOrderTicketsPage() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Solutions", path: "/#solutions" },
+    { name: "Work Order Tickets", path: "/solutions/work-order-tickets/" },
+  ]);
+
   return (
     <>
+      <Script id="work-order-tickets-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <SolutionLayout
         eyebrow="Solution"
@@ -41,6 +52,19 @@ export default function WorkOrderTicketsPage() {
           "Automatically flag friction points during checkout.",
           "Convert verbal cues into structured work orders automatically.",
           "Route tickets flawlessly without any manual intervention.",
+        ]}
+      />
+      <RelatedLinks
+        title="Related Reading"
+        links={[
+          {
+            title: "Is Your POS Leaking Profits? C-Store Equipment Downtime",
+            href: "/articles/is-your-point-of-sale-leaking-profits/",
+          },
+          {
+            title: "Closing the Action Gap: Voice Tickets for Equipment Fixes and Frontline Coaching",
+            href: "/articles/closing-the-action-gap-voice-tickets/",
+          },
         ]}
       />
       <Footer />

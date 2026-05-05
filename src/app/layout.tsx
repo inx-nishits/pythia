@@ -20,6 +20,49 @@ const robotoFont = Roboto({
   weight: ["300", "400", "500", "700"],
 });
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.pythiascorecard.com/#organization",
+      name: "Pythia Scorecard",
+      url: "https://www.pythiascorecard.com/",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.pythiascorecard.com/pythiaLogo.png",
+      },
+      sameAs: ["https://www.linkedin.com/company/pythia-scorecard"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.pythiascorecard.com/#website",
+      url: "https://www.pythiascorecard.com/",
+      name: "Pythia Scorecard",
+      publisher: {
+        "@id": "https://www.pythiascorecard.com/#organization",
+      },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.pythiascorecard.com/#softwareapplication",
+      name: "Pythia Scorecard",
+      url: "https://www.pythiascorecard.com/",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      provider: {
+        "@id": "https://www.pythiascorecard.com/#organization",
+      },
+      offers: {
+        "@type": "Offer",
+        url: "https://www.pythiascorecard.com/pricing/",
+        price: "129",
+        priceCurrency: "USD",
+      },
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   title: "Fix In-Store Issues with Same Day AI | Pythia Store",
   description:
@@ -66,7 +109,10 @@ export default function RootLayout({
       <head>
         <meta name="geo.region" content="US" />
         <meta name="geo.country" content="US" />
-        
+        <Script id="sitewide-structured-data" type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </Script>
+
         {/* 1. Initialize Consent Mode (denied by default) */}
         <Script id="gtm-consent" strategy="afterInteractive">
           {`
@@ -103,7 +149,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-        
+
         <TrackingManager />
         {children}
         <ClientSideComponents />

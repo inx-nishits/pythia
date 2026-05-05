@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
@@ -21,8 +23,15 @@ export const metadata = {
 };
 
 export default function AboutPage() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "About", path: "/about/" },
+  ]);
+
   return (
     <>
+      <Script id="about-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[80px]">
@@ -100,4 +109,3 @@ export default function AboutPage() {
     </>
   );
 }
-

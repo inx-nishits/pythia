@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
 import Link from "next/link";
-import Script from "next/script";
 import { ChevronDown, Check, Zap, LayoutDashboard, ShieldCheck, BarChart3, Users, ZapIcon, HeadphonesIcon, Package } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 import { trackEvent } from "../utils/gtm";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
@@ -168,6 +169,10 @@ export default function PricingPage() {
     })),
   };
 
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Pricing", path: "/pricing/" },
+  ]);
+
   return (
     <>
       <Script id="pricing-product-schema" type="application/ld+json">
@@ -175,6 +180,9 @@ export default function PricingPage() {
       </Script>
       <Script id="pricing-faq-schema" type="application/ld+json">
         {JSON.stringify(faqSchema)}
+      </Script>
+      <Script id="pricing-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
       </Script>
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
@@ -224,7 +232,7 @@ export default function PricingPage() {
                   className="relative rounded-[32px] border border-slate-200 bg-white shadow-[0_25px_60px_-15px_rgba(15,23,42,0.12)] overflow-hidden"
                 >
                   <div className="h-2 w-full bg-gradient-to-r from-brand-teal via-cyan-400 to-brand-teal" />
-                  
+
                   <div className="p-8 sm:p-12">
                     <div className="flex justify-between items-start mb-10">
                       <div>
@@ -273,7 +281,7 @@ export default function PricingPage() {
                         <ChevronDown className="-rotate-90 w-5 h-5" />
                       </Link>
                     </motion.div>
-                    
+
                     <p className="text-center text-xs text-slate-400 mt-6">
                       No credit card required to start. Cancel anytime.
                     </p>
@@ -296,7 +304,7 @@ export default function PricingPage() {
                     { title: "Optimize Staff Training", desc: "Replace guess-work with data-driven coaching based on actual customer interactions.", icon: Users },
                     { title: "Privacy-First Intelligence", desc: "Local edge processing ensures customer privacy while delivering deep operational insights.", icon: ShieldCheck }
                   ].map((item, i) => (
-                    <motion.li 
+                    <motion.li
                       key={i}
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -366,7 +374,7 @@ export default function PricingPage() {
         <section className="px-4 sm:px-6 py-24 bg-[#0F172A] text-white overflow-hidden relative">
           {/* Subtle background glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-brand-teal/5 rounded-full blur-[120px]" />
-          
+
           <div className="max-w-[800px] mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-4xl sm:text-5xl font-[900] tracking-tight !text-white">Common Questions</h2>
@@ -389,53 +397,53 @@ export default function PricingPage() {
 
 function FeatureChecklist() {
   const checklistData = [
-    { 
-      title: "Hardware & Connectivity", 
-      icon: Package, 
+    {
+      title: "Hardware & Connectivity",
+      icon: Package,
       features: [
-        "Edge-AI Processing Unit for local privacy", 
-        "Tamper-Resistant, low-profile design", 
-        "Dual-Band Wi-Fi 6 & Ethernet support", 
-        "USB-C universal power delivery", 
+        "Edge-AI Processing Unit for local privacy",
+        "Tamper-Resistant, low-profile design",
+        "Dual-Band Wi-Fi 6 & Ethernet support",
+        "USB-C universal power delivery",
         "Physical Privacy Kill-Switch & LED status",
         "Over-the-air secure firmware updates"
-      ] 
+      ]
     },
-    { 
-      title: "Advanced Analytics", 
-      icon: BarChart3, 
+    {
+      title: "Advanced Analytics",
+      icon: BarChart3,
       features: [
-        "Real-Time Sentiment & Tone Analysis", 
-        "Shift-by-Shift Performance Breakdowns", 
-        "Automated Missed Upsell Detection", 
-        "Associate-Level Coaching Insights", 
+        "Real-Time Sentiment & Tone Analysis",
+        "Shift-by-Shift Performance Breakdowns",
+        "Automated Missed Upsell Detection",
+        "Associate-Level Coaching Insights",
         "Custom KPI Threshold Alerts",
         "Competitor Mention Tracking"
-      ] 
+      ]
     },
-    { 
-      title: "Operations & Scale", 
-      icon: ZapIcon, 
+    {
+      title: "Operations & Scale",
+      icon: ZapIcon,
       features: [
-        "Unlimited Manager & User Seats", 
-        "Multi-Location Dashboard Rollups", 
-        "Automated Work Order Generation", 
-        "Weekly Executive Digest Emails", 
+        "Unlimited Manager & User Seats",
+        "Multi-Location Dashboard Rollups",
+        "Automated Work Order Generation",
+        "Weekly Executive Digest Emails",
         "Full CSV, PDF & API Data Exports",
         "Single Sign-On (SSO) Capability"
-      ] 
+      ]
     },
-    { 
-      title: "Enterprise Support", 
-      icon: HeadphonesIcon, 
+    {
+      title: "Enterprise Support",
+      icon: HeadphonesIcon,
       features: [
-        "24/7 Proactive System Monitoring", 
-        "Priority Live Chat & Phone Support", 
-        "Dedicated Onboarding Specialist", 
-        "Lifetime Hardware Warranty", 
+        "24/7 Proactive System Monitoring",
+        "Priority Live Chat & Phone Support",
+        "Dedicated Onboarding Specialist",
+        "Lifetime Hardware Warranty",
         "Custom Staff Training Resources",
         "Quarterly Business Reviews (QBR)"
-      ] 
+      ]
     }
   ];
 
@@ -451,8 +459,8 @@ function FeatureChecklist() {
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {checklistData.map((group, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

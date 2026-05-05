@@ -1,6 +1,9 @@
+import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
+import RelatedLinks from "../../components/RelatedLinks";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
@@ -22,8 +25,16 @@ export const metadata = {
 
 
 export default function InStoreAnalyticsPage() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Solutions", path: "/#solutions" },
+    { name: "In-Store Analytics", path: "/solutions/in-store-analytics/" },
+  ]);
+
   return (
     <>
+      <Script id="in-store-analytics-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <SolutionLayout
         eyebrow="Solution"
@@ -45,8 +56,20 @@ export default function InStoreAnalyticsPage() {
           "Give field leaders concrete insight for coaching conversations instead of guesswork.",
         ]}
       />
+      <RelatedLinks
+        title="Related Reading"
+        links={[
+          {
+            title: "Close the Turnover Tap: Spotting and Fixing Training Gaps in Convenience Stores",
+            href: "/articles/close-the-turnover-tap/",
+          },
+          {
+            title: "When Your Team Sends the Customer to the Competition",
+            href: "/articles/when-your-team-sends-customer-to-competition/",
+          },
+        ]}
+      />
       <Footer />
     </>
   );
 }
-

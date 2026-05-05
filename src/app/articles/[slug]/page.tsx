@@ -1,11 +1,14 @@
 import { articles } from "../data";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import Header from "@/app/containers/Header";
 import Footer from "@/app/containers/Footer";
 import Link from "next/link";
 import HomeContact from "@/app/containers/HomeContact";
+import RelatedLinks from "../../components/RelatedLinks";
 import { Zap } from "lucide-react";
 import AnimatedReveal from "@/app/component/AnimatedReveal";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export async function generateStaticParams() {
   return articles.map((article) => ({
@@ -43,10 +46,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = articles.find((a) => a.slug === slug);
-  
+
   if (!article) {
     notFound();
   }
+
+  const relatedSolutionLinks = slug === "close-the-turnover-tap"
+    ? [
+      { title: "In-Store Analytics", href: "/solutions/in-store-analytics/" },
+      { title: "Convenience Store Analytics", href: "/solutions/convenience-store-analytics/" },
+    ]
+    : slug === "is-your-point-of-sale-leaking-profits"
+      ? [
+        { title: "Work Order Tickets", href: "/solutions/work-order-tickets/" },
+        { title: "Retail AI", href: "/solutions/retail-ai/" },
+      ]
+      : slug === "when-your-team-sends-customer-to-competition"
+        ? [
+          { title: "Retail AI", href: "/solutions/retail-ai/" },
+          { title: "In-Store Analytics", href: "/solutions/in-store-analytics/" },
+        ]
+        : [
+          { title: "Work Order Tickets", href: "/solutions/work-order-tickets/" },
+          { title: "Retail AI", href: "/solutions/retail-ai/" },
+        ];
 
   // Schema.org structured data for SEO
   const jsonLd = {
@@ -75,8 +98,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     }
   };
 
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Resources", path: "/resources/" },
+    { name: article.title, path: `/articles/${slug}/` },
+  ]);
+
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden pt-20">
+      <Script id="article-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -127,14 +158,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           {/* Main Content */}
           <AnimatedReveal index={3}>
-            <div 
+            <div
               className="tracking-wide text-[16px] md:text-[17px] text-slate-700 [&>h2]:text-2xl [&>h2]:md:text-3xl [&>h2]:font-bold [&>h2]:text-brand-navy [&>h2]:mt-6 [&>h2]:mb-3 [&>h2]:tracking-tight [&>h3]:text-xl [&>h3]:md:text-2xl [&>h3]:font-bold [&>h3]:text-brand-navy [&>h3]:mt-4 [&>h3]:mb-2 [&>h3]:tracking-tight [&>p]:leading-[1.6] [&>p]:mb-3 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-3 [&>ul>li]:mb-1 [&>ul>li]:leading-[1.6] [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-3 [&>ol>li]:mb-1 [&>ol>li]:leading-[1.6] [&>p>strong]:text-brand-navy [&>p>strong]:font-semibold [&>li>strong]:text-brand-navy [&>li>strong]:font-semibold [&>a]:text-brand-teal [&>a]:underline [&>a:hover]:text-brand-teal-hover"
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </AnimatedReveal>
         </article>
       </main>
-      
+
+      <RelatedLinks title="Related Solutions" links={relatedSolutionLinks} />
+
       {/* Footer CTA */}
       <HomeContact />
       <Footer />
