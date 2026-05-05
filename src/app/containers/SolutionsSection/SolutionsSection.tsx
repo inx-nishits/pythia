@@ -30,7 +30,7 @@ const solutions = [
 
 function SolutionsSection() {
   return (
-    <section className="py-16 sm:py-20 lg:py-[120px] xl:py-[160px] px-4 sm:px-6 bg-[#f8fafc] border-t border-slate-100 overflow-hidden min-w-0 w-full">
+    <section id="solutions" className="py-16 sm:py-20 lg:py-[120px] xl:py-[160px] px-4 sm:px-6 bg-[#f8fafc] border-t border-slate-100 overflow-hidden min-w-0 w-full">
       <div className="max-w-[1400px] mx-auto w-full min-w-0">
         <div className="max-w-[720px] mb-12 space-y-4">
           <MotionSpan

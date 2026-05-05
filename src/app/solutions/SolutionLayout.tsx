@@ -44,49 +44,51 @@ export default function SolutionLayout({
       <main className="min-h-screen bg-[#0b1120] text-white">
         <section className="px-6 pt-[120px] pb-[96px]">
           <div className="max-w-[1400px] mx-auto">
-            <div className="mb-10 space-y-4 max-w-3xl">
-              <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/15 bg-white/5 text-[11px] font-semibold tracking-[0.22em] uppercase text-slate-200">
-                {eyebrow}
-              </span>
-              <h1 className="text-[32px] sm:text-[40px] lg:text-[52px] font-extrabold tracking-tight leading-[1.05]">
-                {title}
-              </h1>
-              <p className="text-slate-200 text-[15px] sm:text-[16px] leading-relaxed">
-                {intro}
-              </p>
-            </div>
+            <div className="grid gap-10 lg:grid-cols-[1fr_360px] items-start">
+              <div className="space-y-6">
+                <div className="space-y-4 max-w-3xl">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/15 bg-white/5 text-[11px] font-semibold tracking-[0.22em] uppercase text-slate-200">
+                    {eyebrow}
+                  </span>
+                  <h1 className="text-[32px] sm:text-[40px] lg:text-[52px] font-extrabold tracking-tight leading-[1.05] text-white" style={{ color: '#ffffff' }}>
+                    {title}
+                  </h1>
+                  <p className="text-slate-200 text-[15px] sm:text-[16px] leading-relaxed">
+                    {intro}
+                  </p>
+                </div>
 
-            <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
-              <div className="flex-1 space-y-6">
-                <div>
-                  <h2 className="text-[18px] sm:text-[20px] font-extrabold tracking-tight mb-2">
-                    {problemHeadline}
-                  </h2>
-                  <p className="text-slate-300 text-[14px] leading-relaxed">
-                    {problemBody}
-                  </p>
-                </div>
-                <div>
-                  <h2 className="text-[18px] sm:text-[20px] font-extrabold tracking-tight mb-2">
-                    {solutionHeadline}
-                  </h2>
-                  <p className="text-slate-300 text-[14px] leading-relaxed">
-                    {solutionBody}
-                  </p>
-                </div>
-                <div className="rounded-[24px] border border-white/15 bg-white/5 p-6 space-y-4 transition-colors duration-200">
-                  <h2 className="text-[16px] sm:text-[18px] font-extrabold tracking-tight text-white">
-                    {useCaseTitle}
-                  </h2>
-                  <p className="text-slate-200 text-[14px] leading-relaxed">
-                    {useCaseBody}
-                  </p>
+                <div className="space-y-6 max-w-3xl">
+                  <div>
+                    <h2 className="text-[18px] sm:text-[20px] font-extrabold tracking-tight mb-2" style={{ color: '#ffffff' }}>
+                      {problemHeadline}
+                    </h2>
+                    <p className="text-slate-300 text-[14px] leading-relaxed">
+                      {problemBody}
+                    </p>
+                  </div>
+                  <div>
+                    <h2 className="text-[18px] sm:text-[20px] font-extrabold tracking-tight mb-2" style={{ color: '#ffffff' }}  >
+                      {solutionHeadline}
+                    </h2>
+                    <p className="text-slate-300 text-[14px] leading-relaxed">
+                      {solutionBody}
+                    </p>
+                  </div>
+                  <div className="rounded-[24px] border border-white/15 bg-white/5 p-6 space-y-4 transition-colors duration-200" >
+                    <h2 className="text-[16px] sm:text-[18px] font-extrabold tracking-tight text-white" style={{ color: '#ffffff' }} >
+                      {useCaseTitle}
+                    </h2>
+                    <p className="text-slate-200 text-[14px] leading-relaxed">
+                      {useCaseBody}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <aside className="w-full max-w-[360px] shrink-0 space-y-6">
+              <aside className="w-full shrink-0 self-start space-y-6">
                 <div className="rounded-[24px] border border-white/15 bg-white/5 p-6 transition-colors duration-200">
-                  <h3 className="text-[16px] font-semibold tracking-tight mb-4">
+                  <h3 className="text-[16px] font-semibold tracking-tight mb-4" style={{ color: '#ffffff' }}>
                     Key capabilities
                   </h3>
                   <ul className="space-y-3 text-[13px] text-slate-100 leading-relaxed">
@@ -116,7 +118,7 @@ export default function SolutionLayout({
                     Ready to see how this solution fits into your network of stores?
                   </p>
                   <div className="flex flex-col gap-2">
-                    <Button 
+                    <Button
                       onClick={() => {
                         clearDemoSource();
                         setIsCalendlyOpen(true);
