@@ -39,16 +39,64 @@ export default function InStoreAnalyticsPage() {
       <SolutionLayout
         eyebrow="Solution"
         title="In-Store Analytics"
-        intro="See what your existing reports miss by turning every checkout conversation into a continuous stream of operational insight."
+        intro="Pythia's In-Store Analytics represents a paradigm shift in how retail operations are managed. By turning every interaction into a continuous stream of operational data, we provide leaders with the visibility needed to optimize service, increase sales, and reduce friction in real-time."
         problemHeadline="Store reports tell you what happened, not why it happened."
-        problemBody="Traditional dashboards show shrink, basket size, and labor costs, but they rarely explain why one store is outperforming another. Managers are left guessing about service quality, missed upsells, and friction that only shows up in real conversations at the counter."
+        problemBody="Traditional retail reporting is fundamentally broken. Dashboards are filled with lagging indicators that arrive too late to make a difference. When a store's performance dips, managers are left guessing. Is it a staffing issue? A training gap? Or perhaps a technical friction point at the point of sale? Without objective data on what is actually being said at the counter, coaching becomes subjective and ineffective. This lack of visibility leads to missed upsell opportunities, inconsistent service quality, and eventually, customer churn that goes unexplained."
         solutionHeadline="Hear the story behind every number in your P&L."
-        solutionBody="Pythia captures audio at the checkout and converts it into structured analytics you can slice by store, shift, script, and sentiment. Instead of relying on anecdotes, your operators get a clear view of how service and selling behavior actually vary location by location."
-        useCaseTitle="Use case: Comparing performance across regions"
-        useCaseBody="An operator with dozens of locations uses Pythia to compare greeting and upsell behaviors between regions. Within days, they pinpoint stores where scripts are slipping and quickly redirect coaching and staffing support."
+        solutionBody="Pythia transforms the checkout counter from a black box into a source of strategic insight. Using edge AI, we capture audio at the point of interaction and convert it into structured analytics. Our system automatically identifies key moments—greetings, upsell attempts, loyalty program mentions, and service friction. This data is aggregated and presented in a way that allows operators to compare performance across stores, shifts, and individual team members. Move from reactive management to proactive leadership, ensuring that every customer receives the high-quality experience your brand promises."
+        useCases={[
+          {
+            title: "Regional Performance Benchmarking",
+            body: "An operator with 50 locations uses Pythia to identify why the Southeast region is consistently outperforming the Northwest in high-margin snack sales. By analyzing the data, they find that Northwest stores are missing the 'suggestive sell' script in 40% of transactions. Within 48 hours, they deploy a targeted refresher training to those specific stores, resulting in an immediate 12% lift in category sales."
+          },
+          {
+            title: "Identifying Service Friction in Real-Time",
+            body: "During a busy holiday shift, a store manager receives an alert from Pythia indicating a spike in 'sentiment friction' at Register 2. Upon investigation, they find a new employee struggling with a complex return process. The manager steps in to assist, preventing a line from forming and saving several potential walk-offs."
+          },
+          {
+            title: "Training ROI Validation",
+            body: "A retail chain invests $500k in a new customer service training program. Using Pythia, they track the adoption of new 'closing' techniques before and after the training. They see a 60% adoption rate within the first week and can directly correlate this behavior change to a 5% increase in customer return rates over the following month."
+          }
+        ]}
+        integrations={[
+          {
+            name: "POS Ecosystems",
+            description: "Deep integration with major POS providers to correlate conversation data with transaction IDs and basket contents."
+          },
+          {
+            name: "Workforce Management",
+            description: "Sync with scheduling tools like Workday or UKG to see how staffing levels impact service quality."
+          },
+          {
+            name: "Learning Management (LMS)",
+            description: "Automatically trigger training modules based on specific behavior gaps identified by Pythia's AI."
+          },
+          {
+            name: "BI & Reporting Tools",
+            description: "Export structured interaction data to Tableau, PowerBI, or Looker for cross-functional analysis."
+          }
+        ]}
+        faqs={[
+          {
+            question: "Is the data secure and private?",
+            answer: "Yes. Pythia uses advanced PII scrubbing and on-device processing to ensure that sensitive customer information is never stored or transmitted. We are fully compliant with SOC2 and GDPR standards."
+          },
+          {
+            question: "How difficult is the hardware setup?",
+            answer: "Extremely simple. Our plug-and-play edge devices connect to your existing network and require no complex wiring or specialized IT knowledge."
+          },
+          {
+            question: "Can it handle noisy retail environments?",
+            answer: "Absolutely. Our proprietary AI models are specifically trained to filter out background noise, music, and machinery, focusing solely on the conversation at the counter."
+          },
+          {
+            question: "How soon can we see results?",
+            answer: "Most clients see actionable insights within the first 72 hours of deployment, as our AI begins to benchmark your baseline performance and identify immediate outliers."
+          }
+        ]}
         impactLabel="Impact snapshot"
-        impactValue="Faster visibility into outlier stores"
-        impactDetail="Leaders can move from monthly post-mortems to daily course-correction by seeing where in-store behaviors diverge from top-performing locations."
+        impactValue="360° Operational Visibility"
+        impactDetail="Move from monthly post-mortems to daily course-correction by seeing exactly where in-store behaviors diverge from your brand standards."
         capabilities={[
           "Compare greeting, upsell, and closing behaviors across stores and shifts.",
           "Spot which locations are quietly leaking revenue because key scripts are not being used.",
