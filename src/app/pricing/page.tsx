@@ -5,7 +5,6 @@ import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
 import Link from "next/link";
-import Script from "next/script";
 import { ChevronDown, Check, Zap, LayoutDashboard, ShieldCheck, BarChart3, Users, ZapIcon, HeadphonesIcon, Package } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
