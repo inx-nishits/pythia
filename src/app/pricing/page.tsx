@@ -242,7 +242,10 @@ export default function PricingPage() {
                         <h2 className="text-3xl font-extrabold text-[#0F172A] tracking-tight mb-2">Professional Plan</h2>
                         <p className="text-slate-500 text-sm">Everything you need for a single location.</p>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right relative">
+                        <span className="absolute -top-6 right-1 inline-block px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">
+                          As low as
+                        </span>
                         <div className="flex items-baseline justify-end gap-1">
                           <span className="text-5xl font-[900] text-[#0F172A] tracking-tighter">${TOTAL_PRICE}</span>
                           <span className="text-slate-400 font-semibold text-lg">/mo</span>
