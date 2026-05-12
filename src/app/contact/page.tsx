@@ -6,7 +6,7 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Contact Pythia Scorecard | Request a Demo or Get Support",
-  description: "Reach out to the Pythia Scorecard team to schedule a demo, ask questions about the device and dashboard, or discuss how we can help your retail operations with AI insights.",
+  description: "Reach out to Pythia to schedule a demo, ask questions about our device and dashboard, or discuss how we can help your retail operations with AI insights.",
   keywords: [
     "contact Pythia Scorecard",
     "schedule demo retail AI",

@@ -5,7 +5,7 @@ import '../policies.css';
 
 export const metadata = {
   title: "Privacy Policy & Data Security | Pythia Scorecard Platform",
-  description: "Learn how Pythia Scorecard collects, uses, and protects your personal information in compliance with our commitment to privacy and data security in retail AI analytics.",
+  description: "Learn how Pythia Scorecard collects, uses, and protects your personal information in compliance with our commitment to privacy and data security in retail AI.",
   keywords: [
     "Pythia Scorecard privacy",
     "retail AI privacy policy",

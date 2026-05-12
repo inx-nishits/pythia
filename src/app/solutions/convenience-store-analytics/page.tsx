@@ -7,7 +7,7 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Convenience Store Analytics: Optimizing Retail Operations",
-  description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service and higher revenue.",
+  description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service, higher revenue, and store efficiency.",
   openGraph: {
     title: "Convenience Store Analytics: Optimizing Retail Operations",
     description: "Give every store a feedback loop they've never had before.",

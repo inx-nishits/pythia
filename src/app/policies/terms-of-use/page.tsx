@@ -5,7 +5,7 @@ import '../policies.css';
 
 export const metadata = {
   title: "Terms & Conditions: User Agreement for Pythia Scorecard",
-  description: "Review the terms of use for Pythia Scorecard’s always-on retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence services.",
+  description: "Review the terms of use for Pythia Scorecard’s always-on retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence.",
   keywords: [
     "Pythia Scorecard terms",
     "retail AI terms of use",

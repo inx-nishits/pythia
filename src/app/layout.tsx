@@ -66,7 +66,7 @@ const structuredData = {
 export const metadata: Metadata = {
   title: "Fix In-Store Issues with Same Day AI | Pythia Store",
   description:
-    "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and sales.",
+    "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and overall store sales.",
   metadataBase: new URL("https://www.pythiascorecard.com"),
   alternates: {
     canonical: "/",
