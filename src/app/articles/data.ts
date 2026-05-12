@@ -46,7 +46,7 @@ export const articles: ArticleData[] = [
       </ul>
 
       <h2>New Tools for Early Detection</h2>
-      <p>Voice-analytics systems at the register are changing the timeline. Instead of waiting for end-of-month reports, these platforms listen to real interactions and flag moments that hint at a skill gap, such as an uncertain tone during a return, a missed greeting, or a customer question that stumps the clerk.</p>
+      <p><a href="/solutions/in-store-analytics/" title="In-Store Analytics Solutions">Voice-analytics systems at the register</a> are changing the timeline. Instead of waiting for end-of-month reports, these platforms listen to real interactions and flag moments that hint at a skill gap, such as an uncertain tone during a return, a missed greeting, or a customer question that stumps the clerk.</p>
       <p>Because feedback arrives quickly, managers can coach while the example is fresh, turning a potential resignation into a quick learning win.</p>
       
       <h2>Five Steps to Build a Real-Time Coaching Loop</h2>
@@ -96,7 +96,7 @@ export const articles: ArticleData[] = [
       </ul>
 
       <h2>Listening for Early Warnings</h2>
-      <p>Frontline chatter is an untapped sensor network. Phrases like "Pump 3 won't start," "Card reader keeps freezing," or "No squeegee water at pump 5" surface problems quickly. Modern audio analytics tools can capture those remarks at the register, convert them into text, and flag key words tied to equipment.</p>
+      <p>Frontline chatter is an untapped sensor network. Phrases like "Pump 3 won't start," "Card reader keeps freezing," or "No squeegee water at pump 5" surface problems quickly. <a href="/solutions/work-order-tickets/" title="Work Order Tickets Automation">Modern audio analytics tools</a> can capture those remarks at the register, convert them into text, and flag key words tied to equipment.</p>
       <p>With real-time alerts, managers can dispatch repairs quickly before queues grow, track repeat failures to spot chronic issues, and view downtime in dollars by correlating alert times with lost transactions.</p>
       
       <h2>Five Steps to Build a Proactive Maintenance Loop</h2>
@@ -169,7 +169,7 @@ export const articles: ArticleData[] = [
       
       <h2>Two ticket types from one source: store voice</h2>
       <h3>1. Equipment tickets</h3>
-      <p>Pythia Scorecard flags phrases tied to failures, such as pump issues or card reader freezes, then routes a ticket to maintenance with priority and location. Faster alert to dispatch reduces revenue loss from offline equipment.</p>
+      <p><a href="/solutions/convenience-store-analytics/" title="Convenience Store Analytics">Pythia Scorecard</a> flags phrases tied to failures, such as pump issues or card reader freezes, then routes a ticket to maintenance with priority and location. Faster alert to dispatch reduces revenue loss from offline equipment.</p>
       
       <h3>2. People tickets</h3>
       <p>Pythia Scorecard flags coaching needs from voice patterns at the counter, such as repeated confusion, uncertainty during checkout steps, or escalating customer tension. The platform drafts a coaching ticket under categories such as Employee Sentiment or Operational Red Flags, then routes the ticket to a store manager.</p>
