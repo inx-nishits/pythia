@@ -4,6 +4,7 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Thank You: We'll Be In Touch About Your Pythia Scorecard Demo",
+  description: "Thank you for your interest in Pythia Scorecard. We have received your request and will be in touch shortly to schedule your demo and discuss store insights.",
   robots: {
     index: false,
     follow: false,
