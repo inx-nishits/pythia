@@ -9,7 +9,7 @@ export const metadata = {
   description: "Learn about the mission behind Pythia Scorecard - giving retail leaders an objective view of every customer interaction through AI-driven audio intelligence.",
   openGraph: {
     title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
-    description: "Retail operations insights built for leaders who care about every interaction.",
+    description: "Learn how Pythia Scorecard transforms retail operations by giving leaders an objective view of every customer interaction through AI-driven audio intelligence.",
     url: "/about/",
   },
   alternates: {
@@ -18,7 +18,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
-    description: "Retail operations insights built for leaders who care about every interaction.",
+    description: "Learn how Pythia Scorecard transforms retail operations by giving leaders an objective view of every customer interaction through AI-driven audio intelligence.",
   }
 };
 

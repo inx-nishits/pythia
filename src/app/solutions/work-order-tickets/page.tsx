@@ -10,7 +10,7 @@ export const metadata = {
   description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI-driven retail audio analytics.",
   openGraph: {
     title: "Automated Work Order Tickets for Retail Operations & ROI",
-    description: "From friction detected to fix in motion automatically.",
+    description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI-driven retail audio analytics.",
     url: "/solutions/work-order-tickets/",
   },
   alternates: {
@@ -19,7 +19,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Automated Work Order Tickets for Retail Operations & ROI",
-    description: "Automate retail work orders with AI audio analytics.",
+    description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI-driven retail audio analytics.",
   }
 };
 

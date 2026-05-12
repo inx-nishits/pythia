@@ -10,7 +10,7 @@ export const metadata = {
   description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
   openGraph: {
     title: "Retail AI & Edge Intelligence for Checkout Optimization",
-    description: "Transform checkout conversations into clear, prioritized actions with AI.",
+    description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
     url: "/solutions/retail-ai/",
   },
   alternates: {
@@ -19,7 +19,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Retail AI & Edge Intelligence for Checkout Optimization",
-    description: "Transform checkout conversations into actionable insights.",
+    description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
   }
 };
 

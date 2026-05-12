@@ -10,7 +10,7 @@ export const metadata = {
   description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service, higher revenue, and store efficiency.",
   openGraph: {
     title: "Convenience Store Analytics: Optimizing Retail Operations",
-    description: "Give every store a feedback loop they've never had before.",
+    description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service, higher revenue, and store efficiency.",
     url: "/solutions/convenience-store-analytics/",
   },
   alternates: {
@@ -19,7 +19,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Convenience Store Analytics: Optimizing Retail Operations",
-    description: "Optimize store performance with AI interaction analytics.",
+    description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service, higher revenue, and store efficiency.",
   }
 };
 
