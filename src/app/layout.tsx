@@ -91,6 +91,9 @@ export const metadata: Metadata = {
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
     description: "Capture what your stores don’t report. Pythia listens at the counter and delivers actionable insights.",
     images: ["/og-image.jpg"],
+  },
+  verification: {
+    google: "UAIuSsjeIL10hdxvXXtCLVxvSyJO-qB2MV44QKQOrTI",
   }
 };
 
