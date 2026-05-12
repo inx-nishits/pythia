@@ -14,6 +14,7 @@ const SOURCE_LABELS: Record<string, string> = {
   homepage: "Homepage",
   chatbot: "Chatbot",
   product: "Product Intelligence",
+  pricing: "Pricing",
 };
 
 export default function ThankYouContent() {

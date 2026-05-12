@@ -4,12 +4,13 @@ import { useState } from "react";
 import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
-import Link from "next/link";
 import { ChevronDown, Check, Zap, LayoutDashboard, ShieldCheck, BarChart3, Users, ZapIcon, HeadphonesIcon, Package } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 import { trackEvent } from "../utils/gtm";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
+import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
+import { PopupModal } from "react-calendly";
 
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
@@ -173,6 +174,8 @@ export default function PricingPage() {
     { name: "Pricing", path: "/pricing/" },
   ]);
 
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+
   return (
     <>
       <Script id="pricing-product-schema" type="application/ld+json">
@@ -239,7 +242,10 @@ export default function PricingPage() {
                         <h2 className="text-3xl font-extrabold text-[#0F172A] tracking-tight mb-2">Professional Plan</h2>
                         <p className="text-slate-500 text-sm">Everything you need for a single location.</p>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right relative">
+                        <span className="absolute -top-6 right-1 inline-block px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">
+                          As low as
+                        </span>
                         <div className="flex items-baseline justify-end gap-1">
                           <span className="text-5xl font-[900] text-[#0F172A] tracking-tighter">${TOTAL_PRICE}</span>
                           <span className="text-slate-400 font-semibold text-lg">/mo</span>
@@ -267,19 +273,20 @@ export default function PricingPage() {
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Link
-                        href="#"
-                        onClick={() =>
+                      <button
+                        type="button"
+                        onClick={() => {
                           trackEvent("pricing_cta_click", {
                             plan: "professional",
                             price: String(TOTAL_PRICE),
-                          })
-                        }
+                          });
+                          setDemoSource(DEMO_SOURCES.pricing);
+                          setIsCalendlyOpen(true);
+                        }}
                         className="flex items-center justify-center gap-3 w-full rounded-2xl font-bold text-lg py-5 bg-brand-navy text-white hover:bg-slate-800 shadow-xl transition-all duration-300"
                       >
-                        Start Your 14-Day Trial
-                        <ChevronDown className="-rotate-90 w-5 h-5" />
-                      </Link>
+                        Book a Demo
+                      </button>
                     </motion.div>
 
                     <p className="text-center text-xs text-slate-400 mt-6">
@@ -391,6 +398,16 @@ export default function PricingPage() {
 
       </main>
       <Footer />
+      <PopupModal
+        url="https://calendly.com/nick-pythiascorecard/new-meeting"
+        onModalClose={() => setIsCalendlyOpen(false)}
+        open={isCalendlyOpen}
+        rootElement={
+          typeof window !== "undefined"
+            ? document.body
+            : (undefined as unknown as HTMLElement)
+        }
+      />
     </>
   );
 }

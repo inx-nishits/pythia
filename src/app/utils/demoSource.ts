@@ -5,6 +5,7 @@ export const DEMO_SOURCES = {
   homepage: "homepage",
   chatbot: "chatbot",
   product: "product",
+  pricing: "pricing",
 } as const;
 
 export type DemoSource =
