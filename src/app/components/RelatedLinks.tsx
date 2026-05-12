@@ -34,7 +34,7 @@ export default function RelatedLinks({ title, links }: RelatedLinksProps) {
                     fontSize: "1.125rem",
                     marginBottom: "0.75rem",
                     fontWeight: 600,
-                    color: "white",
+                    color: "#1c2331",
                 }}
             >
                 {title}
@@ -45,9 +45,9 @@ export default function RelatedLinks({ title, links }: RelatedLinksProps) {
                         <Link
                             href={link.href}
                             style={{
-                                color: "white",
+                                color: "#1c2331",
                                 textDecoration: "underline",
-                                textDecorationColor: "rgba(255, 255, 255, 0.5)",
+                                textDecorationColor: "#1c2331",
                                 fontWeight: 500,
                             }}
                         >
