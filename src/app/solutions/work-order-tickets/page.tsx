@@ -7,7 +7,7 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Automated Work Order Tickets for Retail Operations & ROI",
-  description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI.",
+  description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI-driven retail audio analytics.",
   openGraph: {
     title: "Automated Work Order Tickets for Retail Operations & ROI",
     description: "From friction detected to fix in motion automatically.",

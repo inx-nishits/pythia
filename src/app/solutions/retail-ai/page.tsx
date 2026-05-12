@@ -7,7 +7,7 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Retail AI & Edge Intelligence for Checkout Optimization",
-  description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights and optimized operations.",
+  description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
   openGraph: {
     title: "Retail AI & Edge Intelligence for Checkout Optimization",
     description: "Transform checkout conversations into clear, prioritized actions with AI.",

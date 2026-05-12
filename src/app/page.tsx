@@ -23,7 +23,7 @@ import { faqs } from "./faq/faqs";
 
 export const metadata = {
   title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-  description: "Pythia captures in-store checkout conversations and analyzes them with AI to provide retail chains always-on insights, preventing missed sales and staff burnout.",
+  description: "Pythia captures in-store checkout conversations and analyzes them with AI to provide retail chains always-on insights, preventing missed sales and burnout.",
   keywords: [
     "retail AI",
     "in-store analytics",
