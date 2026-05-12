@@ -15,7 +15,7 @@ const HERO_SLIDES = [
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "/desktop-meet-pythia-store.webp",
-      alt: "Pythia dashboard, always-on retail insights at checkout",
+      alt: "Pythia dashboard showing always-on retail insights at checkout",
     },
   },
   {
@@ -23,7 +23,7 @@ const HERO_SLIDES = [
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "https://res.cloudinary.com/dsgulltma/image/upload/v1773915528/Screenshot_from_2026-03-19_15-47-36_gsyqj1.png",
-      alt: "Retail checkout and store operations",
+      alt: "Pythia AI analyzing retail checkout and store operations in real-time",
     },
   },
   {
@@ -31,7 +31,7 @@ const HERO_SLIDES = [
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "https://res.cloudinary.com/dsgulltma/image/upload/v1774499718/Screenshot_from_2026-03-26_10-05-02_q4y6f4.png",
-      alt: "Analytics and insights dashboard",
+      alt: "Pythia Store analytics and insights dashboard for managers",
     },
   },
 ];
