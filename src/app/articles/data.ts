@@ -11,7 +11,7 @@ export interface ArticleData {
 export const articles: ArticleData[] = [
   {
     slug: "close-the-turnover-tap",
-    title: "Close the Turnover Tap: Spotting and Fixing Training Gaps in Convenience Stores",
+    title: "Close the Turnover Tap: Fixing C-Store Training Gaps",
     excerpt: "Employee turnover drains profit through constant rehiring and inconsistent service. Learn how to pinpoint hidden training gaps and plug them before talent leaves.",
     readTime: "4 min read",
     date: "March 2026",
@@ -64,8 +64,8 @@ export const articles: ArticleData[] = [
   },
   {
     slug: "is-your-point-of-sale-leaking-profits",
-    title: "Is Your POS Leaking Profits? C-Store Equipment Downtime | Pythia",
-    excerpt: "Broken pumps and jammed card readers choke retail sales in real time. Discover how to surface hidden downtime and turn lost minutes into recovered store profit.",
+    title: "Is Your POS Leaking Profits? C-Store Equipment Tips",
+    excerpt: "Broken pumps and jammed card readers choke retail sales in real time. Learn how to surface hidden downtime and turn lost minutes into recovered store profit.",
     readTime: "5 min read",
     date: "March 2026",
     keyTakeaways: [
@@ -115,7 +115,7 @@ export const articles: ArticleData[] = [
   {
     slug: "when-your-team-sends-customer-to-competition",
     title: "When Your Team Sends the Customer to the Competition",
-    excerpt: "What happens when an employee tells a customer it's cheaper down the street? Explore the five common reasons for this revenue leak and learn how to fix it fast.",
+    excerpt: "When an employee tells a customer it's cheaper down the street, you're losing profit. Explore common reasons for this leak and learn how to fix it fast.",
     readTime: "4 min read",
     date: "March 2026",
     keyTakeaways: [
@@ -149,7 +149,7 @@ export const articles: ArticleData[] = [
   },
   {
     slug: "closing-the-action-gap-voice-tickets",
-    title: "Closing the Action Gap: Voice Tickets for Equipment Fixes and Frontline Coaching",
+    title: "Closing the Action Gap: AI Voice Tickets for Retail",
     excerpt: "Learn how Pythia Scorecard turns unstructured POS conversations into actionable tickets, closing the gap between store insight and operational improvements.",
     readTime: "3 min read",
     date: "March 2026",
