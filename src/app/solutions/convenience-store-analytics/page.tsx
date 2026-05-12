@@ -46,7 +46,7 @@ export default function ConvenienceStoreAnalyticsPage() {
         title="Convenience Store Analytics"
         intro="Pythia's Convenience Store Analytics is designed for the unique demands of the C-store environment. We help operators understand why their top-performing stores succeed and how to replicate that success across the entire network."
         problemHeadline="Network-level views hide store-level realities."
-        problemBody="In the C-store industry, traditional metrics like sales and labor spend are essential but incomplete. They don't capture the friction at the counter—the moment a customer decides not to add a hot food item, or the frustration caused by a malfunctioning POS system. Without a way to measure these qualitative moments, district managers are forced to rely on sporadic store visits and subjective feedback, leading to inconsistent coaching and missed opportunities to course-correct underperforming locations."
+        problemBody="In the C-store industry, traditional metrics like sales and labor spend are essential but incomplete. They don't capture the friction at the counter, such as the moment a customer decides not to add a hot food item, or the frustration caused by a malfunctioning POS system. Without a way to measure these qualitative moments, district managers are forced to rely on sporadic store visits and subjective feedback, leading to inconsistent coaching and missed opportunities to course-correct underperforming locations."
         solutionHeadline="Give every store a feedback loop they've never had before."
         solutionBody="Pythia turns everyday conversations at the counter into a continuous performance signal. By analyzing greetings, suggestive sells, loyalty captures, and service friction, we rank stores based on the behaviors that actually drive your business. District managers can see exactly where scripts are slipping and where service is thriving. This allows for hyper-targeted coaching and investment, focusing resources where they will move the needle fastest. With Pythia, you're not just managing stores; you're optimizing the human interactions that define your brand."
         useCases={[
@@ -101,7 +101,7 @@ export default function ConvenienceStoreAnalyticsPage() {
         ]}
         impactLabel="Impact snapshot"
         impactValue="Network-Wide Consistency"
-        impactDetail="Identify your 'interaction outliers'—both positive and negative—and use those insights to drive a unified brand experience."
+        impactDetail="Identify your 'interaction outliers' (both positive and negative) and use those insights to drive a unified brand experience."
         capabilities={[
           "Rank stores based on behaviors that drive revenue and retention, not just sales volume.",
           "Identify locations where friction causes walk-offs, complaints, or missed loyalty capture.",

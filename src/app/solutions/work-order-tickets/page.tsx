@@ -38,7 +38,7 @@ export default function WorkOrderTicketsPage() {
       <SolutionLayout
         eyebrow="Solution"
         title="Work Order Tickets"
-        intro="Introducing AI-driven ticketing: From Friction Detected to Fix in Motion. When Pythia flags a friction point, our AI Agent automatically converts it into a work order and routes it to the right team—no forms, no manual steps."
+        intro="Introducing AI-driven ticketing: From Friction Detected to Fix in Motion. When Pythia flags a friction point, our AI Agent automatically converts it into a work order and routes it to the right team, eliminating forms and manual steps."
         problemHeadline="Manual ticketing slows down resolution and kills ROI."
         problemBody="Traditional ticketing and work order processes are slow, manual, and prone to error. Often, an associate might mention an equipment issue to a manager who then forgets to log it, or logs it hours later with incomplete info. This leads to delays in resolution, miscommunication with maintenance teams, and a general acceptance of friction. For multi-unit operators, this lack of automated visibility makes it impossible to track the true impact of equipment downtime on store performance."
         solutionHeadline="Automated ticketing directly from customer interactions."
