@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-    description: "Capture what your stores don’t report. Pythia listens at the counter and analyses checkout interactions in near real-time.",
+    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses checkout interactions, and delivers actionable insights in near real-time.",
     url: "/",
     siteName: "Pythia Scorecard",
     images: [
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-    description: "Capture what your stores don’t report. Pythia listens at the counter and delivers actionable insights.",
+    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses interactions, and delivers actionable retail insights in near real-time.",
     images: ["/og-image.jpg"],
   },
   verification: {

@@ -57,7 +57,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-    description: "Capture what your stores don’t report. Pythia listens at the counter and delivers actionable insights.",
+    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses interactions, and delivers actionable retail insights in near real-time.",
     images: ["/og-image.jpg"],
   }
 };
