@@ -10,7 +10,7 @@ export const metadata = {
   description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
   openGraph: {
     title: "Retail AI & Edge Intelligence for Checkout Optimization",
-    description: "Transform checkout conversations into clear, prioritized actions with AI.",
+    description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
     url: "/solutions/retail-ai/",
   },
   alternates: {
@@ -19,7 +19,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Retail AI & Edge Intelligence for Checkout Optimization",
-    description: "Transform checkout conversations into actionable insights.",
+    description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
   }
 };
 
@@ -40,7 +40,7 @@ export default function RetailAiPage() {
         title="Retail AI"
         intro="Bring an always-on AI operator into every store, transforming noisy checkout conversations into clear, prioritized actions for your frontline team."
         problemHeadline="AI is powerful, but most teams don't see it where it matters most."
-        problemBody="Many AI projects in retail fail to cross the 'last mile' to the store floor. While executives have access to powerful predictive models, the managers and staff who actually interact with customers are often left with outdated checklists and sporadic audits. This intelligence gap means that operational issues—like missed selling opportunities or service friction—are only identified after they've already impacted the bottom line. Traditional AI is often too slow and too disconnected from daily store routines."
+        problemBody="Many AI projects in retail fail to cross the 'last mile' to the store floor. While executives have access to powerful predictive models, the managers and staff who actually interact with customers are often left with outdated checklists and sporadic audits. This intelligence gap means that operational issues, such as missed selling opportunities or service friction, are only identified after they've already impacted the bottom line. Traditional AI is often too slow and too disconnected from daily store routines."
         solutionHeadline="Put AI directly on top of your most important customer touchpoint."
         solutionBody="Pythia's Retail AI is built to be a practical, daily assistant for your frontline teams. We deploy Edge AI directly at the counter, where it interprets interactions as they happen. Instead of overwhelming managers with more data, our system filters through the noise to highlight the few moments that truly matter. Whether it's identifying a technical issue at a register or spotting a training gap, Pythia delivers actionable prompts and summaries tied to real conversations. This is AI that shows up in your team's daily routines."
         useCases={[

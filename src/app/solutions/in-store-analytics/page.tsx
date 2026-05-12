@@ -10,7 +10,7 @@ export const metadata = {
   description: "Gain deeper insights into store performance by analyzing checkout conversations. Identify missed upsells and service friction with AI-driven audio analytics.",
   openGraph: {
     title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
-    description: "See what your existing reports miss with continuous operational insight.",
+    description: "Gain deeper insights into store performance by analyzing checkout conversations. Identify missed upsells and service friction with AI-driven audio analytics.",
     url: "/solutions/in-store-analytics/",
   },
   alternates: {
@@ -19,7 +19,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
-    description: "Analyze checkout conversations to boost performance.",
+    description: "Gain deeper insights into store performance by analyzing checkout conversations. Identify missed upsells and service friction with AI-driven audio analytics.",
   }
 };
 
@@ -43,7 +43,7 @@ export default function InStoreAnalyticsPage() {
         problemHeadline="Store reports tell you what happened, not why it happened."
         problemBody="Traditional retail reporting is fundamentally broken. Dashboards are filled with lagging indicators that arrive too late to make a difference. When a store's performance dips, managers are left guessing. Is it a staffing issue? A training gap? Or perhaps a technical friction point at the point of sale? Without objective data on what is actually being said at the counter, coaching becomes subjective and ineffective. This lack of visibility leads to missed upsell opportunities, inconsistent service quality, and eventually, customer churn that goes unexplained."
         solutionHeadline="Hear the story behind every number in your P&L."
-        solutionBody="Pythia transforms the checkout counter from a black box into a source of strategic insight. Using edge AI, we capture audio at the point of interaction and convert it into structured analytics. Our system automatically identifies key moments—greetings, upsell attempts, loyalty program mentions, and service friction. This data is aggregated and presented in a way that allows operators to compare performance across stores, shifts, and individual team members. Move from reactive management to proactive leadership, ensuring that every customer receives the high-quality experience your brand promises."
+        solutionBody="Pythia transforms the checkout counter from a black box into a source of strategic insight. Using edge AI, we capture audio at the point of interaction and convert it into structured analytics. Our system automatically identifies key moments including greetings, upsell attempts, loyalty program mentions, and service friction. This data is aggregated and presented in a way that allows operators to compare performance across stores, shifts, and individual team members. Move from reactive management to proactive leadership, ensuring that every customer receives the high-quality experience your brand promises."
         useCases={[
           {
             title: "Regional Performance Benchmarking",

@@ -16,7 +16,7 @@ export const metadata = {
   ],
   openGraph: {
     title: "Terms & Conditions: User Agreement for Pythia Scorecard",
-    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics, ensuring clarity on our in-store audio intelligence services.",
+    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics and always-on in-store audio intelligence services for store operators.",
     url: "/terms-of-use/",
     siteName: "Pythia Scorecard",
     images: [
@@ -35,7 +35,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Terms & Conditions: User Agreement for Pythia Scorecard",
-    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics.",
+    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics and always-on in-store audio intelligence services for store operators.",
     images: ["/og-image.jpg"],
   }
 };

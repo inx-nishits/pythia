@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Pythia Scorecard Pricing: ROI-Driven Retail AI Insights",
-    description: "Simple, transparent pricing for retail AI insights.",
+    description: "Explore Pythia Store's transparent pricing. Get always-on retail AI insights at checkout with no hidden fees and clear monthly implementation costs for your stores.",
     url: "/pricing/",
   },
 };

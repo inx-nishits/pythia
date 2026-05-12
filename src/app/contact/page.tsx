@@ -20,7 +20,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Contact Pythia Scorecard | Request a Demo or Get Support",
-    description: "Talk to us about how Pythia can transform your in-store experience with audio-based AI insights.",
+    description: "Reach out to Pythia to schedule a demo, ask questions about our device and dashboard, or discuss how we can help your retail operations with actionable AI insights.",
     url: "/contact/",
     site_name: "Pythia Scorecard",
     images: [
@@ -36,7 +36,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Contact Pythia Scorecard | Request a Demo or Get Support",
-    description: "Schedule a demo or get support for Pythia Store's AI analytics.",
+    description: "Reach out to Pythia to schedule a demo, ask questions about our device and dashboard, or discuss how we can help your retail operations with actionable AI insights.",
     images: ["/og-image.jpg"],
   }
 };

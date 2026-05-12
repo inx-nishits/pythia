@@ -16,7 +16,7 @@ export const metadata = {
   ],
   openGraph: {
     title: "Privacy Policy & Data Security | Pythia Scorecard Platform",
-    description: "Understand how Pythia Scorecard ensures the privacy and security of your data through our comprehensive privacy policy for retail AI analytics.",
+    description: "Understand how Pythia Scorecard ensures the privacy and security of your data through our comprehensive policy for retail AI and in-store audio analytics.",
     url: "/privacy-policy/",
     siteName: "Pythia Scorecard",
     images: [
@@ -35,7 +35,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Privacy Policy & Data Security | Pythia Scorecard Platform",
-    description: "Understand how Pythia Scorecard ensures the privacy and security of your data.",
+    description: "Understand how Pythia Scorecard ensures the privacy and security of your data through our comprehensive policy for retail AI and in-store audio analytics.",
     images: ["/og-image.jpg"],
   }
 };
