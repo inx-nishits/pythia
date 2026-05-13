@@ -10,7 +10,9 @@ import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 import { trackEvent } from "../utils/gtm";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
-import { PopupModal } from "react-calendly";
+import dynamic from "next/dynamic";
+
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
 
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
@@ -398,7 +400,7 @@ export default function PricingPage() {
 
       </main>
       <Footer />
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}

@@ -6,8 +6,10 @@ import { Sections } from "@/app/sections";
 import Button from "@/app/component/Button";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { PopupModal } from "react-calendly";
 import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
+import dynamic from "next/dynamic";
+
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
 
 const HERO_SLIDES = [
   {
@@ -93,10 +95,6 @@ function HeroSection() {
                 Get the insights{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-coral italic">your stores don’t report.</span>
               </motion.h1>
-
-              <div className="lg:hidden order-first mb-6 -mx-2">
-                <HeroImageSlider activeSlide={activeSlide} />
-              </div>
 
               <div className="flex flex-col items-center lg:items-start w-full">
                 <div className="relative w-full min-h-[140px] sm:min-h-[128px] overflow-hidden">
@@ -189,14 +187,14 @@ function HeroSection() {
               </motion.div>
             </div>
 
-            <div className="hidden lg:block order-2 relative min-w-0">
+            <div className="order-1 lg:order-2 relative min-w-0 mb-6 lg:mb-0 -mx-2 lg:mx-0">
               <HeroImageSlider activeSlide={activeSlide} />
             </div>
           </div>
         </div>
       </section>
 
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
@@ -230,7 +228,7 @@ function HeroImageSlider({ activeSlide }: { activeSlide: number }) {
               alt={HERO_SLIDES[activeSlide].image.alt}
               fill
               className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               priority={activeSlide === 0}
             />
           </motion.div>
