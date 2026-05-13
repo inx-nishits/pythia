@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Button from "@/app/component/Button";
-import { PopupModal } from "react-calendly";
+import dynamic from "next/dynamic";
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
 import { clearDemoSource } from "@/app/utils/demoSource";
 
 interface SolutionLayoutProps {
@@ -206,7 +207,7 @@ export default function SolutionLayout({
         </section>
       </main>
 
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}

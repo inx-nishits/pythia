@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import { chatAction } from "@/app/actions/chat";
 import { trackEvent } from "../../utils/gtm";
-import { PopupModal } from "react-calendly";
+import dynamic from "next/dynamic";
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
 import {
   DEMO_SOURCES,
   setDemoSource,
@@ -766,7 +767,7 @@ export default function ChatBot() {
         </motion.button>
       </div>
 
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}

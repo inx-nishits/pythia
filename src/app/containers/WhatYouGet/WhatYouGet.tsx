@@ -6,7 +6,8 @@ import { Trophy, Target, FileJson, History, Calendar } from "lucide-react";
 import { Sections } from "@/app/sections";
 import Image from "next/image";
 import Button from "@/app/component/Button";
-import { PopupModal } from "react-calendly";
+import dynamic from "next/dynamic";
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
 import { trackEvent } from "@/app/utils/gtm";
 import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
 
@@ -170,7 +171,7 @@ function WhatYouGet() {
         ))}
       </div>
 
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
