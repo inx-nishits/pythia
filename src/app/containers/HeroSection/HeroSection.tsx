@@ -88,7 +88,7 @@ function HeroSection() {
             <div className="flex flex-col order-2 lg:order-1 text-center lg:text-left min-w-0">
               <motion.h1
                 variants={containerVariants}
-                initial="hidden"
+                initial={false}
                 animate="visible"
                 className="text-[28px] min-[400px]:text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.05] font-extrabold text-[#0F172A] tracking-tight text-balance mb-4 lg:mb-5 break-words"
               >
@@ -206,12 +206,7 @@ function HeroSection() {
 
 function HeroImageSlider({ activeSlide }: { activeSlide: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 24 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="relative group min-w-0 w-full"
-    >
+    <motion.div className="relative group min-w-0 w-full">
       <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-br from-brand-teal/5 to-blue-500/5 rounded-[24px] lg:rounded-[40px] blur-2xl opacity-60 group-hover:opacity-80 transition-opacity pointer-events-none" />
       <div className="relative rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] overflow-hidden border border-slate-200/80 shadow-[0_32px_64px_rgba(15,23,42,0.12)] aspect-[16/10] lg:aspect-[4/3] bg-slate-200 w-full min-w-0">
         <AnimatePresence initial={false}>
@@ -230,15 +225,16 @@ function HeroImageSlider({ activeSlide }: { activeSlide: number }) {
               className="object-cover object-center"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               priority={activeSlide === 0}
+              fetchPriority={activeSlide === 0 ? "high" : "auto"}
             />
           </motion.div>
         </AnimatePresence>
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-900/30 overflow-hidden">
           <motion.div
-            className="h-full bg-brand-teal"
-            initial={{ width: "0%" }}
-            animate={{ width: `${((activeSlide + 1) / HERO_SLIDES.length) * 100}%` }}
-            transition={{ duration: 0.35 }}
+            className="h-full bg-brand-teal origin-left"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: (activeSlide + 1) / HERO_SLIDES.length }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
           />
         </div>
       </div>
