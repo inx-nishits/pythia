@@ -9,10 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 import { trackEvent } from "../utils/gtm";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
-import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
-import dynamic from "next/dynamic";
-
-const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
+import { useRouter } from "next/navigation";
 
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
@@ -176,7 +173,7 @@ export default function PricingPage() {
     { name: "Pricing", path: "/pricing/" },
   ]);
 
-  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -282,8 +279,7 @@ export default function PricingPage() {
                             plan: "professional",
                             price: String(TOTAL_PRICE),
                           });
-                          setDemoSource(DEMO_SOURCES.pricing);
-                          setIsCalendlyOpen(true);
+                          router.push("/contact/src=pricing");
                         }}
                         className="flex items-center justify-center gap-3 w-full rounded-2xl font-bold text-lg py-5 bg-brand-navy text-white hover:bg-slate-800 shadow-xl transition-all duration-300"
                       >
@@ -400,16 +396,6 @@ export default function PricingPage() {
 
       </main>
       <Footer />
-      <PopupModalDynamic
-        url="https://calendly.com/nick-pythiascorecard/new-meeting"
-        onModalClose={() => setIsCalendlyOpen(false)}
-        open={isCalendlyOpen}
-        rootElement={
-          typeof window !== "undefined"
-            ? document.body
-            : (undefined as unknown as HTMLElement)
-        }
-      />
     </>
   );
 }

@@ -21,6 +21,14 @@ interface PythiaFormProps {
   submitClassName?: string;
   formClassName: string;
   requestedDemo: boolean;
+  source?: string[];
+}
+
+function buildContactSuccessUrl(pathname: string) {
+  const decodedPathname = decodeURIComponent(pathname).replace(/\/+$/, "");
+  const contactPath = decodedPathname === "/contact" ? "/contact" : decodedPathname.replace(/\/success$/, "");
+
+  return `${contactPath}/success`;
 }
 
 function SubmitButton({
@@ -85,6 +93,11 @@ function PythiaForm({
       trackEvent("demo_request_complete", {
         demo_requested: requestedDemo,
       });
+
+      if (typeof window !== "undefined") {
+        const newUrl = buildContactSuccessUrl(window.location.pathname);
+        window.history.replaceState(window.history.state, "", newUrl);
+      }
     }
   }, [state.status, requestedDemo]);
 
@@ -116,8 +129,8 @@ function PythiaForm({
   }
 
   return (
-    <form 
-      className={formClassName} 
+    <form
+      className={formClassName}
       action={formAction}
       onFocus={handleFormStart}
     >

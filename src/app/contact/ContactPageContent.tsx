@@ -19,7 +19,7 @@ const contactInfo = [
   },
 ];
 
-export default function ContactPageContent() {
+export default function ContactPageContent({ source }: { source?: string[] }) {
   return (
     <main className="relative px-4 sm:px-6 py-20 sm:py-24 lg:py-[120px] xl:py-[160px] bg-brand-navy overflow-hidden min-h-[80vh]">
       {/* Background */}
@@ -107,6 +107,7 @@ export default function ContactPageContent() {
               submitClassName="w-full py-4 rounded-2xl text-[16px] font-bold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
               formClassName="flex flex-col gap-5 w-full"
               requestedDemo={false}
+              source={source}
             />
           </div>
         </motion.div>
