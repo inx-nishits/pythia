@@ -104,7 +104,7 @@ export default function ContactPageContent({ source }: { source?: string[] }) {
             <PythiaForm
               hiddenFields={{}}
               submitText="Send message"
-              submitClassName="w-full py-4 rounded-2xl text-[16px] font-bold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+              submitClassName="w-full py-4 rounded-2xl text-[16px] font-bold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
               formClassName="flex flex-col gap-5 w-full"
               requestedDemo={false}
               source={source}
