@@ -1,7 +1,7 @@
 import Script from "next/script";
-import Footer from "../containers/Footer";
-import Header from "../containers/Header";
-import ContactPageContent from "./ContactPageContent";
+import Footer from "../../containers/Footer";
+import Header from "../../containers/Header";
+import ContactPageContent from "../ContactPageContent";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
@@ -42,7 +42,13 @@ export const metadata = {
 };
 
 
-export default function Contact() {
+export default async function Contact({
+    params,
+}: {
+    params: Promise<{ source: string[] }>;
+}) {
+    const { source } = await params;
+
     const breadcrumbSchema = createBreadcrumbListSchema([
         { name: "Contact", path: "/contact/" },
     ]);
@@ -53,7 +59,7 @@ export default function Contact() {
                 {JSON.stringify(breadcrumbSchema)}
             </Script>
             <Header />
-            <ContactPageContent />
+            <ContactPageContent source={source} />
             <Footer />
         </>
     );
