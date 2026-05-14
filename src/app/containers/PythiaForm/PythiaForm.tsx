@@ -195,6 +195,7 @@ function PythiaForm({
             className={`${inputStyles} pl-[46px] group-hover:border-slate-300 transition-all [&>input]:bg-transparent [&>input]:border-none [&>input]:outline-none [&>input]:w-full`}
             placeholder="Phone number (optional)"
             defaultCountry="US"
+            flagUrl="https://unpkg.com/country-flag-icons/3x2/{XX}.svg"
             value={phoneValue}
             onChange={(value) => setPhoneValue(value ?? "")}
           />
