@@ -45,11 +45,11 @@ export const faqs: FAQItem[] = [
   {
     question: "How does Pythia handle customer privacy?",
     answer:
-      "Pythia Scorecard is designed with privacy as a core requirement. Audio is processed locally on the device using edge AI, and customer voice recordings and personally identifiable information are not stored in the cloud. This architecture helps operators gain operational insight while limiting unnecessary retention of sensitive customer data.",
+      "Privacy is our core foundation. All audio is transmitted and processed securely on our AWS servers in America.",
   },
   {
     question: "Will this integrate with my existing POS system?",
     answer:
-      "Pythia Scorecard is built to work as a standalone intelligence layer and can also integrate with existing retail systems. The platform supports connections with major providers such as PDI, Verifone, and Gilbarco when operators want to correlate conversation insights with transaction and operational data.",
+      "Yes. Pythia is designed to be POS agnostic because we are a standalone intelligence layer that sits along side your POS. Our platform works with any POS.",
   },
 ];
