@@ -48,6 +48,13 @@ function HeroSection() {
     const t = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, SLIDE_DURATION_MS);
+
+    if (window.location.hash === '#book-demo') {
+      setIsCalendlyOpen(true);
+      // Remove the hash from the URL so it doesn't reopen if the user refreshes
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
     return () => clearInterval(t);
   }, []);
 
@@ -141,10 +148,9 @@ function HeroSection() {
                           type="button"
                           aria-label={`Go to slide ${i + 1}`}
                           onClick={() => setActiveSlide(i)}
-                          className={`rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 ${
-                            i === activeSlide
-                              ? "w-8 h-3 bg-brand-teal"
-                              : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
+                          className={`rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 ${i === activeSlide
+                            ? "w-8 h-3 bg-brand-teal"
+                            : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
                             }`}
                         />
                       ))}
@@ -168,7 +174,7 @@ function HeroSection() {
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
               >
-                <Button 
+                <Button
                   onClick={() => {
                     setDemoSource(DEMO_SOURCES.homepage);
                     setIsCalendlyOpen(true);
