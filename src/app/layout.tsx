@@ -73,7 +73,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses checkout interactions, and delivers actionable insights in near real-time.",
+    description:
+      "Capture what your stores don’t report. Pythia listens at the counter, analyses checkout interactions, and delivers actionable insights in near real-time.",
     url: "/",
     siteName: "Pythia Scorecard",
     images: [
@@ -81,22 +82,22 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Pythia Store device analysing retail checkout conversations"
-      }
+        alt: "Pythia Store device analysing retail checkout conversations",
+      },
     ],
-    type: "website"
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses interactions, and delivers actionable retail insights in near real-time.",
+    description:
+      "Capture what your stores don’t report. Pythia listens at the counter, analyses interactions, and delivers actionable retail insights in near real-time.",
     images: ["/og-image.jpg"],
   },
   verification: {
-    google: "UAIuSsjeIL10hdxvXXtCLVxvSyJO-qB2MV44QKQOrTI",
-  }
+    google: "eziGIn7apa5cqpvc8_fq7U1t0t5rGkL2IAMheb4DFKE",
+  },
 };
-
 
 import ClientSideComponents from "./component/ClientSideComponents";
 import CookieConsent from "./component/CookieConsent";
@@ -142,7 +143,10 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`} suppressHydrationWarning>
+      <body
+        className={`${instrumentSans.variable} ${robotoFont.variable} antialiased`}
+        suppressHydrationWarning
+      >
         {/* GTM Noscript (Fallback) */}
         <noscript>
           <iframe
