@@ -11,8 +11,8 @@ export interface ArticleData {
 export const articles: ArticleData[] = [
   {
     slug: "close-the-turnover-tap",
-    title: "Close the Turnover Tap: Spotting and Fixing Training Gaps in Convenience Stores",
-    excerpt: "Employee turnover drains profit through constant rehiring and inconsistent service. Learn how to pinpoint hidden training gaps and plug them before talent walks out the door.",
+    title: "Close the Turnover Tap: Fixing C-Store Training Gaps",
+    excerpt: "Employee turnover drains profit through constant rehiring and inconsistent service. Learn how to pinpoint hidden training gaps and plug them before talent leaves.",
     readTime: "4 min read",
     date: "March 2026",
     keyTakeaways: [
@@ -46,7 +46,7 @@ export const articles: ArticleData[] = [
       </ul>
 
       <h2>New Tools for Early Detection</h2>
-      <p>Voice-analytics systems at the register are changing the timeline. Instead of waiting for end-of-month reports, these platforms listen to real interactions and flag moments that hint at a skill gap, such as an uncertain tone during a return, a missed greeting, or a customer question that stumps the clerk.</p>
+      <p><a href="/solutions/in-store-analytics/" title="In-Store Analytics Solutions">Voice-analytics systems at the register</a> are changing the timeline. Instead of waiting for end-of-month reports, these platforms listen to real interactions and flag moments that hint at a skill gap, such as an uncertain tone during a return, a missed greeting, or a customer question that stumps the clerk.</p>
       <p>Because feedback arrives quickly, managers can coach while the example is fresh, turning a potential resignation into a quick learning win.</p>
       
       <h2>Five Steps to Build a Real-Time Coaching Loop</h2>
@@ -64,8 +64,8 @@ export const articles: ArticleData[] = [
   },
   {
     slug: "is-your-point-of-sale-leaking-profits",
-    title: "Is Your Point of Sale Leaking Profits? Catching Equipment Failures Before They Drain the Till",
-    excerpt: "Broken pumps and jammed card readers choke sales in real time. Discover how to surface hidden downtime and turn lost minutes into recovered profit.",
+    title: "Is Your POS Leaking Profits? C-Store Equipment Tips",
+    excerpt: "Broken pumps and jammed card readers choke retail sales in real time. Learn how to surface hidden downtime and turn lost minutes into recovered store profit.",
     readTime: "5 min read",
     date: "March 2026",
     keyTakeaways: [
@@ -96,7 +96,7 @@ export const articles: ArticleData[] = [
       </ul>
 
       <h2>Listening for Early Warnings</h2>
-      <p>Frontline chatter is an untapped sensor network. Phrases like "Pump 3 won't start," "Card reader keeps freezing," or "No squeegee water at pump 5" surface problems quickly. Modern audio analytics tools can capture those remarks at the register, convert them into text, and flag key words tied to equipment.</p>
+      <p>Frontline chatter is an untapped sensor network. Phrases like "Pump 3 won't start," "Card reader keeps freezing," or "No squeegee water at pump 5" surface problems quickly. <a href="/solutions/work-order-tickets/" title="Work Order Tickets Automation">Modern audio analytics tools</a> can capture those remarks at the register, convert them into text, and flag key words tied to equipment.</p>
       <p>With real-time alerts, managers can dispatch repairs quickly before queues grow, track repeat failures to spot chronic issues, and view downtime in dollars by correlating alert times with lost transactions.</p>
       
       <h2>Five Steps to Build a Proactive Maintenance Loop</h2>
@@ -115,7 +115,7 @@ export const articles: ArticleData[] = [
   {
     slug: "when-your-team-sends-customer-to-competition",
     title: "When Your Team Sends the Customer to the Competition",
-    excerpt: "What happens when an employee tells a customer it's cheaper down the street? Explore the five common reasons for this revenue leak and how to fix it.",
+    excerpt: "When an employee tells a customer it's cheaper down the street, you're losing profit. Explore common reasons for this leak and learn how to fix it fast.",
     readTime: "4 min read",
     date: "March 2026",
     keyTakeaways: [
@@ -149,8 +149,8 @@ export const articles: ArticleData[] = [
   },
   {
     slug: "closing-the-action-gap-voice-tickets",
-    title: "Closing the Action Gap: Voice Tickets for Equipment Fixes and Frontline Coaching",
-    excerpt: "Learn how Pythia Scorecard turns unstructured POS conversations into actionable tickets, closing the gap between insight and operational improvement.",
+    title: "Closing the Action Gap: AI Voice Tickets for Retail",
+    excerpt: "Learn how Pythia Scorecard turns unstructured POS conversations into actionable tickets, closing the gap between store insight and operational improvements.",
     readTime: "3 min read",
     date: "March 2026",
     keyTakeaways: [
@@ -169,7 +169,7 @@ export const articles: ArticleData[] = [
       
       <h2>Two ticket types from one source: store voice</h2>
       <h3>1. Equipment tickets</h3>
-      <p>Pythia Scorecard flags phrases tied to failures, such as pump issues or card reader freezes, then routes a ticket to maintenance with priority and location. Faster alert to dispatch reduces revenue loss from offline equipment.</p>
+      <p><a href="/solutions/convenience-store-analytics/" title="Convenience Store Analytics">Pythia Scorecard</a> flags phrases tied to failures, such as pump issues or card reader freezes, then routes a ticket to maintenance with priority and location. Faster alert to dispatch reduces revenue loss from offline equipment.</p>
       
       <h3>2. People tickets</h3>
       <p>Pythia Scorecard flags coaching needs from voice patterns at the counter, such as repeated confusion, uncertainty during checkout steps, or escalating customer tension. The platform drafts a coaching ticket under categories such as Employee Sentiment or Operational Red Flags, then routes the ticket to a store manager.</p>

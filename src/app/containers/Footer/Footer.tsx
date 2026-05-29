@@ -16,7 +16,7 @@ const siteLinks = [
       },
       {
         name: 'Solutions',
-        href: '/solutions/in-store-analytics/',
+        href: '/#solutions',
       },
       {
         name: 'Resources',
@@ -28,7 +28,7 @@ const siteLinks = [
       },
       {
         name: 'FAQ',
-        href: '/faq/',
+        href: '/#faq',
       },
       {
         name: 'About',
@@ -73,9 +73,9 @@ function Footer() {
               The in-store audio-intel device and dashboard for modern retail chains. Trusted by 100+ locations.
             </p>
             <div className="flex gap-4 pt-1">
-              <a 
-                href="https://www.linkedin.com/company/pythia-scorecard" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/company/pythia-scorecard"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center bg-brand-teal/10 text-brand-teal hover:bg-brand-teal hover:text-white transition-all duration-300"
                 aria-label="Follow us on LinkedIn"

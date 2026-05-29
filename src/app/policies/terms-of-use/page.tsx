@@ -1,9 +1,11 @@
+import Script from "next/script";
 import Link from 'next/link';
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 import '../policies.css';
 
 export const metadata = {
-  title: "Terms & Conditions | Pythia Scorecard",
-  description: "Review the terms of use for Pythia Scorecard’s always-on retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence services.",
+  title: "Terms & Conditions: User Agreement for Pythia Scorecard",
+  description: "Review the terms of use for Pythia Scorecard’s always-on retail AI analytics platform, outlining the rules and guidelines for our in-store audio intelligence.",
   keywords: [
     "Pythia Scorecard terms",
     "retail AI terms of use",
@@ -13,8 +15,8 @@ export const metadata = {
     "Pythia service agreement"
   ],
   openGraph: {
-    title: "Terms & Conditions | Pythia Scorecard",
-    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics, ensuring clarity on our in-store audio intelligence services.",
+    title: "Terms & Conditions: User Agreement for Pythia Scorecard",
+    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics and always-on in-store audio intelligence services for store operators.",
     url: "/terms-of-use/",
     siteName: "Pythia Scorecard",
     images: [
@@ -32,27 +34,35 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms & Conditions | Pythia Scorecard",
-    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics.",
+    title: "Terms & Conditions: User Agreement for Pythia Scorecard",
+    description: "Explore the terms governing the use of Pythia Scorecard’s AI-driven retail analytics and always-on in-store audio intelligence services for store operators.",
     images: ["/og-image.jpg"],
   }
 };
 
 export default function TermsOfUse() {
-  return (
-    <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px] bg-[#f8fafc]">
-      <div className="max-w-[1100px] mx-auto w-full min-w-0">
-        <div className="mb-10 space-y-3 max-w-3xl">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]">
-            Policies
-          </span>
-          <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tight leading-[1.05]">
-            Terms of Use
-          </h1>
-        </div>
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Terms of Use", path: "/terms-of-use/" },
+  ]);
 
-        <div className="policyPage rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
-          <div className="page-content">
+  return (
+    <>
+      <Script id="terms-of-use-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
+      <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px] bg-[#f8fafc]">
+        <div className="max-w-[1100px] mx-auto w-full min-w-0">
+          <div className="mb-10 space-y-3 max-w-3xl">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.25em]">
+              Policies
+            </span>
+            <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tight leading-[1.05]">
+              Terms of Use
+            </h1>
+          </div>
+
+          <div className="policyPage rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
+            <div className="page-content">
         <p>
           <strong className="main">1. Acceptance of the Terms of Use</strong>These terms of use are entered into by and
           between you and Pythia Store LLC (&ldquo;<strong>Pythia Store</strong>,&rdquo; &ldquo;
@@ -713,9 +723,10 @@ export default function TermsOfUse() {
         <p>
           <strong>&nbsp;</strong>
         </p>
-      </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

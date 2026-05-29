@@ -7,7 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { trackEvent } from "../../utils/gtm";
 
 interface NavItemProps {
@@ -49,54 +49,25 @@ function Header() {
   const [isInsightsHovered, setIsInsightsHovered] = useState(false);
   const [isInsightsMobileOpen, setIsInsightsMobileOpen] = useState(false);
 
-  useEffect(() => {
-    let scrollEndTimer: ReturnType<typeof setTimeout>;
+  const { scrollY } = useScroll();
 
-    const onScroll = () => {
-      const y = window.scrollY;
-      const delta = y - lastScrollY.current;
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const delta = latest - lastScrollY.current;
 
-      setScrolled(y > 20);
+    setScrolled(latest > 20);
 
-      if (mobileOpen) {
-        setHeaderHidden(false);
-      } else if (y <= NEAR_TOP_PX) {
-        setHeaderHidden(false);
-      } else if (delta > 0) {
-        setHeaderHidden(true);
-      } else if (delta < 0) {
-        setHeaderHidden(false);
-      }
-
-      lastScrollY.current = y;
-
-      clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(() => {
-        lastScrollY.current = window.scrollY;
-        if (window.scrollY <= NEAR_TOP_PX) setHeaderHidden(false);
-      }, 100);
-    };
-
-    const onScrollEnd = () => {
-      lastScrollY.current = window.scrollY;
-      if (window.scrollY <= NEAR_TOP_PX) setHeaderHidden(false);
-    };
-
-    lastScrollY.current = window.scrollY;
-    if (window.scrollY <= NEAR_TOP_PX) setHeaderHidden(false);
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    if (typeof window !== "undefined" && "onscrollend" in window) {
-      window.addEventListener("scrollend", onScrollEnd);
+    if (mobileOpen) {
+      setHeaderHidden(false);
+    } else if (latest <= NEAR_TOP_PX) {
+      setHeaderHidden(false);
+    } else if (delta > 0) {
+      setHeaderHidden(true);
+    } else if (delta < 0) {
+      setHeaderHidden(false);
     }
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(scrollEndTimer);
-      if (typeof window !== "undefined" && "onscrollend" in window) {
-        window.removeEventListener("scrollend", onScrollEnd);
-      }
-    };
-  }, [mobileOpen]);
+
+    lastScrollY.current = latest;
+  });
 
   // Set active nav based on current route for top-level pages
   useEffect(() => {
@@ -104,7 +75,7 @@ function Header() {
     if (pathname.startsWith("/resources")) setActiveItem("insights");
     else if (pathname.startsWith("/articles")) setActiveItem("articles");
     else if (pathname.startsWith("/pricing")) setActiveItem("pricing");
-    else if (pathname.startsWith("/about") || pathname.startsWith("/faq") || pathname.startsWith("/contact")) setActiveItem("company");
+    else if (pathname.startsWith("/about") || pathname.startsWith("/contact")) setActiveItem("company");
     else {
       // On home and other root-level routes, default to first section
       setActiveItem("why");
@@ -274,8 +245,8 @@ function Header() {
                         About Us
                       </Link>
                       <Link
-                        href="/faq/"
-                        className={`px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 ${pathname === "/faq/" ? "text-brand-navy bg-slate-50/50" : "text-slate-600 hover:text-brand-navy"}`}
+                        href="/#faq"
+                        className="px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 text-slate-600 hover:text-brand-navy"
                         onClick={() => setIsCompanyHovered(false)}
                       >
                         FAQ
@@ -497,8 +468,8 @@ function Header() {
                           </li>
                           <li>
                             <Link
-                              href="/faq/"
-                              className={`block text-[16px] font-medium transition-colors ${pathname === "/faq/" ? "text-brand-navy" : "text-slate-600"}`}
+                              href="/#faq"
+                              className="block text-[16px] font-medium transition-colors text-slate-600"
                               onClick={() => setMobileOpen(false)}
                             >
                               FAQ

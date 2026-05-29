@@ -51,10 +51,9 @@ function DemoAssetsSection() {
             <div className="relative w-full aspect-square sm:aspect-video lg:h-[500px] flex items-center justify-center">
               <Image
                 src="https://res.cloudinary.com/dsgulltma/image/upload/v1774346958/Gemini_Generated_Image_7hfrzj7hfrzj7hfr_1_apuzkt.png"
-                alt="Voice to Ticket automation visualization"
+                alt="Pythia AI Voice to Ticket automation automatically routing work orders from cashier conversations"
                 fill
                 className="object-contain"
-                priority
               />
             </div>
           </div>

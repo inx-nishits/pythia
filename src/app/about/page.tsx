@@ -1,13 +1,15 @@
 import Image from "next/image";
+import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
-  title: "About Pythia Scorecard",
-  description: "Learn about the mission behind Pythia Scorecard - giving retail leaders a clear, objective view of every customer interaction through AI-driven audio intelligence.",
+  title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
+  description: "Learn about the mission behind Pythia Scorecard, giving retail leaders an objective view of every customer interaction through AI-driven audio intelligence.",
   openGraph: {
-    title: "About Pythia Scorecard",
-    description: "Retail operations insights built for leaders who care about every interaction.",
+    title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
+    description: "Learn how Pythia Scorecard transforms retail operations by giving leaders an objective view of every customer interaction through AI-driven audio intelligence.",
     url: "/about/",
   },
   alternates: {
@@ -15,14 +17,21 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Pythia Scorecard",
-    description: "Retail operations insights built for leaders who care about every interaction.",
+    title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
+    description: "Learn how Pythia Scorecard transforms retail operations by giving leaders an objective view of every customer interaction through AI-driven audio intelligence.",
   }
 };
 
 export default function AboutPage() {
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "About", path: "/about/" },
+  ]);
+
   return (
     <>
+      <Script id="about-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[80px]">
@@ -100,4 +109,3 @@ export default function AboutPage() {
     </>
   );
 }
-

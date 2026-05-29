@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { MotionSpan, MotionH2 } from "@/app/component/MotionWrapper";
 import Button from "@/app/component/Button";
-import { PopupModal } from "react-calendly";
+import dynamic from "next/dynamic";
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
+import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
 
 function ConversionSection() {
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
@@ -36,7 +38,10 @@ function ConversionSection() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-3">
               <Button 
-                onClick={() => setIsCalendlyOpen(true)}
+                onClick={() => {
+                  setDemoSource(DEMO_SOURCES.homepage);
+                  setIsCalendlyOpen(true);
+                }}
                 className="w-full py-3.5 rounded-full bg-brand-teal text-brand-navy hover:bg-brand-teal-hover text-[14px] font-semibold shadow-lg hover:shadow-xl transition-transform duration-200 hover:-translate-y-0.5 cursor-pointer"
               >
                 Book a 15-Minute Demo
@@ -50,7 +55,7 @@ function ConversionSection() {
         </div>
       </section>
 
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
@@ -61,4 +66,3 @@ function ConversionSection() {
 }
 
 export default ConversionSection;
-

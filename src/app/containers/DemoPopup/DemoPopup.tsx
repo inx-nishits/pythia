@@ -66,10 +66,9 @@ export default function DemoPopup() {
             <div className="hidden md:block relative w-full md:w-[48%] h-[120px] sm:h-[240px] md:h-auto overflow-hidden bg-slate-50 flex-shrink-0">
               <Image
                 src="/popup-visual.png"
-                alt="Retail checkout intelligence"
+                alt="Pythia AI analyzing retail checkout conversations for missed sales"
                 fill
                 className="object-cover object-left md:object-center"
-                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent md:hidden" />
             </div>

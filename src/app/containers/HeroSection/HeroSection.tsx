@@ -6,7 +6,10 @@ import { Sections } from "@/app/sections";
 import Button from "@/app/component/Button";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { PopupModal } from "react-calendly";
+import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
+import dynamic from "next/dynamic";
+
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
 
 const HERO_SLIDES = [
   {
@@ -14,7 +17,7 @@ const HERO_SLIDES = [
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "/desktop-meet-pythia-store.webp",
-      alt: "Pythia dashboard, always-on retail insights at checkout",
+      alt: "Pythia dashboard showing always-on retail insights at checkout",
     },
   },
   {
@@ -22,7 +25,7 @@ const HERO_SLIDES = [
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "https://res.cloudinary.com/dsgulltma/image/upload/v1773915528/Screenshot_from_2026-03-19_15-47-36_gsyqj1.png",
-      alt: "Retail checkout and store operations",
+      alt: "Pythia AI analyzing retail checkout and store operations in real-time",
     },
   },
   {
@@ -30,7 +33,7 @@ const HERO_SLIDES = [
     pillars: ["Always-on insights", "Retain top talent", "Recover revenue"],
     image: {
       src: "https://res.cloudinary.com/dsgulltma/image/upload/v1774499718/Screenshot_from_2026-03-26_10-05-02_q4y6f4.png",
-      alt: "Analytics and insights dashboard",
+      alt: "Pythia Store analytics and insights dashboard for managers",
     },
   },
 ];
@@ -45,6 +48,13 @@ function HeroSection() {
     const t = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, SLIDE_DURATION_MS);
+
+    if (window.location.hash === '#book-demo') {
+      setIsCalendlyOpen(true);
+      // Remove the hash from the URL so it doesn't reopen if the user refreshes
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
     return () => clearInterval(t);
   }, []);
 
@@ -85,17 +95,13 @@ function HeroSection() {
             <div className="flex flex-col order-2 lg:order-1 text-center lg:text-left min-w-0">
               <motion.h1
                 variants={containerVariants}
-                initial="hidden"
+                initial={false}
                 animate="visible"
                 className="text-[28px] min-[400px]:text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.05] font-extrabold text-[#0F172A] tracking-tight text-balance mb-4 lg:mb-5 break-words"
               >
                 Get the insights{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-coral italic">your stores don’t report.</span>
               </motion.h1>
-
-              <div className="lg:hidden order-first mb-6 -mx-2">
-                <HeroImageSlider activeSlide={activeSlide} />
-              </div>
 
               <div className="flex flex-col items-center lg:items-start w-full">
                 <div className="relative w-full min-h-[140px] sm:min-h-[128px] overflow-hidden">
@@ -142,10 +148,9 @@ function HeroSection() {
                           type="button"
                           aria-label={`Go to slide ${i + 1}`}
                           onClick={() => setActiveSlide(i)}
-                          className={`rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 ${
-                            i === activeSlide
-                              ? "w-8 h-3 bg-brand-teal"
-                              : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
+                          className={`rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 ${i === activeSlide
+                            ? "w-8 h-3 bg-brand-teal"
+                            : "w-3 h-3 bg-slate-300 hover:bg-slate-400 border-2 border-transparent"
                             }`}
                         />
                       ))}
@@ -169,8 +174,11 @@ function HeroSection() {
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mt-6 flex-wrap"
               >
-                <Button 
-                  onClick={() => setIsCalendlyOpen(true)}
+                <Button
+                  onClick={() => {
+                    setDemoSource(DEMO_SOURCES.homepage);
+                    setIsCalendlyOpen(true);
+                  }}
                   className="w-full sm:w-auto h-12 sm:h-14 px-6 lg:px-8 py-4 text-[15px] lg:text-[16px] font-semibold bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap cursor-pointer"
                 >
                   Book a 15-Minute Demo
@@ -185,14 +193,14 @@ function HeroSection() {
               </motion.div>
             </div>
 
-            <div className="hidden lg:block order-2 relative min-w-0">
+            <div className="order-1 lg:order-2 relative min-w-0 mb-6 lg:mb-0 -mx-2 lg:mx-0">
               <HeroImageSlider activeSlide={activeSlide} />
             </div>
           </div>
         </div>
       </section>
 
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
@@ -204,12 +212,7 @@ function HeroSection() {
 
 function HeroImageSlider({ activeSlide }: { activeSlide: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 24 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="relative group min-w-0 w-full"
-    >
+    <motion.div className="relative group min-w-0 w-full">
       <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-br from-brand-teal/5 to-blue-500/5 rounded-[24px] lg:rounded-[40px] blur-2xl opacity-60 group-hover:opacity-80 transition-opacity pointer-events-none" />
       <div className="relative rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] overflow-hidden border border-slate-200/80 shadow-[0_32px_64px_rgba(15,23,42,0.12)] aspect-[16/10] lg:aspect-[4/3] bg-slate-200 w-full min-w-0">
         <AnimatePresence initial={false}>
@@ -226,17 +229,18 @@ function HeroImageSlider({ activeSlide }: { activeSlide: number }) {
               alt={HERO_SLIDES[activeSlide].image.alt}
               fill
               className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               priority={activeSlide === 0}
+              fetchPriority={activeSlide === 0 ? "high" : "auto"}
             />
           </motion.div>
         </AnimatePresence>
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-900/30 overflow-hidden">
           <motion.div
-            className="h-full bg-brand-teal"
-            initial={{ width: "0%" }}
-            animate={{ width: `${((activeSlide + 1) / HERO_SLIDES.length) * 100}%` }}
-            transition={{ duration: 0.35 }}
+            className="h-full bg-brand-teal origin-left"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: (activeSlide + 1) / HERO_SLIDES.length }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
           />
         </div>
       </div>

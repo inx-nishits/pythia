@@ -1,11 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Script from "next/script";
 import { motion } from "framer-motion";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
 import Link from "next/link";
 import { articles } from "../articles/data";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 type ResourceCategory = "Blog" | "Article" | "Case Study";
 
@@ -37,6 +39,9 @@ const categories: (ResourceCategory | "All")[] = ["All", "Blog", "Article", "Cas
 export default function ResourcesPage() {
   const [selectedCategory, setSelectedCategory] = useState<ResourceCategory | "All">("All");
   const [search, setSearch] = useState("");
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "Resources", path: "/resources/" },
+  ]);
 
   const filteredResources = useMemo(() => {
     return allResources.filter((item) => {
@@ -55,6 +60,9 @@ export default function ResourcesPage() {
 
   return (
     <>
+      <Script id="resources-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px]">
@@ -168,4 +176,3 @@ export default function ResourcesPage() {
     </>
   );
 }
-

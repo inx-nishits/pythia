@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Retail Insights & Resources | Pythia Scorecard",
-  description: "Explore articles, blogs, and case studies on how audio intelligence transforms retail operations and store performance.",
+  title: "Retail Insights & Resources: Scaling Store Performance",
+  description: "Explore articles, blogs, and case studies on how audio intelligence transforms retail operations and store performance for modern multi-location operators.",
   openGraph: {
-    title: "Retail Insights & Resources | Pythia Store",
-    description: "Insights for operators who care about what really happens at the counter.",
+    title: "Retail Insights & Resources: Scaling Store Performance",
+    description: "Explore articles, blogs, and case studies on how audio intelligence transforms retail operations and store performance for modern multi-location operators.",
     url: "/resources/",
   },
   alternates: {
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Retail Insights & Resources | Pythia Store",
-    description: "Insights for operators who care about what really happens at the counter.",
+    title: "Retail Insights & Resources: Scaling Store Performance",
+    description: "Explore articles, blogs, and case studies on how audio intelligence transforms retail operations and store performance for modern multi-location operators.",
   }
 };
 

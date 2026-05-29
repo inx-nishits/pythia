@@ -21,6 +21,14 @@ interface PythiaFormProps {
   submitClassName?: string;
   formClassName: string;
   requestedDemo: boolean;
+  source?: string[];
+}
+
+function buildContactSuccessUrl(pathname: string) {
+  const decodedPathname = decodeURIComponent(pathname).replace(/\/+$/, "");
+  const contactPath = decodedPathname === "/contact" ? "/contact" : decodedPathname.replace(/\/success$/, "");
+
+  return `${contactPath}/success`;
 }
 
 function SubmitButton({
@@ -85,6 +93,11 @@ function PythiaForm({
       trackEvent("demo_request_complete", {
         demo_requested: requestedDemo,
       });
+
+      if (typeof window !== "undefined") {
+        const newUrl = buildContactSuccessUrl(window.location.pathname);
+        window.history.replaceState(window.history.state, "", newUrl);
+      }
     }
   }, [state.status, requestedDemo]);
 
@@ -116,8 +129,8 @@ function PythiaForm({
   }
 
   return (
-    <form 
-      className={formClassName} 
+    <form
+      className={formClassName}
       action={formAction}
       onFocus={handleFormStart}
     >
@@ -195,6 +208,7 @@ function PythiaForm({
             className={`${inputStyles} pl-[46px] group-hover:border-slate-300 transition-all [&>input]:bg-transparent [&>input]:border-none [&>input]:outline-none [&>input]:w-full`}
             placeholder="Phone number (optional)"
             defaultCountry="US"
+            flagUrl="https://unpkg.com/country-flag-icons/3x2/{XX}.svg"
             value={phoneValue}
             onChange={(value) => setPhoneValue(value ?? "")}
           />

@@ -1,3 +1,4 @@
+import Script from "next/script";
 import ScrollToHash from "./component/ScrollToHash/ScrollToHash";
 import Footer from "./containers/Footer";
 import Header from "./containers/Header";
@@ -18,10 +19,11 @@ import PrivacySection from "./containers/PrivacySection";
 import BlogSection from "./containers/BlogSection";
 import FAQSection from "./containers/FAQSection";
 import IndustriesSection from "./containers/IndustriesSection";
+import { faqs } from "./faq/faqs";
 
 export const metadata = {
   title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-  description: "Pythia captures in-store checkout conversations and analyzes them with AI to provide retail chains always-on insights, preventing missed sales and staff burnout.",
+  description: "Pythia captures in-store checkout conversations and analyzes them with AI to provide retail chains always-on insights, preventing missed sales and burnout.",
   keywords: [
     "retail AI",
     "in-store analytics",
@@ -55,15 +57,31 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
-    description: "Capture what your stores don’t report. Pythia listens at the counter and delivers actionable insights.",
+    description: "Capture what your stores don’t report. Pythia listens at the counter, analyses interactions, and delivers actionable retail insights in near real-time.",
     images: ["/og-image.jpg"],
   }
 };
 
 
 export default function Home() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden">
+      <Script id="home-faq-schema" type="application/ld+json">
+        {JSON.stringify(faqSchema)}
+      </Script>
       <ScrollToHash />
       <Header />
       <main className="overflow-x-hidden min-w-0 w-full">

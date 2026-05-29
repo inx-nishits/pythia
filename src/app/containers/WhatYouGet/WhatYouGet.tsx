@@ -6,8 +6,10 @@ import { Trophy, Target, FileJson, History, Calendar } from "lucide-react";
 import { Sections } from "@/app/sections";
 import Image from "next/image";
 import Button from "@/app/component/Button";
-import { PopupModal } from "react-calendly";
+import dynamic from "next/dynamic";
+const PopupModalDynamic = dynamic(() => import("react-calendly").then((mod) => mod.PopupModal), { ssr: false });
 import { trackEvent } from "@/app/utils/gtm";
+import { DEMO_SOURCES, setDemoSource } from "@/app/utils/demoSource";
 
 const features = [
   {
@@ -68,7 +70,7 @@ const features = [
       <div className="mt-3 flex items-center justify-center">
         <Image
           src="https://res.cloudinary.com/dsgulltma/image/upload/v1773919322/Gemini_Generated_Image_rmkejirmkejirmke_nqb0hu.png"
-          alt="AI powered recommendations"
+          alt="Pythia AI powered recommendations and actionable store insights"
           width={850}
           height={410}
           style={{ width: "100%", maxWidth: "850px", height: "auto" }}
@@ -151,6 +153,7 @@ function WhatYouGet() {
               {feature.hasCalendly && (
                 <Button 
                   onClick={() => {
+                    setDemoSource(DEMO_SOURCES.product);
                     trackEvent("intelligence_demo_click", {
                       section: "product_intelligence"
                     });
@@ -168,7 +171,7 @@ function WhatYouGet() {
         ))}
       </div>
 
-      <PopupModal
+      <PopupModalDynamic
         url="https://calendly.com/nick-pythiascorecard/new-meeting"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
