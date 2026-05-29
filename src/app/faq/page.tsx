@@ -25,7 +25,7 @@ export default function FaqPage() {
     <>
       <Header />
       <main className="min-h-screen bg-white pt-6 sm:pt-10">
-        <FAQSection standalone />
+        <FAQSection />
       </main>
       <Footer />
     </>
