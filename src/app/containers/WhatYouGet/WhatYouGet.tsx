@@ -73,6 +73,7 @@ const features = [
           alt="Pythia AI powered recommendations and actionable store insights"
           width={850}
           height={410}
+          sizes="(max-width: 768px) 100vw, 850px"
           style={{ width: "100%", maxWidth: "850px", height: "auto" }}
           className="rounded-2xl shadow-sm"
         />

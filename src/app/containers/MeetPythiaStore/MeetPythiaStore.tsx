@@ -63,6 +63,7 @@ function MeetPythiaStore() {
                 alt="Pythia Intelligence Dashboard showing real-time store analytics and staff performance"
                 width={1100}
                 height={600}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1100px"
                 className="w-full h-full object-cover"
               />
             </div>
