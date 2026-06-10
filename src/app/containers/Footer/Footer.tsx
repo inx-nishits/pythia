@@ -62,7 +62,7 @@ function Footer() {
           <div className="flex flex-col gap-5 w-full lg:max-w-[360px] min-w-0">
             <Link href={'/'} className="group">
               <Image
-                src={'/pythiaLogo.png'}
+                src="/pythiaLogo.png"
                 alt="Pythia Intelligence"
                 width={145}
                 height={50}
