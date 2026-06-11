@@ -68,6 +68,7 @@ export default function DemoPopup() {
                 src="/popup-visual.png"
                 alt="Pythia AI analyzing retail checkout conversations for missed sales"
                 fill
+                sizes="(max-width: 768px) 100vw, 450px"
                 className="object-cover object-left md:object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent md:hidden" />

@@ -53,6 +53,7 @@ function DemoAssetsSection() {
                 src="https://res.cloudinary.com/dsgulltma/image/upload/v1774346958/Gemini_Generated_Image_7hfrzj7hfrzj7hfr_1_apuzkt.png"
                 alt="Pythia AI Voice to Ticket automation automatically routing work orders from cashier conversations"
                 fill
+                sizes="(max-width: 1024px) 100vw, 840px"
                 className="object-contain"
               />
             </div>

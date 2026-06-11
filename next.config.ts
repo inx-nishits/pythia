@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   trailingSlash: true,
   experimental: {
-    optimizeCss: true,
+    inlineCss: true,
   },
   async rewrites() {
     return [
@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
           // 3. Add their image domain to 'img-src'
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://assets.calendly.com https://vitals.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; img-src 'self' blob: data: https://res.cloudinary.com https://www.googletagmanager.com https://www.google-analytics.com https://purecatamphetamine.github.io https://unpkg.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-src 'self' https://www.googletagmanager.com https://calendly.com; object-src 'none'; base-uri 'self';",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://assets.calendly.com https://vitals.vercel-scripts.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; img-src 'self' blob: data: https://res.cloudinary.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://google.com https://stats.g.doubleclick.net https://googleads.g.doubleclick.net https://purecatamphetamine.github.io https://unpkg.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://google.com https://stats.g.doubleclick.net https://googleads.g.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://calendly.com; object-src 'none'; base-uri 'self';",
           },
           // Prevents the browser from sniffing the MIME type (Security hardening).
           {
@@ -70,7 +70,9 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
     unoptimized: false,
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",
