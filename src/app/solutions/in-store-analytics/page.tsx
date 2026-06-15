@@ -12,6 +12,16 @@ export const metadata = {
     title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
     description: "Gain deeper insights into store performance by analyzing checkout conversations. Identify missed upsells and service friction with AI-driven audio analytics.",
     url: "/solutions/in-store-analytics/",
+    siteName: "Pythia Scorecard",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "In-Store Analytics"
+      }
+    ],
+    type: "website"
   },
   alternates: {
     canonical: "/solutions/in-store-analytics/",
@@ -20,6 +30,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
     description: "Gain deeper insights into store performance by analyzing checkout conversations. Identify missed upsells and service friction with AI-driven audio analytics.",
+    images: ["/og-image.jpg"],
   }
 };
 

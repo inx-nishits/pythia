@@ -11,6 +11,16 @@ export const metadata = {
     title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
     description: "Learn how Pythia Scorecard transforms retail operations by giving leaders an objective view of every customer interaction through AI-driven audio intelligence.",
     url: "/about/",
+    siteName: "Pythia Scorecard",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "About Pythia Scorecard"
+      }
+    ],
+    type: "website"
   },
   alternates: {
     canonical: "/about/",
@@ -19,6 +29,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
     description: "Learn how Pythia Scorecard transforms retail operations by giving leaders an objective view of every customer interaction through AI-driven audio intelligence.",
+    images: ["/og-image.jpg"],
   }
 };
 

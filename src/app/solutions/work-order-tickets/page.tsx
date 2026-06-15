@@ -12,6 +12,16 @@ export const metadata = {
     title: "Automated Work Order Tickets for Retail Operations & ROI",
     description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI-driven retail audio analytics.",
     url: "/solutions/work-order-tickets/",
+    siteName: "Pythia Scorecard",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Automated Work Order Tickets"
+      }
+    ],
+    type: "website"
   },
   alternates: {
     canonical: "/solutions/work-order-tickets/",
@@ -20,6 +30,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Automated Work Order Tickets for Retail Operations & ROI",
     description: "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI-driven retail audio analytics.",
+    images: ["/og-image.jpg"],
   }
 };
 
