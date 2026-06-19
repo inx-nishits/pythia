@@ -128,7 +128,7 @@ export const articles: ArticleData[] = [
       <h2>The Quiet Revenue Leak</h2>
       <p>A customer walks up, asks for an item, and the employee says, "You should get it at the store down the street. It's cheaper there." That's not a small moment. That's a store giving away a sale in real time.</p>
       <p>On the surface, it looks like a pricing problem. Most of the time, it's bigger than that. It points to a gap in training, a gap in ownership, a gap in execution. In one sentence, the employee shows you the store isn't ready to win the customer in that moment.</p>
-
+ 
       <h2>Five Common Reasons This Happens</h2>
       <ol>
         <li><strong>The employee believes the price objection and has no response:</strong> The customer says it's cheaper somewhere else, and the employee accepts the claim without a fight.</li>
@@ -137,7 +137,7 @@ export const articles: ArticleData[] = [
         <li><strong>The employee has never been trained to offer a substitute:</strong> "We're out of that one, but this is the closest match." Strong operators teach this third option.</li>
         <li><strong>The culture has slipped:</strong> People stop thinking like merchants. They start thinking like traffic directors.</li>
       </ol>
-
+ 
       <h2>How to Fix the Leak</h2>
       <p>Start with the item itself. If customers keep hearing that a competitor has a better price, check your price position. Not every item needs to be the lowest in the market, but you need to know where you're exposed.</p>
       <p>Next, train the team on how to answer a price objection with simple, natural language. "We have a two-for offer on that today," or "This one qualifies for rewards." Then fix the substitute problem by ensuring the employee knows the next best option when their first choice is out-of-stock.</p>
@@ -183,6 +183,89 @@ export const articles: ArticleData[] = [
         <li><strong>CFO:</strong> tighter cost control through faster issue resolution, fewer repeat failures, and better labor output from targeted coaching.</li>
         <li><strong>Operations:</strong> consistent standards across stores through measurable closure, not informal follow up.</li>
       </ul>
+    `
+  },
+  {
+    slug: "pythia-vs-priceeasy-retail-insights",
+    title: "Pythia vs PriceEasy: Choosing the Right Retail Intelligence Tool",
+    excerpt: "While PriceEasy dominates fuel pricing automation, Pythia Scorecard captures the human element inside the store. Learn how these tools differ and why modern C-stores often need both.",
+    readTime: "5 min read",
+    date: "June 2026",
+    keyTakeaways: [
+      "Retail intelligence is splitting into two distinct categories: exterior data (fuel pricing) and interior data (store operations).",
+      "PriceEasy excels at scraping competitor prices and automating digital fuel boards.",
+      "Pythia Scorecard focuses entirely on checkout interactions using audio AI to find training gaps and equipment failures.",
+      "C-store operators seeking maximum profit protection should pair pricing automation with in-store behavioral analytics."
+    ],
+    content: `
+      <h2>The Shift in Retail Intelligence</h2>
+      <p>Convenience store operators have never had more data at their fingertips. But not all data solves the same problem. When comparing modern retail intelligence platforms like <strong>Pythia Scorecard</strong> and <strong>PriceEasy</strong>, it's critical to understand that these tools serve entirely different functions—one protects your margins at the pump, while the other protects your profit inside the four walls.</p>
+      
+      <h2>What is PriceEasy?</h2>
+      <p>PriceEasy is built primarily around fuel pricing intelligence and automation. For operators managing volatile gas prices, PriceEasy provides a massive advantage by scraping competitor pricing data and automating updates to digital signs and POS systems.</p>
+      <ul>
+        <li><strong>Core Strength:</strong> Fuel margin protection and competitor price tracking.</li>
+        <li><strong>Primary User:</strong> Pricing analysts, category managers, and retail executives.</li>
+        <li><strong>The Goal:</strong> Ensure fuel prices are competitive without leaving money on the table.</li>
+      </ul>
+ 
+      <h2>What is Pythia Scorecard?</h2>
+      <p>While PriceEasy looks outside the store, <a href="/solutions/convenience-store-analytics/" title="C-Store Analytics">Pythia Scorecard</a> looks inside. Pythia uses advanced audio analytics at the checkout counter to capture the actual conversations between cashiers and customers. It doesn't track fuel prices; instead, it tracks the human behaviors that drive in-store profit.</p>
+      <ul>
+        <li><strong>Core Strength:</strong> Identifying training gaps, missed upsells, and equipment failures in real-time.</li>
+        <li><strong>Primary User:</strong> Store managers, regional directors, and HR teams.</li>
+        <li><strong>The Goal:</strong> Reduce employee turnover, improve customer service, and minimize hidden POS downtime.</li>
+      </ul>
+ 
+      <h2>The Key Differences: Lagging vs. Leading Indicators</h2>
+      <p>The biggest distinction between the two platforms is the type of action they drive.</p>
+      <p>PriceEasy relies on structured data (competitor prices) to trigger a mechanical action (updating a digital sign). It is highly effective, but it operates in a vacuum away from customer sentiment.</p>
+      <p>Pythia Scorecard analyzes unstructured data—the nuances of human conversation. When an employee nervously fumbles through a lottery transaction, or when a customer complains that a specific card reader is broken, Pythia captures that moment. It then automatically generates a <strong>coaching ticket</strong> or an <strong>equipment repair ticket</strong>, allowing managers to act on leading indicators before they result in lost sales or staff resignations.</p>
+ 
+      <h2>Conclusion: Do You Need Both?</h2>
+      <p>If your sole focus is optimizing fuel margins, a pricing automation tool like PriceEasy is essential. However, fuel margins alone don't run a successful convenience store. The inside of the store—where high-margin items are sold, age-restricted products are managed, and customer loyalty is built—requires a different approach.</p>
+      <p>Forward-thinking operators are combining exterior intelligence tools with interior operations tools like Pythia Scorecard to achieve a comprehensive, 360-degree view of their retail performance.</p>
+    `
+  },
+  {
+    slug: "pythia-vs-manual-store-audits",
+    title: "Pythia vs. Manual Store Audits: The Shift to Always-On AI",
+    excerpt: "Traditional secret shoppers and manual audits capture a snapshot in time. Discover how always-on audio AI replaces lagging indicators with real-time coaching moments.",
+    readTime: "6 min read",
+    date: "June 2026",
+    keyTakeaways: [
+      "Manual audits suffer from the 'Hawthorne Effect'—employees change their behavior when they know they are being watched.",
+      "Secret shopper reports often take weeks to process, rendering the feedback useless for immediate coaching.",
+      "Always-on audio analytics provides an unbiased, continuous stream of operational insight.",
+      "Automated ticketing directly routes specific training gaps to managers before bad habits become permanent."
+    ],
+    content: `
+      <h2>The Problem with the Snapshot Approach</h2>
+      <p>For decades, retail operators have relied on a familiar playbook to monitor store health: the monthly manual audit and the occasional secret shopper. A district manager walks the floor with a clipboard, checks the bathrooms, verifies endcap displays, and watches a few transactions. Or, a hired shopper scores a single interaction based on a rubric.</p>
+      <p>The problem? These methods only capture a single snapshot in time. They are expensive, slow, and fundamentally flawed as a training mechanism.</p>
+      
+      <h2>The Flaws of Manual Audits</h2>
+      <h3>1. The Hawthorne Effect</h3>
+      <p>When the district manager walks in, posture improves, smiles widen, and every upsell script is recited perfectly. Employees naturally change their behavior when they are being observed. Manual audits rarely capture the reality of a Tuesday night shift when the store is understaffed.</p>
+      
+      <h3>2. Delayed Feedback Loops</h3>
+      <p>By the time a secret shopper report makes its way through corporate and down to a store manager, weeks may have passed. Trying to coach an employee on a specific transaction they had three weeks ago is incredibly ineffective.</p>
+      
+      <h3>3. High Cost per Insight</h3>
+      <p>Deploying humans to manually evaluate stores requires significant payroll and travel expenses. The cost-to-insight ratio is incredibly high, meaning operators can only afford to sample a tiny fraction of total transactions.</p>
+ 
+      <h2>The Pythia Scorecard Approach: Always-On AI</h2>
+      <p>Unlike manual audits, <a href="/" title="Pythia Scorecard AI">Pythia Scorecard</a> doesn't rely on human observation or sporadic sampling. By utilizing privacy-first audio analytics at the point of sale, Pythia listens to 100% of checkout interactions, 24/7.</p>
+      
+      <h3>Unbiased, Continuous Monitoring</h3>
+      <p>Because the system is always running quietly in the background, it captures the authentic reality of the store. It hears the missed ID checks, the frustrated customers, and the moments when new hires struggle to explain a promotion. It eliminates the Hawthorne effect entirely.</p>
+      
+      <h3>Real-Time Automated Ticketing</h3>
+      <p>When Pythia detects a specific training gap—such as an employee repeatedly failing to offer a loyalty card—it doesn't wait for a monthly review. It instantly drafts a coaching ticket and routes it to the store manager with a snippet of context. This allows managers to provide immediate, targeted coaching while the shift is still happening.</p>
+ 
+      <h2>Redefining Operational Excellence</h2>
+      <p>Manual audits still have a place for checking physical merchandising and safety compliance. However, relying on them to evaluate human performance and customer service is no longer viable in a fast-paced retail environment.</p>
+      <p>By upgrading from snapshot audits to Pythia's always-on audio intelligence, operators are closing the action gap, reducing employee turnover, and turning every register into a continuous learning hub.</p>
     `
   }
 ];
