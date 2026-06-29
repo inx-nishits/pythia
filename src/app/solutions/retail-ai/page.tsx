@@ -7,11 +7,21 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Retail AI & Edge Intelligence for Checkout Optimization",
-  description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
+  description: "Use Edge AI at checkout to transform conversations into actionable retail insights, optimized operations, and better customer experiences.",
   openGraph: {
     title: "Retail AI & Edge Intelligence for Checkout Optimization",
-    description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
+    description: "Use Edge AI at checkout to transform conversations into actionable retail insights, optimized operations, and better customer experiences.",
     url: "/solutions/retail-ai/",
+    siteName: "Pythia Scorecard",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Retail AI & Edge Intelligence"
+      }
+    ],
+    type: "website"
   },
   alternates: {
     canonical: "/solutions/retail-ai/",
@@ -19,7 +29,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Retail AI & Edge Intelligence for Checkout Optimization",
-    description: "Leverage Edge AI at the counter to transform checkout conversations into actionable retail insights, optimized operations, and enhanced customer experiences.",
+    description: "Use Edge AI at checkout to transform conversations into actionable retail insights, optimized operations, and better customer experiences.",
+    images: ["/og-image.jpg"],
   }
 };
 

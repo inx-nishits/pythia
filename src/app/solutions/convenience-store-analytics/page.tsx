@@ -7,11 +7,21 @@ import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Convenience Store Analytics: Optimizing Retail Operations",
-  description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service, higher revenue, and store efficiency.",
+  description: "Optimize convenience store operations with AI-driven feedback loops for better service, higher revenue, and store efficiency.",
   openGraph: {
     title: "Convenience Store Analytics: Optimizing Retail Operations",
-    description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service, higher revenue, and store efficiency.",
+    description: "Optimize convenience store operations with AI-driven feedback loops for better service, higher revenue, and store efficiency.",
     url: "/solutions/convenience-store-analytics/",
+    siteName: "Pythia Scorecard",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Convenience Store Analytics"
+      }
+    ],
+    type: "website"
   },
   alternates: {
     canonical: "/solutions/convenience-store-analytics/",
@@ -19,7 +29,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Convenience Store Analytics: Optimizing Retail Operations",
-    description: "Optimize convenience store operations by understanding why best stores win. AI-driven feedback loops for better service, higher revenue, and store efficiency.",
+    description: "Optimize convenience store operations with AI-driven feedback loops for better service, higher revenue, and store efficiency.",
+    images: ["/og-image.jpg"],
   }
 };
 
