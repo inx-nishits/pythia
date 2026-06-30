@@ -60,6 +60,18 @@ const structuredData = {
         priceCurrency: "USD",
       },
     },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.pythiascorecard.com/#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.pythiascorecard.com/",
+        },
+      ],
+    },
   ],
 };
 
@@ -113,9 +125,10 @@ export default function RootLayout({
       <head>
         <meta name="geo.region" content="US" />
         <meta name="geo.country" content="US" />
-        <Script id="sitewide-structured-data" type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
 
         {/* 1. Initialize Consent Mode (denied by default) */}
         <Script id="gtm-consent" strategy="afterInteractive">

@@ -6,6 +6,16 @@ export interface ArticleData {
   content: string; // HTML string or structured paragraphs
   readTime: string;
   date: string;
+  author?: {
+    name: string;
+    role: string;
+    bio: string;
+    imageUrl?: string;
+  };
+  citations?: Array<{
+    title: string;
+    url: string;
+  }>;
 }
 
 export const articles: ArticleData[] = [
@@ -15,6 +25,15 @@ export const articles: ArticleData[] = [
     excerpt: "Employee turnover drains profit through constant rehiring and inconsistent service. Learn how to pinpoint hidden training gaps and plug them before talent leaves.",
     readTime: "4 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Snapshot reviews and monthly scorecards capture performance too late.",
       "New hires face information overload, while veterans often slip into unnoticed shortcuts.",
@@ -68,6 +87,15 @@ export const articles: ArticleData[] = [
     excerpt: "Broken pumps and jammed card readers choke retail sales in real time. Learn how to surface hidden downtime and turn lost minutes into recovered store profit.",
     readTime: "5 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Equipment failures are often discovered only after customers complain, leading to unrecorded revenue loss.",
       "Fragmented reporting and assumed loss numbers fail to motivate urgent fixes.",
@@ -118,6 +146,15 @@ export const articles: ArticleData[] = [
     excerpt: "When an employee tells a customer it's cheaper down the street, you're losing profit. Explore common reasons for this leak and learn how to fix it fast.",
     readTime: "4 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Referring a customer to a competitor is a symptom of training and execution gaps, not just pricing issues.",
       "Employees often accept price objections without knowing current loyalty deals or alternate options.",
@@ -128,7 +165,7 @@ export const articles: ArticleData[] = [
       <h2>The Quiet Revenue Leak</h2>
       <p>A customer walks up, asks for an item, and the employee says, "You should get it at the store down the street. It's cheaper there." That's not a small moment. That's a store giving away a sale in real time.</p>
       <p>On the surface, it looks like a pricing problem. Most of the time, it's bigger than that. It points to a gap in training, a gap in ownership, a gap in execution. In one sentence, the employee shows you the store isn't ready to win the customer in that moment.</p>
-
+ 
       <h2>Five Common Reasons This Happens</h2>
       <ol>
         <li><strong>The employee believes the price objection and has no response:</strong> The customer says it's cheaper somewhere else, and the employee accepts the claim without a fight.</li>
@@ -137,7 +174,7 @@ export const articles: ArticleData[] = [
         <li><strong>The employee has never been trained to offer a substitute:</strong> "We're out of that one, but this is the closest match." Strong operators teach this third option.</li>
         <li><strong>The culture has slipped:</strong> People stop thinking like merchants. They start thinking like traffic directors.</li>
       </ol>
-
+ 
       <h2>How to Fix the Leak</h2>
       <p>Start with the item itself. If customers keep hearing that a competitor has a better price, check your price position. Not every item needs to be the lowest in the market, but you need to know where you're exposed.</p>
       <p>Next, train the team on how to answer a price objection with simple, natural language. "We have a two-for offer on that today," or "This one qualifies for rewards." Then fix the substitute problem by ensuring the employee knows the next best option when their first choice is out-of-stock.</p>
@@ -153,6 +190,15 @@ export const articles: ArticleData[] = [
     excerpt: "Learn how Pythia Scorecard turns unstructured POS conversations into actionable tickets, closing the gap between store insight and operational improvements.",
     readTime: "3 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Store performance depends on both mechanical maintenance and human interactions.",
       "Traditional ticketing misses training gaps, service breakdowns, and policy confusion.",
@@ -191,6 +237,15 @@ export const articles: ArticleData[] = [
     excerpt: "While PriceEasy dominates fuel pricing automation, Pythia Scorecard captures the human element inside the store. Learn how these tools differ and why modern C-stores often need both.",
     readTime: "5 min read",
     date: "June 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Retail intelligence is splitting into two distinct categories: exterior data (fuel pricing) and interior data (store operations).",
       "PriceEasy excels at scraping competitor prices and automating digital fuel boards.",
@@ -208,7 +263,7 @@ export const articles: ArticleData[] = [
         <li><strong>Primary User:</strong> Pricing analysts, category managers, and retail executives.</li>
         <li><strong>The Goal:</strong> Ensure fuel prices are competitive without leaving money on the table.</li>
       </ul>
-
+ 
       <h2>What is Pythia Scorecard?</h2>
       <p>While PriceEasy looks outside the store, <a href="/solutions/convenience-store-analytics/" title="C-Store Analytics">Pythia Scorecard</a> looks inside. Pythia uses advanced audio analytics at the checkout counter to capture the actual conversations between cashiers and customers. It doesn't track fuel prices; instead, it tracks the human behaviors that drive in-store profit.</p>
       <ul>
@@ -216,12 +271,12 @@ export const articles: ArticleData[] = [
         <li><strong>Primary User:</strong> Store managers, regional directors, and HR teams.</li>
         <li><strong>The Goal:</strong> Reduce employee turnover, improve customer service, and minimize hidden POS downtime.</li>
       </ul>
-
+ 
       <h2>The Key Differences: Lagging vs. Leading Indicators</h2>
       <p>The biggest distinction between the two platforms is the type of action they drive.</p>
       <p>PriceEasy relies on structured data (competitor prices) to trigger a mechanical action (updating a digital sign). It is highly effective, but it operates in a vacuum away from customer sentiment.</p>
       <p>Pythia Scorecard analyzes unstructured data—the nuances of human conversation. When an employee nervously fumbles through a lottery transaction, or when a customer complains that a specific card reader is broken, Pythia captures that moment. It then automatically generates a <strong>coaching ticket</strong> or an <strong>equipment repair ticket</strong>, allowing managers to act on leading indicators before they result in lost sales or staff resignations.</p>
-
+ 
       <h2>Conclusion: Do You Need Both?</h2>
       <p>If your sole focus is optimizing fuel margins, a pricing automation tool like PriceEasy is essential. However, fuel margins alone don't run a successful convenience store. The inside of the store—where high-margin items are sold, age-restricted products are managed, and customer loyalty is built—requires a different approach.</p>
       <p>Forward-thinking operators are combining exterior intelligence tools with interior operations tools like Pythia Scorecard to achieve a comprehensive, 360-degree view of their retail performance.</p>
@@ -233,6 +288,15 @@ export const articles: ArticleData[] = [
     excerpt: "Traditional secret shoppers and manual audits capture a snapshot in time. Discover how always-on audio AI replaces lagging indicators with real-time coaching moments.",
     readTime: "6 min read",
     date: "June 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Manual audits suffer from the 'Hawthorne Effect'—employees change their behavior when they know they are being watched.",
       "Secret shopper reports often take weeks to process, rendering the feedback useless for immediate coaching.",
@@ -253,7 +317,7 @@ export const articles: ArticleData[] = [
       
       <h3>3. High Cost per Insight</h3>
       <p>Deploying humans to manually evaluate stores requires significant payroll and travel expenses. The cost-to-insight ratio is incredibly high, meaning operators can only afford to sample a tiny fraction of total transactions.</p>
-
+ 
       <h2>The Pythia Scorecard Approach: Always-On AI</h2>
       <p>Unlike manual audits, <a href="/" title="Pythia Scorecard AI">Pythia Scorecard</a> doesn't rely on human observation or sporadic sampling. By utilizing privacy-first audio analytics at the point of sale, Pythia listens to 100% of checkout interactions, 24/7.</p>
       
@@ -262,7 +326,7 @@ export const articles: ArticleData[] = [
       
       <h3>Real-Time Automated Ticketing</h3>
       <p>When Pythia detects a specific training gap—such as an employee repeatedly failing to offer a loyalty card—it doesn't wait for a monthly review. It instantly drafts a coaching ticket and routes it to the store manager with a snippet of context. This allows managers to provide immediate, targeted coaching while the shift is still happening.</p>
-
+ 
       <h2>Redefining Operational Excellence</h2>
       <p>Manual audits still have a place for checking physical merchandising and safety compliance. However, relying on them to evaluate human performance and customer service is no longer viable in a fast-paced retail environment.</p>
       <p>By upgrading from snapshot audits to Pythia's always-on audio intelligence, operators are closing the action gap, reducing employee turnover, and turning every register into a continuous learning hub.</p>

@@ -1,6 +1,6 @@
 import { articles } from "../data";
 import { notFound } from "next/navigation";
-import Script from "next/script";
+
 import Header from "@/app/containers/Header";
 import Footer from "@/app/containers/Footer";
 import Link from "next/link";
@@ -79,7 +79,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     "description": article.excerpt,
     "image": "https://www.pythiascorecard.com/og-image.jpg",
     "datePublished": "2026-03-01",
-    "author": {
+    "author": article.author ? {
+      "@type": "Person",
+      "name": article.author.name,
+      "description": article.author.bio
+    } : {
       "@type": "Organization",
       "name": "Pythia Scorecard",
       "url": "https://www.pythiascorecard.com"
@@ -105,9 +109,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden pt-20">
-      <Script id="article-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -163,6 +168,38 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </AnimatedReveal>
+
+          {/* Author Bio */}
+          {article.author && (
+            <AnimatedReveal index={4}>
+              <div className="mt-12 p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col md:flex-row gap-6 items-start">
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-brand-navy mb-1">{article.author.name}</h3>
+                  <p className="text-sm font-medium text-brand-teal mb-3">{article.author.role}</p>
+                  <p className="text-slate-600 leading-relaxed text-sm">{article.author.bio}</p>
+                </div>
+              </div>
+            </AnimatedReveal>
+          )}
+
+          {/* Citations */}
+          {article.citations && article.citations.length > 0 && (
+            <AnimatedReveal index={5}>
+              <div className="mt-8 pt-8 border-t border-slate-200">
+                <h3 className="text-lg font-bold text-brand-navy mb-4">References & Citations</h3>
+                <ul className="space-y-2">
+                  {article.citations.map((cite, idx) => (
+                    <li key={idx} className="text-sm text-slate-600 flex items-start gap-2">
+                      <span className="text-slate-400">[{idx + 1}]</span>
+                      <a href={cite.url} target="_blank" rel="noopener noreferrer" className="text-brand-teal hover:underline">
+                        {cite.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AnimatedReveal>
+          )}
         </article>
       </main>
 
