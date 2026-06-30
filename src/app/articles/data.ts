@@ -6,6 +6,16 @@ export interface ArticleData {
   content: string; // HTML string or structured paragraphs
   readTime: string;
   date: string;
+  author?: {
+    name: string;
+    role: string;
+    bio: string;
+    imageUrl?: string;
+  };
+  citations?: Array<{
+    title: string;
+    url: string;
+  }>;
 }
 
 export const articles: ArticleData[] = [
@@ -15,6 +25,15 @@ export const articles: ArticleData[] = [
     excerpt: "Employee turnover drains profit through constant rehiring and inconsistent service. Learn how to pinpoint hidden training gaps and plug them before talent leaves.",
     readTime: "4 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Snapshot reviews and monthly scorecards capture performance too late.",
       "New hires face information overload, while veterans often slip into unnoticed shortcuts.",
@@ -68,6 +87,15 @@ export const articles: ArticleData[] = [
     excerpt: "Broken pumps and jammed card readers choke retail sales in real time. Learn how to surface hidden downtime and turn lost minutes into recovered store profit.",
     readTime: "5 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Equipment failures are often discovered only after customers complain, leading to unrecorded revenue loss.",
       "Fragmented reporting and assumed loss numbers fail to motivate urgent fixes.",
@@ -118,6 +146,15 @@ export const articles: ArticleData[] = [
     excerpt: "When an employee tells a customer it's cheaper down the street, you're losing profit. Explore common reasons for this leak and learn how to fix it fast.",
     readTime: "4 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Referring a customer to a competitor is a symptom of training and execution gaps, not just pricing issues.",
       "Employees often accept price objections without knowing current loyalty deals or alternate options.",
@@ -153,6 +190,15 @@ export const articles: ArticleData[] = [
     excerpt: "Learn how Pythia Scorecard turns unstructured POS conversations into actionable tickets, closing the gap between store insight and operational improvements.",
     readTime: "3 min read",
     date: "March 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Store performance depends on both mechanical maintenance and human interactions.",
       "Traditional ticketing misses training gaps, service breakdowns, and policy confusion.",
@@ -191,6 +237,15 @@ export const articles: ArticleData[] = [
     excerpt: "While PriceEasy dominates fuel pricing automation, Pythia Scorecard captures the human element inside the store. Learn how these tools differ and why modern C-stores often need both.",
     readTime: "5 min read",
     date: "June 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Retail intelligence is splitting into two distinct categories: exterior data (fuel pricing) and interior data (store operations).",
       "PriceEasy excels at scraping competitor prices and automating digital fuel boards.",
@@ -233,6 +288,15 @@ export const articles: ArticleData[] = [
     excerpt: "Traditional secret shoppers and manual audits capture a snapshot in time. Discover how always-on audio AI replaces lagging indicators with real-time coaching moments.",
     readTime: "6 min read",
     date: "June 2026",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Retail Operations Lead",
+      bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
+    },
+    citations: [
+      { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+    ],
     keyTakeaways: [
       "Manual audits suffer from the 'Hawthorne Effect'—employees change their behavior when they know they are being watched.",
       "Secret shopper reports often take weeks to process, rendering the feedback useless for immediate coaching.",
