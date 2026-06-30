@@ -9,6 +9,9 @@ export const metadata = {
     index: false,
     follow: false,
   },
+  alternates: {
+    canonical: "/thank-you/",
+  },
 };
 
 export default function ThankYouPage() {
