@@ -3,7 +3,6 @@ import Header from "@/app/containers/Header";
 import Footer from "@/app/containers/Footer";
 import HomeContact from "@/app/containers/HomeContact";
 import FAQSection from "@/app/containers/FAQSection";
-import Script from "next/script";
 
 export const metadata = {
   title: "Frequently Asked Questions | Pythia Scorecard",
@@ -29,8 +28,7 @@ export default function FAQPage() {
 
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden pt-20">
-      <Script
-        id="faq-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

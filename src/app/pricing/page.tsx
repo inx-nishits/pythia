@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
 import { ChevronDown, Check, Zap, LayoutDashboard, ShieldCheck, BarChart3, Users, ZapIcon, HeadphonesIcon, Package } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 import { trackEvent } from "../utils/gtm";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 import { useRouter } from "next/navigation";
 
 const deviceDetails = [
@@ -135,57 +133,10 @@ function DetailAccordion({
 }
 
 export default function PricingPage() {
-  const productSchema = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "Pythia Scorecard Professional Plan",
-    "image": "https://pythia.store/og-image.jpg",
-    "description": "Always-on retail AI insights with compact edge-processing hardware and a comprehensive performance dashboard.",
-    "brand": {
-      "@type": "Brand",
-      "name": "Pythia"
-    },
-    "offers": {
-      "@type": "Offer",
-      "url": "https://pythia.store/pricing/",
-      "priceCurrency": "USD",
-      "price": "129.00",
-      "priceValidUntil": "2026-12-31",
-      "availability": "https://schema.org/InStock",
-      "itemCondition": "https://schema.org/NewCondition"
-    }
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": pricingFaqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer,
-      },
-    })),
-  };
-
-  const breadcrumbSchema = createBreadcrumbListSchema([
-    { name: "Pricing", path: "/pricing/" },
-  ]);
-
   const router = useRouter();
 
   return (
     <>
-      <Script id="pricing-product-schema" type="application/ld+json">
-        {JSON.stringify(productSchema)}
-      </Script>
-      <Script id="pricing-faq-schema" type="application/ld+json">
-        {JSON.stringify(faqSchema)}
-      </Script>
-      <Script id="pricing-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         {/* Hero Section */}
@@ -217,8 +168,11 @@ export default function PricingPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: 0.2 }}
               >
-                <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-4">
                   Pythia provides a complete hardware-and-software ecosystem to capture, analyse, and act on your store interactions - all for one transparent monthly price.
+                </p>
+                <p className="text-slate-400 text-sm font-medium">
+                  Pricing last updated: June 2026
                 </p>
               </MotionDiv>
             </header>
