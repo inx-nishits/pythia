@@ -5,8 +5,10 @@ import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
 import { faqs } from "../../faq/faqs";
 
-function FAQSection() {
+function FAQSection({ isPageHeading = false }: { isPageHeading?: boolean }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const Heading = isPageHeading ? motion.h1 : motion.h2;
 
   return (
     <section
@@ -16,14 +18,14 @@ function FAQSection() {
     >
       <div className="max-w-[800px] mx-auto w-full min-w-0">
         <div className="text-center mb-16 space-y-4">
-          <motion.h2
+          <Heading
             id="faq-heading"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-[#0F172A] text-[40px] lg:text-[56px] font-extrabold tracking-tighter"
           >
             Common questions
-          </motion.h2>
+          </Heading>
           <p className="text-slate-500 text-lg lg:text-xl font-medium">Everything you need to know about Pythia Intelligence.</p>
         </div>
 
