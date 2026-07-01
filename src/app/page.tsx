@@ -1,4 +1,3 @@
-import Script from "next/script";
 import ScrollToHash from "./component/ScrollToHash/ScrollToHash";
 import Footer from "./containers/Footer";
 import Header from "./containers/Header";
@@ -70,18 +69,21 @@ export default function Home() {
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
+      datePublished: "2026-07-01",
       acceptedAnswer: {
         "@type": "Answer",
         text: faq.answer,
+        upvoteCount: 0,
       },
     })),
   };
 
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden">
-      <Script id="home-faq-schema" type="application/ld+json">
-        {JSON.stringify(faqSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <ScrollToHash />
       <Header />
       <main className="overflow-x-hidden min-w-0 w-full">

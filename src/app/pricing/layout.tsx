@@ -90,9 +90,11 @@ export default function PricingLayout({
     "mainEntity": pricingFaqs.map((faq) => ({
       "@type": "Question",
       "name": faq.question,
+      "datePublished": "2026-07-01",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": faq.answer,
+        "upvoteCount": 0,
       },
     })),
   };
