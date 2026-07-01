@@ -65,18 +65,6 @@ const structuredData = {
         priceCurrency: "USD",
       },
     },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://www.pythiascorecard.com/#breadcrumb",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://www.pythiascorecard.com/",
-        },
-      ],
-    },
   ],
 };
 
@@ -119,6 +107,7 @@ export const metadata: Metadata = {
 import ClientSideComponents from "./component/ClientSideComponents";
 import CookieConsent from "./component/CookieConsent";
 import TrackingManager from "./component/TrackingManager";
+import SitewideBreadcrumb from "./component/SitewideBreadcrumb";
 
 export default function RootLayout({
   children,
@@ -176,6 +165,7 @@ export default function RootLayout({
         </noscript>
 
         <TrackingManager />
+        <SitewideBreadcrumb />
         {children}
         <ClientSideComponents />
         <CookieConsent />
