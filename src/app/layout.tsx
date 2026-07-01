@@ -32,7 +32,12 @@ const structuredData = {
         "@type": "ImageObject",
         url: "https://www.pythiascorecard.com/pythiaLogo.png",
       },
-      sameAs: ["https://www.linkedin.com/company/pythia-scorecard"],
+      sameAs: [
+        "https://www.linkedin.com/company/pythia-scorecard",
+        "https://www.g2.com/products/pythia-scorecard/reviews",
+        "https://www.capterra.com/p/pythia-scorecard/",
+        "https://www.trustpilot.com/review/pythiascorecard.com"
+      ],
     },
     {
       "@type": "WebSite",
@@ -125,10 +130,8 @@ export default function RootLayout({
       <head>
         <meta name="geo.region" content="US" />
         <meta name="geo.country" content="US" />
-        <Script
-          id="sitewide-jsonld"
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 

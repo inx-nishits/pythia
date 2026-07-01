@@ -9,7 +9,6 @@ import RelatedLinks from "../../components/RelatedLinks";
 import { Zap } from "lucide-react";
 import AnimatedReveal from "@/app/component/AnimatedReveal";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
-import Script from "next/script";
 
 export async function generateStaticParams() {
   return articles.map((article) => ({
@@ -113,15 +112,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden pt-20">
-      <Script
-        id="breadcrumb-schema"
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <Script
-        id="article-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, jsonLd]) }}
       />
       <Header />
       <main className="flex-grow w-full px-4 pt-8 md:pt-14 pb-12 md:pb-20 lg:px-8 max-w-[1400px] mx-auto">
