@@ -78,7 +78,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     "headline": article.title,
     "description": article.excerpt,
     "image": "https://www.pythiascorecard.com/og-image.jpg",
-    "datePublished": "2026-03-01",
+    "datePublished": article.date === "March 2026" ? "2026-03-01" : "2026-06-01",
     "author": article.author ? {
       "@type": "Person",
       "name": article.author.name,
