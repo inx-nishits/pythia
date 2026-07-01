@@ -9,6 +9,7 @@ import RelatedLinks from "../../components/RelatedLinks";
 import { Zap } from "lucide-react";
 import AnimatedReveal from "@/app/component/AnimatedReveal";
 import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
+import Script from "next/script";
 
 export async function generateStaticParams() {
   return articles.map((article) => ({
@@ -82,7 +83,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     "author": article.author ? {
       "@type": "Person",
       "name": article.author.name,
-      "description": article.author.bio
+      "jobTitle": article.author.role,
+      "worksFor": {
+        "@id": "https://www.pythiascorecard.com/#organization"
+      }
     } : {
       "@type": "Organization",
       "name": "Pythia Scorecard",
@@ -109,11 +113,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden pt-20">
-      <script
+      <Script
+        id="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <script
+      <Script
+        id="article-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />

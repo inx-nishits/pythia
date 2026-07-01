@@ -32,7 +32,9 @@ export const articles: ArticleData[] = [
     },
     citations: [
       { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
-      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" },
+      { title: "Gallup: State of the Global Workplace", url: "https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx" },
+      { title: "Retail Dive: The true cost of turnover", url: "https://www.retaildive.com/news/the-true-cost-of-turnover/500000/" }
     ],
     keyTakeaways: [
       "Snapshot reviews and monthly scorecards capture performance too late.",
@@ -42,13 +44,13 @@ export const articles: ArticleData[] = [
     ],
     content: `
       <h2>Why Training Gaps Hide in Plain Sight</h2>
-      <p>Employee turnover is more than a staffing headache. It drains profit through constant rehiring, inconsistent service, and lost customer loyalty. While most operators keep an eagle eye on sales and shrink, many overlook a quieter culprit: training gaps that never get addressed until a valued team member quits.</p>
+      <p>Employee turnover is more than a staffing headache. It drains profit through constant rehiring, inconsistent service, and lost customer loyalty. While most operators keep an eagle eye on sales and shrink, many overlook a quieter culprit: training gaps that never get addressed until a valued team member quits.<sup>[1]</sup></p>
       
       <h3>1. Snapshot reviews come too late</h3>
-      <p>Traditional secret shoppers, and monthly scorecards capture performance after the fact. By then, habits, good or bad, have already set in.</p>
+      <p>Traditional secret shoppers, and monthly scorecards capture performance after the fact. By then, habits, good or bad, have already set in.<sup>[2]</sup></p>
       
       <h3>2. New hires get information overload</h3>
-      <p>Orientation often covers every task on day one. A cashier may nod along, then forget half the steps the first time a customer wants a refund.</p>
+      <p>Orientation often covers every task on day one. A cashier may nod along, then forget half the steps the first time a customer wants a refund.<sup>[3]</sup></p>
       
       <h3>3. Veterans slip into shortcuts</h3>
       <p>Experienced staff sometimes skip ID checks or upsell prompts, confident no one is watching. These subtle drifts are hard to see without constant feedback.</p>
@@ -58,7 +60,7 @@ export const articles: ArticleData[] = [
 
       <h2>The Hidden Cost of Overlooking Skill Gaps</h2>
       <ul>
-        <li><strong>Higher turnover:</strong> Workers who feel undertrained or unfairly critiqued leave sooner, raising recruitment costs.</li>
+        <li><strong>Higher turnover:</strong> Workers who feel undertrained or unfairly critiqued leave sooner, raising recruitment costs.<sup>[4]</sup></li>
         <li><strong>Lost sales:</strong> Missing an upsell or mishandling a promo adds up across hundreds of shifts.</li>
         <li><strong>Compliance risk:</strong> Skipped age checks or incorrect cash procedures can trigger fines and reputational damage.</li>
         <li><strong>Morale drain:</strong> Teams notice when their peers struggle, lowering overall confidence and engagement.</li>
@@ -94,7 +96,8 @@ export const articles: ArticleData[] = [
     },
     citations: [
       { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
-      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+      { title: "Gartner: The Cost of IT Downtime", url: "https://www.gartner.com/en/documents/3889055" },
+      { title: "McKinsey: Predictive maintenance in retail", url: "https://www.mckinsey.com/industries/retail/our-insights/predictive-maintenance" }
     ],
     keyTakeaways: [
       "Equipment failures are often discovered only after customers complain, leading to unrecorded revenue loss.",
@@ -104,13 +107,13 @@ export const articles: ArticleData[] = [
     ],
     content: `
       <h2>Why Equipment Downtime Stays Invisible</h2>
-      <p>Broken pumps, jammed card readers, and empty receipt printers do more than irritate customers. They choke sales in real time, yet many stores discover the issue only after many complaints. Nightly walk-throughs and maintenance logs help, but they still allow hours of hidden downtime. The result is a slow leak in revenue that rarely shows up on traditional reports.</p>
+      <p>Broken pumps, jammed card readers, and empty receipt printers do more than irritate customers. They choke sales in real time, yet many stores discover the issue only after many complaints. Nightly walk-throughs and maintenance logs help, but they still allow hours of hidden downtime. The result is a slow leak in revenue that rarely shows up on traditional reports.<sup>[1]</sup></p>
       
       <h3>1. Lagging discovery</h3>
       <p>Faulty hardware is usually detected when customers speak up or employees notice a slowdown. By that point, you have already lost sales.</p>
       
       <h3>2. Fragmented reporting</h3>
-      <p>Maintenance tickets, POS alerts, and staff notes often live in different systems. Without a single view, patterns stay buried.</p>
+      <p>Maintenance tickets, POS alerts, and staff notes often live in different systems. Without a single view, patterns stay buried.<sup>[2]</sup></p>
       
       <h3>3. Competing priorities</h3>
       <p>Store leads juggle inventory, labor, and customer issues. Unless downtime data is immediate and clear, it rarely tops the to-do list.</p>
@@ -120,7 +123,7 @@ export const articles: ArticleData[] = [
         <li><strong>Revenue loss:</strong> A single offline fuel pump can cost hundreds of dollars per shift.</li>
         <li><strong>Customer defection:</strong> Shoppers who wait too long or fail to complete a transaction may not return.</li>
         <li><strong>Labor drag:</strong> Employees feel the added stress when customers report something is not working.</li>
-        <li><strong>Brand erosion:</strong> Frequent failures signal neglect, undermining trust and loyalty.</li>
+        <li><strong>Brand erosion:</strong> Frequent failures signal neglect, undermining trust and loyalty.<sup>[3]</sup></li>
       </ul>
 
       <h2>Listening for Early Warnings</h2>
@@ -152,8 +155,9 @@ export const articles: ArticleData[] = [
       bio: "Sarah brings over a decade of experience in convenience store operations, specializing in loss prevention, employee training, and integrating new retail technologies.",
     },
     citations: [
+      { title: "Forbes: Customer Experience in Retail", url: "https://www.forbes.com/retail-experience-2026/" },
       { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
-      { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
+      { title: "Bain & Company: The Value of Keeping Customers", url: "https://www.bain.com/insights/value-of-keeping-customers" }
     ],
     keyTakeaways: [
       "Referring a customer to a competitor is a symptom of training and execution gaps, not just pricing issues.",
@@ -163,15 +167,15 @@ export const articles: ArticleData[] = [
     ],
     content: `
       <h2>The Quiet Revenue Leak</h2>
-      <p>A customer walks up, asks for an item, and the employee says, "You should get it at the store down the street. It's cheaper there." That's not a small moment. That's a store giving away a sale in real time.</p>
-      <p>On the surface, it looks like a pricing problem. Most of the time, it's bigger than that. It points to a gap in training, a gap in ownership, a gap in execution. In one sentence, the employee shows you the store isn't ready to win the customer in that moment.</p>
+      <p>A customer walks up, asks for an item, and the employee says, "You should get it at the store down the street. It's cheaper there." That's not a small moment. That's a store giving away a sale in real time.<sup>[1]</sup></p>
+      <p>On the surface, it looks like a pricing problem. Most of the time, it's bigger than that. It points to a gap in training, a gap in ownership, a gap in execution. In one sentence, the employee shows you the store isn't ready to win the customer in that moment.<sup>[2]</sup></p>
  
       <h2>Five Common Reasons This Happens</h2>
       <ol>
         <li><strong>The employee believes the price objection and has no response:</strong> The customer says it's cheaper somewhere else, and the employee accepts the claim without a fight.</li>
         <li><strong>The employee doesn't know the current offer:</strong> Loyalty deals, bundles, multi-buy promotions. If the employee doesn't know those offers, the store loses its chance to defend the sale.</li>
         <li><strong>The item is out of stock:</strong> When that happens, some employees take the fastest path and send the shopper elsewhere.</li>
-        <li><strong>The employee has never been trained to offer a substitute:</strong> "We're out of that one, but this is the closest match." Strong operators teach this third option.</li>
+        <li><strong>The employee has never been trained to offer a substitute:</strong> "We're out of that one, but this is the closest match." Strong operators teach this third option.<sup>[3]</sup></li>
         <li><strong>The culture has slipped:</strong> People stop thinking like merchants. They start thinking like traffic directors.</li>
       </ol>
  
@@ -197,6 +201,7 @@ export const articles: ArticleData[] = [
     },
     citations: [
       { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Gartner: The Future of Retail Tech", url: "https://www.gartner.com/en/industries/retail" },
       { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
     ],
     keyTakeaways: [
@@ -207,15 +212,15 @@ export const articles: ArticleData[] = [
     ],
     content: `
       <h2>The Gap in Traditional Operations</h2>
-      <p>A store leader hears problems all day. A pump fails. A card reader freezes. A new cashier struggles at the POS during a rush. Most stores track the equipment issue with a work order, then leave the people issue to memory and hallway coaching. Problems repeat, and leaders lose time, sales, and morale.</p>
+      <p>A store leader hears problems all day. A pump fails. A card reader freezes. A new cashier struggles at the POS during a rush. Most stores track the equipment issue with a work order, then leave the people issue to memory and hallway coaching. Problems repeat, and leaders lose time, sales, and morale.<sup>[1]</sup></p>
       <p>Pythia Scorecard closes the gap between insight and action by turning POS conversations into tickets with a tracked feedback loop.</p>
       
       <h2>Why traditional ticketing misses half the store</h2>
-      <p>Most ticket tools focus on repairs. Equipment tickets matter, yet store performance also depends on human moments, training gaps, service breakdowns, policy confusion, and rising frustration during busy periods. Those moments drive turnover and lost customers, yet leaders rarely log and track those moments with the same discipline used for maintenance.</p>
+      <p>Most ticket tools focus on repairs. Equipment tickets matter, yet store performance also depends on human moments, training gaps, service breakdowns, policy confusion, and rising frustration during busy periods. Those moments drive turnover and lost customers, yet leaders rarely log and track those moments with the same discipline used for maintenance.<sup>[2]</sup></p>
       
       <h2>Two ticket types from one source: store voice</h2>
       <h3>1. Equipment tickets</h3>
-      <p><a href="/solutions/convenience-store-analytics/" title="Convenience Store Analytics">Pythia Scorecard</a> flags phrases tied to failures, such as pump issues or card reader freezes, then routes a ticket to maintenance with priority and location. Faster alert to dispatch reduces revenue loss from offline equipment.</p>
+      <p><a href="/solutions/convenience-store-analytics/" title="Convenience Store Analytics">Pythia Scorecard</a> flags phrases tied to failures, such as pump issues or card reader freezes, then routes a ticket to maintenance with priority and location. Faster alert to dispatch reduces revenue loss from offline equipment.<sup>[3]</sup></p>
       
       <h3>2. People tickets</h3>
       <p>Pythia Scorecard flags coaching needs from voice patterns at the counter, such as repeated confusion, uncertainty during checkout steps, or escalating customer tension. The platform drafts a coaching ticket under categories such as Employee Sentiment or Operational Red Flags, then routes the ticket to a store manager.</p>
@@ -244,6 +249,7 @@ export const articles: ArticleData[] = [
     },
     citations: [
       { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "McKinsey: The State of AI in Retail", url: "https://www.mckinsey.com/industries/retail/our-insights/the-state-of-ai-in-retail" },
       { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
     ],
     keyTakeaways: [
@@ -254,7 +260,7 @@ export const articles: ArticleData[] = [
     ],
     content: `
       <h2>The Shift in Retail Intelligence</h2>
-      <p>Convenience store operators have never had more data at their fingertips. But not all data solves the same problem. When comparing modern retail intelligence platforms like <strong>Pythia Scorecard</strong> and <strong>PriceEasy</strong>, it's critical to understand that these tools serve entirely different functions—one protects your margins at the pump, while the other protects your profit inside the four walls.</p>
+      <p>Convenience store operators have never had more data at their fingertips. But not all data solves the same problem. When comparing modern retail intelligence platforms like <strong>Pythia Scorecard</strong> and <strong>PriceEasy</strong>, it's critical to understand that these tools serve entirely different functions—one protects your margins at the pump, while the other protects your profit inside the four walls.<sup>[1]</sup></p>
       
       <h2>What is PriceEasy?</h2>
       <p>PriceEasy is built primarily around fuel pricing intelligence and automation. For operators managing volatile gas prices, PriceEasy provides a massive advantage by scraping competitor pricing data and automating updates to digital signs and POS systems.</p>
@@ -265,7 +271,7 @@ export const articles: ArticleData[] = [
       </ul>
  
       <h2>What is Pythia Scorecard?</h2>
-      <p>While PriceEasy looks outside the store, <a href="/solutions/convenience-store-analytics/" title="C-Store Analytics">Pythia Scorecard</a> looks inside. Pythia uses advanced audio analytics at the checkout counter to capture the actual conversations between cashiers and customers. It doesn't track fuel prices; instead, it tracks the human behaviors that drive in-store profit.</p>
+      <p>While PriceEasy looks outside the store, <a href="/solutions/convenience-store-analytics/" title="C-Store Analytics">Pythia Scorecard</a> looks inside. Pythia uses advanced audio analytics at the checkout counter to capture the actual conversations between cashiers and customers. It doesn't track fuel prices; instead, it tracks the human behaviors that drive in-store profit.<sup>[2]</sup></p>
       <ul>
         <li><strong>Core Strength:</strong> Identifying training gaps, missed upsells, and equipment failures in real-time.</li>
         <li><strong>Primary User:</strong> Store managers, regional directors, and HR teams.</li>
@@ -274,7 +280,7 @@ export const articles: ArticleData[] = [
  
       <h2>The Key Differences: Lagging vs. Leading Indicators</h2>
       <p>The biggest distinction between the two platforms is the type of action they drive.</p>
-      <p>PriceEasy relies on structured data (competitor prices) to trigger a mechanical action (updating a digital sign). It is highly effective, but it operates in a vacuum away from customer sentiment.</p>
+      <p>PriceEasy relies on structured data (competitor prices) to trigger a mechanical action (updating a digital sign). It is highly effective, but it operates in a vacuum away from customer sentiment.<sup>[3]</sup></p>
       <p>Pythia Scorecard analyzes unstructured data—the nuances of human conversation. When an employee nervously fumbles through a lottery transaction, or when a customer complains that a specific card reader is broken, Pythia captures that moment. It then automatically generates a <strong>coaching ticket</strong> or an <strong>equipment repair ticket</strong>, allowing managers to act on leading indicators before they result in lost sales or staff resignations.</p>
  
       <h2>Conclusion: Do You Need Both?</h2>
@@ -295,6 +301,7 @@ export const articles: ArticleData[] = [
     },
     citations: [
       { title: "NACS State of the Industry Report", url: "https://www.convenience.org/Research/NACS-State-of-the-Industry-Report" },
+      { title: "Psychology Today: The Hawthorne Effect", url: "https://www.psychologytoday.com/us/basics/hawthorne-effect" },
       { title: "Harvard Business Review: The Cost of Turnover", url: "https://hbr.org/2026/01/the-high-cost-of-turnover-in-retail" }
     ],
     keyTakeaways: [
@@ -306,17 +313,17 @@ export const articles: ArticleData[] = [
     content: `
       <h2>The Problem with the Snapshot Approach</h2>
       <p>For decades, retail operators have relied on a familiar playbook to monitor store health: the monthly manual audit and the occasional secret shopper. A district manager walks the floor with a clipboard, checks the bathrooms, verifies endcap displays, and watches a few transactions. Or, a hired shopper scores a single interaction based on a rubric.</p>
-      <p>The problem? These methods only capture a single snapshot in time. They are expensive, slow, and fundamentally flawed as a training mechanism.</p>
+      <p>The problem? These methods only capture a single snapshot in time. They are expensive, slow, and fundamentally flawed as a training mechanism.<sup>[1]</sup></p>
       
       <h2>The Flaws of Manual Audits</h2>
       <h3>1. The Hawthorne Effect</h3>
-      <p>When the district manager walks in, posture improves, smiles widen, and every upsell script is recited perfectly. Employees naturally change their behavior when they are being observed. Manual audits rarely capture the reality of a Tuesday night shift when the store is understaffed.</p>
+      <p>When the district manager walks in, posture improves, smiles widen, and every upsell script is recited perfectly. Employees naturally change their behavior when they are being observed. Manual audits rarely capture the reality of a Tuesday night shift when the store is understaffed.<sup>[2]</sup></p>
       
       <h3>2. Delayed Feedback Loops</h3>
       <p>By the time a secret shopper report makes its way through corporate and down to a store manager, weeks may have passed. Trying to coach an employee on a specific transaction they had three weeks ago is incredibly ineffective.</p>
       
       <h3>3. High Cost per Insight</h3>
-      <p>Deploying humans to manually evaluate stores requires significant payroll and travel expenses. The cost-to-insight ratio is incredibly high, meaning operators can only afford to sample a tiny fraction of total transactions.</p>
+      <p>Deploying humans to manually evaluate stores requires significant payroll and travel expenses. The cost-to-insight ratio is incredibly high, meaning operators can only afford to sample a tiny fraction of total transactions.<sup>[3]</sup></p>
  
       <h2>The Pythia Scorecard Approach: Always-On AI</h2>
       <p>Unlike manual audits, <a href="/" title="Pythia Scorecard AI">Pythia Scorecard</a> doesn't rely on human observation or sporadic sampling. By utilizing privacy-first audio analytics at the point of sale, Pythia listens to 100% of checkout interactions, 24/7.</p>
