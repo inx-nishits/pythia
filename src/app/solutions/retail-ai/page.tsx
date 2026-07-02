@@ -1,9 +1,7 @@
-import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
 import RelatedLinks from "../../components/RelatedLinks";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Retail AI & Edge Intelligence for Checkout Optimization",
@@ -35,16 +33,23 @@ export const metadata = {
 };
 
 export default function RetailAiPage() {
-  const breadcrumbSchema = createBreadcrumbListSchema([
-    { name: "Solutions", path: "/#solutions" },
-    { name: "Retail AI", path: "/solutions/retail-ai/" },
-  ]);
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Retail AI & Edge Intelligence",
+    "description": "Use Edge AI at checkout to transform conversations into actionable retail insights, optimized operations, and better customer experiences.",
+    "provider": {
+      "@id": "https://www.pythiascorecard.com/#organization"
+    },
+    "url": "https://www.pythiascorecard.com/solutions/retail-ai/"
+  };
 
   return (
     <>
-      <Script id="retail-ai-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <Header />
       <SolutionLayout
         eyebrow="Solution"

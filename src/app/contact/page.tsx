@@ -1,8 +1,6 @@
-import Script from "next/script";
 import Footer from "../containers/Footer";
 import Header from "../containers/Header";
 import ContactPageContent from "./ContactPageContent";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
     title: "Contact Pythia Scorecard | Request a Demo or Get Support",
@@ -43,15 +41,23 @@ export const metadata = {
 
 
 export default function Contact() {
-    const breadcrumbSchema = createBreadcrumbListSchema([
-        { name: "Contact", path: "/contact/" },
-    ]);
+    const contactSchema = {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Pythia Scorecard",
+        "description": "Reach out to Pythia to schedule a demo, ask questions about our device and dashboard, or discuss how we can help your retail operations with actionable AI insights.",
+        "url": "https://www.pythiascorecard.com/contact/",
+        "mainEntity": {
+            "@id": "https://www.pythiascorecard.com/#organization"
+        }
+    };
 
     return (
         <>
-            <Script id="contact-breadcrumb-schema" type="application/ld+json">
-                {JSON.stringify(breadcrumbSchema)}
-            </Script>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+            />
             <Header />
             <ContactPageContent />
             <Footer />

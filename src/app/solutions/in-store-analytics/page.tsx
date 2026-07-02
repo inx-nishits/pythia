@@ -1,9 +1,7 @@
-import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
 import RelatedLinks from "../../components/RelatedLinks";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "In-Store Analytics: Unlocking Audio Insights at Checkout",
@@ -36,16 +34,23 @@ export const metadata = {
 
 
 export default function InStoreAnalyticsPage() {
-  const breadcrumbSchema = createBreadcrumbListSchema([
-    { name: "Solutions", path: "/#solutions" },
-    { name: "In-Store Analytics", path: "/solutions/in-store-analytics/" },
-  ]);
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "In-Store Analytics",
+    "description": "Gain deeper insights into store performance by analyzing checkout conversations. Identify missed upsells and service friction with AI-driven audio analytics.",
+    "provider": {
+      "@id": "https://www.pythiascorecard.com/#organization"
+    },
+    "url": "https://www.pythiascorecard.com/solutions/in-store-analytics/"
+  };
 
   return (
     <>
-      <Script id="in-store-analytics-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <Header />
       <SolutionLayout
         eyebrow="Solution"
