@@ -78,19 +78,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     "headline": article.title,
     "description": article.excerpt,
     "image": "https://www.pythiascorecard.com/og-image.jpg",
-    "datePublished": article.date === "March 2026" ? "2026-03-01" : "2026-06-01",
-    "author": article.author ? {
-      "@type": "Person",
-      "name": article.author.name,
-      "jobTitle": article.author.role,
-      "worksFor": {
-        "@id": "https://www.pythiascorecard.com/#organization"
-      }
-    } : {
-      "@type": "Organization",
-      "name": "Pythia Scorecard",
-      "url": "https://www.pythiascorecard.com"
-    },
+    "datePublished": article.date === "March 2026" ? "2026-03-01T08:00:00+08:00" : "2026-06-01T08:00:00+08:00",
+    "dateModified": "2026-07-02T08:00:00+08:00",
     "publisher": {
       "@type": "Organization",
       "name": "Pythia Scorecard",
@@ -139,6 +128,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <h1 className="text-[#0F172A] text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold tracking-tighter mb-6 leading-tight">
                 {article.title}
               </h1>
+              <p className="text-[18px] md:text-[20px] text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+                {article.excerpt}
+              </p>
             </header>
           </AnimatedReveal>
 
@@ -167,19 +159,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </AnimatedReveal>
-
-          {/* Author Bio */}
-          {article.author && (
-            <AnimatedReveal index={4}>
-              <div className="mt-12 p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col md:flex-row gap-6 items-start">
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-brand-navy mb-1">{article.author.name}</h3>
-                  <p className="text-sm font-medium text-brand-teal mb-3">{article.author.role}</p>
-                  <p className="text-slate-600 leading-relaxed text-sm">{article.author.bio}</p>
-                </div>
-              </div>
-            </AnimatedReveal>
-          )}
 
           {/* Citations */}
           {article.citations && article.citations.length > 0 && (
