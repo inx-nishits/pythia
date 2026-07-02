@@ -1,0 +1,28 @@
+# Pythia Scorecard
+
+Pythia Scorecard is an Edge-AI hardware and software solution designed to provide always-on retail insights at checkout.
+
+## Core Value Proposition
+Pythia captures in-store checkout conversations using custom Edge-AI hardware. It analyzes these interactions in near real-time, delivering actionable insights to retail chains, convenience stores, and quick-service restaurants (QSRs). By surfacing what actually happens at the counter, Pythia helps prevent missed sales, improve staff performance, reduce employee turnover, and optimize the customer experience without the need for manual managerial oversight or mystery shoppers.
+
+## Key Features
+- **Always-On Edge AI:** Privacy-first AI hardware that processes checkout audio locally on the device.
+- **Automated Scorecards:** Objective grading of staff-customer interactions based on predefined brand standards (e.g., upselling, greeting, policy compliance).
+- **Near Real-Time Insights:** Store managers and corporate leadership receive instant alerts and daily summaries of store performance.
+- **Burnout & Churn Prevention:** Identifies friction points and staff fatigue, allowing management to intervene before turnover happens.
+- **Privacy by Design:** Focuses on operational metadata and staff interactions without storing sensitive PII (Personally Identifiable Information) of customers.
+
+## Pricing
+- **Professional Plan:** $129 USD per month per store. Includes the Edge-AI hardware, always-on analytics, daily summaries, and access to the dashboard.
+
+## Target Audience
+- Retail Chains
+- Convenience Stores
+- Quick Service Restaurants (QSR)
+- Franchise Operators
+
+## Important Links
+- Website: https://www.pythiascorecard.com
+- Pricing: https://www.pythiascorecard.com/pricing/
+- FAQ: https://www.pythiascorecard.com/faq/
+- Contact: https://www.pythiascorecard.com/contact/
