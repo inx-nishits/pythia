@@ -67,6 +67,7 @@ export default function Home() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": "https://www.pythiascorecard.com/#faq",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,

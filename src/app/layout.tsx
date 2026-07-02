@@ -76,6 +76,9 @@ const structuredData = {
       about: {
         "@id": "https://www.pythiascorecard.com/#organization",
       },
+      breadcrumb: {
+        "@id": "https://www.pythiascorecard.com/#breadcrumb",
+      },
     },
   ],
 };

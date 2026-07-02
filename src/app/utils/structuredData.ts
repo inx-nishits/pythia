@@ -15,6 +15,7 @@ export function createBreadcrumbListSchema(items: BreadcrumbItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": "https://www.pythiascorecard.com/#breadcrumb",
     itemListElement: breadcrumbItems.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
