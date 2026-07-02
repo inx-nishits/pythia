@@ -19,6 +19,7 @@ import BlogSection from "./containers/BlogSection";
 import FAQSection from "./containers/FAQSection";
 import IndustriesSection from "./containers/IndustriesSection";
 import { faqs } from "./faq/faqs";
+import { createBreadcrumbListSchema } from "./utils/structuredData";
 
 export const metadata = {
   title: "Pythia Scorecard | Always-On Retail AI Insights at Checkout",
@@ -78,11 +79,13 @@ export default function Home() {
     })),
   };
 
+  const breadcrumbSchema = createBreadcrumbListSchema([]);
+
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, faqSchema]) }}
       />
       <ScrollToHash />
       <Header />

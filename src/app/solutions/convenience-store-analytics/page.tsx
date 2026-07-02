@@ -1,9 +1,7 @@
-import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
 import RelatedLinks from "../../components/RelatedLinks";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Convenience Store Analytics: Optimizing Retail Operations",
@@ -35,22 +33,23 @@ export const metadata = {
 };
 
 export default function ConvenienceStoreAnalyticsPage() {
-  const breadcrumbSchema = createBreadcrumbListSchema([
-    { name: "Solutions", path: "/#solutions" },
-    {
-      name: "Convenience Store Analytics",
-      path: "/solutions/convenience-store-analytics/",
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Convenience Store Analytics",
+    "description": "Optimize convenience store operations with AI-driven feedback loops for better service, higher revenue, and store efficiency.",
+    "provider": {
+      "@id": "https://www.pythiascorecard.com/#organization"
     },
-  ]);
+    "url": "https://www.pythiascorecard.com/solutions/convenience-store-analytics/"
+  };
 
   return (
     <>
-      <Script
-        id="convenience-store-analytics-breadcrumb-schema"
+      <script
         type="application/ld+json"
-      >
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <Header />
       <SolutionLayout
         eyebrow="Solution"

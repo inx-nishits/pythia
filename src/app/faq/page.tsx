@@ -3,6 +3,7 @@ import Header from "@/app/containers/Header";
 import Footer from "@/app/containers/Footer";
 import HomeContact from "@/app/containers/HomeContact";
 import FAQSection from "@/app/containers/FAQSection";
+import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Frequently Asked Questions | Pythia Scorecard",
@@ -28,11 +29,15 @@ export default function FAQPage() {
     })),
   };
 
+  const breadcrumbSchema = createBreadcrumbListSchema([
+    { name: "FAQ", path: "/faq/" }
+  ]);
+
   return (
     <div className="flex flex-col min-w-0 w-full max-w-[100vw] overflow-x-hidden pt-20">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, faqSchema]) }}
       />
       <Header />
       <main className="flex-grow w-full pt-8 md:pt-14 pb-12 md:pb-20">

@@ -1,9 +1,7 @@
-import Script from "next/script";
 import SolutionLayout from "../SolutionLayout";
 import Header from "../../containers/Header";
 import Footer from "../../containers/Footer";
 import RelatedLinks from "../../components/RelatedLinks";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "Automated Work Order Tickets for Retail Operations & ROI",
@@ -35,16 +33,23 @@ export const metadata = {
 };
 
 export default function WorkOrderTicketsPage() {
-  const breadcrumbSchema = createBreadcrumbListSchema([
-    { name: "Solutions", path: "/#solutions" },
-    { name: "Work Order Tickets", path: "/solutions/work-order-tickets/" },
-  ]);
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Automated Work Order Tickets",
+    "description": "Automate maintenance and coaching tickets directly from customer interactions. From friction detected to fix in motion with AI-driven retail audio analytics.",
+    "provider": {
+      "@id": "https://www.pythiascorecard.com/#organization"
+    },
+    "url": "https://www.pythiascorecard.com/solutions/work-order-tickets/"
+  };
 
   return (
     <>
-      <Script id="work-order-tickets-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <Header />
       <SolutionLayout
         eyebrow="Solution"

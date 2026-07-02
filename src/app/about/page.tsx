@@ -1,8 +1,7 @@
+
 import Image from "next/image";
-import Script from "next/script";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 export const metadata = {
   title: "About Pythia Scorecard: Scaling Retail Intelligence with AI",
@@ -34,15 +33,23 @@ export const metadata = {
 };
 
 export default function AboutPage() {
-  const breadcrumbSchema = createBreadcrumbListSchema([
-    { name: "About", path: "/about/" },
-  ]);
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Pythia Scorecard",
+    "description": "Learn about the mission behind Pythia Scorecard, giving retail leaders an objective view of every customer interaction through AI-driven audio intelligence.",
+    "url": "https://www.pythiascorecard.com/about/",
+    "mainEntity": {
+      "@id": "https://www.pythiascorecard.com/#organization"
+    }
+  };
 
   return (
     <>
-      <Script id="about-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[80px]">

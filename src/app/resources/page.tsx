@@ -1,13 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Script from "next/script";
 import { motion } from "framer-motion";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
 import Link from "next/link";
 import { articles } from "../articles/data";
-import { createBreadcrumbListSchema } from "@/app/utils/structuredData";
 
 type ResourceCategory = "Blog" | "Article" | "Case Study";
 
@@ -39,9 +37,22 @@ const categories: (ResourceCategory | "All")[] = ["All", "Blog", "Article", "Cas
 export default function ResourcesPage() {
   const [selectedCategory, setSelectedCategory] = useState<ResourceCategory | "All">("All");
   const [search, setSearch] = useState("");
-  const breadcrumbSchema = createBreadcrumbListSchema([
-    { name: "Resources", path: "/resources/" },
-  ]);
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Pythia Scorecard Resources",
+    "description": "Browse articles, blogs, and case studies that explore how audio intelligence changes the way retail leaders run their stores and coach their teams.",
+    "url": "https://www.pythiascorecard.com/resources/",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": articles.map((article, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://www.pythiascorecard.com/articles/${article.slug}/`
+      }))
+    }
+  };
 
   const filteredResources = useMemo(() => {
     return allResources.filter((item) => {
@@ -60,9 +71,10 @@ export default function ResourcesPage() {
 
   return (
     <>
-      <Script id="resources-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         <section className="px-4 sm:px-6 pt-10 sm:pt-14 lg:pt-[120px] pb-[96px]">
