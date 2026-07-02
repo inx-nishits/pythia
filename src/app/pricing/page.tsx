@@ -135,8 +135,35 @@ function DetailAccordion({
 export default function PricingPage() {
   const router = useRouter();
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "Pythia Scorecard Professional Plan",
+    description: "Always-On Retail AI Insights at Checkout with Edge-AI hardware",
+    brand: {
+      "@type": "Brand",
+      name: "Pythia Scorecard"
+    },
+    offers: {
+      "@type": "Offer",
+      url: "https://www.pythiascorecard.com/pricing/",
+      priceCurrency: "USD",
+      price: "129",
+      priceValidUntil: "2027-12-31",
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Pythia Scorecard"
+      }
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
         {/* Hero Section */}

@@ -65,6 +65,18 @@ const structuredData = {
         priceCurrency: "USD",
       },
     },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.pythiascorecard.com/#webpage",
+      url: "https://www.pythiascorecard.com/",
+      name: "Pythia Scorecard",
+      isPartOf: {
+        "@id": "https://www.pythiascorecard.com/#website",
+      },
+      about: {
+        "@id": "https://www.pythiascorecard.com/#organization",
+      },
+    },
   ],
 };
 
@@ -73,6 +85,21 @@ export const metadata: Metadata = {
   description:
     "Pythia listens to counter conversations, analyzes them with AI, and gives you always-on insights to improve service, staff performance, and overall store sales.",
   metadataBase: new URL("https://www.pythiascorecard.com"),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  category: "Technology",
+  authors: [{ name: "Pythia Scorecard", url: "https://www.pythiascorecard.com" }],
+  creator: "Pythia Scorecard",
+  publisher: "Pythia Scorecard",
   alternates: {
     canonical: "/",
   },

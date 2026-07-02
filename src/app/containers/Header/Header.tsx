@@ -245,8 +245,8 @@ function Header() {
                         About Us
                       </Link>
                       <Link
-                        href="/#faq"
-                        className="px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 text-slate-600 hover:text-brand-navy"
+                        href="/faq/"
+                        className={`px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 ${pathname === "/faq/" ? "text-brand-navy bg-slate-50/50" : "text-slate-600 hover:text-brand-navy"}`}
                         onClick={() => setIsCompanyHovered(false)}
                       >
                         FAQ
@@ -468,8 +468,8 @@ function Header() {
                           </li>
                           <li>
                             <Link
-                              href="/#faq"
-                              className="block text-[16px] font-medium transition-colors text-slate-600"
+                              href="/faq/"
+                              className={`block text-[16px] font-medium transition-colors ${pathname === "/faq/" ? "text-brand-navy" : "text-slate-600"}`}
                               onClick={() => setMobileOpen(false)}
                             >
                               FAQ
