@@ -8,6 +8,7 @@ import MeetPythiaStore from "./containers/MeetPythiaStore";
 import TrustBar from "./containers/TrustBar";
 import RetailSection from "./containers/RetailSection";
 import WhatYouGet from "./containers/WhatYouGet";
+import InteractiveFeaturesSection from "./containers/InteractiveFeaturesSection";
 import SolutionsSection from "./containers/SolutionsSection";
 import ROISection from "./containers/ROISection";
 import TestimonialsSection from "./containers/TestimonialsSection";
@@ -96,6 +97,7 @@ export default function Home() {
         <RetailSection />
         <MeetPythiaStore />
         <WhatYouGet />
+        <InteractiveFeaturesSection />
         <SolutionsSection />
         <ROISection />
         <TestimonialsSection />

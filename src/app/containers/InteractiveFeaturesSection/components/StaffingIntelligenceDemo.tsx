@@ -1,0 +1,397 @@
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AlertTriangle, ArrowRight, Star, GripVertical, Flame, Check, Zap } from "lucide-react";
+import { openDemoModal } from "@/app/utils/calendly";
+import { DEMO_SOURCES } from "@/app/utils/demoSource";
+import { trackEvent } from "@/app/utils/gtm";
+
+const CTA_LOCATION = "interactive_demo_staffing";
+
+type Staff = {
+  id: string;
+  name: string;
+  initials: string;
+  score: number;
+  color: string;
+  bgColor: string;
+};
+
+const staffMembers: Staff[] = [
+  { id: "sarah", name: "Sarah J.", initials: "SJ", score: 94, color: "text-green-700", bgColor: "bg-green-100" },
+  { id: "mike", name: "Mike D.", initials: "MD", score: 88, color: "text-emerald-700", bgColor: "bg-emerald-100" },
+  { id: "kevin", name: "Kevin T.", initials: "KT", score: 72, color: "text-amber-700", bgColor: "bg-amber-100" }
+];
+
+export default function StaffingIntelligenceDemo() {
+  const [step, setStep] = useState<number>(0);
+  const [slots, setSlots] = useState<{ morning: Staff | null; peak: Staff[] }>({
+    morning: null,
+    peak: [],
+  });
+  
+  const [activeZone, setActiveZone] = useState<string | null>(null);
+
+  const handleBookDemo = () => {
+    trackEvent("intelligence_demo_click", {
+      section: "interactive_staffing_intelligence"
+    });
+    openDemoModal({
+      ctaLocation: CTA_LOCATION,
+      source: DEMO_SOURCES.product,
+    });
+  };
+
+  const handleDragStart = (e: React.DragEvent, id: string) => {
+    e.dataTransfer.setData("text/plain", id);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDragOver = (e: React.DragEvent, zone: string) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    if (activeZone !== zone) {
+      setActiveZone(zone);
+    }
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setActiveZone(null);
+  };
+
+  const handleDrop = (e: React.DragEvent, slot: "morning" | "peak" | "pool") => {
+    e.preventDefault();
+    setActiveZone(null);
+    const id = e.dataTransfer.getData("text/plain");
+    const staff = staffMembers.find((s) => s.id === id);
+    
+    if (staff) {
+      setSlots((prev) => {
+        const newSlots = { morning: prev.morning, peak: [...prev.peak] };
+        
+        // Remove from old position
+        if (newSlots.morning?.id === id) newSlots.morning = null;
+        newSlots.peak = newSlots.peak.filter(s => s.id !== id);
+        
+        // Add to new position
+        if (slot === "morning") {
+          newSlots.morning = staff;
+        } else if (slot === "peak") {
+          if (newSlots.peak.length < 2) {
+            newSlots.peak.push(staff);
+          } else {
+            // Replace the first one if already full (max 2)
+            newSlots.peak.shift();
+            newSlots.peak.push(staff);
+          }
+        }
+        
+        return newSlots;
+      });
+    }
+  };
+
+  // Automatically move to step 2 when successful
+  const isSuccess = 
+    slots.morning?.id === "kevin" && 
+    slots.peak.some(s => s.id === "sarah") && 
+    slots.peak.some(s => s.id === "mike");
+
+  React.useEffect(() => {
+    if (isSuccess && step === 1) {
+      setTimeout(() => setStep(2), 500); // Small delay to let user see it drop
+    }
+  }, [isSuccess, step]);
+
+  const poolStaff = staffMembers.filter(
+    (s) => slots.morning?.id !== s.id && !slots.peak.find(ps => ps.id === s.id)
+  );
+
+  return (
+    <div className="w-full h-full min-h-full flex flex-col items-center justify-center relative overflow-hidden bg-white">
+      <AnimatePresence mode="wait">
+        
+        {/* Step 0: The Problem */}
+        {step === 0 && (
+          <motion.div 
+            key="scene-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.5 }}
+            className="w-full flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center p-8 md:p-12 py-8 md:py-12 max-w-6xl mx-auto"
+          >
+            <div className="flex-1 max-w-lg z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-xs font-semibold uppercase tracking-widest mb-6 border border-slate-200 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Issue Detected
+              </div>
+              <h3 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+                The Scheduling <span className="text-slate-400 font-medium">Blind Spot</span>
+              </h3>
+              <p className="text-slate-600 text-base mb-8 leading-relaxed">
+                Yesterday's schedule placed a struggling employee alone during the peak Lunch Rush. This resulted in slower service and lost revenue.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4 mb-10">
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                  <div className="text-slate-500 text-sm mb-1 font-medium">Service Speed</div>
+                  <div className="text-2xl font-bold text-red-500">-24%</div>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                  <div className="text-slate-500 text-sm mb-1 font-medium">Lost Revenue</div>
+                  <div className="text-2xl font-bold text-red-500">$450</div>
+                </div>
+              </div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                <button 
+                  onClick={() => setStep(1)}
+                  className="group relative px-6 py-4 bg-white text-slate-800 font-bold rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:border-brand-teal hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center gap-3"
+                >
+                  <Zap className="w-5 h-5 text-slate-400 group-hover:text-brand-teal transition-colors" />
+                  Optimize Schedule
+                </button>
+              </motion.div>
+            </div>
+
+            <div className="flex-1 w-full max-w-md bg-white rounded-3xl p-6 relative border border-slate-100 shadow-2xl transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out h-[380px] flex flex-col justify-center">
+              <h4 className="font-bold text-slate-900 mb-6 text-xl">Yesterday's Peak <span className="text-slate-500 text-lg font-medium">(12PM - 2PM)</span></h4>
+              
+              <div className="bg-red-50/50 p-5 rounded-2xl border border-red-100 shadow-sm flex items-center gap-4 relative overflow-hidden">
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-red-500"></div>
+                <div className="w-12 h-12 bg-white border border-red-100 rounded-xl flex items-center justify-center font-bold text-slate-700 shadow-sm shrink-0">
+                  KT
+                </div>
+                <div className="flex-1">
+                  <div className="font-bold text-slate-900 text-lg">Kevin T.</div>
+                  <div className="text-sm font-medium text-red-600">Scheduled Alone</div>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-1">Pythia Score</div>
+                  <div className="font-extrabold text-red-500 text-2xl">72</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 1: Interactive Solution */}
+        {step === 1 && (
+          <motion.div 
+            key="scene-1"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6 }}
+            className="w-full flex flex-col items-center justify-center p-8 md:p-12 py-8 md:py-12 max-w-5xl mx-auto"
+          >
+            <div className="flex flex-col md:flex-row gap-8 w-full items-start">
+              {/* Available Staff (Pool) */}
+              <div 
+                className={`w-full md:w-1/3 rounded-3xl p-4 transition-colors ${activeZone === 'pool' ? 'bg-slate-100/80 ring-2 ring-slate-300 ring-inset' : 'bg-transparent'}`}
+                onDragOver={(e) => handleDragOver(e, "pool")}
+                onDragLeave={handleDragLeave}
+                onDrop={(e) => handleDrop(e, "pool")}
+              >
+                <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+                  <h4 className="font-bold text-slate-900">Available Staff</h4>
+                  <span className="text-xs font-semibold text-slate-500 bg-white px-2 py-1 rounded-md border border-slate-200 shadow-sm">Drag to reassign</span>
+                </div>
+                <div className="space-y-4 min-h-[250px]">
+                  <AnimatePresence>
+                    {poolStaff.map((staff) => (
+                      <motion.div
+                        key={staff.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        draggable
+                        onDragStart={(e: any) => handleDragStart(e, staff.id)}
+                        className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal hover:shadow-md transition-all group"
+                      >
+                        <div className={`w-12 h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-lg shadow-sm border border-white`}>
+                          {staff.initials}
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-bold text-slate-900">{staff.name}</div>
+                          <div className={`text-xs font-bold flex items-center gap-1 mt-0.5 ${staff.color}`}>
+                            {staff.score > 80 && <Star className="w-3.5 h-3.5 fill-current" />} Score: {staff.score}
+                          </div>
+                        </div>
+                        <GripVertical className="w-5 h-5 text-slate-300 group-hover:text-brand-teal transition-colors" />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                  
+                  {poolStaff.length === 0 && (
+                    <div className="h-full flex items-center justify-center text-slate-400 text-sm font-medium pt-10">
+                      All staff assigned
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Schedule Slots */}
+              <div className="w-full md:w-2/3 space-y-5">
+                {/* Morning Slot */}
+                <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+                  <div className="flex justify-between items-center mb-4">
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-lg">Morning Open</h4>
+                      <p className="text-sm font-medium text-slate-500">8:00 AM - 12:00 PM</p>
+                    </div>
+                    <span className="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg uppercase tracking-widest border border-slate-200">
+                      Low Traffic
+                    </span>
+                  </div>
+                  <div
+                    onDragOver={(e) => handleDragOver(e, "morning")}
+                    onDragLeave={handleDragLeave}
+                    onDrop={(e) => handleDrop(e, "morning")}
+                    className={`min-h-[96px] border-2 border-dashed rounded-2xl flex items-center justify-center p-2 transition-all
+                      ${slots.morning ? 'border-transparent' : activeZone === 'morning' ? 'border-brand-teal bg-brand-teal/5' : 'border-slate-300 bg-slate-50 hover:bg-slate-100 hover:border-brand-teal/40'}
+                    `}
+                  >
+                    {slots.morning ? (
+                      <motion.div
+                        key={slots.morning.id}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        draggable
+                        onDragStart={(e: any) => handleDragStart(e, slots.morning!.id)}
+                        className="w-full bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                      >
+                        <div className={`w-12 h-12 ${slots.morning.bgColor} rounded-xl flex items-center justify-center font-bold ${slots.morning.color} text-lg`}>
+                          {slots.morning.initials}
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-bold text-slate-900">{slots.morning.name}</div>
+                          <div className={`text-xs font-bold mt-0.5 ${slots.morning.color}`}>Score: {slots.morning.score}</div>
+                        </div>
+                        <GripVertical className="w-5 h-5 text-slate-300" />
+                      </motion.div>
+                    ) : (
+                      <span className={`font-medium transition-colors ${activeZone === 'morning' ? 'text-brand-teal' : 'text-slate-400'}`}>
+                        Drag Kevin here
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Peak Slot */}
+                <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+                  <div className="flex justify-between items-center mb-4">
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-lg">Lunch Rush</h4>
+                      <p className="text-sm font-medium text-slate-500">12:00 PM - 2:00 PM</p>
+                    </div>
+                    <span className="px-3 py-1.5 bg-orange-50 text-orange-600 text-xs font-bold rounded-lg uppercase tracking-widest flex items-center gap-1.5 border border-orange-200 shadow-sm">
+                      <Flame className="w-3.5 h-3.5 fill-orange-600" /> High Traffic
+                    </span>
+                  </div>
+                  <div
+                    onDragOver={(e) => handleDragOver(e, "peak")}
+                    onDragLeave={handleDragLeave}
+                    onDrop={(e) => handleDrop(e, "peak")}
+                    className={`min-h-[96px] border-2 border-dashed rounded-2xl flex flex-col sm:flex-row gap-3 items-center justify-center p-2 transition-all
+                      ${slots.peak.length > 0 ? (slots.peak.length === 2 ? 'border-transparent' : 'border-slate-300 bg-slate-50') : activeZone === 'peak' ? 'border-brand-teal bg-brand-teal/5' : 'border-slate-300 bg-slate-50 hover:bg-slate-100 hover:border-brand-teal/40'}
+                    `}
+                  >
+                    <AnimatePresence>
+                      {slots.peak.map((staff) => (
+                        <motion.div
+                          key={staff.id}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          draggable
+                          onDragStart={(e: any) => handleDragStart(e, staff.id)}
+                          className="w-full sm:flex-1 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                        >
+                          <div className={`w-12 h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-lg`}>
+                            {staff.initials}
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-bold text-slate-900">{staff.name}</div>
+                            <div className={`text-xs font-bold mt-0.5 ${staff.color}`}>Score: {staff.score}</div>
+                          </div>
+                          <GripVertical className="w-5 h-5 text-slate-300" />
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+
+                    {slots.peak.length === 0 && (
+                      <span className={`font-medium transition-colors w-full text-center ${activeZone === 'peak' ? 'text-brand-teal' : 'text-slate-400'}`}>
+                        Drag Sarah and Mike here
+                      </span>
+                    )}
+                    
+                    {slots.peak.length === 1 && (
+                      <div className="w-full sm:flex-1 min-h-[82px] rounded-xl border-2 border-dashed border-slate-200 flex items-center justify-center">
+                         <span className="text-slate-400 text-sm font-medium">Drag second person here</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 2: Value Delivered */}
+        {step === 2 && (
+          <motion.div 
+            key="scene-2"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="w-full flex flex-col items-center justify-center py-8 md:py-12 max-w-4xl mx-auto"
+          >
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 text-center max-w-2xl mx-auto w-full shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-2 bg-brand-teal"></div>
+              
+              <div className="w-20 h-20 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-emerald-100 shadow-sm relative">
+                <div className="absolute inset-0 bg-brand-teal/10 rounded-2xl animate-ping opacity-75"></div>
+                <Check className="w-10 h-10 text-brand-teal relative z-10" />
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">
+                Schedule Optimized Successfully
+              </h3>
+              
+              <p className="text-slate-600 text-base mb-8 leading-relaxed max-w-lg mx-auto">
+                By matching top performers to high traffic periods, you've improved projected service speed by 18% and recovered potential lost revenue.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button 
+                  onClick={() => {
+                    setSlots({ morning: null, peak: [] });
+                    setStep(0);
+                  }}
+                  className="px-6 py-3 text-slate-500 font-bold hover:text-slate-800 transition-colors"
+                >
+                  Reset Demo
+                </button>
+                <button 
+                  onClick={handleBookDemo}
+                  className="bg-slate-900 text-white hover:bg-slate-800 rounded-xl px-8 py-4 font-bold shadow-xl transition-all hover:-translate-y-0.5 hover:shadow-2xl tracking-wide flex items-center gap-2"
+                >
+                  Book a Demo <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+      </AnimatePresence>
+    </div>
+  );
+}
+
