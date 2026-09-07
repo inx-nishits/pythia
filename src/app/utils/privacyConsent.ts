@@ -293,7 +293,7 @@ export function applyConsentMode(selection: PrivacySelection) {
   });
 
   syncAdvertisingConsentCookie(effectiveSelection);
-  window.oaiq?.("consent", effectiveSelection.advertising);
+  (window as any).oaiq?.("consent", effectiveSelection.advertising);
 }
 
 export function savePrivacyPreferences(
