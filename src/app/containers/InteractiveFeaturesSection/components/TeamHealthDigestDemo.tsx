@@ -65,17 +65,17 @@ export default function TeamHealthDigestDemo() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.5 }}
-            className="w-full flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center p-8 md:p-12 py-8 md:py-12 max-w-6xl mx-auto"
+            className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center px-4 py-8 md:p-8 lg:p-12 max-w-6xl mx-auto"
           >
             {/* Context Text */}
-            <div className="flex-1 max-w-lg z-10">
+            <div className="z-10 flex flex-col items-center md:items-start text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-xs font-semibold uppercase tracking-widest mb-6 border border-slate-200 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> The Retention Blind Spot
               </div>
-              <h3 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+              <h3 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight text-balance">
                 Turnover is expensive, <span className="text-slate-400 font-medium">but the signs are subtle.</span>
               </h3>
-              <p className="text-slate-600 text-base mb-8 leading-relaxed">
+              <p className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed max-w-lg">
                 Most managers only realize an employee is struggling when they hand in their two weeks&apos; notice. By then, it&apos;s too late.
               </p>
               
@@ -83,15 +83,16 @@ export default function TeamHealthDigestDemo() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.0, duration: 0.5 }}
+                className="flex flex-col items-center md:items-start w-full"
               >
-                <p className="text-sm text-slate-500 mb-4 font-semibold flex items-center uppercase tracking-wider">
-                  <ArrowRight className="w-4 h-4 text-brand-teal mr-2" /> 
+                <p className="text-sm text-slate-500 mb-4 font-semibold flex items-center justify-center md:justify-start uppercase tracking-wider">
+                  <ArrowRight className="w-4 h-4 text-brand-teal mr-2 hidden md:block" /> 
                   Take the role of the manager:
                 </p>
                 <button 
                   onClick={handleReply}
                   disabled={step > 0}
-                  className={`group relative px-6 py-4 bg-white text-slate-800 font-bold rounded-2xl overflow-hidden shadow-lg border transition-all duration-300 flex items-center gap-3
+                  className={`group relative px-6 py-4 bg-white text-slate-800 font-bold rounded-2xl overflow-hidden shadow-lg border transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto
                     ${step > 0 ? "border-brand-teal ring-4 ring-brand-teal/10 pointer-events-none shadow-brand-teal/20" : "border-slate-200 hover:border-brand-teal hover:scale-[1.02] active:scale-95"}
                   `}
                 >
@@ -105,7 +106,7 @@ export default function TeamHealthDigestDemo() {
             </div>
 
             {/* UI Mockup (Generic Dashboard) */}
-            <DemoMockupCard className="p-6 h-[450px] transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
+            <DemoMockupCard className="w-full p-4 lg:p-6 h-[440px] lg:h-[460px] transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                 <div>
                   <div className="font-bold text-slate-900 text-lg">Team Performance</div>
@@ -144,9 +145,9 @@ export default function TeamHealthDigestDemo() {
                       initial={{ opacity: 0, y: 20, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
-                      className="bg-slate-900 text-white rounded-3xl p-5 max-w-[90%] self-end shadow-lg mt-auto relative"
+                      className="bg-slate-900 text-white rounded-3xl p-4 lg:p-5 max-w-[95%] lg:max-w-[90%] self-end shadow-lg mt-auto relative"
                     >
-                      <p className="text-[15px] leading-relaxed font-medium">I&apos;ll assume everything is going smoothly with the team.</p>
+                      <p className="text-[13px] lg:text-[15px] leading-relaxed font-medium">I&apos;ll assume everything is going smoothly with the team.</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -272,23 +273,23 @@ export default function TeamHealthDigestDemo() {
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-red-50/50 p-6 rounded-2xl border border-red-200 shadow-md flex items-start gap-5 relative overflow-hidden"
+                  className="bg-red-50/50 p-4 lg:p-6 rounded-2xl border border-red-200 shadow-md flex items-start gap-3 lg:gap-5 relative overflow-hidden"
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-red-500"></div>
-                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shrink-0 border border-red-100 shadow-sm">
-                    <HeartPulse className="w-6 h-6 text-red-500" />
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-white flex items-center justify-center shrink-0 border border-red-100 shadow-sm">
+                    <HeartPulse className="w-5 h-5 lg:w-6 lg:h-6 text-red-500" />
                   </div>
-                  <div className="flex-1 pt-1">
-                    <div className="flex justify-between items-center mb-2">
-                      <h5 className="font-bold text-slate-900 text-lg">Marcus J. At Risk</h5>
-                      <span className="text-xs font-bold text-red-500 uppercase tracking-wider">Action Required</span>
+                  <div className="flex-1 pt-0.5 lg:pt-1">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-1 sm:gap-0">
+                      <h5 className="font-bold text-slate-900 text-base lg:text-lg">Marcus J. At Risk</h5>
+                      <span className="text-[10px] lg:text-xs font-bold text-red-500 uppercase tracking-wider">Action Required</span>
                     </div>
-                    <p className="text-slate-700 leading-relaxed font-medium mb-4">Score dropped across &quot;Greeting Speed&quot; and &quot;Tone&quot; for 3 consecutive shifts.</p>
-                    <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-                      <div className="flex items-center gap-2 mb-2 text-brand-teal font-bold text-sm">
-                        <Wand2 className="w-4 h-4" /> AI Coaching Plan
+                    <p className="text-slate-700 leading-relaxed font-medium text-xs sm:text-sm lg:text-base mb-3 lg:mb-4">Score dropped across &quot;Greeting Speed&quot; and &quot;Tone&quot; for 3 consecutive shifts.</p>
+                    <div className="bg-white rounded-xl p-3 lg:p-4 border border-slate-200 shadow-sm">
+                      <div className="flex items-center gap-1.5 lg:gap-2 mb-1.5 lg:mb-2 text-brand-teal font-bold text-xs lg:text-sm">
+                        <Wand2 className="w-3.5 h-3.5 lg:w-4 lg:h-4" /> AI Coaching Plan
                       </div>
-                      <p className="text-slate-600 italic text-sm">&quot;Hey Marcus, I noticed you&apos;ve been a bit quieter with customers during the morning rush lately. Is everything okay?&quot;</p>
+                      <p className="text-slate-600 italic text-[11px] sm:text-xs lg:text-sm leading-relaxed">&quot;Hey Marcus, I noticed you&apos;ve been a bit quieter with customers during the morning rush lately. Is everything okay?&quot;</p>
                     </div>
                   </div>
                 </motion.div>
@@ -298,17 +299,17 @@ export default function TeamHealthDigestDemo() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-5"
+                  className="bg-white p-4 lg:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 lg:gap-5"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
-                    <AlertTriangle className="w-6 h-6 text-amber-500" />
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                    <AlertTriangle className="w-5 h-5 lg:w-6 lg:h-6 text-amber-500" />
                   </div>
-                  <div className="flex-1 pt-1">
-                    <div className="flex justify-between items-center mb-2">
-                      <h5 className="font-bold text-slate-900 text-lg">Team Burnout Warning</h5>
-                      <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Yesterday</span>
+                  <div className="flex-1 pt-0.5 lg:pt-1">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1 lg:mb-2 gap-1 sm:gap-0">
+                      <h5 className="font-bold text-slate-900 text-base lg:text-lg">Team Burnout Warning</h5>
+                      <span className="text-[10px] lg:text-xs font-bold text-slate-400 uppercase tracking-wider">Yesterday</span>
                     </div>
-                    <p className="text-slate-500 leading-relaxed font-medium">Average shift duration exceeded by 1.5 hours for the closing team.</p>
+                    <p className="text-slate-500 leading-relaxed font-medium text-xs sm:text-sm lg:text-base">Average shift duration exceeded by 1.5 hours for the closing team.</p>
                   </div>
                 </motion.div>
 

@@ -68,17 +68,17 @@ export default function CoachingTrackerDemoNew() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.5 }}
-            className="w-full flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center px-4 py-8 md:p-12 max-w-6xl mx-auto"
+            className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center px-4 py-8 md:p-8 lg:p-12 max-w-6xl mx-auto"
           >
             {/* Context Text */}
-            <div className="flex-1 max-w-lg z-10">
+            <div className="z-10 flex flex-col items-center md:items-start text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-xs font-semibold uppercase tracking-widest mb-6 border border-slate-200 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> The Manual Bottleneck
               </div>
-              <h3 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+              <h3 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight text-balance">
                 Great insights are useless <span className="text-slate-400 font-medium">if they are forgotten.</span>
               </h3>
-              <p className="text-slate-600 text-base mb-8 leading-relaxed">
+              <p className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed max-w-lg">
                 Most QA software stops at identifying the problem. They rely on busy managers to manually intervene, schedule reviews, and coach employees.
               </p>
               
@@ -86,15 +86,16 @@ export default function CoachingTrackerDemoNew() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.0, duration: 0.5 }}
+                className="flex flex-col items-center lg:items-start w-full"
               >
-                <p className="text-sm text-slate-500 mb-4 font-semibold flex items-center uppercase tracking-wider">
-                  <ArrowRight className="w-4 h-4 text-brand-teal mr-2" /> 
+                <p className="text-sm text-slate-500 mb-4 font-semibold flex items-center justify-center md:justify-start uppercase tracking-wider">
+                  <ArrowRight className="w-4 h-4 text-brand-teal mr-2 hidden md:block" /> 
                   Take the role of the manager:
                 </p>
                 <button 
                   onClick={handleReply}
                   disabled={step > 0}
-                  className={`group relative px-6 py-4 bg-white text-slate-800 font-bold rounded-2xl overflow-hidden shadow-lg border transition-all duration-300 flex items-center gap-3
+                  className={`group relative px-6 py-4 bg-white text-slate-800 font-bold rounded-2xl overflow-hidden shadow-lg border transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto
                     ${step > 0 ? "border-brand-teal ring-4 ring-brand-teal/10 pointer-events-none shadow-brand-teal/20" : "border-slate-200 hover:border-brand-teal hover:scale-[1.02] active:scale-95"}
                   `}
                 >
@@ -108,7 +109,7 @@ export default function CoachingTrackerDemoNew() {
             </div>
 
             {/* UI Mockup */}
-            <DemoMockupCard className="pl-3 pt-3 h-[450px] transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
+            <DemoMockupCard className="pl-3 pt-3 h-[440px] lg:h-[460px] transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out w-full">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold text-xl border border-indigo-100 shadow-sm">S</div>
@@ -124,10 +125,10 @@ export default function CoachingTrackerDemoNew() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="bg-slate-50 text-slate-800 rounded-3xl rounded-tl-sm p-5 max-w-[90%] border border-slate-100 shadow-sm relative"
+                  className="bg-slate-50 text-slate-800 rounded-3xl rounded-tl-sm p-4 lg:p-5 max-w-[90%] border border-slate-100 shadow-sm relative"
                 >
-                  <p className="text-[15px] leading-relaxed">Hey, I noticed Bob&apos;s greeting compliance dropped by 25% this week. Can you make sure he gets a review?</p>
-                  <p className="text-xs text-slate-400 mt-3 font-semibold tracking-wide">Today, 9:41 AM</p>
+                  <p className="text-[13px] lg:text-[15px] leading-relaxed">Hey, I noticed Bob&apos;s greeting compliance dropped by 25% this week. Can you make sure he gets a review?</p>
+                  <p className="text-[10px] lg:text-xs text-slate-400 mt-2 lg:mt-3 font-semibold tracking-wide">Today, 9:41 AM</p>
                 </motion.div>
 
                 <AnimatePresence>
@@ -137,10 +138,10 @@ export default function CoachingTrackerDemoNew() {
                       initial={{ opacity: 0, y: 20, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
-                      className="bg-brand-teal text-white rounded-3xl rounded-br-sm p-5 max-w-[90%] self-end shadow-lg shadow-brand-teal/30 mt-4 relative"
+                      className="bg-brand-teal text-white rounded-3xl rounded-br-sm p-4 lg:p-5 max-w-[95%] lg:max-w-[90%] self-end shadow-lg shadow-brand-teal/30 mt-4 relative"
                     >
-                      <p className="text-[15px] leading-relaxed font-medium">I&apos;ll review his performance and schedule a meeting with him this week.</p>
-                      <p className="text-xs text-teal-100 mt-3 text-right font-semibold tracking-wide">Just now</p>
+                      <p className="text-[13px] lg:text-[15px] leading-relaxed font-medium">I&apos;ll review his performance and schedule a meeting with him this week.</p>
+                      <p className="text-[10px] lg:text-xs text-teal-100 mt-2 lg:mt-3 text-right font-semibold tracking-wide">Just now</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -265,18 +266,18 @@ export default function CoachingTrackerDemoNew() {
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-emerald-50/50 p-4 md:p-6 rounded-2xl border border-brand-teal/30 shadow-md flex items-start gap-3 md:gap-5 relative overflow-hidden"
+                  className="bg-emerald-50/50 p-4 lg:p-6 rounded-2xl border border-brand-teal/30 shadow-md flex items-start gap-3 lg:gap-5 relative overflow-hidden"
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-teal"></div>
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white flex items-center justify-center shrink-0 border border-brand-teal/20 shadow-sm">
-                    <Wand2 className="w-5 h-5 md:w-6 md:h-6 text-brand-teal" />
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-white flex items-center justify-center shrink-0 border border-brand-teal/20 shadow-sm">
+                    <Wand2 className="w-5 h-5 lg:w-6 lg:h-6 text-brand-teal" />
                   </div>
-                  <div className="flex-1 pt-0.5 md:pt-1">
+                  <div className="flex-1 pt-0.5 lg:pt-1">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-1">
-                      <h5 className="font-bold text-slate-900 text-base md:text-lg">Greeting Protocol</h5>
-                      <span className="text-[10px] md:text-xs font-bold text-brand-teal uppercase tracking-wider">Just now</span>
+                      <h5 className="font-bold text-slate-900 text-base lg:text-lg">Greeting Protocol</h5>
+                      <span className="text-[10px] lg:text-xs font-bold text-brand-teal uppercase tracking-wider">Just now</span>
                     </div>
-                    <p className="text-slate-700 leading-relaxed font-medium text-sm md:text-base">"Hey Bob, I noticed your greeting speed slowed down during the rush. Take a deep breath between customers, and remember to smile and offer the loyalty card before scanning items!"</p>
+                    <p className="text-slate-700 leading-relaxed font-medium text-xs sm:text-sm lg:text-base">"Hey Bob, I noticed your greeting speed slowed down during the rush. Take a deep breath between customers, and remember to smile and offer the loyalty card before scanning items!"</p>
                   </div>
                 </motion.div>
 
@@ -285,17 +286,17 @@ export default function CoachingTrackerDemoNew() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-white p-4 md:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 md:gap-5"
+                  className="bg-white p-4 lg:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 lg:gap-5"
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
-                    <Wand2 className="w-5 h-5 md:w-6 md:h-6 text-slate-400" />
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                    <Wand2 className="w-5 h-5 lg:w-6 lg:h-6 text-slate-400" />
                   </div>
-                  <div className="flex-1 pt-0.5 md:pt-1">
+                  <div className="flex-1 pt-0.5 lg:pt-1">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-1">
-                      <h5 className="font-bold text-slate-900 text-base md:text-lg">Upsell Opportunity</h5>
-                      <span className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider">Monday, 2:14 PM</span>
+                      <h5 className="font-bold text-slate-900 text-base lg:text-lg">Upsell Opportunity</h5>
+                      <span className="text-[10px] lg:text-xs font-bold text-slate-400 uppercase tracking-wider">Monday, 2:14 PM</span>
                     </div>
-                    <p className="text-slate-500 leading-relaxed font-medium text-sm md:text-base">"Great job moving the line! Don't forget to ask if they want to add a beverage to their meal combo."</p>
+                    <p className="text-slate-500 leading-relaxed font-medium text-xs sm:text-sm lg:text-base">"Great job moving the line! Don't forget to ask if they want to add a beverage to their meal combo."</p>
                   </div>
                 </motion.div>
 
@@ -304,17 +305,17 @@ export default function CoachingTrackerDemoNew() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="bg-white p-4 md:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 md:gap-5"
+                  className="bg-white p-4 lg:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 lg:gap-5"
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
-                    <Wand2 className="w-5 h-5 md:w-6 md:h-6 text-slate-400" />
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                    <Wand2 className="w-5 h-5 lg:w-6 lg:h-6 text-slate-400" />
                   </div>
-                  <div className="flex-1 pt-0.5 md:pt-1">
+                  <div className="flex-1 pt-0.5 lg:pt-1">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-1">
-                      <h5 className="font-bold text-slate-900 text-base md:text-lg">Shift Transition</h5>
-                      <span className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider">Sunday, 11:00 AM</span>
+                      <h5 className="font-bold text-slate-900 text-base lg:text-lg">Shift Transition</h5>
+                      <span className="text-[10px] lg:text-xs font-bold text-slate-400 uppercase tracking-wider">Sunday, 11:00 AM</span>
                     </div>
-                    <p className="text-slate-500 leading-relaxed font-medium text-sm md:text-base">"Make sure your drawer is fully counted before handing off to Sarah."</p>
+                    <p className="text-slate-500 leading-relaxed font-medium text-xs sm:text-sm lg:text-base">"Make sure your drawer is fully counted before handing off to Sarah."</p>
                   </div>
                 </motion.div>
 

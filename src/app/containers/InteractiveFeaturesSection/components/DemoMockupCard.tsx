@@ -12,7 +12,7 @@ export default function DemoMockupCard({ children, className = "" }: DemoMockupC
   // - Fixed width boundaries (flex-1 w-full max-w-md)
   // - Consistent rounded corners, shadow and border
   // - CRITICAL: overflow-hidden to prevent inner absolute or flex items from bleeding out
-  const baseClasses = "flex-1 w-full max-w-md bg-white rounded-3xl relative shadow-2xl border border-slate-100 flex flex-col overflow-hidden";
+  const baseClasses = "flex-1 w-full max-w-lg bg-white rounded-3xl relative shadow-2xl border border-slate-100 flex flex-col overflow-hidden";
   
   return (
     <div className={`${baseClasses} ${className}`}>

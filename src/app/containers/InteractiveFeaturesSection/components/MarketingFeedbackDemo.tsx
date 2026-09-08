@@ -60,18 +60,18 @@ export default function MarketingFeedbackDemo() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.5 }}
-            className="w-full flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center px-4 py-8 md:p-12 max-w-5xl mx-auto"
+            className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center px-4 py-8 md:p-8 lg:p-12 max-w-6xl mx-auto"
           >
             {/* Context Text */}
-            <div className="flex-1 max-w-lg z-10">
+            <div className="z-10 flex flex-col items-center md:items-start text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-4 border border-slate-200 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> The Marketing Blind Spot
               </div>
               
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight text-balance">
                 Traffic is up, <span className="text-slate-400 font-medium">but who is walking in?</span>
               </h3>
-              <p className="text-slate-600 text-sm sm:text-base mb-6 leading-relaxed">
+              <p className="text-slate-600 text-sm sm:text-base md:text-lg mb-6 leading-relaxed max-w-lg">
                 You run local promotions and track foot traffic, but traditional door counters and POS systems can't tell you which age group is actually responding to your marketing.
               </p>
               
@@ -79,10 +79,11 @@ export default function MarketingFeedbackDemo() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
+                className="w-full sm:w-auto"
               >
                 <button 
                   onClick={handleAnalyze}
-                  className="group relative px-5 py-3 sm:px-6 sm:py-4 bg-brand-teal text-white text-sm sm:text-base font-bold rounded-2xl overflow-hidden shadow-lg shadow-brand-teal/20 transition-all duration-300 flex items-center gap-3 hover:-translate-y-0.5 hover:shadow-brand-teal/30"
+                  className="group relative px-5 py-3 sm:px-6 sm:py-4 bg-brand-teal text-white text-sm sm:text-base font-bold rounded-2xl overflow-hidden shadow-lg shadow-brand-teal/20 transition-all duration-300 flex items-center justify-center gap-3 w-full hover:-translate-y-0.5 hover:shadow-brand-teal/30"
                 >
                   Analyze with Pythia AI
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
@@ -91,7 +92,7 @@ export default function MarketingFeedbackDemo() {
             </div>
 
             {/* UI Mockup (Generic Store Analytics) */}
-            <DemoMockupCard className="p-5 sm:p-6 h-[440px] flex flex-col">
+            <DemoMockupCard className="p-5 sm:p-6 h-[380px] lg:h-[440px] flex flex-col">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center border border-indigo-100">
@@ -138,22 +139,22 @@ export default function MarketingFeedbackDemo() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.5 }}
-            className="w-full flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center px-4 py-8 md:p-12 max-w-5xl mx-auto"
+            className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center px-4 py-8 md:p-8 lg:p-12 max-w-6xl mx-auto"
           >
-            <div className="flex-1 max-w-lg z-10">
+            <div className="z-10 flex flex-col items-center md:items-start text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-brand-teal text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 border border-emerald-100 shadow-sm">
                 <Wand2 className="w-3 h-3" /> Pythia Insight
               </div>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight text-balance">
                 Gen Z is your <span className="text-brand-teal">true audience.</span>
               </h3>
-              <p className="text-slate-600 text-sm sm:text-base mb-6 leading-relaxed">
+              <p className="text-slate-600 text-sm sm:text-base md:text-lg mb-6 leading-relaxed max-w-lg">
                 Pythia analyzed your physical store traffic and identified that 65% of the people who actually walked in from the promo are Gen Z (18-24).
               </p>
             </div>
 
-            <DemoMockupCard className="p-5 sm:p-6 h-[440px]">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+            <DemoMockupCard className="p-4 sm:p-6 h-[420px] lg:h-[440px]">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3 sm:pb-4 mb-4 sm:mb-5">
                 <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
                   <PieChart className="w-5 h-5 text-brand-teal"/> In-Store Demographics
                 </div>
@@ -189,9 +190,9 @@ export default function MarketingFeedbackDemo() {
                 </div>
               </div>
 
-              <div className="mt-auto bg-slate-50 rounded-2xl p-5 border border-slate-200 shadow-inner">
+              <div className="mt-auto bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-inner">
                 <div className="text-sm font-bold text-slate-900 mb-1">Optimize Ad Targeting</div>
-                <p className="text-xs text-slate-500 mb-4 leading-relaxed">Focus your digital budget on Gen Z to maximize actual walk-ins.</p>
+                <p className="text-[11px] sm:text-xs text-slate-500 mb-3 sm:mb-4 leading-relaxed">Focus your digital budget on Gen Z to maximize actual walk-ins.</p>
                 <button 
                   onClick={handleToggle}
                   disabled={isOptimized}

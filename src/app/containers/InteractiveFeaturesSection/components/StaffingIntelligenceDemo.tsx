@@ -121,20 +121,20 @@ export default function StaffingIntelligenceDemo() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.5 }}
-            className="w-full flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center p-8 md:p-12 py-8 md:py-12 max-w-6xl mx-auto"
+            className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center px-4 py-8 md:p-8 lg:p-12 max-w-6xl mx-auto"
           >
-            <div className="flex-1 max-w-lg z-10">
+            <div className="z-10 flex flex-col items-center md:items-start text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-xs font-semibold uppercase tracking-widest mb-6 border border-slate-200 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Issue Detected
               </div>
-              <h3 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+              <h3 className="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight text-balance">
                 The Scheduling <span className="text-slate-400 font-medium">Blind Spot</span>
               </h3>
-              <p className="text-slate-600 text-base mb-8 leading-relaxed">
+              <p className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed max-w-lg">
                 Yesterday's schedule placed a struggling employee alone during the peak Lunch Rush. This resulted in slower service and lost revenue.
               </p>
               
-              <div className="grid grid-cols-2 gap-4 mb-10">
+              <div className="grid grid-cols-2 gap-4 mb-10 w-full sm:w-auto">
                 <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                   <div className="text-slate-500 text-sm mb-1 font-medium">Service Speed</div>
                   <div className="text-2xl font-bold text-red-500">-24%</div>
@@ -149,10 +149,11 @@ export default function StaffingIntelligenceDemo() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
+                className="w-full sm:w-auto"
               >
                 <button 
                   onClick={() => setStep(1)}
-                  className="group relative px-6 py-4 bg-white text-slate-800 font-bold rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:border-brand-teal hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center gap-3"
+                  className="group relative px-6 py-4 bg-white text-slate-800 font-bold rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:border-brand-teal hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 w-full"
                 >
                   <Zap className="w-5 h-5 text-slate-400 group-hover:text-brand-teal transition-colors" />
                   Optimize Schedule
@@ -160,7 +161,7 @@ export default function StaffingIntelligenceDemo() {
               </motion.div>
             </div>
 
-            <div className="flex-1 w-full max-w-md bg-white rounded-3xl p-6 relative border border-slate-100 shadow-2xl transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out h-[380px] flex flex-col justify-center">
+            <div className="w-full bg-white rounded-3xl p-6 relative border border-slate-100 shadow-2xl transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out h-[300px] lg:h-[380px] flex flex-col justify-center">
               <h4 className="font-bold text-slate-900 mb-6 text-xl">Yesterday's Peak <span className="text-slate-500 text-lg font-medium">(12PM - 2PM)</span></h4>
               
               <div className="bg-red-50/50 p-5 rounded-2xl border border-red-100 shadow-sm flex items-center gap-4 relative overflow-hidden">
@@ -184,18 +185,17 @@ export default function StaffingIntelligenceDemo() {
         {/* Step 1: Interactive Solution */}
         {step === 1 && (
           <motion.div 
-            key="scene-1"
+            key="scene-2"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6 }}
-            className="w-full flex flex-col items-center justify-center p-8 md:p-12 py-8 md:py-12 max-w-5xl mx-auto"
+            transition={{ duration: 0.5 }}
+            className="w-full flex flex-col items-center justify-center px-4 py-8 md:p-8 lg:p-12 max-w-5xl mx-auto"
           >
-            <div className="flex flex-col md:flex-row gap-8 w-full items-start">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full items-start">
               {/* Available Staff (Pool) */}
               <div 
-                className={`w-full md:w-1/3 rounded-3xl p-4 transition-colors ${activeZone === 'pool' ? 'bg-slate-100/80 ring-2 ring-slate-300 ring-inset' : 'bg-transparent'}`}
-                onDragOver={(e) => handleDragOver(e, "pool")}
+                className={`w-full rounded-3xl p-4 transition-colors md:col-span-1 ${activeZone === 'pool' ? 'bg-slate-100/80 ring-2 ring-slate-300 ring-inset' : 'bg-transparent'}`}
+                onDragOver={(e) => handleDragOver(e, 'pool')}
                 onDragLeave={handleDragLeave}
                 onDrop={(e) => handleDrop(e, "pool")}
               >
@@ -213,18 +213,18 @@ export default function StaffingIntelligenceDemo() {
                         exit={{ opacity: 0, scale: 0.9 }}
                         draggable
                         onDragStart={(e: any) => handleDragStart(e, staff.id)}
-                        className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal hover:shadow-md transition-all group"
+                        className="bg-white p-3 lg:p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal hover:shadow-md transition-all group"
                       >
-                        <div className={`w-12 h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-lg shadow-sm border border-white`}>
+                        <div className={`w-10 h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-base lg:text-lg shadow-sm border border-white shrink-0`}>
                           {staff.initials}
                         </div>
-                        <div className="flex-1">
-                          <div className="font-bold text-slate-900">{staff.name}</div>
-                          <div className={`text-xs font-bold flex items-center gap-1 mt-0.5 ${staff.color}`}>
-                            {staff.score > 80 && <Star className="w-3.5 h-3.5 fill-current" />} Score: {staff.score}
+                        <div className="flex-1 min-w-0">
+                          <div className="font-bold text-slate-900 text-sm lg:text-base truncate">{staff.name}</div>
+                          <div className={`text-[10px] lg:text-xs font-bold flex items-center gap-1 mt-0.5 ${staff.color}`}>
+                            {staff.score > 80 && <Star className="w-3 h-3 lg:w-3.5 lg:h-3.5 fill-current shrink-0" />} Score: {staff.score}
                           </div>
                         </div>
-                        <GripVertical className="w-5 h-5 text-slate-300 group-hover:text-brand-teal transition-colors" />
+                        <GripVertical className="w-4 h-4 lg:w-5 lg:h-5 text-slate-300 group-hover:text-brand-teal transition-colors shrink-0" />
                       </motion.div>
                     ))}
                   </AnimatePresence>
@@ -238,15 +238,15 @@ export default function StaffingIntelligenceDemo() {
               </div>
 
               {/* Schedule Slots */}
-              <div className="w-full md:w-2/3 space-y-5">
+              <div className="w-full space-y-5 md:col-span-2">
                 {/* Morning Slot */}
                 <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
-                  <div className="flex justify-between items-center mb-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
                     <div>
                       <h4 className="font-bold text-slate-900 text-lg">Morning Open</h4>
                       <p className="text-sm font-medium text-slate-500">8:00 AM - 12:00 PM</p>
                     </div>
-                    <span className="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg uppercase tracking-widest border border-slate-200">
+                    <span className="px-3 py-1.5 bg-slate-100 text-slate-600 text-[10px] sm:text-xs font-bold rounded-lg uppercase tracking-widest border border-slate-200">
                       Low Traffic
                     </span>
                   </div>
@@ -265,16 +265,16 @@ export default function StaffingIntelligenceDemo() {
                         animate={{ opacity: 1, scale: 1 }}
                         draggable
                         onDragStart={(e: any) => handleDragStart(e, slots.morning!.id)}
-                        className="w-full bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                        className="w-full bg-white p-3 lg:p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
                       >
-                        <div className={`w-12 h-12 ${slots.morning.bgColor} rounded-xl flex items-center justify-center font-bold ${slots.morning.color} text-lg`}>
+                        <div className={`w-10 h-10 lg:w-12 lg:h-12 ${slots.morning.bgColor} rounded-xl flex items-center justify-center font-bold ${slots.morning.color} text-base lg:text-lg shrink-0`}>
                           {slots.morning.initials}
                         </div>
-                        <div className="flex-1">
-                          <div className="font-bold text-slate-900">{slots.morning.name}</div>
-                          <div className={`text-xs font-bold mt-0.5 ${slots.morning.color}`}>Score: {slots.morning.score}</div>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-bold text-slate-900 text-sm lg:text-base truncate">{slots.morning.name}</div>
+                          <div className={`text-[10px] lg:text-xs font-bold mt-0.5 ${slots.morning.color}`}>Score: {slots.morning.score}</div>
                         </div>
-                        <GripVertical className="w-5 h-5 text-slate-300" />
+                        <GripVertical className="w-4 h-4 lg:w-5 lg:h-5 text-slate-300 shrink-0" />
                       </motion.div>
                     ) : (
                       <span className={`font-medium transition-colors ${activeZone === 'morning' ? 'text-brand-teal' : 'text-slate-400'}`}>
@@ -286,13 +286,13 @@ export default function StaffingIntelligenceDemo() {
 
                 {/* Peak Slot */}
                 <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
-                  <div className="flex justify-between items-center mb-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
                     <div>
                       <h4 className="font-bold text-slate-900 text-lg">Lunch Rush</h4>
                       <p className="text-sm font-medium text-slate-500">12:00 PM - 2:00 PM</p>
                     </div>
-                    <span className="px-3 py-1.5 bg-orange-50 text-orange-600 text-xs font-bold rounded-lg uppercase tracking-widest flex items-center gap-1.5 border border-orange-200 shadow-sm">
-                      <Flame className="w-3.5 h-3.5 fill-orange-600" /> High Traffic
+                    <span className="px-3 py-1.5 bg-orange-50 text-orange-600 text-[10px] sm:text-xs font-bold rounded-lg uppercase tracking-widest flex items-center gap-1.5 border border-orange-200 shadow-sm shrink-0">
+                      <Flame className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-orange-600" /> High Traffic
                     </span>
                   </div>
                   <div
@@ -312,16 +312,16 @@ export default function StaffingIntelligenceDemo() {
                           exit={{ opacity: 0, scale: 0.9 }}
                           draggable
                           onDragStart={(e: any) => handleDragStart(e, staff.id)}
-                          className="w-full sm:flex-1 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                          className="w-full sm:flex-1 bg-white p-3 lg:p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
                         >
-                          <div className={`w-12 h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-lg`}>
+                          <div className={`w-10 h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-base lg:text-lg shrink-0`}>
                             {staff.initials}
                           </div>
-                          <div className="flex-1">
-                            <div className="font-bold text-slate-900">{staff.name}</div>
-                            <div className={`text-xs font-bold mt-0.5 ${staff.color}`}>Score: {staff.score}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-bold text-slate-900 text-sm lg:text-base truncate">{staff.name}</div>
+                            <div className={`text-[10px] lg:text-xs font-bold mt-0.5 ${staff.color}`}>Score: {staff.score}</div>
                           </div>
-                          <GripVertical className="w-5 h-5 text-slate-300" />
+                          <GripVertical className="w-4 h-4 lg:w-5 lg:h-5 text-slate-300 shrink-0" />
                         </motion.div>
                       ))}
                     </AnimatePresence>

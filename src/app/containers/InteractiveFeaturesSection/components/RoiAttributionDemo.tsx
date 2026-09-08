@@ -14,7 +14,7 @@ import {
 import { openDemoModal } from "@/app/utils/calendly";
 import { DEMO_SOURCES } from "@/app/utils/demoSource";
 import { trackEvent } from "@/app/utils/gtm";
-import DemoMockupCard from "./DemoMockupCard";
+import AnimatedFoldText from "./AnimatedFoldText";
 
 const CTA_LOCATION = "interactive_demo_roi";
 
@@ -74,7 +74,7 @@ export default function RoiAttributionDemo() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-white overflow-hidden">
+    <div className="w-full flex-1 flex flex-col items-center justify-center bg-white overflow-hidden">
       <AnimatePresence mode="wait">
         
         {/* SCENES 1 & 2: The Problem */}
@@ -85,29 +85,29 @@ export default function RoiAttributionDemo() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.5 }}
-            className="w-full flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center px-4 py-8 md:p-12 max-w-5xl mx-auto"
+            className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center px-4 py-8 md:p-8 lg:p-12 max-w-6xl mx-auto"
           >
             {/* Context Text */}
-            <div className="flex-1 max-w-lg z-10">
+            <div className="z-10 flex flex-col items-center md:items-start text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-4 border border-slate-200 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> The Blind Spot
               </div>
               
               {step === 0 ? (
                 <>
-                  <h3 className="text-2xl sm:text-3xl md:text-3xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight text-balance">
                     Sales are dropping, <span className="text-slate-400 font-medium">and no one knows why.</span>
                   </h3>
-                  <p className="text-slate-600 text-sm sm:text-base mb-6 leading-relaxed">
+                  <p className="text-slate-600 text-sm sm:text-base md:text-lg mb-6 leading-relaxed max-w-lg">
                     Traffic is steady, but your location just missed its monthly target. Traditional POS data tells you <strong>what</strong> happened, but not <strong>why</strong>.
                   </p>
                 </>
               ) : (
                 <>
-                  <h3 className="text-2xl sm:text-3xl md:text-3xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight text-balance">
                     POS data is <span className="text-slate-400 font-medium">only half the story.</span>
                   </h3>
-                  <p className="text-slate-600 text-sm sm:text-base mb-6 leading-relaxed">
+                  <p className="text-slate-600 text-sm sm:text-base md:text-lg mb-6 leading-relaxed max-w-lg">
                     You can see the drop in revenue, but you're left guessing if it's a macro trend, bad weather, or an operational issue.
                   </p>
                 </>
@@ -117,10 +117,11 @@ export default function RoiAttributionDemo() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
+                className="w-full sm:w-auto"
               >
                 <button 
                   onClick={handleNextStep}
-                  className="group relative px-5 py-3 sm:px-6 sm:py-4 bg-white text-slate-800 text-sm sm:text-base font-bold rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:border-brand-teal hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center gap-3"
+                  className="group relative px-5 py-3 sm:px-6 sm:py-4 bg-white text-slate-800 text-sm sm:text-base font-bold rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:border-brand-teal hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 w-full"
                 >
                   {step === 0 ? "Check POS Dashboard" : "Analyze with Pythia AI"} 
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-brand-teal transition-colors" />
@@ -129,7 +130,7 @@ export default function RoiAttributionDemo() {
             </div>
 
             {/* UI Mockup - The Standard Dashboard */}
-            <DemoMockupCard className="p-5 h-[320px] sm:h-[380px]">
+            <div className="w-full bg-white rounded-3xl relative shadow-2xl border border-slate-100 flex flex-col overflow-hidden p-5 h-[320px] lg:h-[350px] transform md:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
                 <div>
                   <div className="font-bold text-slate-900 text-base sm:text-lg">Sales Performance</div>
@@ -150,7 +151,7 @@ export default function RoiAttributionDemo() {
                 </div>
                 
                 {/* Line graph simulation */}
-                <svg className="absolute inset-0 w-full h-[80%] bottom-6" preserveAspectRatio="none" viewBox="0 0 100 100">
+                <svg className="absolute inset-x-0 bottom-6 w-full h-[80%] overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
                   <motion.path 
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
@@ -158,9 +159,10 @@ export default function RoiAttributionDemo() {
                     d="M0,20 L20,30 L40,25 L60,50 L80,75 L100,85" 
                     fill="none" 
                     stroke="#ef4444" 
-                    strokeWidth="4"
+                    strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    vectorEffect="non-scaling-stroke"
                   />
                   {/* Fill gradient */}
                   <motion.path 
@@ -193,7 +195,7 @@ export default function RoiAttributionDemo() {
                   </div>
                 </motion.div>
               )}
-            </DemoMockupCard>
+            </div>
           </motion.div>
         )}
 
@@ -273,12 +275,12 @@ export default function RoiAttributionDemo() {
             key="scene-4"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-full flex flex-col items-center justify-center px-4 py-8 md:p-12 max-w-4xl mx-auto overflow-hidden"
+            transition={{ duration: 0.6 }}
+            className="w-full flex flex-col items-center justify-center px-4 py-8 md:p-8 lg:p-12 max-w-5xl mx-auto overflow-hidden md:overflow-visible"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center w-full">
               {/* Context Text & Input */}
-              <div className="pr-0 md:pr-4">
+              <div className="pr-0 lg:pr-4">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-brand-teal text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 border border-brand-teal/20 shadow-sm">
                   <Wand2 className="w-3 h-3 sm:w-4 sm:h-4" /> ROI Projection
                 </div>
@@ -326,25 +328,25 @@ export default function RoiAttributionDemo() {
                   </h2>
 
                   {/* Metrics */}
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
-                    <div className="bg-slate-50 p-3 sm:p-4 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-center">
-                      <p className="text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Extra Transactions</p>
+                  <div className="grid grid-cols-2 gap-3 lg:gap-4 mb-6">
+                    <div className="bg-slate-50 p-3 lg:p-4 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-center min-w-0">
+                      <p className="text-[8px] lg:text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1 truncate">Extra Transactions</p>
                       <motion.div
                         key={extraTx}
                         initial={{ opacity: 0.5, y: -2 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className={`text-lg sm:text-xl font-extrabold truncate ${extraTx < 0 ? 'text-red-500' : 'text-slate-900'}`}
+                        className={`text-base lg:text-xl font-extrabold truncate ${extraTx < 0 ? 'text-red-500' : 'text-slate-900'}`}
                       >
                         {extraTx > 0 ? '+' : ''}{formatNum(extraTx)}
                       </motion.div>
                     </div>
-                    <div className={`p-3 sm:p-4 rounded-xl border shadow-sm flex flex-col justify-center ${extraRev < 0 ? 'bg-red-50 border-red-200' : 'bg-brand-teal/5 border-brand-teal/20'}`}>
-                      <p className={`text-[9px] sm:text-[10px] uppercase tracking-wider font-bold mb-1 ${extraRev < 0 ? 'text-red-500' : 'text-brand-teal'}`}>Monthly ROI Lift</p>
+                    <div className={`p-3 lg:p-4 rounded-xl border shadow-sm flex flex-col justify-center min-w-0 ${extraRev < 0 ? 'bg-red-50 border-red-200' : 'bg-brand-teal/5 border-brand-teal/20'}`}>
+                      <p className={`text-[8px] lg:text-[10px] uppercase tracking-wider font-bold mb-1 truncate ${extraRev < 0 ? 'text-red-500' : 'text-brand-teal'}`}>Monthly ROI Lift</p>
                       <motion.div
                         key={extraRev}
                         initial={{ opacity: 0.5, y: -2 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className={`text-xl sm:text-2xl font-extrabold truncate ${extraRev < 0 ? 'text-red-500' : 'text-brand-teal'}`}
+                        className={`text-lg lg:text-2xl font-extrabold truncate ${extraRev < 0 ? 'text-red-500' : 'text-brand-teal'}`}
                       >
                         {extraRev > 0 ? '+' : ''}{formatMoney(extraRev)}
                       </motion.div>

@@ -68,7 +68,7 @@ export default function InteractiveFeaturesSection() {
       id={Sections.InteractiveFeatures}
       className="relative flex flex-col items-center w-full min-w-0 py-12 lg:py-20 bg-slate-50 overflow-hidden"
     >
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="w-full max-w-6xl mx-auto px-2 sm:px-6">
         
         {/* Section Header */}
         <div className="mb-16 space-y-6 text-center flex flex-col items-center">
@@ -95,7 +95,7 @@ export default function InteractiveFeaturesSection() {
         </div>
 
         {/* The Features Cards */}
-        <div className="flex flex-col gap-10 md:gap-16">
+        <div className="grid grid-cols-1 gap-10 md:gap-16 w-full max-w-5xl mx-auto">
           {featuresList.map((feature, idx) => (
             <motion.div
               key={feature.id}
@@ -103,20 +103,25 @@ export default function InteractiveFeaturesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: 0.1 }}
-              className="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col border border-slate-200 h-[650px] md:h-[600px]"
+              className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col border border-slate-200 min-h-[600px] lg:min-h-[500px]"
             >
               {/* Window header */}
-              <div className="flex items-center justify-between px-3 sm:px-4 py-3 bg-white z-20 shrink-0">
-                <div className="flex items-center gap-2 w-auto sm:w-24 hidden sm:flex">
+              <div className="grid grid-cols-[auto_1fr_auto] items-center px-3 sm:px-4 py-3 bg-white border-b border-slate-100 z-20 shrink-0">
+                <div className="hidden sm:flex items-center gap-2 w-24">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]"></div>
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]"></div>
                   <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]"></div>
                 </div>
-                <div className="text-sm sm:text-base font-bold text-slate-700 flex items-center gap-2 flex-1 sm:justify-center">
+                
+                {/* Fallback space for mobile where traffic lights are hidden */}
+                <div className="sm:hidden w-2"></div>
+
+                <div className="text-sm sm:text-base font-bold text-slate-700 flex items-center justify-start sm:justify-center gap-2">
                   {React.cloneElement(feature.icon as React.ReactElement<any>, { className: "w-4 h-4 text-brand-teal hidden sm:block" })}
                   <span className="truncate">{feature.title}</span>
                 </div>
-                <div className="w-auto flex justify-end">
+                
+                <div className="flex justify-end">
                   <Link 
                     href={feature.link}
                     className="inline-flex whitespace-nowrap items-center gap-1.5 px-3 py-1.5 bg-emerald-50 border border-emerald-100 text-brand-teal text-xs font-bold rounded-lg hover:bg-emerald-100 transition-colors group shadow-sm"
@@ -126,7 +131,7 @@ export default function InteractiveFeaturesSection() {
                   </Link>
                 </div>
               </div>
-              <div className="flex-1 w-full relative flex flex-col overflow-y-auto bg-white">
+              <div className="flex-1 w-full relative flex flex-col overflow-hidden bg-white">
                 {feature.demo}
               </div>
             </motion.div>
