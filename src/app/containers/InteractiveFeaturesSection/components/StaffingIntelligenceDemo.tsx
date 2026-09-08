@@ -93,6 +93,33 @@ export default function StaffingIntelligenceDemo() {
     }
   };
 
+  // Mobile Tap-to-Assign fallback for instant snapping
+  const handleTapStaff = (id: string, currentZone: "morning" | "peak" | "pool") => {
+    const staff = staffMembers.find((s) => s.id === id);
+    if (!staff) return;
+
+    setSlots((prev) => {
+      const newSlots = { morning: prev.morning, peak: [...prev.peak] };
+      
+      if (currentZone === "morning") {
+        newSlots.morning = null; // Move to pool
+      } else if (currentZone === "peak") {
+        newSlots.peak = newSlots.peak.filter(s => s.id !== id); // Move to pool
+      } else if (currentZone === "pool") {
+        // Smart assign: prefer empty peak, then empty morning, then replace peak
+        if (newSlots.peak.length < 2) {
+          newSlots.peak.push(staff);
+        } else if (!newSlots.morning) {
+          newSlots.morning = staff;
+        } else {
+          newSlots.peak.shift();
+          newSlots.peak.push(staff);
+        }
+      }
+      return newSlots;
+    });
+  };
+
   // Automatically move to step 2 when successful
   const isSuccess = 
     slots.morning?.id === "kevin" && 
@@ -201,7 +228,10 @@ export default function StaffingIntelligenceDemo() {
               >
                 <div className="flex flex-col md:flex-row justify-between items-center mb-3 md:mb-4 pb-2 md:pb-3 border-b border-slate-200 gap-1 md:gap-0">
                   <h4 className="font-bold text-slate-900 text-xs md:text-base text-center md:text-left">Available Staff</h4>
-                  <span className="hidden md:inline-block text-xs font-semibold text-slate-500 bg-white px-2 py-1 rounded-md border border-slate-200 shadow-sm">Drag to reassign</span>
+                  <span className="text-[10px] md:text-xs font-semibold text-slate-500 bg-white px-1.5 md:px-2 py-0.5 md:py-1 rounded-md border border-slate-200 shadow-sm text-center">
+                    <span className="md:hidden">Tap to assign</span>
+                    <span className="hidden md:inline">Drag to reassign</span>
+                  </span>
                 </div>
                 <div className="space-y-2 md:space-y-4 min-h-[150px] md:min-h-[250px]">
                   <AnimatePresence>
@@ -213,7 +243,8 @@ export default function StaffingIntelligenceDemo() {
                         exit={{ opacity: 0, scale: 0.9 }}
                         draggable
                         onDragStart={(e: any) => handleDragStart(e, staff.id)}
-                        className="bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-1 md:gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal hover:shadow-md transition-all group"
+                        onClick={() => handleTapStaff(staff.id, "pool")}
+                        className="bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-1 md:gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal hover:shadow-md transition-all group touch-none"
                       >
                         <div className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-lg md:rounded-xl flex items-center justify-center font-bold ${staff.color} text-xs md:text-base lg:text-lg shadow-sm border border-white shrink-0`}>
                           {staff.initials}
@@ -262,10 +293,11 @@ export default function StaffingIntelligenceDemo() {
                       <motion.div
                         key={slots.morning.id}
                         initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
                         draggable
                         onDragStart={(e: any) => handleDragStart(e, slots.morning!.id)}
-                        className="w-full bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                        onClick={() => handleTapStaff(slots.morning!.id, "morning")}
+                        className="w-full bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors touch-none"
                       >
                         <div className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${slots.morning.bgColor} rounded-lg md:rounded-xl flex items-center justify-center font-bold ${slots.morning.color} text-xs md:text-base lg:text-lg shrink-0`}>
                           {slots.morning.initials}
@@ -277,8 +309,9 @@ export default function StaffingIntelligenceDemo() {
                         <GripVertical className="hidden sm:block w-4 h-4 lg:w-5 lg:h-5 text-slate-300 shrink-0" />
                       </motion.div>
                     ) : (
-                      <span className={`font-medium text-[10px] sm:text-xs md:text-sm transition-colors text-center ${activeZone === 'morning' ? 'text-brand-teal' : 'text-slate-400'}`}>
-                        Drag Kevin<span className="hidden sm:inline"> here</span>
+                      <span className={`font-medium text-[10px] sm:text-xs md:text-sm transition-colors text-center flex flex-col md:block ${activeZone === 'morning' ? 'text-brand-teal' : 'text-slate-400'}`}>
+                        <span className="md:hidden">Tap Kevin</span>
+                        <span className="hidden md:inline">Drag Kevin here</span>
                       </span>
                     )}
                   </div>
@@ -312,7 +345,8 @@ export default function StaffingIntelligenceDemo() {
                           exit={{ opacity: 0, scale: 0.9 }}
                           draggable
                           onDragStart={(e: any) => handleDragStart(e, staff.id)}
-                          className="w-full md:flex-1 bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                          onClick={() => handleTapStaff(staff.id, "peak")}
+                          className="w-full md:flex-1 bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors touch-none"
                         >
                           <div className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-lg md:rounded-xl flex items-center justify-center font-bold ${staff.color} text-xs md:text-base lg:text-lg shrink-0`}>
                             {staff.initials}
@@ -327,14 +361,18 @@ export default function StaffingIntelligenceDemo() {
                     </AnimatePresence>
 
                     {slots.peak.length === 0 && (
-                      <span className={`font-medium text-[10px] sm:text-xs md:text-sm transition-colors w-full text-center ${activeZone === 'peak' ? 'text-brand-teal' : 'text-slate-400'}`}>
-                        Drag Sarah and Mike<span className="hidden sm:inline"> here</span>
+                      <span className={`font-medium text-[10px] sm:text-xs md:text-sm transition-colors w-full text-center flex flex-col md:block ${activeZone === 'peak' ? 'text-brand-teal' : 'text-slate-400'}`}>
+                        <span className="md:hidden">Tap Sarah & Mike</span>
+                        <span className="hidden md:inline">Drag Sarah & Mike here</span>
                       </span>
                     )}
                     
                     {slots.peak.length === 1 && (
                       <div className="w-full md:flex-1 min-h-[48px] md:min-h-[82px] rounded-xl border-2 border-dashed border-slate-200 flex items-center justify-center">
-                         <span className="text-slate-400 text-[10px] sm:text-sm font-medium">Drag second person<span className="hidden sm:inline"> here</span></span>
+                         <span className="text-slate-400 text-[10px] sm:text-sm font-medium text-center">
+                           <span className="md:hidden">Tap second person</span>
+                           <span className="hidden md:inline">Drag second person here</span>
+                         </span>
                       </div>
                     )}
                   </div>
