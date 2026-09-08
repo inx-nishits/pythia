@@ -191,40 +191,40 @@ export default function StaffingIntelligenceDemo() {
             transition={{ duration: 0.5 }}
             className="w-full flex flex-col items-center justify-center px-4 py-8 md:p-8 lg:p-12 max-w-5xl mx-auto"
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full items-start">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 w-full items-start">
               {/* Available Staff (Pool) */}
               <div 
-                className={`w-full rounded-3xl p-4 transition-colors md:col-span-1 ${activeZone === 'pool' ? 'bg-slate-100/80 ring-2 ring-slate-300 ring-inset' : 'bg-transparent'}`}
+                className={`w-full rounded-2xl md:rounded-3xl p-2 md:p-4 transition-colors col-span-1 ${activeZone === 'pool' ? 'bg-slate-100/80 ring-2 ring-slate-300 ring-inset' : 'bg-transparent'}`}
                 onDragOver={(e) => handleDragOver(e, 'pool')}
                 onDragLeave={handleDragLeave}
                 onDrop={(e) => handleDrop(e, "pool")}
               >
-                <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
-                  <h4 className="font-bold text-slate-900">Available Staff</h4>
-                  <span className="text-xs font-semibold text-slate-500 bg-white px-2 py-1 rounded-md border border-slate-200 shadow-sm">Drag to reassign</span>
+                <div className="flex flex-col md:flex-row justify-between items-center mb-3 md:mb-4 pb-2 md:pb-3 border-b border-slate-200 gap-1 md:gap-0">
+                  <h4 className="font-bold text-slate-900 text-xs md:text-base text-center md:text-left">Available Staff</h4>
+                  <span className="hidden md:inline-block text-xs font-semibold text-slate-500 bg-white px-2 py-1 rounded-md border border-slate-200 shadow-sm">Drag to reassign</span>
                 </div>
-                <div className="space-y-4 min-h-[250px]">
+                <div className="space-y-2 md:space-y-4 min-h-[150px] md:min-h-[250px]">
                   <AnimatePresence>
                     {poolStaff.map((staff) => (
-                      <motion.div
+                        <motion.div
                         key={staff.id}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9 }}
                         draggable
                         onDragStart={(e: any) => handleDragStart(e, staff.id)}
-                        className="bg-white p-3 lg:p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal hover:shadow-md transition-all group"
+                        className="bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-1 md:gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal hover:shadow-md transition-all group"
                       >
-                        <div className={`w-10 h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-base lg:text-lg shadow-sm border border-white shrink-0`}>
+                        <div className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-lg md:rounded-xl flex items-center justify-center font-bold ${staff.color} text-xs md:text-base lg:text-lg shadow-sm border border-white shrink-0`}>
                           {staff.initials}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="font-bold text-slate-900 text-sm lg:text-base truncate">{staff.name}</div>
-                          <div className={`text-[10px] lg:text-xs font-bold flex items-center gap-1 mt-0.5 ${staff.color}`}>
-                            {staff.score > 80 && <Star className="w-3 h-3 lg:w-3.5 lg:h-3.5 fill-current shrink-0" />} Score: {staff.score}
+                        <div className="flex-1 min-w-0 w-full text-center md:text-left">
+                          <div className="font-bold text-slate-900 text-[10px] md:text-sm lg:text-base truncate leading-tight">{staff.name}</div>
+                          <div className={`text-[9px] md:text-[10px] lg:text-xs font-bold flex items-center justify-center md:justify-start gap-0.5 md:gap-1 mt-0.5 md:mt-0 ${staff.color}`}>
+                            {staff.score > 80 && <Star className="hidden md:block w-3 h-3 lg:w-3.5 lg:h-3.5 fill-current shrink-0" />} <span className="hidden md:inline">Score:</span> {staff.score}
                           </div>
                         </div>
-                        <GripVertical className="w-4 h-4 lg:w-5 lg:h-5 text-slate-300 group-hover:text-brand-teal transition-colors shrink-0" />
+                        <GripVertical className="hidden md:block w-4 h-4 lg:w-5 lg:h-5 text-slate-300 group-hover:text-brand-teal transition-colors shrink-0" />
                       </motion.div>
                     ))}
                   </AnimatePresence>
@@ -238,23 +238,23 @@ export default function StaffingIntelligenceDemo() {
               </div>
 
               {/* Schedule Slots */}
-              <div className="w-full space-y-5 md:col-span-2">
+              <div className="w-full space-y-3 md:space-y-5 col-span-2">
                 {/* Morning Slot */}
-                <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                <div className="bg-white border border-slate-200 rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-5 shadow-sm">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-2 mb-2 md:mb-4">
                     <div>
-                      <h4 className="font-bold text-slate-900 text-lg">Morning Open</h4>
-                      <p className="text-sm font-medium text-slate-500">8:00 AM - 12:00 PM</p>
+                      <h4 className="font-bold text-slate-900 text-xs sm:text-sm md:text-lg leading-tight">Morning Open</h4>
+                      <p className="text-[9px] sm:text-[10px] md:text-sm font-medium text-slate-500 hidden sm:block">8:00 AM - 12:00 PM</p>
                     </div>
-                    <span className="px-3 py-1.5 bg-slate-100 text-slate-600 text-[10px] sm:text-xs font-bold rounded-lg uppercase tracking-widest border border-slate-200">
-                      Low Traffic
+                    <span className="px-1.5 py-0.5 md:px-3 md:py-1.5 bg-slate-100 text-slate-600 text-[8px] sm:text-[10px] md:text-xs font-bold rounded md:rounded-lg uppercase tracking-widest border border-slate-200 whitespace-nowrap">
+                      Low <span className="hidden sm:inline">Traffic</span>
                     </span>
                   </div>
                   <div
                     onDragOver={(e) => handleDragOver(e, "morning")}
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, "morning")}
-                    className={`min-h-[96px] border-2 border-dashed rounded-2xl flex items-center justify-center p-2 transition-all
+                    className={`min-h-[60px] md:min-h-[96px] border-2 border-dashed rounded-xl md:rounded-2xl flex items-center justify-center p-1.5 md:p-2 transition-all
                       ${slots.morning ? 'border-transparent' : activeZone === 'morning' ? 'border-brand-teal bg-brand-teal/5' : 'border-slate-300 bg-slate-50 hover:bg-slate-100 hover:border-brand-teal/40'}
                     `}
                   >
@@ -265,41 +265,41 @@ export default function StaffingIntelligenceDemo() {
                         animate={{ opacity: 1, scale: 1 }}
                         draggable
                         onDragStart={(e: any) => handleDragStart(e, slots.morning!.id)}
-                        className="w-full bg-white p-3 lg:p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                        className="w-full bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
                       >
-                        <div className={`w-10 h-10 lg:w-12 lg:h-12 ${slots.morning.bgColor} rounded-xl flex items-center justify-center font-bold ${slots.morning.color} text-base lg:text-lg shrink-0`}>
+                        <div className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${slots.morning.bgColor} rounded-lg md:rounded-xl flex items-center justify-center font-bold ${slots.morning.color} text-xs md:text-base lg:text-lg shrink-0`}>
                           {slots.morning.initials}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="font-bold text-slate-900 text-sm lg:text-base truncate">{slots.morning.name}</div>
-                          <div className={`text-[10px] lg:text-xs font-bold mt-0.5 ${slots.morning.color}`}>Score: {slots.morning.score}</div>
+                          <div className="font-bold text-slate-900 text-[10px] sm:text-sm md:text-base lg:text-base truncate leading-tight">{slots.morning.name}</div>
+                          <div className={`text-[9px] sm:text-[10px] lg:text-xs font-bold mt-0 md:mt-0.5 ${slots.morning.color}`}><span className="hidden sm:inline">Score:</span> {slots.morning.score}</div>
                         </div>
-                        <GripVertical className="w-4 h-4 lg:w-5 lg:h-5 text-slate-300 shrink-0" />
+                        <GripVertical className="hidden sm:block w-4 h-4 lg:w-5 lg:h-5 text-slate-300 shrink-0" />
                       </motion.div>
                     ) : (
-                      <span className={`font-medium transition-colors ${activeZone === 'morning' ? 'text-brand-teal' : 'text-slate-400'}`}>
-                        Drag Kevin here
+                      <span className={`font-medium text-[10px] sm:text-xs md:text-sm transition-colors text-center ${activeZone === 'morning' ? 'text-brand-teal' : 'text-slate-400'}`}>
+                        Drag Kevin<span className="hidden sm:inline"> here</span>
                       </span>
                     )}
                   </div>
                 </div>
 
                 {/* Peak Slot */}
-                <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                <div className="bg-white border border-slate-200 rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-5 shadow-sm">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-2 mb-2 md:mb-4">
                     <div>
-                      <h4 className="font-bold text-slate-900 text-lg">Lunch Rush</h4>
-                      <p className="text-sm font-medium text-slate-500">12:00 PM - 2:00 PM</p>
+                      <h4 className="font-bold text-slate-900 text-xs sm:text-sm md:text-lg leading-tight">Lunch Rush</h4>
+                      <p className="text-[9px] sm:text-[10px] md:text-sm font-medium text-slate-500 hidden sm:block">12:00 PM - 2:00 PM</p>
                     </div>
-                    <span className="px-3 py-1.5 bg-orange-50 text-orange-600 text-[10px] sm:text-xs font-bold rounded-lg uppercase tracking-widest flex items-center gap-1.5 border border-orange-200 shadow-sm shrink-0">
-                      <Flame className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-orange-600" /> High Traffic
+                    <span className="px-1.5 py-0.5 md:px-3 md:py-1.5 bg-orange-50 text-orange-600 text-[8px] sm:text-[10px] md:text-xs font-bold rounded md:rounded-lg uppercase tracking-widest flex items-center gap-1 md:gap-1.5 border border-orange-200 shadow-sm shrink-0 whitespace-nowrap">
+                      <Flame className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 fill-orange-600" /> High <span className="hidden sm:inline">Traffic</span>
                     </span>
                   </div>
                   <div
                     onDragOver={(e) => handleDragOver(e, "peak")}
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, "peak")}
-                    className={`min-h-[96px] border-2 border-dashed rounded-2xl flex flex-col sm:flex-row gap-3 items-center justify-center p-2 transition-all
+                    className={`min-h-[60px] md:min-h-[96px] border-2 border-dashed rounded-xl md:rounded-2xl flex flex-col md:flex-row gap-2 md:gap-3 items-center justify-center p-1.5 md:p-2 transition-all
                       ${slots.peak.length > 0 ? (slots.peak.length === 2 ? 'border-transparent' : 'border-slate-300 bg-slate-50') : activeZone === 'peak' ? 'border-brand-teal bg-brand-teal/5' : 'border-slate-300 bg-slate-50 hover:bg-slate-100 hover:border-brand-teal/40'}
                     `}
                   >
@@ -312,29 +312,29 @@ export default function StaffingIntelligenceDemo() {
                           exit={{ opacity: 0, scale: 0.9 }}
                           draggable
                           onDragStart={(e: any) => handleDragStart(e, staff.id)}
-                          className="w-full sm:flex-1 bg-white p-3 lg:p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
+                          className="w-full md:flex-1 bg-white p-2 md:p-3 lg:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2 lg:gap-4 cursor-grab active:cursor-grabbing hover:border-brand-teal transition-colors"
                         >
-                          <div className={`w-10 h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-xl flex items-center justify-center font-bold ${staff.color} text-base lg:text-lg shrink-0`}>
+                          <div className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${staff.bgColor} rounded-lg md:rounded-xl flex items-center justify-center font-bold ${staff.color} text-xs md:text-base lg:text-lg shrink-0`}>
                             {staff.initials}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="font-bold text-slate-900 text-sm lg:text-base truncate">{staff.name}</div>
-                            <div className={`text-[10px] lg:text-xs font-bold mt-0.5 ${staff.color}`}>Score: {staff.score}</div>
+                            <div className="font-bold text-slate-900 text-[10px] sm:text-sm md:text-base truncate leading-tight">{staff.name}</div>
+                            <div className={`text-[9px] sm:text-[10px] lg:text-xs font-bold mt-0 md:mt-0.5 ${staff.color}`}><span className="hidden sm:inline">Score:</span> {staff.score}</div>
                           </div>
-                          <GripVertical className="w-4 h-4 lg:w-5 lg:h-5 text-slate-300 shrink-0" />
+                          <GripVertical className="hidden sm:block w-4 h-4 lg:w-5 lg:h-5 text-slate-300 shrink-0" />
                         </motion.div>
                       ))}
                     </AnimatePresence>
 
                     {slots.peak.length === 0 && (
-                      <span className={`font-medium transition-colors w-full text-center ${activeZone === 'peak' ? 'text-brand-teal' : 'text-slate-400'}`}>
-                        Drag Sarah and Mike here
+                      <span className={`font-medium text-[10px] sm:text-xs md:text-sm transition-colors w-full text-center ${activeZone === 'peak' ? 'text-brand-teal' : 'text-slate-400'}`}>
+                        Drag Sarah and Mike<span className="hidden sm:inline"> here</span>
                       </span>
                     )}
                     
                     {slots.peak.length === 1 && (
-                      <div className="w-full sm:flex-1 min-h-[82px] rounded-xl border-2 border-dashed border-slate-200 flex items-center justify-center">
-                         <span className="text-slate-400 text-sm font-medium">Drag second person here</span>
+                      <div className="w-full md:flex-1 min-h-[48px] md:min-h-[82px] rounded-xl border-2 border-dashed border-slate-200 flex items-center justify-center">
+                         <span className="text-slate-400 text-[10px] sm:text-sm font-medium">Drag second person<span className="hidden sm:inline"> here</span></span>
                       </div>
                     )}
                   </div>
