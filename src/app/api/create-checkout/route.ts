@@ -1,13 +1,17 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-// Initialize Stripe. Check your environment variables to ensure STRIPE_SECRET_KEY is defined.
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2026-08-26.dahlia",
-});
-
 export async function POST(req: Request) {
   try {
+    // Initialize Stripe inside the handler to prevent build-time crashes if the env var is missing in Vercel
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error("STRIPE_SECRET_KEY is not defined in the environment.");
+    }
+    
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: "2026-08-26.dahlia",
+    });
+
     // Dynamically determine the base URL from the request headers
     // This ensures it works on localhost, Vercel preview URLs, and the production domain automatically.
     const origin = req.headers.get("origin");
