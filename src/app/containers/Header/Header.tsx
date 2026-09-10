@@ -266,7 +266,7 @@ function Header() {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <Link href="https://app.pythiascorecard.com" className="hidden sm:block shrink-0">
+            <Link href="/login" className="hidden sm:block shrink-0">
               <Button className="bg-transparent border border-slate-200 text-brand-navy hover:bg-slate-50 px-3 sm:px-4 py-2 rounded-full text-xs lg:text-sm font-semibold whitespace-nowrap">
                 Login
               </Button>
@@ -494,15 +494,15 @@ function Header() {
             </div>
 
               <div className="mt-6 flex gap-3">
-                <a
-                  href="https://app.pythiascorecard.com"
+                <Link
+                  href="/login"
                   className="flex-1"
                   onClick={() => setMobileOpen(false)}
                 >
                   <Button className="w-full bg-transparent border border-slate-200 text-brand-navy hover:bg-slate-50 px-4 py-2.5 rounded-full text-sm font-semibold">
                     Login
                   </Button>
-                </a>
+                </Link>
                 <a
                   href={`/#${Sections.Contact}`}
                   className="flex-1"

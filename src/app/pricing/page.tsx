@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Header from "../containers/Header";
 import Footer from "../containers/Footer";
 import { ChevronDown, Check, Zap, LayoutDashboard, ShieldCheck, BarChart3, Users, ZapIcon, HeadphonesIcon, Package } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionDiv, MotionSpan } from "@/app/component/MotionWrapper";
 import { trackEvent } from "../utils/gtm";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { PaymentSuccessModal } from "../component/PaymentSuccessModal";
 
 const deviceDetails = [
   "Compact, tamper-resistant hardware designed for counter deployment",
@@ -132,8 +133,28 @@ function DetailAccordion({
   );
 }
 
+function SuccessModalWrapper() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const isSuccess = searchParams.get("payment_success") === "true";
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsOpen(true);
+      // Remove query param safely using next/router after state is committed
+      setTimeout(() => {
+        router.replace(window.location.pathname, { scroll: false });
+      }, 100);
+    }
+  }, [isSuccess, router]);
+
+  return <PaymentSuccessModal isOpen={isOpen} onClose={() => setIsOpen(false)} />;
+}
+
 export default function PricingPage() {
   const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const productSchema = {
     "@context": "https://schema.org",
@@ -166,6 +187,9 @@ export default function PricingPage() {
       />
       <Header />
       <main className="min-h-screen bg-[#f8fafc]">
+        <Suspense fallback={null}>
+          <SuccessModalWrapper />
+        </Suspense>
         {/* Hero Section */}
         <section className="px-4 sm:px-6 pt-16 sm:pt-20 lg:pt-[120px] pb-12 sm:pb-20">
           <div className="max-w-[1000px] mx-auto">
@@ -255,16 +279,35 @@ export default function PricingPage() {
                     >
                       <button
                         type="button"
-                        onClick={() => {
-                          trackEvent("pricing_cta_click", {
+                        disabled={isRedirecting}
+                        onClick={async () => {
+                          setIsRedirecting(true);
+                          trackEvent("subscribe_click", {
                             plan: "professional",
                             price: String(TOTAL_PRICE),
                           });
-                          router.push("/contact/src=pricing");
+                          
+                          try {
+                            const res = await fetch("/api/create-checkout", { method: "POST" });
+                            const data = await res.json();
+                            if (data.url) {
+                              router.push(data.url);
+                            } else {
+                              console.error("Failed to create checkout session:", data);
+                              setIsRedirecting(false);
+                            }
+                          } catch (err) {
+                            console.error("Error calling checkout API:", err);
+                            setIsRedirecting(false);
+                          }
                         }}
-                        className="flex items-center justify-center gap-3 w-full rounded-2xl font-bold text-lg py-5 bg-brand-navy text-white hover:bg-slate-800 shadow-xl transition-all duration-300"
+                        className="flex items-center justify-center gap-3 w-full rounded-2xl font-bold text-lg py-5 bg-brand-navy text-white hover:bg-slate-800 shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
                       >
-                        Book a Demo
+                        {isRedirecting ? (
+                          <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : (
+                          "Subscribe"
+                        )}
                       </button>
                     </motion.div>
 
