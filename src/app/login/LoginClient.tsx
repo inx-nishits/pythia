@@ -51,7 +51,7 @@ const cards = [
   {
     title: "Pythia 2.0",
     description: "The next-generation AI platform with enhanced capabilities.",
-    href: "https://v2.pythiascorecard.com",
+    href: "https://dev.d1epsbs0ekh6x3.amplifyapp.com/",
     icon: Sparkles,
     isNew: true,
     theme: "navy" as const
@@ -89,13 +89,16 @@ export default function LoginClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.15 + 0.2, ease: "easeOut" }}
             >
-              <motion.a
-                href={card.href}
+              <motion.div
+                onClick={() => {
+                  window.history.replaceState(null, '', '/login/');
+                  window.location.href = card.href;
+                }}
                 onHoverStart={() => setHoveredIndex(idx)}
                 onHoverEnd={() => setHoveredIndex(null)}
                 whileHover={{ y: -4, scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
-                className={`block relative h-full`}
+                className={`block relative h-full cursor-pointer`}
               >
                 <CardSpotlight 
                   theme={card.theme} 
@@ -144,7 +147,7 @@ export default function LoginClient() {
                     {card.description}
                   </p>
                 </CardSpotlight>
-              </motion.a>
+              </motion.div>
             </motion.div>
           );
         })}

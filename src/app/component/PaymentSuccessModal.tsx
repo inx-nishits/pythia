@@ -87,7 +87,7 @@ export function PaymentSuccessModal({ isOpen, onClose }: PaymentSuccessModalProp
               </div>
 
               <Link
-                href="/login"
+                href="https://dev.d1epsbs0ekh6x3.amplifyapp.com/login/owner"
                 className="flex items-center justify-center w-full rounded-2xl font-bold text-lg py-4 bg-brand-navy text-white hover:bg-slate-800 shadow-xl transition-all duration-300"
               >
                 Go to Login

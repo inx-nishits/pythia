@@ -187,20 +187,20 @@ function Header() {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 min-w-[180px] mt-2 py-2 bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col z-50 overflow-hidden"
                     >
-                      <a
+                      <Link
                         href={`/#${Sections.WhatYouGet}`}
                         className="px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 text-slate-600 hover:text-brand-navy"
                         onClick={() => { setIsInsightsHovered(false); setActiveItem("insights"); }}
                       >
                         Intelligence
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         href={`/#${Sections.Industries}`}
                         className="px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 text-slate-600 hover:text-brand-navy"
                         onClick={() => { setIsInsightsHovered(false); setActiveItem("insights"); }}
                       >
                         Industries
-                      </a>
+                      </Link>
                       <Link
                         href="/resources/"
                         className={`px-5 py-2.5 text-[14px] font-semibold transition-colors hover:bg-slate-50 ${pathname.startsWith("/resources") ? "text-brand-navy bg-slate-50/50" : "text-slate-600 hover:text-brand-navy"}`}
@@ -271,11 +271,12 @@ function Header() {
                 Login
               </Button>
             </Link>
-            <a href={`/#${Sections.Contact}`} className="hidden sm:block shrink-0">
+
+            <Link href={`/#${Sections.Contact}`} className="hidden sm:block shrink-0">
               <Button className="px-3 sm:px-4 lg:px-6 py-2.5 bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-full font-semibold text-xs lg:text-sm shadow-md hover:shadow-lg transition-transform duration-200 hover:-translate-y-0.5 whitespace-nowrap">
                 Book a Demo
               </Button>
-            </a>
+            </Link>
             {/* Mobile menu toggle */}
             <button
               type="button"
@@ -319,7 +320,7 @@ function Header() {
               <nav>
                 <ul className="flex flex-col gap-5 text-left">
                 <li>
-                  <a
+                  <Link
                     href={`/#${Sections.WhyItMatters}`}
                     className={`block text-[18px] font-semibold transition-colors ${
                       activeItem === "why" && pathname === "/"
@@ -332,10 +333,10 @@ function Header() {
                     }}
                   >
                     Why It Matters
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href={`/#${Sections.MeetPythiaStore}`}
                     className={`block text-[18px] font-semibold transition-colors ${
                       activeItem === "device" && pathname === "/"
@@ -348,10 +349,10 @@ function Header() {
                     }}
                   >
                     Device
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href={`/#${Sections.HowItWorks}`}
                     className={`block text-[18px] font-semibold transition-colors ${
                       activeItem === "how" && pathname === "/"
@@ -364,7 +365,7 @@ function Header() {
                     }}
                   >
                     How it works
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link
@@ -405,22 +406,22 @@ function Header() {
                       >
                         <ul className="flex flex-col gap-4 pl-4 mt-4 border-l-2 border-slate-100">
                           <li>
-                            <a
+                            <Link
                               href={`/#${Sections.WhatYouGet}`}
                               className="block text-[16px] font-medium transition-colors text-slate-600"
                               onClick={() => { setActiveItem("insights"); setMobileOpen(false); }}
                             >
                               Intelligence
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a
+                            <Link
                               href={`/#${Sections.Industries}`}
                               className="block text-[16px] font-medium transition-colors text-slate-600"
                               onClick={() => { setActiveItem("insights"); setMobileOpen(false); }}
                             >
                               Industries
-                            </a>
+                            </Link>
                           </li>
                           <li>
                             <Link
@@ -503,7 +504,8 @@ function Header() {
                     Login
                   </Button>
                 </Link>
-                <a
+
+                <Link
                   href={`/#${Sections.Contact}`}
                   className="flex-1"
                   onClick={() => setMobileOpen(false)}
@@ -511,7 +513,7 @@ function Header() {
                   <Button className="w-full px-4 py-3 bg-brand-teal text-brand-navy hover:bg-brand-teal-hover rounded-full font-semibold text-sm shadow-md hover:shadow-lg">
                     Book a Demo
                   </Button>
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

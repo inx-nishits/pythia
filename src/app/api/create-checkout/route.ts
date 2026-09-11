@@ -21,11 +21,25 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       line_items: [
         {
-          price: "price_1UDjVV0VKXUUu0wPXQWLR2CE", // Pythia Scorecard Professional Plan ($129/mo)
+          price: process.env.STRIPE_PRICE_ID, // Pythia Scorecard Professional Plan ($129/mo)
           quantity: 1,
         },
       ],
       mode: "subscription",
+      custom_fields: [
+        {
+          key: "first_name",
+          label: { type: "custom", custom: "First Name" },
+          type: "text",
+          optional: false,
+        },
+        {
+          key: "last_name",
+          label: { type: "custom", custom: "Last Name" },
+          type: "text",
+          optional: false,
+        },
+      ],
       success_url: `${siteUrl}/pricing?payment_success=true`,
       cancel_url: `${siteUrl}/pricing`,
     });
