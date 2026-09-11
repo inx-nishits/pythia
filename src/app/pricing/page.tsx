@@ -287,18 +287,24 @@ export default function PricingPage() {
                             price: String(TOTAL_PRICE),
                           });
                           
-                          try {
-                            const res = await fetch("/api/create-checkout", { method: "POST" });
-                            const data = await res.json();
-                            if (data.url) {
-                              router.push(data.url);
-                            } else {
-                              console.error("Failed to create checkout session:", data);
+                          const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
+                          
+                          if (paymentLink) {
+                            window.location.href = paymentLink;
+                          } else {
+                            try {
+                              const res = await fetch("/api/create-checkout", { method: "POST" });
+                              const data = await res.json();
+                              if (data.url) {
+                                router.push(data.url);
+                              } else {
+                                console.error("Failed to create checkout session:", data);
+                                setIsRedirecting(false);
+                              }
+                            } catch (err) {
+                              console.error("Error calling checkout API:", err);
                               setIsRedirecting(false);
                             }
-                          } catch (err) {
-                            console.error("Error calling checkout API:", err);
-                            setIsRedirecting(false);
                           }
                         }}
                         className="flex items-center justify-center gap-3 w-full rounded-2xl font-bold text-lg py-5 bg-brand-navy text-white hover:bg-slate-800 shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
